@@ -6,5 +6,5 @@
 ^.*$
 ^.*
 .*
-*.vim
+.vim$
 !/.gitignore
