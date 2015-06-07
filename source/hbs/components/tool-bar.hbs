@@ -1,0 +1,7 @@
+
+{{#each settings.datas as |panels|}}	
+<div class='{{panels.panel}}Full {{if panels.checked "autohide"}}'>
+		{{component panels.name}}
+	</div>
+
+{{/each}}

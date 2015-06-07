@@ -1,0 +1,29 @@
+		<th>
+					<ul>
+   					 {{#each item in model}}
+						<li>
+						{{A-A notes=notes
+							expression=item.expression
+							contentIndex=_view.contentIndex 
+							meter=meter 
+							volume=volume
+							count=count
+							beat=item.beat
+							scoreIndex=item.scoreIndex
+							noteLength=noteLength
+							sine=item.sine
+						   	playProp=playProp
+							show=item.skip
+						   	loopValue=loopValue}}	
+						</li>
+   					 {{/each}}
+			 </ul>
+	 </th>		<th>
+				<table>
+					
+				<td>
+				<h2 {{action "adding"}} >+</h2>
+				</td>
+				</table>
+			</th> 
+

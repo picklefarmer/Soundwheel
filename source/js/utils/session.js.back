@@ -1,0 +1,37 @@
+App.SessionService = Em.Service.extend({
+  
+  isAuth:       false,
+  crntU:  null,
+  afterRedirect:null,
+
+
+  open(){
+    
+    var session = this; 
+
+    return  this.get('adapter')
+                .open(credentials, session)
+                .then( user => {
+                    session.set('isAuth', true )
+                    session.set('crntU',user )
+                    return user 
+                  }, Ember.RSVP.reject)  
+  },
+
+  fetch(){
+
+   var session = this; 
+
+    return  this.get('adapter')
+                .fetch( session)
+                .then( user => {
+                    session.set('isAuth', true )
+                    session.set('crntU',user )
+                    return user 
+                  }, Ember.RSVP.reject)  
+  
+  }
+
+
+
+})

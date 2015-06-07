@@ -1,0 +1,57 @@
+.inventory{
+	display:inline-block;
+	height:100%;
+	cursor:crosshair;
+}
+
+.chordBank{
+	background:#aaa;
+//	width:100%;
+//	left:0px;
+//	bottom:0px;
+//	position:absolute;
+	margin:0px;
+}
+
+.chordBank table{
+	 background: rgb(37, 66, 90);
+	 border:14px groove grey;
+	 margin:2px;
+
+}
+
+.chordbtn button{
+	color:inherit;
+	background:rgba(0,0,0,.4);
+	font-size:22px;	
+  margin:0px;
+//  padding:0px 6px;
+
+} 
+.chordbtn div{
+	background:blue;
+	color:white;
+	font-size:46px;	
+}
+
+.chordedit{
+	background:rgba(150,150,150,.6);
+	td{
+  	&:last-child,&:first-child{
+			background:none;
+		}
+	}
+}
+/*
+.loading{
+	background-image:url(../images/loading.gif);
+	background-repeat:no-repeat;
+	background-size:auto 100%;
+}
+
+.loaded{
+
+}
+*/
+
+

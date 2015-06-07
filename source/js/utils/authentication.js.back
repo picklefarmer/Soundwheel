@@ -1,0 +1,22 @@
+
+Em.Application.initializer({
+  name:'authentication',
+
+    initialize(container,app){
+    
+      var Session = session;
+        
+        container.register('session:main', Session) 
+        
+        app.inject('controller','session','session:main')
+        app.inject('route',     'session','session:main')
+
+      var FirebaseAuth = firebaseAuth;
+
+        container.register('session:adapter',FirebaseAuth)
+
+        app.inject('controller','firebase','adapter:firebase')
+        app.inject('route',     'adapter','session:adapter')
+
+      }
+})

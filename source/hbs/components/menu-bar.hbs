@@ -1,0 +1,19 @@
+<ul class={{menubar}}>
+		<li {{action 'click'}}>O</li>
+		{{#if controller.barVisible}}
+		{{#each page in menuArray itemController="li"}}
+			<li {{action "forActive" page.model}} {{bind-attr class="page.isActive:round"}}>
+				{{#if page.model.x}}
+					{{#link-to page.model.route page.model.x page.model.y tagName="div"}}
+						{{page.model.name}}
+					{{/link-to}}
+				{{else}}
+					{{#link-to page.model.route tagName="div"}}
+						{{page.model.name}}
+					{{/link-to}}
+				{{/if}}
+			</li>
+		{{/each}}
+	{{/if}}
+</ul>
+

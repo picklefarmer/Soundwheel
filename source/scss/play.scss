@@ -1,0 +1,55 @@
+@mixin topBot($height,$width,$direction){
+	width: 0; 
+	height: 0; 
+	border-top: $height+px solid transparent;
+	border-bottom: $height+px solid transparent;
+	border-#{$direction}: $width+px solid #bcc;
+} 
+@mixin boxRow($offset){
+	content:"";
+	display:block;
+	background:#bcc;
+	width:20px;
+	height:20px;
+	position:absolute;
+	top:-10px;
+	#{$offset}:48px;
+}
+
+.playGroup{
+	margin-left:40%;
+	margin-right:40%;
+	padding:3px;
+	border:6px #777 groove;
+	border-radius:6px;
+}
+
+.arrowbtn{
+	margin:auto;
+	position:relative;
+}
+
+.arrow-play {
+	@include topBot(38,52,left);
+}
+.arrow-back {
+	@include topBot(38,52,right);
+}
+
+.arrow-left {
+	@include topBot(32,48,right);	
+	margin-left:-3px;
+	&:before{
+		@include boxRow(left);
+	}
+}
+
+.arrow-right {
+	@include topBot(32,48,left);
+	margin-right:-3px;
+	&:before{
+		@include boxRow(right);
+	}	
+}
+
+

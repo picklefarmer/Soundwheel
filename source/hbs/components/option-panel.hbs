@@ -1,0 +1,45 @@
+	
+	{{!#each note in octaves itemController="octaves"}}
+		<!--button {{action "check" note}}> {{note.isActive}}  </button-->		
+	{{!/each}}
+
+  {{!song.index}}	
+  <li class="{{!if state "hi" "lo"}} navlabel">{{!song.selected}}{{!model.y}}</li>
+<li>
+<div>
+	{{view "select" selection=song.selected content=song.names value=model.y}}
+	</div>
+</li>
+	<li>	
+		{{!textarea value=model.y}}
+	</li>
+	{{#each options.actionNames as |com|}}
+		{{#with com.name as |name|}}
+		<li>
+		<div class="{{if com.class com.class 'blank'}}">
+			{{component com.type name=name id=name ctrl=this click=actionHandler }}
+				{{label-for for=name}}
+		</div>
+				{{#if com.class}}
+					<span class="navlabel">{{name}}</span>
+				{{/if}}
+
+		</li>
+			{{/with}}
+		{{/each}}
+		<li>
+			<div>{{component "switch" value=model.x}}
+				<span >PlayType</span>
+			</div>
+			</li>
+	<li>
+    <div>
+		{{input type="range" min="264"  max="2000" value=options.song.bpm}}
+		{{input type="text"  value=options.song.meter}}
+    <span> Tempo </span>
+		</div>
+		{{!textarea enter="songRead"}}
+	
+		
+		
+	</li>

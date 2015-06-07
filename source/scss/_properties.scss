@@ -1,0 +1,16 @@
+$blend:#282828;
+
+//@include box-shadow(inset 0px 0px 4px 4px $blend);
+//@include box-shadow(rgba(0, 0, 0, 0.898438) 0px 0px 20px inset);
+
+@function opposite($pos) {
+	$pos-map:(
+    	'top':    'bottom',
+	    'right':  'left',
+    	'bottom': 'top',
+	    'left':   'right'
+ 	 );
+	@return map-get($pos-map, $pos);
+}
+
+

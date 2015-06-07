@@ -1,0 +1,255 @@
+/* Put your CSS here */
+/* line 47, ../source/scss/style.scss */
+.topFull {
+  top: 0px;
+  position: absolute;
+  background: #aaa;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  border-bottom: 6px solid #ddd;
+}
+/* line 27, ../source/scss/style.scss */
+.topFull.autohide {
+  position: absolute;
+  background: green;
+}
+/* line 31, ../source/scss/style.scss */
+.topFull.autohide ul {
+  display: none;
+  background: red;
+}
+/* line 36, ../source/scss/style.scss */
+.topFull.autohide:hover {
+  background: black;
+}
+/* line 37, ../source/scss/style.scss */
+.topFull.autohide:hover ul {
+  display: inherit;
+}
+
+/* line 47, ../source/scss/style.scss */
+.leftFull {
+  left: 0px;
+  position: absolute;
+  background: #aaa;
+  display: block;
+  top: 0px;
+  height: 100%;
+  border-right: 6px solid #ddd;
+}
+/* line 27, ../source/scss/style.scss */
+.leftFull.autohide {
+  background: green;
+}
+/* line 31, ../source/scss/style.scss */
+.leftFull.autohide ul {
+  display: none;
+  background: red;
+}
+/* line 36, ../source/scss/style.scss */
+.leftFull.autohide:hover {
+  background: black;
+}
+/* line 37, ../source/scss/style.scss */
+.leftFull.autohide:hover ul {
+  display: inherit;
+}
+
+/* line 47, ../source/scss/style.scss */
+.rightFull {
+  right: 0px;
+  position: absolute;
+  background: #aaa;
+  display: block;
+  top: 0px;
+  height: 100%;
+  border-left: 6px solid #ddd;
+}
+/* line 27, ../source/scss/style.scss */
+.rightFull.autohide {
+  background: green;
+}
+/* line 31, ../source/scss/style.scss */
+.rightFull.autohide ul {
+  display: none;
+  background: red;
+}
+/* line 36, ../source/scss/style.scss */
+.rightFull.autohide:hover {
+  background: black;
+}
+/* line 37, ../source/scss/style.scss */
+.rightFull.autohide:hover ul {
+  display: inherit;
+}
+
+/* line 47, ../source/scss/style.scss */
+.bottomFull {
+  bottom: 0px;
+  position: absolute;
+  background: #aaa;
+  display: inline-block;
+  width: 100%;
+  border-top: 6px solid #ddd;
+}
+/* line 27, ../source/scss/style.scss */
+.bottomFull.autohide {
+  background: green;
+}
+/* line 31, ../source/scss/style.scss */
+.bottomFull.autohide ul {
+  display: none;
+  background: red;
+}
+/* line 36, ../source/scss/style.scss */
+.bottomFull.autohide:hover {
+  background: black;
+}
+/* line 37, ../source/scss/style.scss */
+.bottomFull.autohide:hover ul {
+  display: inherit;
+}
+
+/* line 54, ../source/scss/style.scss */
+.match {
+  -moz-box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.75);
+  border: 3px solid cyan;
+}
+
+/* line 58, ../source/scss/style.scss */
+.hit {
+  color: orange;
+  background-color: white;
+  display: inline-block;
+  border-radius: 33px;
+}
+
+/* line 64, ../source/scss/style.scss */
+.hi {
+  color: red;
+}
+
+/* line 67, ../source/scss/style.scss */
+.lo {
+  color: blue;
+}
+
+/* line 70, ../source/scss/style.scss */
+.ember-application {
+  margin: 0px auto;
+  background: rgba(0, 0, 0, 0.45);
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+/* line 76, ../source/scss/style.scss */
+.noteClass * {
+  background: green;
+}
+
+/* line 79, ../source/scss/style.scss */
+.lest {
+  display: inline-block;
+  position: relative;
+  cursor: crosshair;
+}
+
+/* line 84, ../source/scss/style.scss */
+.outer table, th, td {
+  border: 7px inset #383838;
+  -moz-box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.9);
+  -webkit-box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.9);
+  background-image: none;
+}
+
+/* line 91, ../source/scss/style.scss */
+.outer {
+  border: 4px double #666666;
+  padding: 3%;
+  padding-top: 12px;
+  border-radius: 64px;
+  -moz-box-shadow: 0px 0px 4px 4px #282828;
+  -webkit-box-shadow: 0px 0px 4px 4px #282828;
+  box-shadow: 0px 0px 4px 4px #282828;
+  background-image: url("pat.png");
+}
+
+/*
+.twit{
+	background:black;
+	width:24px;
+	height:24px;
+	position:absolute;
+	display:block;
+	left:155px;
+	top:146px;
+}
+
+.round *{
+	top:0px;
+	cursor:default !important;
+	border-radius:15px;
+	border:7px inset #383838;
+	@include box-shadow(inset 0px 0px 4px 4px #282828);
+	@include box-shadow(rgba(38,38,38, 0.898438) 0px 0px 20px inset); 
+    @include background-clip(text);
+	padding:6px;
+	font-size:20px;
+   	text-align:center;
+	vertical-align:middle;	
+    color: rgba(95,95,95, 0.498438) !important;
+
+}
+
+
+.circle{
+	background: hsl(1,0%,20%);
+	height:300px;
+	width:300px;
+
+}
+
+
+.disabled .context{
+   background-color: #000000;
+  }
+
+.context{
+	@include text-shadow(0px 1px 3px #282828);
+    @include background-clip(text);
+	width:92px;
+	height:32px;
+	font-size:34px;
+//padding:32px 0px 32px 0px;
+   	text-align:center;
+	vertical-align:middle;	
+    color: transparent;
+	display:inline-block;
+
+
+}
+
+.enabled .context{
+	 background-color: #ffffff;
+ }
+
+.disabled table {
+	background:#282828
+}
+
+h2 {
+	background-color: #000;
+	@include text-shadow(0px 1px 1px #343434);
+	@include background-clip(text);
+	margin:12px 5px 5px 5px ;
+	font-size:35px;
+    color: rgba(155,155,155,.5);
+} 
+*/

@@ -1,0 +1,34 @@
+<ul class="sidebar chordBank {{if isLoaded "loading" "loaded"}}" >
+
+
+	<button {{action "editSelected"}}>Edit</button>
+
+	{{#if isEditing}}
+			<button {{action "saveSelection"}}>Save</button>
+			<button {{action "deleteSelection"}}>Remove</button>
+			<button {{action "chordCapture"}}>Capture</button>
+		{{#if selected }}
+			{{#ar-peg isEditing="isEditing" higher=controller click=null chord=selected as |string fret|}}
+
+				<button	{{action "toggleSelected" string fret}}>
+						}{
+				</button>
+
+			{{/ar-peg}}
+		{{/if}}
+
+	{{/if}}
+
+	{{#each model as |chord|}}
+
+		<li class="{{if ("arr-comp" selection chord) "match" }}">
+			{{ar-peg chord=chord action="selector"}}
+		</li>
+
+	{{/each}}
+
+
+</ul>
+
+
+

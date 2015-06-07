@@ -1,0 +1,171 @@
+/* Put your CSS here */
+@import "compass/css3/box-shadow";
+@import "compass/css3/user-interface";
+@import "compass/css3/text-shadow";
+@import "compass/css3/background-clip";
+@import "compass/css3/appearance";
+
+@import "properties";
+
+@mixin fullBar($pos){
+	#{$pos}:0px;
+	position:absolute;
+	background:#aaa;
+	@if ($pos == top) or ($pos == bottom) {
+		@if ($pos == top){
+			position:relative;
+		}
+		display:inline-block;
+		width:100%;		
+	//	height:10%;
+	}@else{
+		display:block;
+		top:0px;
+	//	width:10%;
+		height:100%;
+	}
+  &.autohide {
+	@if ($pos == top){
+			position:absolute;
+		}
+	ul {
+	  display: none;
+	  background: red;
+	}
+    background: green;
+    &:hover {
+	  ul {
+	  	display: inherit;
+	  }
+	  background: black;
+    }
+  }
+}
+
+@each $pos in top, left, right, bottom {
+	$opposite:opposite($pos);
+	.#{$pos}Full {
+    	@include fullBar($pos);
+		border-#{$opposite}:6px solid #ddd;
+		//background-image: url('/images/#{$animal}.png');
+  	}
+}
+
+.match{
+	@include box-shadow(0px 0px 6px 4px rgba(0,0,0,0.75));
+	border:3px solid cyan;
+}
+.hit {
+	color:orange;
+	background-color:white;
+	display:inline-block;
+	border-radius:33px;	
+}
+.hi {
+	color:red;
+} 
+.lo {
+	color:blue;
+}
+.ember-application {
+    margin:0px auto;
+	background:rgba(0,0,0,.45);
+	@include user-select(none);
+	overflow-x:hidden;	
+}
+.noteClass *{
+	background:green;
+}
+.lest{
+	display:inline-block;
+	position:relative;
+	cursor:crosshair;
+}
+.outer table, th, td {
+		border:7px inset #383838;
+	//    border-radius:36px;
+	//	margin: 0px 0px 10px 0px;
+		@include box-shadow(inset 0px 0px 20px rgba(0,0,0,0.9));
+		background-image:none;
+}
+.outer {
+	border:4px double #666666;
+    padding:3%;	
+	padding-top:12px;
+	border-radius:64px;
+	@include box-shadow(0px 0px 4px 4px #282828);
+	background-image:url("pat.png");	
+}
+
+/*
+.twit{
+	background:black;
+	width:24px;
+	height:24px;
+	position:absolute;
+	display:block;
+	left:155px;
+	top:146px;
+}
+
+.round *{
+	top:0px;
+	cursor:default !important;
+	border-radius:15px;
+	border:7px inset #383838;
+	@include box-shadow(inset 0px 0px 4px 4px #282828);
+	@include box-shadow(rgba(38,38,38, 0.898438) 0px 0px 20px inset); 
+    @include background-clip(text);
+	padding:6px;
+	font-size:20px;
+   	text-align:center;
+	vertical-align:middle;	
+    color: rgba(95,95,95, 0.498438) !important;
+
+}
+
+
+.circle{
+	background: hsl(1,0%,20%);
+	height:300px;
+	width:300px;
+
+}
+
+
+.disabled .context{
+   background-color: #000000;
+  }
+
+.context{
+	@include text-shadow(0px 1px 3px #282828);
+    @include background-clip(text);
+	width:92px;
+	height:32px;
+	font-size:34px;
+//padding:32px 0px 32px 0px;
+   	text-align:center;
+	vertical-align:middle;	
+    color: transparent;
+	display:inline-block;
+
+
+}
+
+.enabled .context{
+	 background-color: #ffffff;
+ }
+
+.disabled table {
+	background:#282828
+}
+
+h2 {
+	background-color: #000;
+	@include text-shadow(0px 1px 1px #343434);
+	@include background-clip(text);
+	margin:12px 5px 5px 5px ;
+	font-size:35px;
+    color: rgba(155,155,155,.5);
+} 
+*/

@@ -1,0 +1,21 @@
+
+
+{{menu-bar}}
+
+	<ul >
+	{{! FRET BOARD }}
+	<li>	{{outlet}}    </li>
+	</ul>		
+	<br>
+{{outlet "left"}}		{{outlet "center"}}		{{outlet "right"}}	
+						
+						{{outlet "middle"}}
+						
+						{{outlet "bottom"}}
+
+
+<!--div class="topFull">TOP</div>
+<div class="rightFull">RIGHT</div>
+<div class="leftFull">LEFT</div>
+<div class="bottomFull">BOTTOM</div-->
+

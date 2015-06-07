@@ -1,0 +1,42 @@
+	
+			   <table class="outer">
+				<th>	
+					<table>
+							<th>
+									<h2 >{{title}}</h2>
+							</th>
+							<tr>
+								<td>
+	
+										{{input type="text" width=12 value=meter}}<br>
+								   		bpm		
+								</td>
+								</tr>
+							<tr>
+								<td>
+										{{input type="text" width=12 value=noteLength}}<br>	 
+										length
+								</td>
+							</tr>
+							<tr>
+								<td>
+	
+										{{input type="text" width=0.1 value=volume}}<br>
+										volume	{{volume}}	
+								</td>
+							</tr>
+							<tr>
+								<td>
+										<button {{action
+													controllers.menu.tope
+											   		target="controllers.menu"}}>
+													{{controllers.menu.tope}}
+										</button>	
+								</td>
+							</tr>
+					</table>
+				</th>
+				{{outlet}}	
+		</table>
+
+

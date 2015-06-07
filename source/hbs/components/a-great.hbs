@@ -1,0 +1,36 @@
+<table>
+		 {{#if show}}
+
+		<tr>
+			{{input type="text" value=sine}}
+		</tr>
+		<tr>
+		{{view "select" content=names value=expression}}
+		</tr>
+		<tr>
+			<button {{action "toggle"}}>{{tone}}</button>
+		</tr>
+		{{else}}
+		<tr>  
+				<span {{action 'animate'}} class="context">{{contentIndex }}</span><br>
+				{{view "select"  content=counts value=beat}}<br>
+				{{input type="text" value=scoreIndex}}<br>
+
+				<button {{action 'toggle'}} >{{tone}}</button>
+
+			</tr>
+		  
+		{{/if}}
+</table>
+	{{The-Great 
+		notes=notes 
+		expression=expression 
+		noteLength=noteLength 
+		playProp=playProp
+	 	 
+		tone=tone 
+		sine=sine 
+		loopValue=loopValue}}		
+	
+	
+

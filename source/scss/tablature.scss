@@ -1,0 +1,29 @@
+@import "compass/css3/box-shadow";
+
+
+
+.tablet{
+ 	margin:0px 12px 30px 12px;
+	border-radius:15px;
+	border:7px inset #383838;
+	@include box-shadow(inset 0px 0px 4px 4px #282828);
+	vertical-align:top;
+  position:relative;
+  display:block;
+  height:320px;
+
+}
+
+.tablature{
+  padding:0;
+  margin-top:2px;
+  margin-left:2px;
+	border-radius:8px;
+	display:inline-block;
+	height:300px;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+
+

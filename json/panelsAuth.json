@@ -1,0 +1,8 @@
+[
+  { "panel":"right","name":"option-panel","checked":false },
+  { "panel":"left","name":"measure-bar","checked":true },
+  { "panel":"bottom","name":"chord-dash","checked":false },
+  { "panel":"middle","name":"play-bar","checked":true  },
+  { "panel":"middle","name":"lyrics-pane","checked":false}
+]
+

@@ -1,0 +1,82 @@
+.demo li {
+  outline:#fff groove 4px;
+    box-shadow:0px 0px 22px 15px rgba(0,0,0,.3)  ;
+  list-style:none;
+    border:solid 11px;
+  display:inline-block;
+    position:relative;
+  padding: 22px;
+    background:#f3f3ef;
+  margin:20px;
+    width:20%;
+  height:10%;
+    overflow:hidden;
+  background:#564469;
+  }
+
+  .text{
+    
+    padding:2%px;
+  margin:3%px;
+   
+    display:block;
+  position:relative;
+  }
+
+  .mug{
+    
+    box-shadow:0px 0px 22px 15px rgba(0,0,0,.3)  ;
+  overflow-x:hidden;
+    overflow-y:hidden;
+  
+  display:inline-block;
+    width:100%;
+   border-image: url(../images/DirtTile.png);
+   }
+
+   .mug div{
+    position:relative;
+    border-image-repeat:round;
+	border-image-source:inherit;
+   
+    border-style: solid;
+  
+}
+.platformer{
+ 
+  top:-24px;
+    left:6px;
+
+  margin-right:-214px; 
+    margin-bottom:-50px;
+
+  border-width: 47px 246px 50px 20px;
+    border-image-slice: 47 246 50 20 fill;
+
+}
+
+.cavern {
+
+  top:-50px;
+    left:-100px;
+  
+  margin-right:-235px; 
+    margin-bottom:-100px;
+
+  border-width: 74px 159px 66px 127px; 
+    border-image-slice: 74 159 66 127 ;
+}
+
+.menuScreen{
+ 
+  top:-33px;
+  left:-223px;
+ 
+  margin-right:-220px; 
+  margin-bottom:-60px;
+  
+  border-width: 43px 42px 100px 256px;  
+  border-image-slice: 44 42 100 256 fill;
+  
+  
+}

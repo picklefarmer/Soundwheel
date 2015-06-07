@@ -1,0 +1,137 @@
+@import "compass/css3/box-shadow";
+@import "compass/css3/user-interface";
+@import "compass/css3/text-shadow";
+@import "compass/css3/background-clip";
+@import "compass/css3/appearance";
+
+@mixin matteShadow {
+	border-radius:30px 30px 0px 0px;
+	@include box-shadow(inset 0px 0px 20px rgba(0,0,0,0.9));
+}
+
+select{
+	text-align:center;
+	display:inline-block;
+	width:60px;
+	color:transparent;
+	border:7px solid #383838;
+	border-radius:15px;
+	@include box-shadow(0px 0px 5px 5px #222222);
+ 	@include appearance(none);
+}
+
+select:focus {
+	outline:none;
+}
+option{
+	outline:none;
+}
+li{
+	display:inline-block;
+}
+
+li ul li{
+	display:block;
+}
+table{
+	display:inline-block;
+	table{
+		border:none;
+		background:#292929;
+		td{
+			&:first-child,&:last-child{
+				background:rgba(150,150,150,.6);
+			}
+		}
+	}
+}
+
+input{
+	text-align:center;
+	display:inline-block;
+	width:46px;
+	border:7px solid #383838;
+	border-radius:15px;
+	@include box-shadow(0px 0px 5px 5px #222222);
+	&:focus {
+		background:black;
+		color:white;
+		outline:none;
+	}
+}
+
+button{
+	//width:60px;
+	display:inline-block;
+	//border:7px solid #383838;
+	border-radius:15px;
+	@include box-shadow(0px 0px 5px 5px #222222);
+	color:black;
+	&:active {
+		display:inline-block;
+		position:relative;
+		top:-1px;
+		left:-2px;
+		border:7px solid #383838;
+		border-radius:15px;
+		@include box-shadow(0px 0px 1px 1px #282828);
+	}
+}
+
+table, th, td {
+	border:none;
+	@include box-shadow(none);
+	background-image:none;
+
+}
+
+th {
+	th{
+		@include matteShadow();
+		background:#626262;
+		color:white;	
+	}
+	table {
+		@include matteShadow();
+	}
+	&:first-child{
+		tr{
+			&:last-child{
+				td{
+					background:#626262;
+					@include matteShadow();
+					color:white;	
+				}
+			}		
+		}
+	}
+	&:last-child{
+		td{
+			h2{
+				background:#626262;
+				border-radius:60px;
+				border-style:inset none none inset;
+				@include box-shadow(inset 0px 6px 20px rgba(0,0,0,0.9));
+				font-size:66px;
+				height:76px;
+				width:46px;
+				position:relative;
+				top:-6px;
+				margin:0px;
+			}
+		}
+		table{
+			height:100%;
+			position:relative;
+			background:#282828;
+			margin:310px 0px -50px 0px;
+			border:none;
+			td{
+				border:none;
+				border-radius:33px;
+				background:#282828;
+				@include box-shadow(none);
+			}
+		}
+	}	
+}

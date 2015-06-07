@@ -1,0 +1,496 @@
+
+App.SongView = Em.CollectionView.extend({
+content:['backView','frontView'],
+classNames:['lest'],
+itemViewClass: Ember.View.extend({
+	mouseDown:function(e){
+		var f = [~~((e.offsetX-10)/(1600/24)),~~((e.offsetY-5)/(300/6))],
+		note = [f[0],this.get('parentView.mapAllocation')[f[0]][f[1]]],
+		obj = {};
+		obj[f[1]] = note;
+		Em.run(this.get('parentView'),this.get('parentView.editPush'),obj)
+		
+	},
+	tagName:"canvas",
+	classNames:["tablature"],
+	attributeBindings:['width','height'],
+	height:300,
+	width:1200
+}),
+editPush:function(notes){
+		var pos =  this.get('editScore')[this.get('editIndex')],name = Object.keys(notes)[0];
+//		console.log( this.get('editScore'),pos,"index: " +  this.get('editIndex') , notes ) 
+		if(pos){
+			if(!pos[name]){
+				console.log( "add" ,name,notes[name]) 				
+				pos[name] = notes[name]
+				Em.run(this,'dot',notes[name][0],name,notes[name][1])
+
+			}else{
+				console.log( "remove" + name ) 
+				delete pos[name]
+				Em.run(this,'dot',notes[name][0],name,notes[name][1],1)
+			}
+		}else{
+			this.get('editScore').push(notes)}
+			console.log(this.get('editScore'),pos,name) 
+			Em.run(this,'dot',notes[name][0],name,notes[name][1],1)
+},
+attributeBindings:['id',"style"],
+style:function(_,y,x){
+//		console.log(_,this.get('x'),this.get('y'))
+		x = 1220;
+		y = 360;
+		var v = "px;";
+		return "height:"+y+v+"width:"+x+v;
+}.property(),
+x:Em.computed.oneWay('this.controller.model.x'),
+y:Em.computed.oneWay('this.controller.model.y'),
+id:"hing",
+frontView:function(a,ctx){
+		if(ctx){
+			ctx.font="bolder 22px serif"
+		}
+		return ctx || null
+
+}.property(),
+
+
+backView:function(a,b){
+		var twentyFour = 24,dots = 2,
+			size = 1600/24,fret = new Image();
+			fret.src = "images/fret.jpg";
+//			fret.src = "lightning.svg";
+		fret.onload = function(){
+			b.fillStyle = "#012";
+    		b.fillRect(0,0,1600,300);
+			b.globalAlpha = .65;	
+				b.save()
+			b.translate(0,300)
+			b.scale(1, -1)
+			b.globalCompositeOperation = "lighter"
+		while(dots--){
+//		b.drawImage(fret,600*dots,0,600,488)
+		}
+//		b.drawImage(fret,2905,300)
+			b.restore()
+			b.fillStyle = "rgba(44,77,150,.122)"
+			b.lineWidth = "5"
+		b.beginPath()
+		b.moveTo(770,160)
+		b.lineTo(795,160)
+		b.lineTo(745,80)
+		b.lineTo(765,140)
+		b.lineTo(740,140)
+		b.lineTo(790,220)
+		b.closePath()
+		b.fill()
+		b.fillStyle = "#333333"
+//b.stroke()
+
+		dots = 4
+		while(twentyFour--){
+		
+		b.fillStyle = "hsl(180,11%,32%)"
+			b.fillRect(size*twentyFour,0,9,300)
+		b.fillStyle = "hsl(180,11%,42%)"
+			b.fillRect(size*twentyFour+2,0,5,300)
+		}
+		
+		b.fillStyle = "hsl(180,11%,32%)"
+		while(dots--){
+			b.beginPath()
+			b.arc(size*2.5+3+(dots*size*2),150,16,0,2*Math.PI)
+			b.fill()
+		}
+		dots = 4;
+		while(dots--){
+			b.beginPath()
+			b.arc(size*14.5+3+(dots*size*2),150,16,0,2*Math.PI)
+			b.fill()
+		}
+		dots = 2;
+
+		while(dots--){
+			b.beginPath()
+			b.arc(size*11.5+3,75+150*dots,16,0,2*Math.PI)
+			b.fill()
+		}
+	
+		twentyFour =6;
+		while(twentyFour--){
+		b.fillStyle = "hsl(0,0%,5%)"
+			b.fillRect(0,22+50*twentyFour,1200,6)
+		b.fillStyle = "hsl(0,0%,40%)"
+			b.fillRect(0,24+50*twentyFour,1200,3)
+		}
+	}
+}.property(),
+notes:function(){
+console.log("F")
+	var volume = .025 //this.get('volume');
+
+	// circle of fifths 
+	var octaves = [.5,1,2,4],octaveIndex = 4;
+	
+	var notes = [
+		261.63,	//	0
+		392,	//	7
+		293.66,	//	2 
+		440,	//	9	
+		329.63,	//	4 
+		493.88,	//	11 
+		369.99,	//	6 
+		277.18,	//	1
+		415.3, 	//	8
+		311.13,	//	3 
+		466.16,	//	10 
+		349.23]	//	5 
+		
+		while(octaveIndex--){
+			octaves[3-octaveIndex] = notes.map(function(e){return e*octaves[3-octaveIndex]})
+		}
+		notes = octaves.reduce(function(a,b){return a.concat(b)})
+		notes = notes.map(function(e){
+		return play_tone(e,volume)})
+
+		return notes
+
+}.property(),
+isFaded:Em.computed.oneWay('controller.isFaded'),
+
+didInsertElement: function(){
+		var self = this;
+			this.forEach(function(item,index){
+				if(item.element)
+				self.set(item.content,item.element.getContext('2d'))
+			})
+
+     $(document).keydown(function(e) {
+
+		var is,x = self.get('x'),y = self.get('y'),type = self.get('playType');
+	switch(e.keyCode){
+		
+		case 37:Em.run(self,type,"decrementProperty");
+				self.set('controller.direction',1);break;
+		case 38:self.toggleProperty('pause');
+				Em.run(self,'play',"incrementProperty");
+				self.set('controller.direction',-1);break;
+		case 39:Em.run(self,type,"incrementProperty");
+				self.set('controller.direction',-1);break;
+		case 40:self.toggleProperty('pause');
+				Em.run(self,'play',"decrementProperty");
+				self.set('controller.direction',1);break;;
+		case 32:Em.run(self,'tablature');break;
+		case 13:if(type === 'edit'){
+			self.get('editScore')
+				.insertAt(self.get('editIndex')+1,{})
+				};break;
+		case 46:if(type === 'edit'){
+			self.get('editScore')
+				.removeAt(self.get('editIndex'),1)
+				};break;
+		case 45:if(type === 'edit'){
+			var score = self.get('editScore'),index = self.get('editIndex'),temp = Em.copy(score[index]);
+				score.insertAt(index+1,temp)
+				};break;
+		default:break;	
+	}
+	if(is){
+			console.log("fired")	
+			self.get('controller.target')
+				.send('ride', x,y)
+		}})
+},
+dots:function(x,y,i){
+
+		Em.run.later(this,'dot',x,y,i,this.incrementProperty('dotsIndex')*this.get('tempo'))
+
+},
+	
+dotsIndex:0,
+dot:function(x,y,i,clear){
+	var offset = 18
+	x*=67
+	y*=50
+	try{
+		var note = this.get('notes')[i];
+		}catch(e){
+			console.log("error",x,y,i,this.get('notes'))
+		}
+		var ctx = this.get('frontView');
+		var fifths = this.get('fifths'),
+			scale = 36;
+		var fade = this.get('isFaded');	
+//		arr = fifths[i];
+	//	console.log(note,x,y,i,"notes")
+//			 x = arr[0]; y = arr[1]; h = arr[2];
+var h  = (360/12)*i,names =   ["C","G","D","A","E","B","F#","C#","G#","D#","A#","F"][i%12];
+		var initVol = note.volume;
+		ctx.clearRect(offset+x,offset/2+y,scale,scale)
+		if(!clear)
+		for(var l = 0; l <8; l++){	
+			note.play()
+			Em.run.later(this,function(l){
+			//	ctx.clearRect(x,y,scale/2,scale/2)
+				
+				if(note.volume >= .12)	
+					note.volume -=.12
+			//	ctx.fillStyle = "hsl("+ h +",100%,"+l*7+"%)";
+				ctx.globalCompositeOperation = "source-over"
+				ctx.fillStyle = "white" 
+				ctx.beginPath()
+				ctx.arc(offset+x+scale/2,
+						offset/2+y+scale/2,
+						((scale/2)/8)*l,
+						0,2*Math.PI)
+				ctx.fill()
+				
+				if(l === 7){
+				//	ctx.fillStyle = "hsl("+ h +",100%,40%)"
+				//	ctx.fillText(names,(offset/2)+(names[1]?-5:1)+x+scale/2,offset/2+8+y+scale/2)
+				//ctx.fill()
+					note.pause()
+					note.volume = initVol; 
+					note.currentTime = 0;
+				}
+			},l,l*25);
+}
+		
+		
+			
+},
+isCleared:Em.computed.oneWay('controller.isCleared'),
+clearObserver:function(){
+	Em.run.next(this,'clear')
+}.observes('controller.clear'),
+clear:function(x,y){
+		this.get('frontView').clearRect(0,0,1400,300)
+},
+draw:function(){
+	var type = this.get('block'),map = this.get('mapAllocation'),x = this.get('x'),y = this.get('y');
+
+		Em.run(this,'clear')
+
+		//	Em.run(this,'dot',this.get('x')-1,this.get('y'),(type-1)%12)
+		//	Em.run(this,'dot',this.get('x')+1,this.get('y'),(type+1)%12)
+			Em.run(this,'dot',x,y,type)
+			Em.run(this,'dot',x,y-1,map[x][y-1])
+			Em.run(this,'dot',x,y+1,map[x][y+1])
+},
+mapAllocation:function(){
+	var map = [], _x = 18, _y = 6,deFifth = (function(){
+													var count =4,arr = [0,7,2,9,4,11,6,1,8,3,10,5],self = [];
+														while(count--){
+														self.push(arr.map(function(e){return e+12*(3-count)}))	
+													}
+														self = self.reduce(function(a,b){return a.concat(b)})
+													return  self }());
+				 
+		while(_x--){
+				map.push([])
+			while(_y--){
+//					console.log(map[17-_x])
+				map[17-_x].push( deFifth[(5+(17-_x)+ _y*5+(_y>3?-1:0))%48])
+			}
+			_y = 6
+		}
+
+	return map
+}.property(),
+
+block:function(){
+	//	return this.get('mapAllocation')[this.get('x')][this.get('y')]
+}.property('x','y'),
+
+drawObserver:function(_,x,y){
+		if(this.get('frontView')){
+	//		Em.run.debounce(this,'draw',7*15)
+		}	
+}.observes('x','y'),
+tablature:function(){
+		var self = this;
+		console.log("D")
+		Em.run(this,'clear')
+		this.get('mapAllocation').forEach(function(e,x){
+							e.forEach(function(v,y){
+								Em.run(self,'dots',x,y,v)
+							})
+						})
+		this.set('dotsIndex',0)
+},
+playType:Em.computed.oneWay('controller.playType'),
+editIndex:Em.computed.alias('controller.editIndex'),
+songLength:function(){return blues[0].length}.property(),
+songIndex:function(a,b){
+		
+		if(b < 0){b = this.get('songLength')-1}
+		return b%this.get('songLength')
+}.property(),
+muSongLength:function(){return bfa.length}.property(),
+muSongIndex:function(a,b){
+		if(b < 0){b = this.get('muSongLength')-1}
+		b = b%this.get('muSongLength')
+		this.set('controller.model.x',b)
+		return b
+}.property(),
+song:function(direction){
+		 	var length = blues[0].length,
+			i = this[direction]('songIndex'),
+			y = 6, v,x = [],tmp;
+				
+			while(y--){
+				tmp = ~~blues[y][i];
+				if(tmp)
+					x.push([tmp-1,y])
+			} 	
+			
+	if(x[0])
+		x.forEach(function(x,f){
+				var y = x[1],x = x[0]; 
+		v = this.get('mapAllocation')[x][y];
+	//		console.log("y:",y+1,"x:",x,"note:",v,"index:",i)
+		if(this.get('isCleared')){
+			Em.run(this,'clear')
+			}
+			Em.run(this,"dot",x,y,v)
+			},this)
+},
+range:function(){
+	var range = this.get('controller.model.y')[this.get('muSongIndex')]
+	return range || null
+}.property('controller.model.x'),
+muSong:function(direction){
+	
+		var index = this[direction]('muSongIndex') ;
+console.log(this.get('muSongIndex'),index)
+		var note = bfa[index];
+		var board = this.get('mapAllocation');
+		var y =18,tmp,x = [],range = this.get('range');
+if(	range ) {
+	while(y--){
+			tmp = board[y].indexOf(note)
+			if(tmp !== -1){
+				x.push([y,tmp])
+			}
+			
+		}
+		x = [x[range]]	
+}else{
+	while(y--){
+			tmp = board[y].indexOf(note)
+			if(tmp !== -1){
+				x.push([y,tmp])
+			}
+			
+		}	
+}
+//	console.log(x+1,y,note,index)	
+		if(x[0]) {
+		x.forEach(function(e,f){
+		if(this.get('isCleared')){
+			Em.run(this,'clear')
+			}
+			Em.run(this,'dot',e[0],e[1],note)
+		},this)
+		}		
+	
+	
+
+},
+editScore:Em.computed.alias('controller.editScore'),
+edit:function(direction){
+	
+		var index = this[direction]('editIndex') ;
+		var note = this.get('editScore.'+index);
+	
+	Object.keys(note).forEach(function(e){
+	var name;		
+	if(this.get('isCleared')){
+		Em.run(this,'clear')
+	}
+	if(e === "l"){
+		console.log(note[e])		
+	}else if(e[1]){
+	//	console.log(e)
+		name = e.split(",");
+		Em.run(this,'dot',name[0],name[1],note[e])
+	}else{
+		name = note[e];
+		console.log("ASDF",name[0],name[1],e)
+		Em.run(this,'dot',name[0],e,name[1])
+		}
+	},this)
+	
+	
+},
+tempo:Em.computed.oneWay('controller.tempo'),
+pause:false, 
+play:function(direction){
+console.log(this.get('playType'))	
+	if(!this.get('pause')){
+			Em.run(this,this.get('playType'),direction)		
+			Em.run.later(this,"play",direction,this.get('tempo'))
+
+		}
+},
+
+
+
+})
+
+App.SongRoute = Em.Route.extend({
+ actions: {
+    
+  },
+model:function(params){
+
+params.y = [params.y.split("")][params.x] || params.y
+console.log(params.y)
+return params
+},
+init:function(){
+//	console.log('f')
+},
+renderTemplate: function() {
+   		this.render();
+			
+	this.render("scroll", {
+            outlet: "scroll",
+            into: "application",
+			controller: "song"
+        });
+	this.render("inventory", {
+            outlet: "inventory",
+            into: "application",
+			controller: "inventory"
+    });
+	this.render("lyrics", {
+	outlet: "bottom",
+	into: "application",
+	controller: "song"
+});
+
+this.render("nav", {
+            outlet: "nav",
+            into: "application",
+			controller: "song"
+        });
+
+  },
+
+
+beforeRender:function(){
+	console.log("j",this.get('model'))
+},
+actions:{
+ride:function(x,y){
+	this.router.replaceWith("song",{x:x,y:y})
+	},
+loading:function(){
+	console.log ( "THIS" ) 
+}
+}
+})
+
+

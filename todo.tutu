@@ -1,0 +1,37 @@
+config
+	add layout customizability
+user.
+	login
+	| logout/
+	new user
+	| panel-settings
+	| songs
+  	| chords
+	| shared
+	messages
+	| song sharing
+	\ make songs sharable
+	^
+default
+	local-storage
+		panel-settings? 
+		
+display
+	rework menu
+	//  range slider http://codepen.io/anon/pen/bNmxYM
+add
+//	play buttons
+#	chord capture
+
+remove
+	?
+#	save functionality
+
+debug
+	"chord save" 
+	"measure wheel"
+#	"chord difference" 
+
+art
+
+	add lightning dino logo

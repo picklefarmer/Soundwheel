@@ -1,0 +1,49 @@
+
+  <li>
+  	<button {{action "newSelection"}}>New</button>
+  </li>
+  <li>
+  	<button {{action "editSelected"}}>Edit</button>
+  </li>
+   <li>
+			<button {{action "saveSelection"}}>Save</button>
+   </li>
+
+	{{#if isEditing}}
+  <li>
+    <ul>
+   <li>
+			<button {{action "updateSelection"}}>Update</button>
+   </li>
+   <li>
+			<button {{action "deleteSelection"}}>Remove</button>
+   </li>
+   <li>
+			<button {{action "chordCapture"}}>Capture</button>
+  </li>
+    </ul>
+  </li>
+		{{#if selected }}
+			{{#ar-peg isEditing="isEditing" higher=controller click=null chord=selected as |string fret|}}
+
+				<button	{{action "toggleSelected" string fret}}>
+						|}{|
+				</button>
+
+			{{/ar-peg}}
+		{{/if}}
+
+	{{/if}}
+
+	{{#each model as |chord|}}
+
+		<li class="{{if ("arr-comp" selection chord) "match" }}">
+			{{ar-peg chord=chord action="selector"}}
+		</li>
+
+	{{/each}}
+
+
+
+
+

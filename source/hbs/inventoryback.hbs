@@ -1,0 +1,9 @@
+{{#ar-peg block=null action="toggle" rod=selected}}
+<div>[+]</div>	
+{{/ar-peg}}
+<br>
+<div class="sidebar" >
+	{{#each model as |rod index|}}
+		{{ar-peg target=view rod=rod index=index}}
+	{{/each}}
+</div>

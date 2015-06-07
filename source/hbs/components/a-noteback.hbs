@@ -1,0 +1,9 @@
+{{#each fret as |hold| }}
+	{{#if template}}
+		{{#for-fret action="toggle" line=line hold=hold note=note}}
+			{{yield}}
+		{{/for-fret}}
+	{{else}}
+		{{for-fret line=line hold=hold note=note}}
+	{{/if}}
+{{/each}}

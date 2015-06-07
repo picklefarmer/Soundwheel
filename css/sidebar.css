@@ -1,0 +1,547 @@
+/* line 1, ../source/scss/sidebar.scss */
+.sidebar {
+  -webkit-transition: background 1s;
+  transition: background 1s;
+}
+
+/* line 5, ../source/scss/sidebar.scss */
+.sidebar tr td {
+  border-left: 7px inset #383838;
+}
+
+/* line 9, ../source/scss/sidebar.scss */
+.sidebar li div {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 15px;
+  border: 7px inset #383838;
+  -webkit-box-shadow: inset 0px 0px 4px 4px #282828;
+  box-shadow: inset 0px 0px 4px 4px #282828;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.89844) 0px 0px 20px inset;
+  box-shadow: rgba(0, 0, 0, 0.89844) 0px 0px 20px inset;
+  text-shadow: 0px 1px 2px #282828;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  font-size: 20px;
+  padding: 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* $activeColor: #c0392b; //red */
+/* $background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/13460/dark_wall.png'); */
+/* .slideOne */
+/* line 4, ../libs/checkbox.scss */
+.slideOne {
+  width: 50px;
+  height: 10px;
+  background: #333;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* line 12, ../libs/checkbox.scss */
+.slideOne label {
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  cursor: pointer;
+  background: #fcfff4;
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+/* line 25, ../libs/checkbox.scss */
+.slideOne input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 27, ../libs/checkbox.scss */
+.slideOne input[type=checkbox]:checked + label {
+  left: 37px;
+}
+
+/* end .slideOne */
+/* .slideTwo */
+/* line 32, ../libs/checkbox.scss */
+.slideTwo {
+  width: 80px;
+  height: 30px;
+  background: #333;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* line 40, ../libs/checkbox.scss */
+.slideTwo:after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  height: 2px;
+  width: 52px;
+  background: #111;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* line 50, ../libs/checkbox.scss */
+.slideTwo label {
+  display: block;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  z-index: 1;
+  left: 4px;
+  background: #fcfff4;
+  border-radius: 50px;
+  transition: all 0.4s ease;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+}
+
+/* line 64, ../libs/checkbox.scss */
+.slideTwo label:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #333;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px black, 0px 1px 0px rgba(255, 255, 255, 0.9);
+}
+
+/* line 74, ../libs/checkbox.scss */
+.slideTwo input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 76, ../libs/checkbox.scss */
+.slideTwo input[type=checkbox]:checked + label {
+  left: 54px;
+}
+
+/* line 78, ../libs/checkbox.scss */
+.slideTwo input[type=checkbox]:checked + label:after {
+  background: #27ae60;
+  /*activeColor*/
+}
+
+/* end .slideTwo */
+/* .slideThree */
+/* line 84, ../libs/checkbox.scss */
+.slideThree {
+  width: 48%;
+  height: 38px;
+  background: #333;
+  color: #fff;
+  display: inline-block;
+  margin: 0px auto;
+  position: relative;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* line 94, ../libs/checkbox.scss */
+.slideThree:after {
+  content: 'OFF';
+  color: #000;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  z-index: 0;
+  font: 12px/26px Arial, sans-serif;
+  font-weight: bold;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+}
+
+/* line 104, ../libs/checkbox.scss */
+.slideThree:before {
+  content: 'ON';
+  color: #27ae60;
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  z-index: 0;
+  font: 12px/26px Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* line 113, ../libs/checkbox.scss */
+.slideThree label {
+  display: block;
+  width: 34px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  z-index: 1;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  transition: all 0.4s ease;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* line 127, ../libs/checkbox.scss */
+.slideThree input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 129, ../libs/checkbox.scss */
+.slideThree input[type=checkbox]:checked + label {
+  left: 62%;
+}
+
+/* end .slideThree */
+/* .roundedOne */
+/* line 134, ../libs/checkbox.scss */
+.roundedOne {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 143, ../libs/checkbox.scss */
+.roundedOne label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  background: linear-gradient(top, #222 0%, #45484d 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+
+/* line 153, ../libs/checkbox.scss */
+.roundedOne label:after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: #27ae60;
+  background: linear-gradient(top, #27ae60 0%, #145b32 100%);
+  opacity: 0;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 165, ../libs/checkbox.scss */
+.roundedOne label:hover::after {
+  opacity: 0.3;
+}
+
+/* line 167, ../libs/checkbox.scss */
+.roundedOne input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 169, ../libs/checkbox.scss */
+.roundedOne input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+/* end .roundedOne */
+/* .roundedTwo */
+/* line 174, ../libs/checkbox.scss */
+.roundedTwo {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 183, ../libs/checkbox.scss */
+.roundedTwo label {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  cursor: pointer;
+  background: linear-gradient(top, #222 0%, #45484d 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+
+/* line 193, ../libs/checkbox.scss */
+.roundedTwo label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 5px;
+  left: 4px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+/* line 206, ../libs/checkbox.scss */
+.roundedTwo label:hover::after {
+  opacity: 0.3;
+}
+
+/* line 208, ../libs/checkbox.scss */
+.roundedTwo input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 210, ../libs/checkbox.scss */
+.roundedTwo input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+/* end .roundedTwo */
+/* .squaredOne */
+/* line 215, ../libs/checkbox.scss */
+.squaredOne {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 223, ../libs/checkbox.scss */
+.squaredOne label {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  cursor: pointer;
+  background: linear-gradient(top, #222 0%, #45484d 100%);
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+
+/* line 232, ../libs/checkbox.scss */
+.squaredOne label:after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: #27ae60;
+  background: linear-gradient(top, #27ae60 0%, #145b32 100%);
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+}
+
+/* line 243, ../libs/checkbox.scss */
+.squaredOne label:hover::after {
+  opacity: 0.3;
+}
+
+/* line 245, ../libs/checkbox.scss */
+.squaredOne input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 247, ../libs/checkbox.scss */
+.squaredOne input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+/* end .squaredOne */
+/* .squaredTwo */
+/* line 252, ../libs/checkbox.scss */
+.squaredTwo {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 260, ../libs/checkbox.scss */
+.squaredTwo label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  background: linear-gradient(top, #222 0%, #45484d 100%);
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+
+/* line 269, ../libs/checkbox.scss */
+.squaredTwo label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+/* line 282, ../libs/checkbox.scss */
+.squaredTwo label:hover::after {
+  opacity: 0.3;
+}
+
+/* line 284, ../libs/checkbox.scss */
+.squaredTwo input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 286, ../libs/checkbox.scss */
+.squaredTwo input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+/* end .squaredTwo */
+/* .squaredThree */
+/* line 291, ../libs/checkbox.scss */
+.squaredThree {
+  width: 20px;
+  position: relative;
+  margin: 20px auto;
+}
+
+/* line 295, ../libs/checkbox.scss */
+.squaredThree label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(top, #222 0%, #45484d 100%);
+  border-radius: 4px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.4);
+}
+
+/* line 305, ../libs/checkbox.scss */
+.squaredThree label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+/* line 318, ../libs/checkbox.scss */
+.squaredThree label:hover::after {
+  opacity: 0.3;
+}
+
+/* line 320, ../libs/checkbox.scss */
+.squaredThree input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 322, ../libs/checkbox.scss */
+.squaredThree input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+/* end .squaredThree */
+/* .squaredFour */
+/* line 327, ../libs/checkbox.scss */
+.squaredFour {
+  width: 20px;
+  position: relative;
+  margin: 20px auto;
+}
+
+/* line 331, ../libs/checkbox.scss */
+.squaredFour label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 4px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* line 342, ../libs/checkbox.scss */
+.squaredFour label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+/* line 355, ../libs/checkbox.scss */
+.squaredFour label:hover::after {
+  opacity: 0.5;
+}
+
+/* line 357, ../libs/checkbox.scss */
+.squaredFour input[type=checkbox] {
+  visibility: hidden;
+}
+
+/* line 359, ../libs/checkbox.scss */
+.squaredFour input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+
+/* end .squaredFour */
+/* line 363, ../libs/checkbox.scss */
+* {
+  box-sizing: border-box;
+}

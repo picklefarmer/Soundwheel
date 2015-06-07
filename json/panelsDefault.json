@@ -1,0 +1,8 @@
+[
+  { "panel":"right","name":"nav" },
+  { "panel":"bottom","name":"inventory" },
+  { "panel":"left","name":"scroll" },
+  { "panel":"center","name":"plays" },
+  { "panel":"middle","name":"lyrics" }
+]
+
