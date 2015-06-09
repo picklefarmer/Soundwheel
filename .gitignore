@@ -7,5 +7,10 @@
 ^.*
 .*
 .vim$
-compiled/
+/compiled
+/libs
+/css
+/images
+*back*
+
 !/.gitignore
