@@ -7,4 +7,5 @@
 ^.*
 .*
 .vim$
+/compiled
 !/.gitignore
