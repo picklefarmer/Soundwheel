@@ -559,133 +559,6 @@ App.SongsView = Em.CollectionView.extend({
  * ctx.fill()
 */
 
-App.UserRoute = Em.Route.extend({
-  actions: {
-    login: function login() {
-      this.auth.login();
-    },
-    logout: function logout() {
-      this.auth.logout();
-    }
-
-  }
-});
-
-Em.Application.initializer({
-  name: "firebase-compile",
-
-  initialize: function initialize(container, App) {
-
-    App.inject("component:menu-bar", "logger", "login:side");
-    App.inject("route:song", "settings", "settings:side");
-    App.inject("component:pa-nels", "settings", "settings:side");
-    App.inject("component:tool-bar", "settings", "settings:side");
-
-    App.inject("component:option-panel", "song", "service:song");
-    App.inject("component:play-bar", "song", "service:song");
-    App.inject("component:measure-bar", "song", "service:song");
-    App.inject("component:fret-board", "options", "service:options");
-    App.inject("component:fret-board", "song", "service:song");
-    App.inject("controller:song", "song", "service:song");
-    //        App.inject('view:song','song', 'service:song')
-
-    App.inject("component:pa-nels", "_actions", "settings:actions");
-    App.inject("route:user", "auth", "service:auth");
-    App.inject("component:log-in", "auth", "service:auth");
-  }
-
-});
-
-var DEBAG;
-
-App.register("service:local", Em.Object.extend({
-  //play properties
-
-  /*
-  score:function(_,nw,ld){
-    return this.get('songSelection') || Em.A([[]])
-  }.property('songSelection'),
-  */
-  selected: (function (_, _x, oldSelected) {
-    var selected = arguments[1] === undefined ? "fizz" : arguments[1];
-
-    console.log(_, selected, oldSelected);
-    _ = this;
-    new Em.RSVP.Promise(function (res, rej) {
-      var om = JSON.parse(JSON.parse(localStorage.songs)[selected]);
-      console.log("promise");
-      res(_.set("songSelection", om));
-    });
-    return selected;
-  }).property(),
-
-  chordSave: function chordSave() {
-    var chords = this.get("chordBank");
-    var chords = JSON.stringify(this.get("chordBank"));
-
-    localStorage.chords = chords;
-  },
-  /*
-  chordBank:function(_,nw){
-    console.log(nw, "BANK CHORD")
-    return this.get('chordCache') || Em.A([[]]) 
-  }.property('chordCache'),
-  */
-  chords: (function (_, async, __) {
-    var _ = this;
-    console.log("chords", async, __);
-    if (!async) {
-      new Em.RSVP.Promise(function (res, ref) {
-        var om = JSON.parse(localStorage.chords);
-        console.log("promise chord");
-        res(_.set("chordCache", om));
-      });
-    }
-    return async;
-  }).property(),
-
-  /*
-  chordSelection:function(_,I){
-    console.log(I)
-    return I 
-  }.property(),
-  index:function(a,b){
-    console.log(b,"index")
-    if(b < 0){
-      b = this.get('score').length-1
-    }
-    a = b%this.get('score').length || 0;
-    return a
-  }.property('score.[]'),
-  /
-  meter:function(){
-    return ~~((60/(this.get('tempo')))*1000) 
-  }.property('tempo'),
-  bpm:320,
-  tempo:function(_,__){
-    return 2264 - this.get('bpm')
-  }.property('bpm'),
-  pause:false,
-  cacheNotes:[[]],
-  measure:function(){
-    console.log('meaure in init',this.get('score'),this.get('score'))
-    return this.get('score').objectAt(this.get('index'))
-  }.property('index','score'),
-   clock:function(){
-    if(this.pause){ 
-         this.incrementProperty('index')
-         Em.run.later(this,'clock',this.get('tempo'))    
-    }
-  }.observes('pause'),
-  tempChord:[],
-  */
-  names: (function () {
-    var names = Object.keys(JSON.parse(localStorage.songs));
-    return Em.A(names) //|| ["fizz","fuzz"]
-    ;
-  }).property()
-}));
-
 App.GlobalKeydownService = Em.Service.extend({
 											begin: function begin(e) {
 
@@ -740,10 +613,14 @@ App.GlobalKeydownService = Em.Service.extend({
 });
 
 Em.Application.initializer({
+
   name: "firebase-init",
+
   before: "firebase-compile",
 
   initialize: function initialize(container, App) {
+
+    //default . routes
 
     App.register("login:side", Ember.Object.extend({
       menuBar: (function () {
@@ -751,18 +628,15 @@ Em.Application.initializer({
       }).property()
     }));
 
+    //user . routes
+
     App.register("login:auth", Ember.Object.extend({
       menuBar: (function () {
         return $.getJSON("./json/routesAuth.json");
       }).property()
     }));
 
-    App.register("settings:actions", Ember.Object.extend({
-      click: function click(param) {
-        //DEBUG = param
-        console.log("free", param);
-      }
-    }));
+    //user . config
 
     App.register("settings:side", Ember.Object.extend({
 
@@ -770,48 +644,69 @@ Em.Application.initializer({
       datas: (function () {
         var _this = this;
 
+        console.log("fetch panel-data");
         this.get("data").then(function (data) {
           return _this.set("datas", data);
         });
       }).property(),
       data: (function () {
-        //return $.getJSON('./json/panelsDefault.json');
         return $.getJSON("./json/panelsAuth.json", function (err) {});
       }).property()
     }));
   }
+
 });
 
-//.set('hide',true))
-
-//          console.log(err)
 /*
+ * user is looged in
+ *
+ *
+ */
 
-var base = new Firebase('https://acroeven.firebaseio.com/music');
-var chords = base.child('chords');
+Em.Application.initializer({
+  name: "auth",
+  after: "firebase-compile",
+  initialize: function initialize(container, App) {
+    var isLogged = App.__container__.lookup("service:auth").get("uid"),
+        type = isLogged ? "auth" : "side";
 
-*/
-//App.SongController = Em.Controller.extend({
+    App.inject("component:menu-bar", "logger", "login:" + type);
+  }
+});
+
+Em.Application.initializer({
+  name: "firebase-compile",
+
+  initialize: function initialize(container, App) {
+
+    App.inject("route:song", "settings", "settings:side");
+    App.inject("component:pa-nels", "settings", "settings:side");
+    App.inject("component:tool-bar", "settings", "settings:side");
+
+    App.inject("component:option-panel", "song", "service:song");
+    App.inject("component:play-bar", "song", "service:song");
+    App.inject("component:measure-bar", "song", "service:song");
+    App.inject("component:fret-board", "options", "service:options");
+    App.inject("component:fret-board", "song", "service:song");
+    App.inject("controller:song", "song", "service:song");
+
+    //        App.inject('view:song','song', 'service:song')
+
+    //      App.inject('component:pa-nels','_actions', 'settings:actions')
+    App.inject("route:user", "auth", "service:auth");
+    App.inject("component:log-in", "auth", "service:auth");
+  }
+
+});
+// isLogged = true ->
+
 /*
-		needs:'inventory',
-		songs:function(){
+ * config
+ * user.config
+ * user.options
+ */
 
-						var one = Firebase.List.create({ref:base})
-						//	console.log ( one.names ) 
-						return one
-
-				}.property(),
-
-*/
-//App.InventoryController = Em.Controller.extend({
-/*
-	model:function(){
-		return	Firebase.List.create({
-			ref:chords
-			})
-	}.property(),
-
-*/
+//set online {storage.isOnline}
 
 App.InstrumentsService = Em.Service.extend({
   organ: (function () {
@@ -833,6 +728,65 @@ App.InstrumentsService = Em.Service.extend({
   tables: {
     real: [0, -0, -0.042008, 0.010474, -0.138038, 0.002641, -0.001673, 0.001039, -0.021054, 0.000651, -0.000422, 0.000334, -0.000236, 0.000191, -0.000161, 0.000145, -0.018478, 0.000071, -0.000066, 0.000047, -0.000044, 0.000041, -0.000034, 0.000031, -0.00003, 0.000028, -0.000025, 0.000024, -0.000022, 0.00002, -0.000015, 0.000013, -0.01157, 0.000004, -0.000003, 0.000003, -0.000003, 0.000003, -0.000003, 0.000002, -0.000002, 0.000002, -0.000002, 0.000002, -0.000002, 0.000002, -0.000002, 0.000002, -0.000001, 0.000001, -0.000001, 0.000001, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000898, 0.000001, -0.000001, 0.000001, -0.000001, 0.000001, -0.000001, 0.000001, -0.000001, 0.000001, -0.000001, 0.000001, -0.000001, 0.000001, -0.000001, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000245, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000106, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000003, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0],
     imag: [0, 0.196487, -0, 0, -0.000003, 0, -0, 0, -0.000002, 0, -0, 0, -0, 0, -0, 0, -0.000007, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000018, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000006, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000006, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.00001, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0.000001, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0, 0, -0] } });
+
+App.TonesService = Em.Service.extend({
+  webaudio: Em.inject.service(),
+  init: function init() {},
+  isLeft: true, //false,
+  tone: (function () {
+    var strings = this.get("strings").map(this.get("webaudio.tone"), this.get("webaudio"));
+
+    strings = this.get("isLeft") ? strings.reverse() : strings;
+
+    return Em.A(strings);
+  }).property("isLeft", "strings"),
+  strings: (function () {
+    //  console.log('init from notes' )
+    var notesMap = [],
+        octaves = [0.5, 1, 2, 4],
+        strings = [],
+        string = 5,
+        frequencies = [261.63, //	0
+    277.18, //	1
+    293.66, //	2
+    311.13, //	3
+    329.63, //	4
+    349.23, //	5
+    369.99, //	6
+    392, //	7
+    415.3, //	8
+    440, //	9	
+    466.16, //	10
+    493.88 //	11
+    ];
+    notesMap = octaves.map(function (multiplier) {
+      return frequencies.map(function (frequency) {
+        return multiplier * frequency;
+      });
+    }).reduce(function (e, f) {
+      return e.concat(f);
+    });
+    while (string >= 0) {
+      var start = undefined;
+      switch (string) {
+        case 5:
+          start = 4 + 4 * 5 + 4;break;
+        case 4:
+          start = 4 + 3 * 5 + 4;break;
+        default:
+          start = 4 + string * 5;break;
+      }
+      strings[string] = notesMap.slice(start, start + 22);
+      strings[string].unshift(1);
+      string--;
+    }
+    return strings.reverse();
+  }).property() });
+
+//        var strings = this.get('strings')
+//                        .map(this.get('webaudio.tone'),
+//                           this.get('webaudio'))
+//  this.set('tone',Em.A(strings))
 
 function play_tone(freq, volume) {
 
@@ -906,57 +860,6 @@ App.WebaudioService = Em.Service.extend({
         }).property()
     })
 });
-
-App.TonesService = Em.Service.extend({
-    webaudio: Em.inject.service(),
-    strings: (function () {
-        //  console.log('init from notes' )
-        var notesMap = [],
-            octaves = [0.5, 1, 2, 4],
-            strings = [],
-            string = 5,
-            frequencies = [261.63, //	0
-        277.18, //	1
-        293.66, //	2
-        311.13, //	3
-        329.63, //	4
-        349.23, //	5
-        369.99, //	6
-        392, //	7
-        415.3, //	8
-        440, //	9	
-        466.16, //	10
-        493.88 //	11
-        ];
-        notesMap = octaves.map(function (multiplier) {
-            return frequencies.map(function (frequency) {
-                return multiplier * frequency;
-            });
-        }).reduce(function (e, f) {
-            return e.concat(f);
-        });
-        while (string >= 0) {
-            var start = undefined;
-            switch (string) {
-                case 5:
-                    start = 4 + 4 * 5 + 4;break;
-                case 4:
-                    start = 4 + 3 * 5 + 4;break;
-                default:
-                    start = 4 + string * 5;break;
-            }
-            strings[string] = notesMap.slice(start, start + 22);
-            strings[string].unshift(1);
-            string--;
-        }
-        return strings.reverse();
-    }).property(),
-    init: function init() {
-        var strings = this.get("strings").map(this.get("webaudio.tone"), this.get("webaudio"));
-        DEBUG = strings;
-        //  console.log("STRINGS in service map",strings,this.get('strings'))
-        this.set("tone", Em.A(strings));
-    } });
 //this.ctx.disconnect()
 
 App.AuthService = Em.Service.extend({
@@ -973,7 +876,6 @@ App.AuthService = Em.Service.extend({
     var user = this.get("uid");
     return this.get("base").child(user);
   }).property("uid"),
-  songList: Em.A([]),
   baseList: (function () {
     //this.get('base').child(this.get('uid')).on("value",(snapshot) => {
     this.get("base").on("value", function (snapshot) {
@@ -1000,8 +902,13 @@ App.AuthService = Em.Service.extend({
     console.log("logout");
     this.get("base").unauth();
     this.set("uid", "Personal");
-  },
-  update: function update() {},
+  }
+});
+//            var newPost = snapshot.val().map(e => e.key());
+//            this.set('songList',newPost)
+
+App.FirebaseService = Em.Service.extend({
+
   selected: (function (_) {
     var _this = this;
 
@@ -1036,8 +943,49 @@ App.AuthService = Em.Service.extend({
   }).property("names")
 
 });
-//            var newPost = snapshot.val().map(e => e.key());
-//            this.set('songList',newPost)
+
+App.LocalService = Em.Service.extend({
+
+  selected: (function (_, _x, oldSelected) {
+    var selected = arguments[1] === undefined ? "fizz" : arguments[1];
+
+    console.log(_, selected, oldSelected);
+    _ = this;
+    new Em.RSVP.Promise(function (res, rej) {
+      var om = JSON.parse(JSON.parse(localStorage.songs)[selected]);
+      console.log("promise");
+      res(_.set("songSelection", om));
+    });
+    return selected;
+  }).property(),
+
+  chordSave: function chordSave() {
+    var chords = this.get("chordBank");
+    var chords = JSON.stringify(this.get("chordBank"));
+
+    localStorage.chords = chords;
+  },
+
+  chords: (function (_, async, __) {
+    var _ = this;
+    console.log("chords", async, __);
+    if (!async) {
+      new Em.RSVP.Promise(function (res, ref) {
+        var om = JSON.parse(localStorage.chords);
+        console.log("promise chord");
+        res(_.set("chordCache", om));
+      });
+    }
+    return async;
+  }).property(),
+
+  names: (function () {
+    var names = Object.keys(JSON.parse(localStorage.songs));
+    return Em.A(names) //|| ["fizz","fuzz"]
+    ;
+  }).property()
+
+});
 
 App.OptionsService = Em.Service.extend({
   onLine: true,
@@ -1058,15 +1006,19 @@ App.OptionsService = Em.Service.extend({
   },
   actionNames: [{ name: "load", type: "core" }, { name: "save", type: "core" }, { name: "onLine", type: "check", "class": "slideThree" }, { name: "clear", type: "core" }, { name: "isFaded", type: "check", "class": "slideThree" }, { name: "isCleared", type: "check", "class": "slideThree" }, { name: "noteType", type: "check", "class": "slideThree" }] });
 
-App.SongService = Em.ObjectProxy.extend({
-  content: (function () {
-    var online = this.get("onLine") ? "auth" : "local";
-    return this.get(online);
-  }).property("onLine"),
-  onLine: false,
-  auth: Em.inject.service(),
-  local: Em.inject.service(),
+App.UpdateMethods = Ember.Mixin.create({
+  content: Em.inject.service("storage"),
+  chordSave: function chordSave() {
+    var chords = this.get("chordBank");
+    var chords = JSON.stringify(this.get("chordBank"));
 
+    localStorage.chords = chords;
+  } });
+
+App.SongService = Em.ObjectProxy.extend(App.UpdateMethods, {
+  init: function init() {
+    this.get("content");
+  },
   score: (function (_, nw, ld) {
     return this.get("songSelection") || Em.A([{ notes: [0, 0, 0, 0] }]);
   }).property("songSelection"),
@@ -1075,12 +1027,7 @@ App.SongService = Em.ObjectProxy.extend({
     console.log("meaure in init", this.get("score"), this.get("score"));
     return this.get("score").objectAt(this.get("index")) || { notes: [] };
   }).property("index", "score"),
-  update: function update(params) {
-    console.log("asdfasdf", params);
-    if (this.get("onLine")) {
-      this.get("user").child("songs/" + this.get("selected") + "/" + this.get("index")).update({ notes: params.toArray() });
-    }
-  },
+
   index: (function (a, b) {
     console.log(b, "index");
     if (b < 0) {
@@ -1089,22 +1036,30 @@ App.SongService = Em.ObjectProxy.extend({
     a = b % this.get("score").length || 0;
     return a;
   }).property("score.[]"),
+
   meter: (function () {
     return ~ ~(60 / this.get("tempo") * 1000);
   }).property("tempo"),
+
   bpm: 320,
+
   tempo: (function (_, __) {
     return 2264 - this.get("bpm");
   }).property("bpm"),
+
   pause: false,
+
   cacheNotes: [[]],
+
   clock: (function () {
     if (this.pause) {
       this.incrementProperty("index");
       Em.run.later(this, "clock", this.get("tempo"));
     }
   }).observes("pause"),
+
   tempChord: [],
+
   chordBank: (function (_, nw) {
     console.log(nw, "BANK CHORD");
     return this.get("chordCache") || Em.A([[]]);
@@ -1113,7 +1068,27 @@ App.SongService = Em.ObjectProxy.extend({
   chordSelection: (function (_, I) {
     console.log(I);
     return I;
-  }).property() });
+  }).property(),
+
+  update: function update(params) {
+    console.log("asdfasdf", params);
+    if (this.get("onLine")) {
+      this.get("user").child("songs/" + this.get("selected") + "/" + this.get("index")).update({ notes: params.toArray() });
+    }
+  } });
+
+App.StorageService = Em.ObjectProxy.extend({
+  content: (function () {
+    var online = this.get("onLine") ? "firebase" : "local";
+    return this.get(online);
+  }).property("onLine"),
+  onLine: false,
+  firebase: Em.inject.service(),
+  local: Em.inject.service(),
+
+  selected: function selected() {}
+
+});
 
 App.Router.map(function () {
 	this.route("catchall", { path: "/*wildcard" });
@@ -1204,6 +1179,18 @@ App.SongRoute = Em.Route.extend({
 		    })
 */
 ;
+
+App.UserRoute = Em.Route.extend({
+  actions: {
+    login: function login() {
+      this.auth.login();
+    },
+    logout: function logout() {
+      this.auth.logout();
+    }
+
+  }
+});
 
 App.AboutView = Ember.View.extend({
 	tagName: "canvas",
