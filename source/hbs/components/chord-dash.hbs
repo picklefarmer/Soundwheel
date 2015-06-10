@@ -34,14 +34,15 @@
 		{{/if}}
 
 	{{/if}}
+  {{#if song.chords.isFulfilled}}
+  	{{#each song.chords.content as |chord|}}
 
-	{{#each model as |chord|}}
+	  	<li class="{{if ("arr-comp" selection chord) "match" }}">
+		  	{{ar-peg chord=chord action="selector"}}
+		  </li>
 
-		<li class="{{if ("arr-comp" selection chord) "match" }}">
-			{{ar-peg chord=chord action="selector"}}
-		</li>
-
-	{{/each}}
+  	{{/each}}
+  {{/if}}
 
 
 

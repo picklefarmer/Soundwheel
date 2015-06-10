@@ -7,7 +7,12 @@
   <li class="{{!if state "hi" "lo"}} navlabel">{{!song.selected}}{{!model.y}}</li>
 <li>
 <div>
-	{{view "select" selection=song.selected content=song.names value=model.y}}
+
+{{#if song.names.isFulfilled}}
+	{{view "select" selection=song.selected content=song.names.content value=model.y}}
+{{else}}
+    {{view "select"}}
+{{/if}}
 	</div>
 </li>
 	<li>	

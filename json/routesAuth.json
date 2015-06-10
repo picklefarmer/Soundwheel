@@ -1,5 +1,4 @@
 [
-  {"route":"about","name":"about"},
   {"route":"song","name":"song","x":"edit","y":"new"},
   {"route":"user","name":"personal"},
   {"route":"config","name":"config"}

@@ -1,8 +1,8 @@
 App.PlayBarComponent = Em.Component.extend({
 actions:{
 	back(){
-		console.log( 'back ' ) 
-		ctrl.send('play',true,"decrementProperty")
+		console.log( 'debug ' ) 
+        this.song.debug()
 	},
 	stepLeft(){
 		console.log( 'stepLeft ' ) 

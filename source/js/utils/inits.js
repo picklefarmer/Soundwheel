@@ -25,8 +25,8 @@ Em.Application.initializer({
    }));
 
 
-//user . config
-   
+//default . config
+    
    App.register('settings:side',Ember.Object.extend({
 
         menuBars:["left","right","bottom","top","center","middle"],
@@ -37,6 +37,24 @@ Em.Application.initializer({
         data:function(){
 	  	  	  return $.getJSON('./json/panelsAuth.json',function(err){
             });
+        }.property()
+   }));   
+
+   App.register('settings:auth',Ember.Object.extend({
+        auth:Em.inject.service(),
+        menuBars:["left","right","bottom","top","center","middle"],
+	      datas:function(){
+          console.log('fetch auth panel-data' )
+		    	this.get('data').then(data => {
+            console.log(data, "information from settings") 
+            this.set('datas',data)
+          });
+    	  }.property(),
+        data:function(){
+            var om = this.get('auth.settings')
+            console.log(om)
+	  	  	  return this.get('auth.settings')
+//            return $.getJSON('./json/panelsAuth.json',function(err){       });
         }.property()
    }));   
 
@@ -61,6 +79,11 @@ Em.Application.initializer({
 
     // isLogged = true ->
 
+    App.inject('route:song'        ,'settings', `settings:${type}`)
+    App.inject('component:pa-nels' ,'settings', `settings:${type}`)
+    App.inject('component:tool-bar','settings', `settings:${type}`)
+
+
 
     /*
      * config
@@ -83,10 +106,6 @@ Em.Application.initializer({
 
   initialize(container,App){
 
-    		App.inject('route:song',	 'settings', 'settings:side')
-        App.inject('component:pa-nels','settings', 'settings:side')
-        App.inject('component:tool-bar','settings', 'settings:side')
-
         App.inject('component:option-panel','song', 'service:song')
         App.inject('component:play-bar','song', 'service:song')
         App.inject('component:measure-bar','song', 'service:song')
@@ -97,6 +116,7 @@ Em.Application.initializer({
         //        App.inject('view:song','song', 'service:song')
 
   //      App.inject('component:pa-nels','_actions', 'settings:actions')
+
         App.inject('route:user', 'auth', 'service:auth')
         App.inject('component:log-in', 'auth', 'service:auth')
 

@@ -1,6 +1,5 @@
 
 App.LocalService = Em.Service.extend({
-
   selected:function(_,selected = "fizz",oldSelected){
     console.log(_,selected,oldSelected)
     _ = this;
@@ -12,29 +11,19 @@ App.LocalService = Em.Service.extend({
     return selected
   }.property(),
 
-  chordSave(){
-    var chords = this.get('chordBank');
-    var chords = JSON.stringify(this.get('chordBank'));
-        
-        localStorage.chords = chords 
-  },
-
-  chords:function(_,async,__){
-    var _ = this;
-    console.log("chords",async,__)
-    if(!async){
-      new Em.RSVP.Promise((res,ref)=>{
-       var om = JSON.parse(localStorage.chords)
-       console.log('promise chord')
-       res(_.set("chordCache",om))
-     })
-    }
-    return async 
+  debugOfChords:function(){
+   return "e"
   }.property(),
+  chords(res,rej){
+    console.log('in chords')
+      var om = JSON.parse(localStorage.chords)
+      res(om)
+  },
+  names:function(res,rej){
 
-  names:function(){
     var names = Object.keys(JSON.parse(localStorage.songs))
-    return Em.A(names) //|| ["fizz","fuzz"]
-  }.property()
+    res( Em.A(names) ) 
+//    return Em.A(names) //|| ["fizz","fuzz"]
+  }
 
 })

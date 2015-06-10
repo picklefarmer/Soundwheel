@@ -1,6 +1,11 @@
-
+App.RsvpProxy = Em.Object.extend(Em.PromiseProxyMixin)
 
 App.UpdateMethods = Ember.Mixin.create({
+  firebase:Em.inject.service(),
+  local:Em.inject.service(),
+  init(bravo){
+    console.log('mixin init',bravo)
+  },
   chordSave(){
     var chords = this.get('chordBank');
     var chords = JSON.stringify(this.get('chordBank'));
@@ -8,12 +13,31 @@ App.UpdateMethods = Ember.Mixin.create({
         localStorage.chords = chords 
   },
 
+  promise(method){
+    var promise = new Em.RSVP.Promise((res,rej) =>{
+            Em.run(this.get('content'),method,res,rej)
+        })
+        return App.RsvpProxy.create({promise: promise})
+  }, 
+
+  chords:function(_){
+    return this.promise(_)
+  }.property('onLine'),
+
+  names:function(_){
+    return this.promise(_)
+  }.property('onLine')
 
 })
 
 
 App.SongService  = Em.ObjectProxy.extend(App.UpdateMethods,{
-  content:Em.inject.service('storage'),
+  content:function(){
+    var online = this.get('onLine')?"firebase":"local"
+
+    return this.get(online)
+  }.property('onLine'),
+  onLine:false,
 
   score:function(_,nw,ld){
     return this.get('songSelection') || Em.A([{notes:[0,0,0,0]}])
@@ -37,6 +61,7 @@ App.SongService  = Em.ObjectProxy.extend(App.UpdateMethods,{
     return ~~((60/(this.get('tempo')))*1000) 
   }.property('tempo'),
 
+
   bpm:320,
 
   tempo:function(_,__){
@@ -56,11 +81,6 @@ App.SongService  = Em.ObjectProxy.extend(App.UpdateMethods,{
 
   tempChord:[],
 
-  chordBank:function(_,nw){
-    console.log(nw, "BANK CHORD")
-    return this.get('chordCache') || Em.A([[]]) 
-  }.property('chordCache'),
-
   chordSelection:function(_,I){
     console.log(I)
     return I 
@@ -75,7 +95,6 @@ App.SongService  = Em.ObjectProxy.extend(App.UpdateMethods,{
     }
 
   },
-
 
 
 
