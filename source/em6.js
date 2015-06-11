@@ -1,6 +1,7 @@
 var	 walk    = require('walk'),
 	 hbsFiles  = [],
 	 jsFiles   = [],
+	 mixins	   = [],
 	 config    = require('./config.js');
 	 compile = require('./compile.js');
 
@@ -13,15 +14,21 @@ compile.init()
 var walker  = walk.walk('.', { followLinks: false });
 
 walker.on('file', function(root, stat, next) {
-	if(stat.name.match('back')||
-	   stat.name.match('compile\.js$')||
-	   stat.name.match('config\.js$')||
+	if(stat.name.match('back')			||
+	   stat.name.match('compile\.js$')	||
+	   stat.name.match('config\.js$')	||
 	   stat.name.match('em6\.js$')){
 //		console.log('given')
 		next()
 	}else{
 		// Add this file to the list of files
-	if((stat.name.match('js$'))){
+	if( root.match('mixins')){
+		if(stat.name.match('js$')){
+			mixins.push(root + '/' + stat.name);	
+		}else{
+			next()
+		}	
+	}else if((stat.name.match('js$'))){
 //		console.log(stat.name)
     	jsFiles.push(root + '/' + stat.name);
 	}else if((stat.name.match('hbs$'))){
@@ -38,6 +45,9 @@ walker.on('file', function(root, stat, next) {
 });
 
 walker.on('end', function() {
+	mixins.forEach(function(e){
+		compile.es(e)	
+	})
 	jsFiles.forEach(function(e){
 //		console.log(e)			
 		compile.es(e)

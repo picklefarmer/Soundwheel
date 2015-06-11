@@ -38,7 +38,7 @@ App.AuthService = Em.Service.extend({
                this.set('user',this.get('base').child(authData.uid))
              }
            }, {
-//             remember: "sessionOnly",
+             remember: "sessionOnly",
              scope: "email,user_likes"
            }
          )

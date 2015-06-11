@@ -48,11 +48,13 @@ App.FretBoardComponent = Em.Component.extend({
 				var f = Em.run(this,"mouseFormat",e);
 	      var measure = this.get('song.measure');
         
-        this.set('song.debug',f)
+//        this.set('song.debug',f)
     //    console.log(f,this.get('song.score').objectAt(this.get('song.index')).notes.toString())
-   
-        measure.notes.replace(f[1],1,f[0])
-        Em.run(this.get('song'),'update',measure.notes)      
+  var update = {};
+        measure.replace(f[1],1,f[0])
+        update[f[1]] = f[0] 
+        this.set('song.update',update)
+        //,'update',measure.notes)      
    //     console.log("pushMeasure",measure,this.get('song.score').objectAt(this.get('song.index')))
 
 	//			Em.run(this,'editPush',obj)
@@ -130,6 +132,7 @@ App.FretBoardComponent = Em.Component.extend({
     theArr = theArr.slice(0,6)
 
     this.set('song.measure.notes',theArr.map((e,f)=> e?e:measure.notes[f]))
+    this.set('song.update',theArr)
 //    this.set('song.measure.debug',["X",diffX,"low",low].toString())
     //console.log(arr.toString(), x,y, theArr.toString(),"|",this.get('song.measure.notes').toString())
 

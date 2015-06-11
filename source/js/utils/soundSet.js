@@ -7,7 +7,7 @@ App.TonesService = Em.Service.extend({
     //                           this.get('webaudio'))
       //  this.set('tone',Em.A(strings))
       },
-    isLeft:true,//false,
+    isLeft:false,//true,//false,
     tone:function(){
       var strings = this.get('strings')
                         .map(this.get('webaudio.tone'),

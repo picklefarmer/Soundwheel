@@ -1,19 +1,17 @@
 App.FirebaseService = Em.Service.extend({ 
 
-     auth:Em.inject.service(),
-     selected:function(_,selected = "fizz"){
-        console.log(selected,"AUTH SELECTED") 
-       this.get('auth.user')
+     selected(res,rej,selection){
+      var root = this.get('auth.user')
          .child('songs')
-         .child(selected)
-         .on("value",(snapshot) => {
-           console.log(snapshot.val(),snapshot.key())
-           snapshot.forEach(e=>{console.log("snappy",e.val(),e.key())})
-           this.set('songSelection',snapshot.val())
-         })
-       return selected
+         .child(selection);
 
-     }.property('names'),
+         root.on("value",(snapshot) => {
+
+          res(snapshot.val())
+
+         })
+
+    },
  
 
 
@@ -33,8 +31,10 @@ App.FirebaseService = Em.Service.extend({
             res( names)
             })
                
-     }
+     },
 
+
+     auth:Em.inject.service(),
  })
 
 

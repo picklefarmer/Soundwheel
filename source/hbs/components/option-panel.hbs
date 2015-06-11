@@ -1,18 +1,20 @@
+
 	
 	{{!#each note in octaves itemController="octaves"}}
 		<!--button {{action "check" note}}> {{note.isActive}}  </button-->		
 	{{!/each}}
 
   {{!song.index}}	
-  <li class="{{!if state "hi" "lo"}} navlabel">{{!song.selected}}{{!model.y}}</li>
+  <li class="{{!if state "hi" "lo"}} navlabel">{{!song.selected}}{{song.selected.selection}}</li>
 <li>
-<div>
+	<div>
 
 {{#if song.names.isFulfilled}}
-	{{view "select" selection=song.selected content=song.names.content value=model.y}}
+	{{view "select" selection=song.selected content=song.names}}
 {{else}}
     {{view "select"}}
 {{/if}}
+
 	</div>
 </li>
 	<li>	

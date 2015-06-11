@@ -1,3 +1,4 @@
+/*
 function play_tone(freq,volume) {
  
   var samples = [];
@@ -19,6 +20,7 @@ function play_tone(freq,volume) {
 return audio
 
 }	
+*/
 
 App.WebaudioService = Em.Service.extend({
      instruments:Em.inject.service(),
@@ -47,7 +49,7 @@ App.WebaudioService = Em.Service.extend({
           freq:function(name,tone){
             return this.get('freqs').objectAt(tone)
           }.property('freqs'),
-          ac:new (window.AudioContext || window.webkitAudioContect),
+          ac:new (window.AudioContext || window.webkitAudioContect || Object),
     			ctx:function(){
             return this.get('ac').createGain()
           }.property('ac'),
