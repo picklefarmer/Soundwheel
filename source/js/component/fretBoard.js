@@ -1,67 +1,15 @@
-
 App.FretBoardComponent = Em.Component.extend({
+
   names:['backView','frontView','centerView'],
   classNames:['tablet'],
-	mouseFormat(E){
-		//console.log( this.get('element').offsetTop,"OFFSETTOP") 
-		var [ x , y ]=[ E.offsetX == undefined ? E.pageX - (this.get('element').offsetLeft +40): E.offsetX,
-			   			E.offsetY == undefined ? E.pageY - (this.get('element').offsetTop): E.offsetY];
-		
-			E = [ x , y ]=[~~((x-10)/(1472/23)),~~((y-5)/(300/6))];
-		return E
-	},
-  globalKeydown:Em.inject.service(),	
-	didInsertElement(){
-    this.get('song.measure')
-   //   console.log('getting it in',this.get('element'),this.get('foreGround')) 
-//    	this.set('frontView',this.get('element').getContext('2d'))	  
-	    $(document).keydown(e => Em.run(this,this.get('globalKeydown.begin'),e))
-	},
-    willDestroyElement(){
-   //   console.log( 'destroy, view') 
-      $(document).off('keydown')
-  },
-	mouseMoveBinding:"mouseSelection",
-			mouseSelection:function(){
-        console.log ( 'moving')
-				if(this.get('song.chordSelection'))
-					return this.get('console')
-				return null
-			}.property('song.chordSelection'),
-			console(e){
-				Em.run.throttle(this,'chordHover',e,2)
-			},
-			click(e){
-     //   console.log( ' begin ' ) 
-				if(this.get('song.chordSelection')){
-					Em.run.once(this,'pushChord',e)
-				}else{
-					Em.run.once(this,'prePushEdit',e)
-				}
-			},
-			mouseLeave:function(){
-				if(this.get('song.chordSelection')){
-					Em.run.once(this.get('options'),'clear')
-				 }
-			},
-	prePushEdit:function(e){
-				var f = Em.run(this,"mouseFormat",e);
-	      var measure = this.get('song.measure');
-        
-//        this.set('song.debug',f)
-    //    console.log(f,this.get('song.score').objectAt(this.get('song.index')).notes.toString())
-  var update = {};
-        measure.replace(f[1],1,f[0])
-        update[f[1]] = f[0] 
-        this.set('song.update',update)
-        //,'update',measure.notes)      
-   //     console.log("pushMeasure",measure,this.get('song.score').objectAt(this.get('song.index')))
 
-	//			Em.run(this,'editPush',obj)
-	},
+
   playNotes:function(){
-      var chord =  this.get('song.measure.notes');
-     console.log('tempChord',chord.toString())
+      var chord =  this.get('song.selected.measure');
+      console.log(this.get('song.selected.measure'),chord,"log of measure")
+      if(!chord)return
+        chord = chord.notes
+//     console.log('tempChord',chord.toString())
      var 	x = 67
           y = 50
           offset = 18,
@@ -70,14 +18,17 @@ App.FretBoardComponent = Em.Component.extend({
           scale = 36,
           note = this.get('tones.tone'),
           tempChord = this.get('song.cacheNotes'),
-          index = ~~this.get('song.index').toString(),
+          index = ~~this.get('song.selected.index').toString(),
           ctx =  this.get('options.frontView');
           rate = ~~(tempo/2)-1;
-    this.set('song.measure.debug',[tempo,rate].toString())
+
+//    this.set('song.measure.debug',[tempo,rate].toString())
+          //
      ctx.clearRect(0,0,1400,300)
      note.setEach('freq',0)
      note.setEach('ctx.gain.value',0.1)
      //     console.log("premap",chord) 
+  
           chord = chord.map((e,f) => { 
                   if(e){
                     note.objectAt(f).set('freq',e)
@@ -94,7 +45,7 @@ App.FretBoardComponent = Em.Component.extend({
 				Em.run.later(this,(l)=>{
           window.requestAnimationFrame(()=>{
             tempChord.map(([fret,string]) => ctx.clearRect(fret-scale/2,string-scale/2,scale,scale))
-              if(this.get('song.index') === index){
+              if(this.get('song.selected.index') === index){
 //            console.log(index,this.get('song.index'))
 	  			  	ctx.beginPath()
           	        chord.map(([fret,string]) => {  
@@ -104,21 +55,39 @@ App.FretBoardComponent = Em.Component.extend({
 				    	ctx.fill()
 			      }
           })
-        },l,tempo*l);
-        //(Math.sin(60/l)+1)*l*tempo);
-			}	
+        },l,(Math.sin(60/l)+1)*l*tempo)
+        //tempo*l);
+			}
+  },
+  playSwitch:function(){
+    var proxy  = this.get('song.selected.isFulfilled');
 
-     console.log('tempChord_2',this.get('song.measure.notes').toString())
-  }.observes('song.measure.notes.@each'),
+    if(proxy){
+      this.addObserver('song.selected.measure.notes.@each',this.playNotes) 
+      Em.run.next(()=>{console.log( `play switch ${true}` , this.get('song.selected.measure'))})
+    }else if(!proxy){
+      console.log( `play switch ${false}` ) 
+      this.removeObserver('song.selected.measure.notes.@each',this.playNotes) 
+    }
+  }.observes('song.selected.isFulfilled'),
+ 
+	pushNote:function(e){
+				var f = Em.run(this,"mouseFormat",e);
+	      var measure = this.get('song.measure');
+        
+    console.log('this is firing')
+     Em.run(this.get('song'),this.get('song.content.update'),f)
+	},
+
 	pushChord(e){
-
+console.log('pushChord')
     var arr = this.get('song.chordSelection'),
         [x,y] = [this.get('cacheX'),this.get('cacheY')],
         low = this.get('song.chordLow'),
         diffX = ~~((this.get('song.chordDifference')/2) -.5),
 				diffY = ~~(arr.length/2),
         theArr = arr.map(e => e - low + x - diffX),
-        measure = this.get('song.measure');
+        measure = this.get('song.selected.measure.notes');
 
     while(y--){
       theArr.unshift(0)
@@ -131,28 +100,17 @@ App.FretBoardComponent = Em.Component.extend({
     }
     theArr = theArr.slice(0,6)
 
-    this.set('song.measure.notes',theArr.map((e,f)=> e?e:measure.notes[f]))
-    this.set('song.update',theArr)
-//    this.set('song.measure.debug',["X",diffX,"low",low].toString())
-    //console.log(arr.toString(), x,y, theArr.toString(),"|",this.get('song.measure.notes').toString())
+    console.log(theArr.toString(),measure)
 
-/*
- 			var chord = this.get('chordTemp'),noteMap = this.get('mapAllocation');
-				
-				pos =  this.get('song.score')[this.get('song.index')];
+    theArr = theArr.map( ( e , f ) => e ? e : ( measure[f] || 0 )) 
 
-//			chord = chord.map(([x,y])=>[x,y,noteMap[x/67][y/50]])
-//			console.log( "__CHORD___",chord) 
-			for(var [x,y] of chord){
-				x/=67;
-				y/=50;
-				pos[y] = [x,noteMap[x][y]]
-			}
-			
-			Em.run(this,'edit',null,this.get('song.index')) 
-     */
+    console.log(theArr.toString(),measure)
+
+    console.log('is firing')
+    Em.run( this.get('song') ,this.get('song.content.update'),  theArr  )
+
 	},
-
+/*
 	editPush:function(notes){
 				var pos =  this.get('song.score')[this.get('song.index')],name = Object.keys(notes)[0];
 		//		console.log( this.get('song.score'),pos,"index: " +  this.get('song.index') , notes ) 
@@ -178,6 +136,7 @@ App.FretBoardComponent = Em.Component.extend({
 					//Em.run(this,'dot',notes[name][0],name,notes[name][1],true)
 					Em.run(this,'erase',67*notes[name][0],50*name)
 		},
+   */
 	chordTemp:[],
   tempChord:[],
 
@@ -259,13 +218,57 @@ App.FretBoardComponent = Em.Component.extend({
 				ctx.globalAlpha=1
 	},
     tones:Em.inject.service(),  
-	clearObserver:function(){
-			Em.run.next(this,'clear')
-		}.observes('controller.clear'),
+
 	clear:function(ctx='options.frontView'){
 				this.get(ctx).clearRect(0,0,1400,300)
 		},
-	volume:.25
+	volume:.25,
+
+  mouseMoveBinding:"mouseSelection",
+	mouseSelection:function(){
+    console.log ( 'moving')
+  	if(this.get('song.chordSelection'))
+				return this.get('chordOverlay')
+	  		return null
+	}.property('song.chordSelection'),
+	
+  chordOverlay(e){
+		Em.run.throttle(this,'chordHover',e,2)
+	},
+	
+  click(e){
+		if(this.get('song.chordSelection')){
+			Em.run.once(this,'pushChord',e)
+		}else{
+			Em.run.once(this,'pushNote',e)
+		}
+	},
+	
+  mouseLeave:function(){
+		if(this.get('song.chordSelection')){
+			Em.run.once(this.get('options'),'clear')
+	  }
+	},
+
+	mouseFormat(E){
+		//console.log( this.get('element').offsetTop,"OFFSETTOP") 
+		var [ x , y ]=[ E.offsetX == undefined ? E.pageX - (this.get('element').offsetLeft +40): E.offsetX,
+			   			E.offsetY == undefined ? E.pageY - (this.get('element').offsetTop): E.offsetY];
 		
+			E = [ x , y ]=[~~((x-10)/(1472/23)),~~((y-5)/(300/6))];
+		return E
+	},
+
+  globalKeydown:Em.inject.service(),	
+
+	didInsertElement(){
+    this.get('song.measure')
+	  $(document).keydown(e => Em.run(this,this.get('globalKeydown.begin'),e))
+	},
+
+  willDestroyElement(){
+    $(document).off('keydown')
+  },
+
 })
 		

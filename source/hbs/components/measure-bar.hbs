@@ -2,11 +2,11 @@
 <li>
 <div>
 {{view "select" selection=view.width value=view.width content=view.range}} 
-{{song.index}}
 </div>
 </li>
 <br>
-	{{#each song.score as |color measure|}}
-		{{l-measure active=("is-classy" measure song.index) index=measure}}
+{{#if song.selected.isFulfilled}}
+	{{#each song.selected as |color measure|}}
+		{{l-measure active=("is-classy" measure song.selected.index) index=measure}}
 	{{/each}}
-
+{{/if}}

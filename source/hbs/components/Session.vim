@@ -679,7 +679,7 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 8
-normal! 0
+normal! 066|
 tabedit ~/Dropbox/Icon/emberSound/source/em/application.em
 set splitbelow splitright
 wincmd _ | wincmd |

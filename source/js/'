@@ -3,8 +3,10 @@ App.LocalService = Em.Service.extend({
 
   selected(res,rej,selection){
     var om;
+   Em.run.later( ()=>{
       om = JSON.parse(JSON.parse(localStorage.songs)[selection])
       res(om)
+    },500)
   },
 
   chords(res,rej){
@@ -22,16 +24,13 @@ App.LocalService = Em.Service.extend({
   
   update:function(value){
     console.log('updating',value.length,this)
-    var content = this.get('selected.measure.notes')
 
-    if(value.length === 6){
-      console.log(6,value) 
-      content.replace(0,6,value)
-      console.log("end",this)
+    if(value.length === 2){
+      console.log ( 6 ) 
+      measure.replace(0,5,value)
     }else{
-      let [fret,string] = value;
-      console.log(string,fret,this) 
-      content.replace(string,1,fret)
+      console.log ( 1 ,this) 
+
     }
   
   }

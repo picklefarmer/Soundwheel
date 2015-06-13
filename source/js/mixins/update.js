@@ -34,21 +34,36 @@ App.UpdateMethods = Ember.Mixin.create({
     }, 
   
     promiseWithSelection(method,selection){
+
       console.log( ' selection ',selection )
+
       var promise = new Em.RSVP.Promise((res,rej) =>{
-              
-             Em.run(this.get('content'),method,res,rej,selection)
+
+             Em.run(this,this.get('content').get(method),res,rej,selection)
+
           }),
+
           proxy = App.RsvpE.create({promise,selection});
-  
-          if(this.get('onLine'))
+
+
+          proxy.then((e)=>{
+
           proxy.reopen({
-              salve:function(index,value){
-                this.get('content.root')
-                  .child(index)
-                  .child("notes")
-                  .update(value)
-              }
+            
+              measure:function(){
+                  console.log(  'measure ' ) 
+                  return this.objectAt(this.get('index'))
+               }.property('index','content.@each.notes'),
+              
+              index:function(a,b){
+                  console.log(b,"index of proxy")
+                  if(b < 0){
+                    b = this.get('length')-1
+                  }
+                    a = b%this.get('length') || 0;
+                  return a
+               }.property('[]'),
+              })
           })
           return proxy
     }, 

@@ -10,14 +10,6 @@ App.MeasureBarComponent = Ember.Component.extend({
     	return "height:"+ height+"px;width:"+width
     }.property('width'),
     range:[1,2,3,4],
-    isActive:function(){
-    	console.log("F")
-    	
-    }.property(),
-    content:function(){
-    		console.log('controller')
-    		return this.get('controller.editScore') || []
-    }.property('controller.editScore'),
     
 })
 
@@ -34,18 +26,13 @@ App.LMeasureComponent = Ember.Component.extend({
 	}.property('index'),
 	click:function(e,f){
 			let ii = this.get('index')
-//		this.set('parentView.controller.editIndex',ii)
-//		this.get('parentView.controller').send('play',ii)
 
-        this.set('parentView.song.index',ii)
+        this.set('parentView.song.selected.index',ii)
 	},
 })
 
 App.LiController = Ember.Controller.extend({
     needs: ['application'],
-    isActive: function() {
-			return this.get('controllers.application.active') === this.get('model.name');
-    }.property('controllers.application.active')
 });
 
 App.LyricsPaneComponent = Ember.Component.extend({

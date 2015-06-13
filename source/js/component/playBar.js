@@ -6,11 +6,11 @@ actions:{
 	},
 	stepLeft(){
 		console.log( 'stepLeft ' ) 
-        this.decrementProperty('song.index')
+        this.decrementProperty('song.selected.index')
 	},
 	stepRight(){
-		console.log( 'stepRight ', this.get('song.index'))
-       this.incrementProperty('song.index')
+		console.log( 'stepRight ')
+       this.incrementProperty('song.selected.index')
 	},	
 	play(){
 		console.log( 'play ' ,this.get('song.pause')) 
