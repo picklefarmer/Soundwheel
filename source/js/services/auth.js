@@ -3,49 +3,84 @@ App.AuthService = Em.Service.extend({
         var base = new Firebase('http://acroeven.firebaseio.com/music');
         this.set('base',base) 
      },
+
      uid:function(){
+       console.log( ' user id ' ) 
        var uid = this.get('base').getAuth()
            uid = uid ? uid.uid : null
         return uid 
      }.property('base'),
+
      user:function(){
        var user = this.get('uid')
         return this.get('base').child(user)
      }.property('uid'),
-     settings:function(){
-        var user = this.get('user')
-       console.log( 'inside',user ) 
-        return new Em.RSVP.Promise( ( res,ref) =>{
-          user.child('settings').on("value",e => res(e.val()) )
-        })
-     }.property('user'),
-     baseList:function(){
-        //this.get('base').child(this.get('uid')).on("value",(snapshot) => {
-        this.get('base').on("value",(snapshot) => {
-          console.log("ASDFASDF",snapshot.val())
-//            var newPost = snapshot.val().map(e => e.key());
-  //            this.set('songList',newPost)
-        });
-     }.observes('uid'),
-     login:function(){
-        this.get('base')
-          .authWithOAuthPopup("facebook", (error, authData) => {
-             if(error){
-               console.log( error, "error")
-             }else{
-               console.log ( authData, authData.uid )
-               this.set('uid',authData.uid)
-               this.set('user',this.get('base').child(authData.uid))
-             }
-           }, {
-             remember: "sessionOnly",
-             scope: "email,user_likes"
-           }
-         )
+
+     userNew(user){
+       var base = this.get('base')
+                      .child(user.uid),
+          settings = base.child('settings'),
+          Hash = Em.RSVP.hash;
+
+          Hash({
+            settings:Hash({
+              panels:$.getJSON('./json/panelsAuth.json'),
+              options:$.getJSON('./json/routesAuth.json')
+            }),
+            chords:$.getJSON('./json/chordsDefault.json'),
+            songs:Hash({
+              golden:$.getJSON('./scores/over.json'),
+              promise:$.getJSON('./scores/some.json')
+            })
+            
+          }).then((hash)=>{
+            base.set(hash,(hash)=>{
+              this.set('uid',user.uid)
+              this.set('user',base)
+            })
+          })
      },
-     logout:function(){
+     userNewCheck(user){
+        this.get('base')
+          .child(user.uid)
+          .on('value',(value) => { if( value.exists() ){
+
+              this.set('uid',user.uid)
+              this.set('user',  this.get('base').child(user.uid) )
+
+            }else{
+
+              Em.run(this,'userNew',user)
+
+            }
+          })
+     },
+
+    loginDebug:true,
+
+    login(){
+
+      if(!this.get('loginDebug')){ 
+              this.get('base')
+                  .authWithOAuthPopup("facebook", (error, authData) => {
+                     console.log ( authData, authData.uid )
+                     Em.run(this,'userNewCheck',authData)
+                   }, {
+                     remember:  "sessionOnly",
+                     scope:     "email,user_likes"
+                   })
+        }else{
+             var authData = {};
+                 authData.uid = "testingLogin"; 
+
+                 Em.run(this,'userNewCheck',authData)
+        }
+     },
+
+     logout(){
         console.log('logout')
         this.get('base').unauth()
         this.set('uid',null)
      }
+
 })

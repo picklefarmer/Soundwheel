@@ -1,5 +1,59 @@
 App.FirebaseService = Em.Service.extend({ 
+    
+    instrument(res,rej,selection){
+      var root = this.get('auth.base')
+                     .child('instruments')
+                     .child(selection);
 
+          root.on("value",(snapshot)  =>{
+            res(snapshot.val())
+          })
+    },
+    
+    instrumentNames(res,rej){
+    console.log( ' instrument Names ' ) 
+      var root = this.get('auth.base')
+                     .child('instruments'),
+          instruments = [];
+
+        root.on("value",(snapshot) =>{
+          snapshot.forEach(instrument => {
+              instruments.push(instrument.key())
+          })
+
+          res(instruments)
+
+        }) 
+    },
+
+
+    panels(res,rej){
+      var root = this.get('auth.user')
+                  .child('settings/panels');
+
+         root.on("value",(snapshot) => {
+            res(snapshot.val())
+         })
+    },
+
+    options(res,rej){
+      var root = this.get('auth.user')
+                  .child('settings/options');
+
+          root.on("value",(snapshot) => {
+            res(snapshot.val())
+         })
+    },
+    updateOptions(menuData){
+      console.log( ' observation got _2 ' ) 
+        this.get('auth.user')
+            .child('settings/panels')
+            .update(menuData,
+                ()=>{
+                  console.log('success')
+                }) 
+    
+    },
      selected(res,rej,selection){
       var root = this.get('auth.user')
          .child('songs')
@@ -11,44 +65,40 @@ App.FirebaseService = Em.Service.extend({
          })
          root.off('value')
          root.on('child_changed',((snapshot) => {
-           console.log('returned') 
-           try{
-this.get('selected.content')
-.objectAt(snapshot.key()).notes
-.replace(0,6,snapshot.val().notes)
-           }catch(e){
-           console.log(e)
-           }
 
-//this.set('selected['+snapshot.key()+"].notes",snapshot.val().notes )
+          console.log('returned') 
+          this.get('selected.content')
+            .objectAt(snapshot.key()).notes
+            .replace(0,6,snapshot.val().notes)
+
          }))
 
     },
  
-update(value){
-    console.log("socket update",value)
-    var base = this.get('auth.user'),
-        song = this.get('selected.selection'),
-        index = this.get('selected.index');
-    console.log( base, song, index ) 
+    update(value){
+          console.log("socket update",value)
+     
+     var base = this.get('auth.user'),
+         song = this.get('selected.selection'),
+         index = this.get('selected.index');
+          
+      console.log( base, song, index ) 
 
-    var ref = base
-              .child('songs')
+     var ref = base
+             .child('songs')
               .child(song)
               .child(index)
 
-    if(value.length === 6) { 
+      if(value.length === 6) { 
     
-       ref.update({notes:value})
+         ref.update({notes:value})
     
-    }else{
-      let [fret,string] = value;
-      ref.child('notes')
-      update({[string]:fret})  
-    } 
-
-
-},
+      }else{
+        let [fret,string] = value;
+        ref.child('notes')
+       update({[string]:fret})  
+       } 
+    },
 
      chords(res,rej){
         this.get('auth.user')
@@ -58,18 +108,17 @@ update(value){
           })
      },
 
-     names:function(res,rej){
+     names(res,rej){
         this.get('auth.user')
           .child('songs')
           .on("value",(snapshot) => {
             var names = Object.keys(snapshot.val())
             res( names)
             })
-               
      },
 
 
-     auth:Em.inject.service(),
+//     auth:Em.inject.service(),
  })
 
 

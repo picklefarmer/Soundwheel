@@ -1,8 +1,8 @@
 [
-  { "panel":"right","name":"nav" },
-  { "panel":"bottom","name":"inventory" },
-  { "panel":"left","name":"scroll" },
-  { "panel":"center","name":"plays" },
-  { "panel":"middle","name":"lyrics" }
+  { "panel":"right","name":"option-panel","checked":false },
+  { "panel":"left","name":"measure-bar","checked":true },
+  { "panel":"bottom","name":"chord-dash","checked":false },
+  { "panel":"middle","name":"play-bar","checked":true  },
+  { "panel":"middle","name":"lyrics-pane","checked":false}
 ]
 

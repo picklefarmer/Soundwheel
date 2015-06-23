@@ -6,6 +6,7 @@
 
   {{!song.index}}	
   <li class="{{!if state "hi" "lo"}} navlabel">{{!song.selected}}</li>
+
 <li>
 	<div>
 
@@ -14,6 +15,19 @@
 {{else}}
     {{view "select"}}
 {{/if}}
+
+	</div>
+</li>
+
+<li>
+	<div>
+
+	{{#if song.instrumentNames.isFulfilled}}
+		{{view "select" selection=song.instrument content=song.instrumentNames}}
+	{{else}}
+	    {{view "select"}}
+	{{/if}}
+
 
 	</div>
 </li>

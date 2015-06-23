@@ -1,5 +1,4 @@
 App.OptionsService = Em.Service.extend({
- onLine:true,
  song:Em.inject.service(),
  ls:function(){}.property(), 
   clear(){

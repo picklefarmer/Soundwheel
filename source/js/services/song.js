@@ -5,25 +5,12 @@ App.SongService = Em.ObjectProxy.extend(App.UpdateMethods,{
   
       return this.get(online)
     }.property('onLine'),
+   
     onLine:false,
   
-   /* 
-    score:function(_,nw,ld){
-      return this.get('selected') || Em.A([{notes:[0,0,0,0]}])
-    }.property('selected'),
-      //}.property('songSelection'),
-    measure:function(){
-      console.log(`
-                  measure
-                  `)
-      return this.get('score').objectAt(this.get('index')) || {notes:[]}
-    }.property('index','score'),
-  */
-     
     meter:function(){
       return ~~((60/(this.get('tempo')))*1000) 
     }.property('tempo'),
-  
   
     bpm:320,
   

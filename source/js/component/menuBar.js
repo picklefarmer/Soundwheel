@@ -1,5 +1,6 @@
 App.MenuBarComponent = Em.Component.extend({
 //	classNameBindings:['col-lg-12'],
+//    settings:Em.inject.service(),
 	menubar:"menubar",
 	barVisible:true,
 	sidebar:"sidebar",
@@ -17,7 +18,7 @@ App.MenuBarComponent = Em.Component.extend({
 	},
 	menuArray:[],
   menuBar:function(){
-    this.get('logger.menuBar')
-      .then(data => this.set('menuArray',data))
+   // this.get('logger.menuBar')
+   //   .then(data => this.set('menuArray',data))
   }.on('init'),
 })
