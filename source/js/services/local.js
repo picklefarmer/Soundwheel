@@ -5,33 +5,44 @@ App.LocalService = Em.Service.extend({
     if(selection === "default"){
       return res()
     } 
-    try{
      $.getJSON("./instruments/"+selection+".json")
-              .then(om => {
-                  om.len  = om.real.length;
-                  om.real = new Float32Array(om.real);
-                  om.imag = new Float32Array(om.imag);
-                  
-                  console.log("instrument "+selection, om )
-                  res(om)
-              })
-    
-    }catch(e){
-      console.log(e)
-    }
+      .then(om => {
+
+         var c = om.real.length;
+         var real = new Float32Array(c);
+         var imag = new Float32Array(c);
+              
+         for (var i = 0; i < c; i++) {
+           real[i] = om.real[i];
+           imag[i] = om.imag[i];
+         }
+
+/*
+              om.len  = om.real.length;
+              om.real = new Float32Array(om.real);
+              om.imag = new Float32Array(om.imag);
+  */                
+            console.log("instrument "+selection,{real,imag} )
+              res({real,imag})
+    })
   },
 
   instrumentNames(res,rej){
     console.log( ' instrument Names ' ) 
-      $.getJSON("./instruments/instrumentList.json")
-              .then(e => {
+      $.getJSON("./instruments/instrumentsDefault.json")
+       .then(e => {
+         var om = Object.keys(e)
+              .map(instrument => {
+                return {
+                        "name":instrument,
+                        "enabled":e[instrument]
+                       }
+              });  
 
-                var om = Object.keys(e)
-                         .filter(instrument => e[instrument]?
-                            instrument : false);  
-                    console.log( om , " instrument names " ) 
-                    res(om)
-              })
+             console.log( om , " instrument names " ) 
+
+             res(om)
+       })
   },
 
 
@@ -49,14 +60,31 @@ App.LocalService = Em.Service.extend({
 
   selected(res,rej,selection){
     var om;
+
+    if(localStorage.songs){
       om = JSON.parse(JSON.parse(localStorage.songs)[selection])
       res(om)
+    }else{
+      $.getJSON("./scores/"+selection+".json")
+       .then(om => res(om))
+    }
+
   },
 
   names(res,rej){
+    if(localStorage.songs){
     var names = Object.keys(JSON.parse(localStorage.songs))
     console.log(names)
-    res( Em.A(names) ) 
+    res( Em.A(names) )
+    }else{
+      om = $.getJSON('./json/songsDefault.json')
+            .then(e =>{
+              var songs = Object.keys(e)
+                                .filter(key => e[key] ? key : false);
+              res(songs)
+            })
+      
+    } 
   },
 
   chords(res,rej){

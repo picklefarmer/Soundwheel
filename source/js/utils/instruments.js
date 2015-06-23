@@ -7,7 +7,7 @@ App.InstrumentsService = Em.Service.extend({
 
     if(instrument.isFulfilled){
       console.log("service _ instrument" , instrument)
-      if(instrument.get('len')){
+      if(instrument.get('real')){
         real = instrument.get('real');
         imag = instrument.get('imag');
         console.log(real,imag, " did inserst correctly " ) 

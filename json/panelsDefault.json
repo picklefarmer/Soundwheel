@@ -1,8 +1,8 @@
 [
-  { "panel":"right","name":"option-panel","checked":false },
-  { "panel":"left","name":"measure-bar","checked":true },
-  { "panel":"bottom","name":"chord-dash","checked":false },
-  { "panel":"middle","name":"play-bar","checked":true  },
-  { "panel":"middle","name":"lyrics-pane","checked":false}
+  { "panel":"right","name":"option-panel","enabled":false },
+  { "panel":"left","name":"measure-bar","enabled":true },
+  { "panel":"bottom","name":"chord-dash","enabled":false },
+  { "panel":"middle","name":"play-bar","enabled":true  },
+  { "panel":"middle","name":"lyrics-pane","enabled":false}
 ]
 

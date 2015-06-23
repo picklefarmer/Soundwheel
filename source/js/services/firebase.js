@@ -1,5 +1,5 @@
 App.FirebaseService = Em.Service.extend({ 
-    
+   /* 
     instrument(res,rej,selection){
       var root = this.get('auth.base')
                      .child('instruments')
@@ -9,16 +9,20 @@ App.FirebaseService = Em.Service.extend({
             res(snapshot.val())
           })
     },
-    
+    */
+
     instrumentNames(res,rej){
-    console.log( ' instrument Names ' ) 
-      var root = this.get('auth.base')
+      console.log ( 'instrument Names Auth ' ) 
+      var root = this.get('auth.user')
                      .child('instruments'),
           instruments = [];
 
         root.on("value",(snapshot) =>{
           snapshot.forEach(instrument => {
-              instruments.push(instrument.key())
+            console.log(instrument.val())
+              if(instrument.val()){
+                instruments.push(instrument.key())
+              }
           })
 
           res(instruments)

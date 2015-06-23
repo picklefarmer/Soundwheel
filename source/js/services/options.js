@@ -6,13 +6,18 @@ App.OptionsService = Em.Service.extend({
   },
   load(){},
   save(){
-    var selected = this.get('song.selected');
-    var song = JSON.stringify(this.get('song.score'));
+    console.log('saving',this.get('song.selected.selection'),this.get('song.selected.content'))
+    try{
+    var selected = this.get('song.selected.selection');
+    var song = JSON.stringify(this.get('song.selected.content'));
     var storage = JSON.parse(localStorage.songs);
     
     storage[selected] = song
     localStorage.songs= JSON.stringify(storage) 
 console.log('saved')
+  }catch(e){
+    console.log(e)
+  }
   },
 	actionNames:[
 	 {	name:	"load",		type:"core"	},

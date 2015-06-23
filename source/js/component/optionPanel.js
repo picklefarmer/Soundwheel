@@ -3,6 +3,9 @@ tagName:"ul",
   classNames:["nav","sidebar"],
   options:Em.inject.service(),
    actions:{
+    instrument(a){
+      console.log('instrument selection',a)
+    },
     actionHandler(name){
       console.log ( 'actionHAndler',name)
       Em.run(this.get('options'),name)

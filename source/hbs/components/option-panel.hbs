@@ -23,7 +23,7 @@
 	<div>
 
 	{{#if song.instrumentNames.isFulfilled}}
-		{{view "select" selection=song.instrument content=song.instrumentNames}}
+		{{view "select" selection=song.instrument content=song.instrumentNames.filtered}}
 	{{else}}
 	    {{view "select"}}
 	{{/if}}

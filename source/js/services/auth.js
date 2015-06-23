@@ -28,6 +28,7 @@ App.AuthService = Em.Service.extend({
               options:$.getJSON('./json/routesAuth.json')
             }),
             chords:$.getJSON('./json/chordsDefault.json'),
+            instruments:$.getJSON('./instruments/instrumentsAuth.json'),
             songs:Hash({
               golden:$.getJSON('./scores/over.json'),
               promise:$.getJSON('./scores/some.json')

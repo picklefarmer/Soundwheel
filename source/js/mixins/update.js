@@ -13,14 +13,22 @@ App.UpdateMethods = Ember.Mixin.create({
       console.log( ' instrument in mixin' ) 
       var proxy;
       if(selection){
-        proxy = this.promiseWithContextAndSelection(_,selection)
+        proxy = this.promiseWithSelectionAsObject(_,selection)
         return proxy
       }
     }.property(),
 
     instrumentNames:function(_){
       console.log( ' instrument Names in mixin' ) 
-         return this.promiseWithContext(_)
+      var proxy = this.promiseWithContext(_)
+        proxy.then((rawNames)=>{
+          proxy.reopen({
+            filtered:function(){
+              return this.filterBy('enabled').getEach('name')
+            }.property('@each.enabled')
+          })
+        })
+        return proxy
     }.property('auth.uid'),
 
     options:function(_){
@@ -129,13 +137,12 @@ App.UpdateMethods = Ember.Mixin.create({
 
     }, 
     
-    promiseWithContextAndSelection(method,selection){
+    promiseWithSelectionAsObject(method,selection){
 
-      console.log( ' selection context',selection )
+      console.log( ' selection object',selection )
 
-      var context = this.get('auth.uid') ? "firebase" : "local",
-          promise = new Em.RSVP.Promise((res,rej) =>{
-             Em.run(this, this.get( context + '.' + method ),
+      var promise = new Em.RSVP.Promise((res,rej) =>{
+             Em.run(this, this.get( 'local.' + method ),
                           res,  rej,  selection )
           });
 

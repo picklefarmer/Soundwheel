@@ -3,4 +3,4 @@
     h1 Settings
 .row
   .column.large-5
-    pa-nels
+    outlet

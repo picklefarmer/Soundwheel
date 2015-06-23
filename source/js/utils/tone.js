@@ -48,8 +48,8 @@ App.WebaudioService = Em.Service.extend({
           tone.setPeriodicWave(W);
 
         }else if(typeof instrument === "string"){
-          W= ac.createPeriodicWave(new Float32Array([0.0],[0.0]),
-                                   new Float32Array([1.0],[1.0]));
+          W= ac.createPeriodicWave(new Float32Array([0.0,0.0]),
+                                   new Float32Array([1.0,1.0]));
           tone.setPeriodicWave(W)
           console.log('default') 
         }
