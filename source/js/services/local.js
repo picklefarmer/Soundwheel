@@ -45,6 +45,11 @@ App.LocalService = Em.Service.extend({
        })
   },
 
+  main(res,rej){
+    console.log( ' main options get ' ) 
+      $.getJSON("./json/mainDefault.json")
+        .then(om => { res(om) })
+  },
 
   panels(res,rej){
     console.log(  ' panels get  ' ) 

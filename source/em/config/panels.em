@@ -1,1 +1,1 @@
-pa-nels configPanel=song.panels
+pa-nels

@@ -19,10 +19,9 @@ App.FirebaseService = Em.Service.extend({
 
         root.on("value",(snapshot) =>{
           snapshot.forEach(instrument => {
-            console.log(instrument.val())
-              if(instrument.val()){
-                instruments.push(instrument.key())
-              }
+          
+            instruments.push({"name":instrument.key(),
+                              "enabled":instrument.val()})
           })
 
           res(instruments)
@@ -30,6 +29,14 @@ App.FirebaseService = Em.Service.extend({
         }) 
     },
 
+    main(res,rej){
+      var root = this.get('auth.user')
+                     .child('settings/main');
+
+          root.on("value", (snapshot) => {
+            res(snapshot.val())
+          })
+    },
 
     panels(res,rej){
       var root = this.get('auth.user')
@@ -48,6 +55,35 @@ App.FirebaseService = Em.Service.extend({
             res(snapshot.val())
          })
     },
+
+    updateInstruments(menuData){
+      console.log( ' observation got _2 ' )
+      var menuObject = {};
+
+      menuData.forEach(data => {
+        menuObject[data.name] = data.enabled
+      })
+        console.log(this.get('auth'),menuData)
+        this.get('auth.user')
+            .child('instruments')
+            .update(menuObject,
+                ()=>{
+                  console.log('success')
+                }) 
+    
+    },
+    
+    updateMain(menuData){
+      console.log( ' main observation got _2 ' ) 
+        this.get('auth.user')
+            .child('settings/main')
+            .update(menuData,
+                ()=>{
+                  console.log('success')
+                }) 
+    
+    },
+
     updateOptions(menuData){
       console.log( ' observation got _2 ' ) 
         this.get('auth.user')
@@ -58,6 +94,7 @@ App.FirebaseService = Em.Service.extend({
                 }) 
     
     },
+
      selected(res,rej,selection){
       var root = this.get('auth.user')
          .child('songs')
@@ -122,7 +159,7 @@ App.FirebaseService = Em.Service.extend({
      },
 
 
-//     auth:Em.inject.service(),
+     auth:Em.inject.service(),
  })
 
 

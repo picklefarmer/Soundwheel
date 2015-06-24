@@ -25,7 +25,8 @@ App.AuthService = Em.Service.extend({
           Hash({
             settings:Hash({
               panels:$.getJSON('./json/panelsAuth.json'),
-              options:$.getJSON('./json/routesAuth.json')
+              options:$.getJSON('./json/routesAuth.json'),
+              main:$.getJSON('./json/mainDefault.json')
             }),
             chords:$.getJSON('./json/chordsDefault.json'),
             instruments:$.getJSON('./instruments/instrumentsAuth.json'),

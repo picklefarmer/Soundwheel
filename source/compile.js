@@ -4,7 +4,7 @@ var fs = require('fs'),
 	config    = require('./config.js');
 	emblem = require('emblem').default.compile;
 
-var init = config.flags.join("\n")+"\nvar App = Ember.Application.create({});\n"
+var init = config.flags.join("\n")+"\nvar App = Ember.Application.create({"+config.debug.join(",\n")+"});\n"
 
 module.exports.init = function(func,name){
 		fs.writeFileSync('../compiled/output.js',"",{ encoding: "utf8" });

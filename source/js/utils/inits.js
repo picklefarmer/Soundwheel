@@ -117,7 +117,8 @@ Em.Application.initializer({
         App.inject('component:menu-bar',    'song',   'service:song')
         App.inject('component:tool-bar',    'song',   'service:song')
         App.inject('component:pa-nels',     'song',   'service:song')
-//        App.inject('component:instruments', 'song',   'service:song')
+        App.inject('component:selection-panel', 'song',   'service:song')
+        App.inject('component:index-panel', 'song',   'service:song')
         //*                         *//
 
         App.inject('component:option-panel','song',   'service:song')

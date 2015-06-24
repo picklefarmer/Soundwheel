@@ -20,17 +20,47 @@ App.UpdateMethods = Ember.Mixin.create({
 
     instrumentNames:function(_){
       console.log( ' instrument Names in mixin' ) 
-      var proxy = this.promiseWithContext(_)
+      var proxy = this.promiseWithContext(_),
+          _this = this;
+
         proxy.then((rawNames)=>{
           proxy.reopen({
             filtered:function(){
               return this.filterBy('enabled').getEach('name')
-            }.property('@each.enabled')
+            }.property('@each.enabled'),
+            contentObserver:function(){
+               console.log( ' got content observe ' )  
+                  Em.run(_this.get('firebase'),"updateInstruments",
+                              this.get('content'))
+               }.observes('@each.enabled')
           })
         })
-        return proxy
-    }.property('auth.uid'),
 
+        return proxy
+
+    }.property('auth.uid'),
+    
+    main:function(_){
+      var proxy = this.promiseWithContext(_);
+      var _this = this;
+
+      if(this.get('auth.uid')){
+
+        proxy.then(()=>{
+          proxy.reopen({
+             contentObserver:function(){
+               console.log( ' got main observe ' )  
+                  Em.run(_this.get('firebase'),"updateMain",
+                              this.get('content'))
+               }.observes('@each.enabled')
+          })
+        })
+
+      }
+
+      return proxy
+
+    }.property('auth.uid'),
     options:function(_){
       return this.promiseWithContext(_)
     }.property('auth.uid'),
@@ -52,7 +82,7 @@ App.UpdateMethods = Ember.Mixin.create({
                   console.log( ' got content observe ' )  
                   Em.run(_this.get('firebase'),"updateOptions",
                               this.get('content'))
-                 }.observes('@each.panel','@each.checked')
+                 }.observes('@each.panel','@each.enabled')
               })
           })
 

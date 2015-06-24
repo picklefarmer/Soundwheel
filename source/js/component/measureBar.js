@@ -13,6 +13,15 @@ App.MeasureBarComponent = Ember.Component.extend({
     
 })
 
+App.BooleanSwitchComponent = Em.Component.extend({
+
+  actions:{
+    feel(){
+      console.log("VALUE")
+    }
+  }
+})
+
 App.LMeasureComponent = Ember.Component.extend({
 	classNameBindings:'active:hit',
 	tagName:"li",
