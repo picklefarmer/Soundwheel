@@ -28,11 +28,12 @@ App.UpdateMethods = Ember.Mixin.create({
             filtered:function(){
               return this.filterBy('enabled').getEach('name')
             }.property('@each.enabled'),
-            contentObserver:function(){
+            update(hash){
                console.log( ' got content observe ' )  
-                  Em.run(_this.get('firebase'),"updateInstruments",
-                              this.get('content'))
-               }.observes('@each.enabled')
+               Em.run(  _this.get('firebase'),
+                        "updateInstruments",
+                        hash  )
+            }
           })
         })
 
@@ -48,11 +49,12 @@ App.UpdateMethods = Ember.Mixin.create({
 
         proxy.then(()=>{
           proxy.reopen({
-             contentObserver:function(){
+             update(hash){
                console.log( ' got main observe ' )  
-                  Em.run(_this.get('firebase'),"updateMain",
-                              this.get('content'))
-               }.observes('@each.enabled')
+                  Em.run( _this.get('firebase'),
+                          "updateMain",
+                          hash )
+               }
           })
         })
 
@@ -78,11 +80,12 @@ App.UpdateMethods = Ember.Mixin.create({
                           "center",
                           "top",
                           "bottom"],
-                contentObserver:function(){
+                update(hash){
                   console.log( ' got content observe ' )  
-                  Em.run(_this.get('firebase'),"updateOptions",
-                              this.get('content'))
-                 }.observes('@each.panel','@each.enabled')
+                  Em.run( _this.get('firebase'),
+                          "updateOptions",
+                          hash )
+                 }
               })
           })
 

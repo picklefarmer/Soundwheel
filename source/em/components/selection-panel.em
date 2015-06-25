@@ -4,7 +4,7 @@
     if song.instrumentNames.isFulfilled
       each configuration in song.instrumentNames
         li.list-group-item
-          span.badge = configuartion.name
+          span.badge = configuration.name
           .panel-body
-            boolean-switch bar=configuration
+            boolean-switch bar=configuration update=song.instrumentNames.update
               | {{configuration.name}}

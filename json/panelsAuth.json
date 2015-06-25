@@ -1,8 +1,8 @@
-[
-  { "panel":"right","name":"option-panel","enabled":false },
-  { "panel":"left","name":"measure-bar","enabled":true },
-  { "panel":"bottom","name":"chord-dash","enabled":false },
-  { "panel":"middle","name":"play-bar","enabled":true  },
-  { "panel":"middle","name":"lyrics-pane","enabled":false}
-]
+{
+ "option-panel"	: { "options":"right"	,"enabled":false	},
+ "measure-bar"	: { "options":"left"	,"enabled":true 	},
+ "chord-dash"	: { "options":"bottom","enabled":false 	},
+ "play-bar"		: { "options":"middle","enabled":true  	},
+ "lyrics-pane"	: { "options":"middle","enabled":false	}
+}
 

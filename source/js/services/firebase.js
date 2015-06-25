@@ -15,35 +15,55 @@ App.FirebaseService = Em.Service.extend({
       console.log ( 'instrument Names Auth ' ) 
       var root = this.get('auth.user')
                      .child('instruments'),
-          instruments = [];
+          objArray = [];
 
         root.on("value",(snapshot) =>{
-          snapshot.forEach(instrument => {
+          snapshot.forEach(hash  => {
           
-            instruments.push({"name":instrument.key(),
-                              "enabled":instrument.val()})
+            objArray.push({
+                            "name":hash.key(),
+                            "enabled":hash.val()
+                          })
           })
 
-          res(instruments)
+          res(objArray)
 
         }) 
     },
 
     main(res,rej){
       var root = this.get('auth.user')
-                     .child('settings/main');
+                     .child('settings/main'),
+          objArray = [];
 
           root.on("value", (snapshot) => {
-            res(snapshot.val())
+            snapshot.forEach(hash =>  {
+              objArray.push({
+                            "name":hash.key(),
+                            "enabled":hash.val().enabled,
+                            "options":hash.val().options
+                            })
+            })
+
+            res(objArray)
           })
     },
 
     panels(res,rej){
       var root = this.get('auth.user')
-                  .child('settings/panels');
-
+                  .child('settings/panels'),
+          objArray = [];
+        
          root.on("value",(snapshot) => {
-            res(snapshot.val())
+           snapshot.forEach(hash => {
+            objArray.push({
+                            "name":hash.key(),
+                            "enabled":hash.val().enabled,
+                            "options":hash.val().options
+                          })
+            })
+
+            res(objArray)
          })
     },
 
@@ -56,39 +76,60 @@ App.FirebaseService = Em.Service.extend({
          })
     },
 
-    updateInstruments(menuData){
+    updateInstruments(update){
       console.log( ' observation got _2 ' )
-      var menuObject = {};
 
-      menuData.forEach(data => {
-        menuObject[data.name] = data.enabled
-      })
-        console.log(this.get('auth'),menuData)
+/*
+ {name:02_Saw,enabled:true}
+ update({[update.name]:update.enabled})
+ */
+          update = {[update.name]:update.enabled}
+
         this.get('auth.user')
             .child('instruments')
-            .update(menuObject,
+            .update(update,
                 ()=>{
                   console.log('success')
                 }) 
     
     },
     
-    updateMain(menuData){
+    updateMain(update){
       console.log( ' main observation got _2 ' ) 
+
+/*
+ {name:isLeft,enabled:true}
+  var {enabled,options} = update;
+ update({[update.name]:{enabled,options}})
+ */
+      var {enabled,options,name} = update;
+          update = {[name]:{enabled,options}}
+
+
         this.get('auth.user')
             .child('settings/main')
-            .update(menuData,
+            .update(update,
                 ()=>{
                   console.log('success')
                 }) 
     
     },
 
-    updateOptions(menuData){
+    updateOptions(update){
       console.log( ' observation got _2 ' ) 
+
+/*
+ {name:isLeft,enabled:true}
+  var {name,enabled,panel} = update
+  update =  update({[name]:{enabled,panel}})
+*/
+      var {name,enabled,options} = update;
+          update = {[name]:{enabled,options}}
+
+
         this.get('auth.user')
             .child('settings/panels')
-            .update(menuData,
+            .update(update,
                 ()=>{
                   console.log('success')
                 }) 

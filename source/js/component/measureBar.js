@@ -14,7 +14,16 @@ App.MeasureBarComponent = Ember.Component.extend({
 })
 
 App.BooleanSwitchComponent = Em.Component.extend({
-
+  checkedObserver:function(){
+    console.log(`
+                check changed
+                `,this.get('bar.options'),this.get('bar.enabled'))
+      try{
+        Em.run(this,this.get('update'),this.get('bar'))
+      }catch(e){
+        console.log(e)
+      }
+  }.observes('bar.enabled','bar.options'),
   actions:{
     feel(){
       console.log("VALUE")

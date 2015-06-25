@@ -1,6 +1,6 @@
 {{#if song.panels.isFulfilled}}
   {{#each song.panels as |panels|}}	
-    <div class='{{panels.panel}}Full {{if panels.enabled "autohide"}}'>
+    <div class='{{panels.options}}Full {{if panels.enabled "autohide"}}'>
 		  {{component panels.name}}
 	  </div>
   {{/each}}

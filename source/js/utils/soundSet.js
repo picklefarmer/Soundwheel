@@ -1,13 +1,27 @@
 
 App.TonesService = Em.Service.extend({
    webaudio:Em.inject.service(),
+   song:Em.inject.service(),
    init(){
 //        var strings = this.get('strings')
   //                        .map(this.get('webaudio.tone'),
     //                           this.get('webaudio'))
       //  this.set('tone',Em.A(strings))
       },
-    isLeft:false,//true,//false,
+    isLeft:function(){
+      console.log(`
+
+
+                  isLEft
+
+
+
+                  `)
+    if( this.get('song.main.isFulfilled')){
+      return  this.get('song.main.isLeft.enabled')
+    }
+      return false 
+    }.property('song.main.isFulfilled','song.main.isLeft.enabled'),
     tone:function(){
       var strings = this.get('strings')
                         .map(this.get('webaudio.tone'),

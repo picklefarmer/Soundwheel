@@ -1,4 +1,4 @@
-[
-	{"name":"isLeft","enabled":true},
-	{"name":"isNothing","enabled":true}
-]
+{
+	"isLeft"	:{"enabled":true, 	"options":""	},
+	"isNothing"	:{"enabled":true, 	"options":""	}
+}
