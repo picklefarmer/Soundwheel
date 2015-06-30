@@ -41,7 +41,7 @@ App.InstrumentComponent = Em.Component.extend({
 				return ctx || null
 		}.property(),
 	backView:function(a,b){
-				var twentyFour = 24,width = this.get('width'),dots = 2,
+				var twentyFour = 24,width = this.get('width'),dots = 2,L = 775,
 					size = Math.ceil(1600/24),fret = new Image();
 					fret.src = "images/fret.jpg";
 					console.log(width) 
@@ -63,12 +63,12 @@ App.InstrumentComponent = Em.Component.extend({
 					b.fillStyle = "rgba(44,77,150,.122)"
 					b.lineWidth = "5"
 				b.beginPath()
-				b.moveTo(770,160)
-				b.lineTo(795,160)
-				b.lineTo(745,80)
-				b.lineTo(765,140)
-				b.lineTo(740,140)
-				b.lineTo(790,220)
+				b.moveTo(L,160)
+				b.lineTo(L+25,160)
+				b.lineTo(L-25,80)
+				b.lineTo(L-5,140)
+				b.lineTo(L-30,140)
+				b.lineTo(L+20,220)
 				b.closePath()
 				b.fill()
 				b.fillStyle = "#333333"

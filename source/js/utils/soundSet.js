@@ -1,36 +1,28 @@
 
-App.TonesService = Em.Service.extend({
+App.TonesService = Em.ArrayProxy.extend({
    webaudio:Em.inject.service(),
    song:Em.inject.service(),
-   init(){
-//        var strings = this.get('strings')
-  //                        .map(this.get('webaudio.tone'),
-    //                           this.get('webaudio'))
-      //  this.set('tone',Em.A(strings))
-      },
-    isLeft:function(){
-      console.log(`
-
-
-                  isLEft
-
-
-
-                  `)
-    if( this.get('song.main.isFulfilled')){
-      return  this.get('song.main.isLeft.enabled')
-    }
+   
+   isLeft:function(){
+      if( this.get('song.main.isFulfilled')){
+        return  this.get('song.main.isLeft')
+      }
       return false 
-    }.property('song.main.isFulfilled','song.main.isLeft.enabled'),
-    tone:function(){
+   }.property('song.main.isFulfilled','song.main.isLeft'),
+  
+   init(){
+      console.log(`
+                  tone object created
+                  `)
       var strings = this.get('strings')
                         .map(this.get('webaudio.tone'),
                              this.get('webaudio'))
           
           strings = this.get('isLeft') ? strings.reverse() : strings
 
-          return Em.A(strings)
-    }.property('isLeft','strings'),
+       this.set('content', Em.A(strings))
+    },
+
     strings:function(){
     //  console.log('init from notes' ) 
     var notesMap = [ ],

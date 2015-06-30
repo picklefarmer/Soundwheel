@@ -16,7 +16,8 @@ App.FretBoardComponent = Em.Component.extend({
           rate = 24,
       	  tempo = ~~(this.get('song.tempo')/50),
           scale = 36,
-          note = this.get('tones.tone'),
+         // note = this.get('tones.tone'),
+          note = this.get('tones'),
           tempChord = this.get('song.cacheNotes'),
           index = ~~this.get('song.selected.index').toString(),
           ctx =  this.get('options.frontView');
@@ -217,7 +218,6 @@ console.log('pushChord')
 				this.set('chordTemp',chord)
 				ctx.globalAlpha=1
 	},
-    tones:Em.inject.service(),  
 
 	clear:function(ctx='options.frontView'){
 				this.get(ctx).clearRect(0,0,1400,300)
@@ -259,6 +259,7 @@ console.log('pushChord')
 		return E
 	},
 
+  tones:Em.inject.service(),  
   globalKeydown:Em.inject.service(),	
 
 	didInsertElement(){

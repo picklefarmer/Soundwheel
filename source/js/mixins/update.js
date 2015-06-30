@@ -49,6 +49,10 @@ App.UpdateMethods = Ember.Mixin.create({
 
         proxy.then(()=>{
           proxy.reopen({
+            isLeft:function(){
+              console.log('proxy isLeft')
+              return this.findBy('name','isLeft').enabled
+            }.property('@each.enabled'),
              update(hash){
                console.log( ' got main observe ' )  
                   Em.run( _this.get('firebase'),
@@ -116,7 +120,18 @@ App.UpdateMethods = Ember.Mixin.create({
                   console.log(  'measure ' ) 
                   return this.objectAt(this.get('index'))
                }.property('index','content.@each.notes'),
-              
+              lyrics:function(_,I,II){
+                console.log(I,II)
+                if(I){
+            Em.run.throttle(this,'updator',I,12)
+//                  this.set('measure.lyric',I)
+                }
+                return this.get('measure.lyric')
+              }.property('measure'),
+              updator(I,J,K){
+                console.log(I,J,K,"ASDF")
+                this.set('measure.lyric',I)
+              },
               index:function(a,b){
                   console.log(b,"index of proxy")
                   if(b < 0){

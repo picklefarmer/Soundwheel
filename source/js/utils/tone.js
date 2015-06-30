@@ -1,18 +1,41 @@
 
 App.WebaudioService = Em.Service.extend({
   instruments:Em.inject.service(),
-    tone(freqs,volume){
+  song:Em.inject.service(),
+
+  tone(freqs,volume){
   
       return  this.get('toneObject')
                   .create({
                     instruments:this.get('instruments'),
-                    freqs:freqs
+                    freqs:freqs,
+                    masterVolume:this.get('masterVolume'),
+                    ac:this.get('ac')
                    })
-     },
-     
+  },
+
+  masterVolume:function(){
+    var ac = this.get('ac'),
+        gain = ac.createGain();
+        gain.connect(ac.destination)
+
+        return gain
+  }.property(), 
+  
+
+  masterVolumeObserver:function(_,I){
+    console.log('value on masterVolume Observer')
+  
+    this.get('masterVolume').gain.value = I || .06
+  }.property('song.volume'),
+  ac:function(){
+    return  new (window.AudioContext || window.webkitAudioContect || Object)
+  }.property(),
+
   toneObject:Em.Object.extend({
     init(){
-      var tone = this.get('tone'),
+      var MV   = this.get('masterVolume'),
+          tone = this.get('tone'),
           ctx  = this.get('ctx'),
           ac   = this.get('ac');
 
@@ -22,7 +45,7 @@ App.WebaudioService = Em.Service.extend({
       this.get('tone').start(0)
       tone.connect(ctx)
       ctx.gain.value = 0.135
-      ctx.connect(ac.destination)
+      ctx.connect(MV)
 
     },
     
@@ -61,9 +84,7 @@ App.WebaudioService = Em.Service.extend({
       return this.get('freqs').objectAt(tone)
     }.property('freqs'),
     
-    ac:new (window.AudioContext || window.webkitAudioContect || Object),
-
-    ctx:function(){
+     ctx:function(){
       return this.get('ac').createGain()
     }.property('ac'),
 

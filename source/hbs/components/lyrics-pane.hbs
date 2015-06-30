@@ -1,4 +1,10 @@
-LYRICS
-{{textarea class="field" value=song.measure.lyric}}
-DEBUG
-{{textarea class="field" value=song.measure.debug}}
+<div class="row">
+  <div class="column large-12 large-centered">
+    <h1> {{song.selected.lyrics}}</h1>
+    <div class="form-group">
+      {{textarea class="form-control field" rows="1" value=song.selected.lyrics}}
+      </div>
+  </div>
+</div>
+{{!textarea class="field" value=song.measure.lyric}}
+{{!textarea class="field" value=song.measure.debug}}

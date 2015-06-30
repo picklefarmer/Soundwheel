@@ -29,10 +29,15 @@ App.SongService = Em.ObjectProxy.extend(App.UpdateMethods,{
       }
     }.observes('pause'),
   
+    volume:function(_,I,II){
+      console.log(_,I,II)
+      this.set('webaudio.masterVolumeObserver',I)
+      return I || .5
 
+    }.property(),
     chordSelection:function(_,I){
       console.log(I)
       return I 
     }.property(),
-  
+    webaudio:Em.inject.service() 
 })

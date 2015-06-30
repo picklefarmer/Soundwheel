@@ -5,15 +5,15 @@
 	border-bottom: $height+px solid transparent;
 	border-#{$direction}: $width+px solid #bcc;
 } 
-@mixin boxRow($offset){
+@mixin boxRow($offset, $height:20, $width:20, $top:-10, $offsetN: 48){
 	content:"";
 	display:block;
 	background:#bcc;
-	width:20px;
-	height:20px;
+	width:$width+px;
+	height:$height+px;
 	position:absolute;
-	top:-10px;
-	#{$offset}:48px;
+	top:$top+px;
+	#{$offset}:$offsetN+px;
 }
 
 .playGroup{
@@ -30,7 +30,12 @@
 }
 
 .arrow-play {
-	@include topBot(38,52,left);
+	@include topBot(38,56,left);
+	left: 15px;
+	&:before{
+		@include boxRow(right,76,22,-38,64)
+
+	}
 }
 .arrow-back {
 	@include topBot(38,52,right);
