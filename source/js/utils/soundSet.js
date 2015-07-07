@@ -5,6 +5,7 @@ App.TonesService = Em.ArrayProxy.extend({
    
    isLeft:function(){
       if( this.get('song.main.isFulfilled')){
+        //this.ctx.reverse()
         return  this.get('song.main.isLeft')
       }
       return false 
@@ -14,6 +15,8 @@ App.TonesService = Em.ArrayProxy.extend({
       console.log(`
                   tone object created
                   `)
+
+
       var strings = this.get('strings')
                         .map(this.get('webaudio.tone'),
                              this.get('webaudio'))
@@ -28,6 +31,7 @@ App.TonesService = Em.ArrayProxy.extend({
     var notesMap = [ ],
         octaves = [.5,1,2,4],
         strings = [ ],
+        frets   = 22,
         string = 5,
         frequencies = [
                    		261.63,	//	0
@@ -54,7 +58,7 @@ App.TonesService = Em.ArrayProxy.extend({
               case 4:  start = 4 + ( 3*5 ) + 4 ;break;
               default: start = 4 + ( string*5 );break;
           }
-           strings[string] = notesMap.slice(start,start+22)
+           strings[string] = notesMap.slice(start,start+frets)
            strings[string].unshift(1)
            string--
         }

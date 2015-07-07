@@ -42,16 +42,42 @@ App.UpdateMethods = Ember.Mixin.create({
     }.property('auth.uid'),
     
     main:function(_){
-      var proxy = this.promiseWithContext(_);
+      var proxy = this.promiseAsObject(_);
       var _this = this;
 
-      if(this.get('auth.uid')){
 
-        proxy.then(()=>{
+      proxy.then(()=>{
+
+      if(this.get('auth.uid')){
           proxy.reopen({
+            list:function(){
+              var objArray = [];
+              var content = this.get('content');
+             Object.keys(content).forEach(key => {
+              objArray.push({
+                            "name":key,
+                            "enabled":content[key].enabled,
+                            "options":content[key].options
+                            })
+             })
+
+             return objArray
+
+            }.property('@each.enabled','@each.options'),
+            strings:function(){
+              return 6  //this.findBy('name','
+            }.property('@each.options'),
+            frets:function(){
+              console.log(`
+                          within
+                          the frets
+                          proxy
+                          `)
+              return 26
+            }.property(),
             isLeft:function(){
               console.log('proxy isLeft')
-              return this.findBy('name','isLeft').enabled
+              return this.get('content.isLeft').enabled
             }.property('@each.enabled'),
              update(hash){
                console.log( ' got main observe ' )  
@@ -60,9 +86,9 @@ App.UpdateMethods = Ember.Mixin.create({
                           hash )
                }
           })
-        })
+        }
+      })
 
-      }
 
       return proxy
 
@@ -97,7 +123,19 @@ App.UpdateMethods = Ember.Mixin.create({
     }.property('auth.uid'), 
 
     chords:function(_){
-      return this.promise(_)
+      var promise = this.promise(_),
+          _this = this;
+          
+          promise.then(()=>{
+            promise.reopen({
+              update(hash){
+                console.log( ' got chords observe ',_this,_this.get('content'))
+                Em.run ( _this.get('content'), 'updateChords', hash)
+
+              }
+            })
+          })
+      return promise
     }.property('onLine'),
   
     names:function(_){
@@ -147,13 +185,6 @@ App.UpdateMethods = Ember.Mixin.create({
 
     }.property('onLine'),
 
-    chordSave(){
-      var chords = this.get('chordBank');
-      var chords = JSON.stringify(this.get('chordBank'));
-          
-          localStorage.chords = chords 
-    },
- 
     promise(method){
       var promise = new Em.RSVP.Promise((res,rej) =>{
               Em.run(this,this.get('content.' + method  ),res,rej)
@@ -184,7 +215,16 @@ App.UpdateMethods = Ember.Mixin.create({
         return App.RsvpE.create({promise,selection});
 
     }, 
-    
+    promiseAsObject(method){
+      console.log ( 'promise as object' , method)
+
+      var promise = new Em.RSVP.Promise((res,rej)=>{
+      
+        Em.run(this,this.get('content.' + method),res,rej)
+      })
+
+      return App.RsvpO.create({promise})
+    },    
     promiseWithSelectionAsObject(method,selection){
 
       console.log( ' selection object',selection )

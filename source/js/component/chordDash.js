@@ -4,39 +4,33 @@ App.ChordDashComponent = Em.Component.extend({
   tagName:"ul",
   classNames:['sidebar','chordBank'],
 	model:function(){
-        console.log('varience of chords')
-               this.get('song.chords')
-        return this.get('song.chordBank')//[[6,5,4]]
-        return	Firebase.List.create({
-			ref:chords
-			})
-	}.property('song.chordBank'),
+        return this.get('song.chords')//[[6,5,4]]
+	}.property('song.chords'),
     song:Em.inject.service(),
-	selected:[],
+	selectedBinding:"song.chordSelected",
 	selectionBinding:"song.chordSelection",
 	differenceBinding:"song.chordDifference",
+    needs:"song",
 	lowBinding:"song.chordLow",
-	needs:"song",
-	isEditing:false,
+	isEditingBinding:"song.chordEditFlag",
 	actions:{
+
 		saveSelection(){
-          Em.run(this.get('song'),"chordSave") 
+
+          Em.run(this.get('song.chords'),"update",this.get('song.chords.content')) 
         },
+
 		updateSelection(){
-          /*
-			var selection = this.get('selection');
-			var index = this.get('model').indexOf(selection)
-            var model = this.get('model')
-            model.set(index,this.get('selected'))
-            console.log('DEBUG SAVE')
-            DEBUG = [this.get('model'),index,selection]
-            */
-            var index = this.get('model').indexOf(this.get('selection'))
+            var model = this.get('model'),
+                selection   = this.get('selection'),
+                index = model.indexOf(selection);
+
             this.set('selection',this.get('selected'))
 		    this.get('model').replace(index,1,[this.get('selected')])
 		},
+
 		chordCapture(){
-		  var chord = this.get('song.measure.notes').filter(e => e ? e : false),
+		  var chord = this.get('song.selected.measure.notes').filter(e => e ? e : false),
               low   = Math.min.apply(this,chord),
               high  = Math.max.apply(this,chord),
               difference = Math.abs(low - high) + 1
@@ -44,6 +38,7 @@ App.ChordDashComponent = Em.Component.extend({
           this.send('newSelection',{chord,high,difference,low})
 
 		},
+
         newSelection({chord:notes,high,difference,low}={}){
 
           console.log("pre-model",this.get('model'))
@@ -53,17 +48,21 @@ App.ChordDashComponent = Em.Component.extend({
             this.set('selection',notes)
             console.log("chordSelection",this.get('model')||"undefined",notes||"undefined",high,difference,low) 
         },
+
 		deleteSelection(){
 			var selection = this.get('selection');
 			this.get('model').removeObject(this.get('selection'))
 		},
+
 		editSelected(){
 				this.toggleProperty('isEditing')
         		this.send('sendSelection')
 		},
+
 		sendSelection(){
               this.set('selected',Em.copy(this.get('selection')))
 		},
+
 		selector({chord:selection,difference,low}){
 //			console.log ("action selector",chord)
           var isEditing = this.get('isEditing')
@@ -182,7 +181,9 @@ App.ArPegComponent = Em.Component.extend({
 		console.log ( ' link  ' ,this.get('low') )
 		this.sendAction('action',this.getProperties('chord','difference','low'))
 	},
-
+    touchEnd(){
+        this.send('click') 
+    },
 	actions:{
 		toggleSelected(string,fret){
 			console.log ('toggleSelected',string, fret) 

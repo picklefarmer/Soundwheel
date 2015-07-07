@@ -1,8 +1,11 @@
+
+var	config    = require('./config.js');
+
+
 var fs = require('fs'),
-	compiler = require('../libs/ember-template-compiler'),
-	compilejs = require('babel'),
-	config    = require('./config.js');
-	emblem = require('emblem').default.compile;
+		compiler = require('../libs/ember-template-compiler_'+config.version),
+		compilejs = require('babel'),
+		emblem = require('emblem').default.compile;
 
 var init = config.flags.join("\n")+"\nvar App = Ember.Application.create({"+config.debug.join(",\n")+"});\n"
 

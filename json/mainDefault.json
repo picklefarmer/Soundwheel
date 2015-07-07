@@ -1,4 +1,7 @@
 {
-	"isLeft"	:{"enabled":true, 	"options":""	},
-	"isNothing"	:{"enabled":true, 	"options":""	}
+	"isLeft"	:{"enabled":true, 	"options":null	},
+	"frets"		:{"enabled":true, 	"options":[24,26]	},
+	"strings"	:{"enabled":true,	"options":[4,6]	},
+	"fretboard"	:{"enabled":true,	"options":"rgba(0,0,0,.5)"},
+	"tuning"	:{"enabled":true,	"options":["e","a","d","g","b","e"]}
 }

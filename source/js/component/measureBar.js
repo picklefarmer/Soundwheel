@@ -13,6 +13,21 @@ App.MeasureBarComponent = Ember.Component.extend({
     
 })
 
+App.RgbPalletComponent = Em.Component.extend({
+  didInsertElement(){
+    console.log('init rgb palle')
+     $('.color-box').colpick({
+    	colorScheme:'dark',
+    	layout:'rgbhex',
+    	color:'ff8800',
+    	onSubmit:function(hsb,hex,rgb,el) {
+	    	$(el).css('background-color', '#'+hex);
+	    	$(el).colpickHide();
+    	}
+    }).css('background-color', '#ff8800')
+  }
+})
+
 App.BooleanSwitchComponent = Em.Component.extend({
   checkedObserver:function(){
     console.log(`
@@ -24,11 +39,6 @@ App.BooleanSwitchComponent = Em.Component.extend({
         console.log(e)
       }
   }.observes('bar.enabled','bar.options'),
-  actions:{
-    feel(){
-      console.log("VALUE")
-    }
-  }
 })
 
 App.LMeasureComponent = Ember.Component.extend({

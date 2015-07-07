@@ -43,3 +43,21 @@
 		  return this.get('controller.'+value)
 		});
 
+        Ember.Handlebars.helper('typeOf', function(value,controller) {
+          var value = typeof value,
+              component = "";
+          switch(value){
+                case 'object' : component   = "option-set";  break;
+                case 'string' : component   = "rgb-pallet";  break;
+                case 'number' : component   = "range"   ;   break;
+                default       : component   = "boolean-switch";     break;
+          }
+        console.log(component,"component")
+          return component
+		});
+
+        Ember.Handlebars.helper('lookUp',function(service,method) {
+          var liquid = service.get(method)
+          console.log('lookup',service,method,liquid) 
+          return liquid
+        })

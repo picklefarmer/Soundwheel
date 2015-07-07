@@ -2,8 +2,11 @@ var	 walk    = require('walk'),
 	 hbsFiles  = [],
 	 jsFiles   = [],
 	 mixins	   = [],
-	 config    = require('./config.js');
+	 config    = require('./config.js'),
 	 compile = require('./compile.js');
+
+	 require('babel/register');
+var htmlGen = require('../htmlCompiler.js');
 
 var date = new Date()
 console.log("[1;33m"+date.getHours()+":"+date.getMinutes()+"[0;37m")
@@ -22,7 +25,7 @@ walker.on('file', function(root, stat, next) {
 		next()
 	}else{
 		// Add this file to the list of files
-	if( root.match('mixins')){
+	if( root.match('mixins') ){
 		if(stat.name.match('js$')){
 			mixins.push(root + '/' + stat.name);	
 		}else{
@@ -61,6 +64,6 @@ walker.on('end', function() {
 			compile.append(e[0],true)
 		}
 	})
-
+	htmlGen.toHtml()
 console.log("[1;32m"+(new Date().getTime() - date.getTime())+"[0;37m")
 });

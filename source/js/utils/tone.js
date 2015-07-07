@@ -7,29 +7,34 @@ App.WebaudioService = Em.Service.extend({
   
       return  this.get('toneObject')
                   .create({
+                    song:this.get('song'),
                     instruments:this.get('instruments'),
                     freqs:freqs,
                     masterVolume:this.get('masterVolume'),
                     ac:this.get('ac')
                    })
   },
-
+  tempo:function(){
+    return this.get('song.tempo')
+  }.property('song.tempo'),
   masterVolume:function(){
     var ac = this.get('ac'),
-        gain = ac.createGain();
-        gain.connect(ac.destination)
+        gain = ac.createGain(),
+        comp = ac.createDynamicsCompressor();
+
+        gain.connect(comp)
+        comp.connect(ac.destination)
 
         return gain
   }.property(), 
   
-
   masterVolumeObserver:function(_,I){
     console.log('value on masterVolume Observer')
   
     this.get('masterVolume').gain.value = I || .06
   }.property('song.volume'),
   ac:function(){
-    return  new (window.AudioContext || window.webkitAudioContect || Object)
+    return  new (window.AudioContext || window.webkitAudioContext)
   }.property(),
 
   toneObject:Em.Object.extend({
@@ -44,7 +49,7 @@ App.WebaudioService = Em.Service.extend({
       Em.run(this,"instrumentObserver")
       this.get('tone').start(0)
       tone.connect(ctx)
-      ctx.gain.value = 0.135
+      ctx.gain.value = 0.166
       ctx.connect(MV)
 
     },
@@ -93,18 +98,20 @@ App.WebaudioService = Em.Service.extend({
     }.property('ac'),
 
     play:function(){
-      var ctx = this.get('ctx'),
-          tone= this.get('tone'),
+      var ctx   = this.get('ctx'),
+          tone  = this.get('tone'),
+          tempo = this.get('song.tempo'),
           currentTime = ctx.context.currentTime;
-      
-      ctx.gain.exponentialRampToValueAtTime(0.5,currentTime+.125)
+    console.log(tempo,"ASDF")
+     //make this dependent on tempo  2000/16000 
+      ctx.gain.exponentialRampToValueAtTime(0.166,currentTime+tempo/16000)
       tone.frequency.exponentialRampToValueAtTime(this.get('freq'),currentTime)
-      ctx.gain.exponentialRampToValueAtTime(0.01,currentTime+1)
+      ctx.gain.exponentialRampToValueAtTime(0.001,currentTime+tempo/2000)
     }.observes('freq'),
 
     pause(){
       // console.log( 'pause' ) 
-      this.get('ctx').gain.exponentialRampToValueAtTime(0.01,this.get('ctx').context.currentTime)
+      this.get('ctx').gain.exponentialRampToValueAtTime(0.001,this.get('ctx').context.currentTime)
     	//this.ctx.disconnect()
     },
 

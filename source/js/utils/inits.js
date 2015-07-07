@@ -119,6 +119,7 @@ Em.Application.initializer({
         App.inject('component:pa-nels',     'song',   'service:song')
         App.inject('component:selection-panel', 'song',   'service:song')
         App.inject('component:index-panel', 'song',   'service:song')
+        //chord dash
         //*                         *//
 
         App.inject('component:option-panel','song',   'service:song')

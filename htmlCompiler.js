@@ -1,6 +1,6 @@
-var fs = require ( 'fs' ) 
-var walk = require ( 'walk' ) 
-
+var fs = require ( 'fs' ),
+	walk = require ( 'walk' ),
+	settings = require('./source/config.js');
 
 
 var config = [
@@ -17,9 +17,9 @@ var css = [];
 module.exports.toHtml = function(cb){
 console.log( ' init compile html page ' ) 
 	
-var walker = walk.walk('./')
+var walker = walk.walk('../')
 	walker.on('directory',function(root,stat,next){
-	console.log ( '[1m '+stat.name+'[0m')
+	//console.log ( '[1m '+stat.name+'[0m')
 		if(config.indexOf(stat.name) > -1){
 			walk.walk(root+stat.name).on('file',function(root,file,nextFile){
 				if(file.name.match('\.js$')){
@@ -52,24 +52,19 @@ var field = `
 <body>
 
 	<script src="libs/jquery.min.js"></script>
-	<script src="libs/ember-template-compiler.js"></script>
-	<script src="libs/ember.debug.js"></script> 
-	<script src="scores/blues.js"></script>
-	<!-- <script src="scores/waves.js"></script>-->
-	<script src="scores/bfa.js"></script>
-	<script src="libs/riffwave.js"></script>
+	<script src="libs/colpick.js"></script>
+	<script src="libs/ember-template-compiler_${settings.version}.js"></script>
+	<script src="libs/ember.debug_${settings.version}.js"></script> 
 	<script src="libs/firebase.js"></script>
-	<script src="libs/ember-fire_2.js"></script>
 
 	<script src="compiled/this.js"></script>
 	<script src="compiled/output.js"></script>
-	<script src="watch.js"></script>
 
 </body>
 </html>
 `	
-	console.log ( field ) 
-	fs.writeFileSync('index.html',field)
-	cb()	
+	//console.log ( field ) 
+	fs.writeFileSync('../index.html',field)
+		if(cb)cb()	
 	})
 }

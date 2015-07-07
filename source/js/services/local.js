@@ -49,6 +49,8 @@ App.LocalService = Em.Service.extend({
     console.log( ' main options get ' ) 
       $.getJSON("./json/mainDefault.json")
         .then( e => {
+          res(e)
+          /*
           var om = Object.keys(e)
               .map(hash => {
                 return {
@@ -59,6 +61,7 @@ App.LocalService = Em.Service.extend({
               })
 
               res(om)
+          */
         }) 
 
   },
@@ -134,7 +137,12 @@ App.LocalService = Em.Service.extend({
       }
   },
 
-    
+  updateChords(update){
+    console.log('updating chords')
+      
+    localStorage.chords = JSON.stringify(update)
+    console.log(  'chords saved to local storage' ) 
+  }, 
   update(value){
     console.log('updating',value.length,this)
 

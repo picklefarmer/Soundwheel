@@ -37,15 +37,17 @@ App.FirebaseService = Em.Service.extend({
           objArray = [];
 
           root.on("value", (snapshot) => {
-            snapshot.forEach(hash =>  {
+
+/*            snapshot.forEach(hash =>  {
               objArray.push({
                             "name":hash.key(),
                             "enabled":hash.val().enabled,
                             "options":hash.val().options
                             })
             })
-
-            res(objArray)
+*/
+              res(snapshot.val())
+  //          res(objArray)
           })
     },
 
@@ -74,6 +76,15 @@ App.FirebaseService = Em.Service.extend({
           root.on("value",(snapshot) => {
             res(snapshot.val())
          })
+    },
+
+    updateChords(update){
+      console.log ( ' observation got _2' )
+
+      this.get('auth.user')
+          .update(update,()=>{
+            console.log('chords saved online')
+          })
     },
 
     updateInstruments(update){
