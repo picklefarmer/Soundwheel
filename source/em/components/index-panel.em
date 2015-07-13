@@ -8,5 +8,5 @@
           span.badge = configuration.name
           .panel-body
             |{{log configuration}}
-            option-type bar=configuration update=song.main.update range=(lookUp song.main configuration.name)
-                | {{configuration.name}}
+            option-type bar=configuration main=song.main range=(lookUp song.main configuration.name)
+              |{{configuration.name}}

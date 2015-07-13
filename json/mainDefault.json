@@ -1,7 +1,7 @@
 {
-	"isLeft"	:{"enabled":true, 	"options":null	},
-	"frets"		:{"enabled":true, 	"options":[24,26]	},
-	"strings"	:{"enabled":true,	"options":[4,6]	},
-	"fretboard"	:{"enabled":true,	"options":"rgba(0,0,0,.5)"},
+	"isLeft"	:{"enabled":false, 	"options":false	},
+	"frets"		:{"enabled":true, 	"options":24	},
+	"strings"	:{"enabled":true,	"options":6		},
+	"fretboard"	:{"enabled":true,	"options":{	"background":"012","fret marker":"012","notes":"012"}},
 	"tuning"	:{"enabled":true,	"options":["e","a","d","g","b","e"]}
 }

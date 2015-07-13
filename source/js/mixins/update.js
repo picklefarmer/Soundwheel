@@ -42,7 +42,7 @@ App.UpdateMethods = Ember.Mixin.create({
     }.property('auth.uid'),
     
     main:function(_){
-      var proxy = this.promiseAsObject(_);
+      var proxy = this.promiseWithContextAsObject(_);
       var _this = this;
 
 
@@ -53,6 +53,7 @@ App.UpdateMethods = Ember.Mixin.create({
             list:function(){
               var objArray = [];
               var content = this.get('content');
+              console.log('change of options')
              Object.keys(content).forEach(key => {
               objArray.push({
                             "name":key,
@@ -64,28 +65,54 @@ App.UpdateMethods = Ember.Mixin.create({
              return objArray
 
             }.property('@each.enabled','@each.options'),
-            strings:function(){
-              return 6  //this.findBy('name','
-            }.property('@each.options'),
-            frets:function(){
-              console.log(`
-                          within
-                          the frets
-                          proxy
-                          `)
-              return 26
-            }.property(),
-            isLeft:function(){
-              console.log('proxy isLeft')
-              return this.get('content.isLeft').enabled
-            }.property('@each.enabled'),
-             update(hash){
+            
+            stringsArr:[4,5,6],
+            fretsArr:[16,24,26],
+            tuningArr:['a','A','b','c','C','d','D','e','f','F','g','G'],
+            intervals:function(){
+              var notes     = this.get('tuningArr'),
+                  selected  = this.get('tuning.options'),
+                  intervals = [],
+                  indexes   = [];
+                  
+                  indexes   = selected.map( e => notes.indexOf(e))
+                  
+                  intervals = indexes.map(  (e,f)=>{
+                    if(f){
+                      let p = (indexes[f-1]-e)%12;
+                      return p  > 6 ? 12-p  : Math.abs(p);
+                    }else{
+                      return e
+                    }
+                   })
+
+                  /*
+                    7   ( initial note)
+                    0   (  5  ) 
+                    5   (  5  )
+                    10  (  5  )
+                    2   (  4  )
+                    7   (  5  )
+                  */
+                 console.log('intervals', `
+
+
+                             ${intervals}
+
+
+
+                             `)
+                  return intervals
+
+            }.property('content.tuning.options'), 
+            
+            update(hash,path){
                console.log( ' got main observe ' )  
                   Em.run( _this.get('firebase'),
                           "updateMain",
-                          hash )
-               }
-          })
+                          hash ,path)
+            }
+         })
         }
       })
 
@@ -93,6 +120,7 @@ App.UpdateMethods = Ember.Mixin.create({
       return proxy
 
     }.property('auth.uid'),
+
     options:function(_){
       return this.promiseWithContext(_)
     }.property('auth.uid'),
@@ -191,7 +219,29 @@ App.UpdateMethods = Ember.Mixin.create({
           })
           return App.RsvpE.create({promise})
     }, 
+
+    promiseAsObject(method){
+      console.log ( 'promise as object' , method)
+
+      var promise = new Em.RSVP.Promise((res,rej)=>{
+      
+        Em.run(this,this.get('content.' + method),res,rej)
+      })
+
+      return App.RsvpO.create({promise})
+    },    
      
+    promiseWithContextAsObject(method){
+      
+      console.log(method,"debug")
+      var context = this.get('auth.uid') ? "firebase" : "local";
+      var promise = new Em.RSVP.Promise((res,rej)=>{
+              Em.run(this,this.get( context+"."+method    ) ,res  ,rej) 
+          });
+      console.log(method,"debug _ 2")
+          return App.RsvpO.create({promise})
+    },
+
     promiseWithContext(method){
       
       console.log(method,"debug")
@@ -215,16 +265,7 @@ App.UpdateMethods = Ember.Mixin.create({
         return App.RsvpE.create({promise,selection});
 
     }, 
-    promiseAsObject(method){
-      console.log ( 'promise as object' , method)
 
-      var promise = new Em.RSVP.Promise((res,rej)=>{
-      
-        Em.run(this,this.get('content.' + method),res,rej)
-      })
-
-      return App.RsvpO.create({promise})
-    },    
     promiseWithSelectionAsObject(method,selection){
 
       console.log( ' selection object',selection )

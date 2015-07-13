@@ -8,5 +8,5 @@
               | {{capitalize configuration.name}} Panel
               .panel-body
                 view "select" content=song.panels.menuBars value=configuration.options
-                boolean-switch bar=configuration update=song.panels.update
+                boolean-switch bar=configuration main=song.panels
                   | Auto-hide

@@ -44,20 +44,22 @@
 		});
 
         Ember.Handlebars.helper('typeOf', function(value,controller) {
-          var value = typeof value,
+          var value = Em.typeOf(value),
               component = "";
           switch(value){
-                case 'object' : component   = "option-set";  break;
-                case 'string' : component   = "rgb-pallet";  break;
-                case 'number' : component   = "range"   ;   break;
-                default       : component   = "boolean-switch";     break;
+            case 'number' : component   = "option-set";     break;
+            case 'string' : component   = "rgb-pallet";     break;
+            case 'array'  : component   = "select-range";   break;
+            case 'object' : component   = "select-set";     break;
+            default       : component   = "boolean-switch"; break;
           }
-        console.log(component,"component")
+          
+          console.log(component,"component")
           return component
 		});
 
         Ember.Handlebars.helper('lookUp',function(service,method) {
-          var liquid = service.get(method)
-          console.log('lookup',service,method,liquid) 
-          return liquid
+          var selectionArr = service.get(method+"Arr")
+          console.log('lookup',service,method,selectionArr) 
+          return selectionArr
         })

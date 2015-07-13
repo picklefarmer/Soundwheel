@@ -4,63 +4,83 @@ App.InstrumentComponent = Em.Component.extend({
 	classNames:['tablature'],
   song:Em.inject.service(),
   //strings number
+  color:function(){
+    var color = this.get('song.main.fretboard.options')
+    console.log('color','changed',color)
+    return color
+  }.property('song.main.fretboard.options'),
 	height:function(){
-    var size = 50;
-    return (this.get('song.main.strings') * size) || 300
+     
+    console.log(`height
+                 was
+                 set/changed
+                `)
+
+       var size = 50;
+    return (this.get('song.main.strings.options') * size) || 300
   
-  }.property('song.main.strings'),
+  }.property('song.main.strings.options'),
   //frets number
 	width:function(){
     
+    console.log(`width
+                 was
+                 set/changed
+                `)
+
     var size = 61.33; 
-    return (this.get('song.main.frets') * size) || 1472
+
+    return (this.get('song.main.frets.options') * size) || 1472
     
-  }.property('song.main.frets'),
+  }.property('song.main.frets.options'),
 
 	attributeBindings:['id',"style","height","width"],
-	style:function(_,y,x){
-		//		console.log(_,this.get('x'),this.get('y'))
-				x = 100;
-//				x = 1220;
-				y = 360;
-				var v = "px;";
-				var p = "%;";
-	}.property(),
+  style:function(){
+     
+    console.log('style two ',this.get('height'),this.get('width'))
+    return ""
+  }.property(),
 
   didInsertElement:function(){
       var name = this.get('name'),
           ctx  = this.get('element').getContext('2d');
+          this.set('ctx',ctx)
 
           this.set(name,ctx);
           ctx = this.get(name)
 
           this.get('parentView.options').set(name,ctx)
   },
+
 	frontView:function(a,ctx){
+
 				if(ctx){
 					ctx.font="bolder 22px serif";
-     			ctx.fillStyle = "white";//"rgba(155,155,155,.79)"
+     			ctx.fillStyle = "#"+this.get('color.notes')//"white";//"rgba(155,155,155,.79)"
           ctx.strokeStyle = "white";
 
 				}
 				return ctx || null
-		}.property(),
+	}.property('color'),
+
 	centerView:function(a,ctx){
 				if(ctx){
 					ctx.font="bolder 22px serif"
 				}
 				return ctx || null
-		}.property(),
+	}.property('color'),
+
 	backView:function(a,b){
         //frets number
         //heighti
-
-    console.log(this.get('song.main'),`song 
+        b = b || this.get('ctx')
+    console.log(b,this.get('song.main.frets.options'),`the song 
                 . main .
                 frets `)
-				var frets   = this.get('song.main.frets') || 24,
+				var frets   = this.get('song.main.frets.options') || 24,
             height  = this.get('height'),
             width = this.get('width'),
+            color = ("#" + this.get('color.background'))
             dots = 2,
             L = 775,
 					  size = Math.ceil(1600/24),
@@ -72,7 +92,7 @@ App.InstrumentComponent = Em.Component.extend({
         //
 				fret.onload = function(){
 
-				  b.fillStyle = "#012";
+				  b.fillStyle = color; //"#012";
 		    //		b.fillRect(0,0,1600,300);
 		    	b.fillRect(0,0,width,height);
 					b.globalAlpha = .65;	
@@ -99,10 +119,8 @@ App.InstrumentComponent = Em.Component.extend({
 				b.lineTo(L+20,220)
 				b.closePath()
 				b.fill()
-				b.fillStyle = "#333333"
     //  b.stroke()
 		
-				dots = 4
 				while(frets--){
 				
 				b.fillStyle = "hsl(180,11%,32%)"
@@ -111,7 +129,10 @@ App.InstrumentComponent = Em.Component.extend({
 					b.fillRect(size*frets+2,0,5,height)
 				}
 				
-				b.fillStyle = "hsl(180,11%,32%)"
+				b.fillStyle = color["fret marker"] // "hsl(180,11%,32%)"
+
+				dots = 4
+
 				while(dots--){
 					b.beginPath()
 					b.arc(size*2.5+3+(dots*size*2),height/2,16,0,2*Math.PI)
@@ -139,7 +160,7 @@ App.InstrumentComponent = Em.Component.extend({
 					b.fillRect(0,24+50*frets,width,3)
 				}
 			}
-		}.property(),
+		}.property('height','width','color'),
 
 
 })

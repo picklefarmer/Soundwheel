@@ -25,7 +25,7 @@ var walker = walk.walk('../')
 				if(file.name.match('\.js$')){
 					js.push(`<script src="${root+"/"+file.name}"></script>`)
 				}else if(file.name.match('\.css$')){
-					css.push(`<link rel="stylesheet" href="${root+"/"+file.name}">`)	
+					css.push(`<link rel="stylesheet" href="${"css"+"/"+file.name}">`)	
 				}
 				nextFile()
 			})

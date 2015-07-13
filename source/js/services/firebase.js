@@ -105,7 +105,7 @@ App.FirebaseService = Em.Service.extend({
     
     },
     
-    updateMain(update){
+    updateMain(update,path){
       console.log( ' main observation got _2 ' ) 
 
 /*
@@ -113,12 +113,16 @@ App.FirebaseService = Em.Service.extend({
   var {enabled,options} = update;
  update({[update.name]:{enabled,options}})
  */
-      var {enabled,options,name} = update;
-          update = {[name]:{enabled,options}}
+      if(!path){
 
+        let {enabled,options,name} = update;
+            update = {[name]:{enabled,options}}
+            path   = '/'
+      }  
 
         this.get('auth.user')
             .child('settings/main')
+            .child(path)
             .update(update,
                 ()=>{
                   console.log('success')
@@ -189,7 +193,7 @@ App.FirebaseService = Em.Service.extend({
       }else{
         let [fret,string] = value;
         ref.child('notes')
-       update({[string]:fret})  
+			.update({[string]:fret})  
        } 
     },
 

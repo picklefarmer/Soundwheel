@@ -6,5 +6,5 @@
         li.list-group-item
           span.badge = configuration.name
           .panel-body
-            boolean-switch bar=configuration update=song.instrumentNames.update
+            boolean-switch bar=configuration main=song.instrumentNames
               | {{configuration.name}}

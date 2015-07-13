@@ -11,17 +11,20 @@ App.SongController = Em.Controller.extend({
 						console.log ( one , "LOCAL STORAGE") 
 						return one
 
-				}.property(),
+		}.property(),
+
 		onLine:function(e,f,g){
 				console.log(f)
 				return f || false
 		}.property(),
+
 		songNames:function(){
 
 				return this.get('songs').names
 				//return this.get('songs').names
 
 				}.property('songs'),
+                
 		editScore:function(){
 
 				return Em.A([[]])
