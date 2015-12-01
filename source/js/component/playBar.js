@@ -6,16 +6,17 @@ actions:{
 	},
 	stepLeft(){
 		console.log( 'stepLeft ' ) 
-        this.decrementProperty('song.selected.index')
+        this.decrementProperty('song.index')
 	},
 	stepRight(){
 		console.log( 'stepRight ')
-       this.incrementProperty('song.selected.index')
+       this.incrementProperty('song.index')
 	},	
 	play(){
 		console.log( 'play ' ,this.get('song.pause')) 
-	    this.toggleProperty('song.pause')
-    },	
+	    if(this.toggleProperty('song.pause'))
+				Em.run.next(this.get('song'),'clock')
+  },	
 
 }
 	

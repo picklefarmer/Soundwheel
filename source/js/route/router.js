@@ -15,10 +15,10 @@ App.Router.map(function() {
 	this.route("personal");	
 	this.route("user");	
 	
-	this.resource('mount',{path:'/mount/:x/:y'});
+	this.route('mount',{path:'/mount/:x/:y'});
 	
-	this.resource('console', { path: '/:ison' },function(){
-  	this.resource("menu", { path: '/:son' })  
+	this.route('console', { path: '/:ison' },function(){
+  	this.route("menu", { path: '/:son' })  
   });
 		// put your routes here
 });

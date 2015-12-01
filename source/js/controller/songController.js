@@ -1,59 +1,68 @@
 		
 App.SongController = Em.Controller.extend({
 		needs:'inventory',
-    init:function(){
-      console.log('songController, INIT') 
-    },
-		songs:function(){
+   		init:function(){
+      //		console.log('songController, INIT') 
+    	},
 
-						
-            var one = localStorage
-						console.log ( one , "LOCAL STORAGE") 
-						return one
+		songs:Em.computed({
+			get(){
+        	    var one = localStorage
+				console.log ( one , "LOCAL STORAGE") 
+				return one
+			}
+		}),
 
-		}.property(),
-
-		onLine:function(e,f,g){
+		onLine:Em.computed({
+			get(){
+				return false
+			},
+			set(e,f){
 				console.log(f)
 				return f || false
-		}.property(),
+			}
+		}),
 
-		songNames:function(){
-
+		songNames:Em.computed('songs',{
+			  get(){
 				return this.get('songs').names
 				//return this.get('songs').names
-
-				}.property('songs'),
+			}
+		}),
                 
-		editScore:function(){
+		editScore:Em.computed({
+				get(){
+					return Em.A([[]])
+				}
+		}),		
 
-				return Em.A([[]])
-
-				}.property(),
-		
-		editIndex:function(a,b){
+		editIndex:Em.computed({
+			set(a,b){
 				if(b < 0){b = this.get('editScore').length-1}
-			
 				return b%this.get('editScore').length ||0
+			}
+		}),
 
-				}.property(),
-
-		lyric:function(e,f,g){
-
-							//	console.log(e,f,g)
-					var base  = this.get('editScore.'+this.get('editIndex'))
-								if (base ){
+		lyric:Em.computed("editScore","editIndex",{
+			get(e,f,g){
+				//	console.log(e,f,g)
+				var base  = this.get('editScore.'+this.get('editIndex'))
+				if (base ){
 					//					console.log("lyric found" , base )
-										return base
-								}
-								return ""
+					return base
+				}
+				return ""
+			}
+		}),
 
-				}.property('editScore','editIndex'),
-		play:function(i,ii){
-			console.log(ii,i, "play+prop" ) 
-			if(	ii[1] ){ return ii}
-			return ii > -1 ? ii : []
-		}.property(), 
+		play:Em.computed({
+			set(i,ii){
+				console.log(ii,i, "play+prop" ) 
+				if(	ii[1] ){ return ii}
+				return ii > -1 ? ii : []
+			}
+		}), 
+
 		actions:{
 				play(f,g){
 					if(g){	

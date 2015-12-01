@@ -7,6 +7,6 @@
               span.badge = configuration.name
               | {{capitalize configuration.name}} Panel
               .panel-body
-                view "select" content=song.panels.menuBars value=configuration.options
-                boolean-switch bar=configuration main=song.panels
+                /view "select" content=song.panels.menuBars value=configuration.options
+                /boolean-switch bar=configuration main=song.panels
                   | Auto-hide

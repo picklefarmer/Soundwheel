@@ -1,6 +1,6 @@
 var fs = require ( 'fs' ),
 	walk = require ( 'walk' ),
-	settings = require('./source/config.js');
+	settings = require('./config.js');
 
 
 var config = [
@@ -17,7 +17,7 @@ var css = [];
 module.exports.toHtml = function(cb){
 console.log( ' init compile html page ' ) 
 	
-var walker = walk.walk('../')
+var walker = walk.walk('./')
 	walker.on('directory',function(root,stat,next){
 	//console.log ( '[1m '+stat.name+'[0m')
 		if(config.indexOf(stat.name) > -1){
@@ -59,12 +59,12 @@ var field = `
 
 	<script src="compiled/this.js"></script>
 	<script src="compiled/output.js"></script>
+	<script src="./watch.js"></script>
 
 </body>
 </html>
 `	
-	//console.log ( field ) 
-	fs.writeFileSync('../index.html',field)
+	fs.writeFileSync('./index.html',field)
 		if(cb)cb()	
 	})
 }

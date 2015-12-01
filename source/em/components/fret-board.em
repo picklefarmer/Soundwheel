@@ -1,2 +1,3 @@
-each name in names
-  component 'instrument' name=name
+each names as |name|
+  component 'instrument-type' name=name
+

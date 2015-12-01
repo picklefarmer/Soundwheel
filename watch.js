@@ -4,29 +4,23 @@
 if(require){
 !function(){
 		require('nw.gui').Window.get().showDevTools();
-		require('nw.gui').Window.get().setTransparent(true);
-
-		require('babel/register');
-	var reIndex = require('./htmlCompiler.js');
+//		require('nw.gui').Window.get().setTransparent(true);
+/*
 	var path = './css';
 	var fs = require('fs');
 
-/*	fs.watch(path, function(e,f) {
-		
-	console.log( 'css') 
+	fs.watch(path, function(e,f) {
 		reIndex.toHtml(function(){
 				if (location)
 				  location.reload();
 			})
 		});
-*/	  
-		fs.watch("./compiled", function(e,f) {
-		 
-	console.log( 'js') 
+	  
+	fs.watch("./compiled", function(e,f) {
 			if (location)
 			  location.reload();
 		});
-
+*/
 
 	}()
 }

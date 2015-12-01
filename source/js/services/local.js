@@ -86,7 +86,7 @@ App.LocalService = Em.Service.extend({
   options(res,rej){
     console.log(  ' options get  ' ) 
       $.getJSON("./json/routesDefault.json")
-        .then(om => { res(om) })
+        .then(om => { console.log(om, "new");res(om) })
   },
 
   selected(res,rej,selection){
@@ -97,7 +97,10 @@ App.LocalService = Em.Service.extend({
       res(om)
     }else{
       $.getJSON("./scores/"+selection+".json")
-       .then(om => res(om))
+       .then(om => {
+			console.log( ' no localstorage found  grabbing / json ', om)
+	   		res(om)
+	   })
     }
 
   },

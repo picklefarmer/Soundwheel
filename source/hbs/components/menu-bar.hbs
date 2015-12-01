@@ -1,25 +1,17 @@
-
-
-
-
-<ul class={{menubar}}>
+<!--ul class={{menubar}}>
 		<li {{action 'click'}}>O</li>
-		{{#if controller.barVisible}}
+		{{#if barVisible}}
 		  {{#if song.options.isFulfilled}}
-    		{{#each page in song.options itemController="li"}}
-		    	<li {{action "forActive" page.model}} class="{{page.isActive:round}}">
-				    {{#if page.model.x}}
-				    	{{#link-to page.model.route page.model.x page.model.y tagName="div"}}
-		  				  {{page.model.name}}
-    					{{/link-to}}
+        {{#each song.options as |page| }}
+		    	<li {{action "forActive" page.name}} class="{{page.isActive:round}}">
+				    {{#if page.x}}
+				    	{{link-to page.name page.route page.x page.y tagName="div"}}
 		    		{{else}}
-				    	{{#link-to page.model.route tagName="div"}}
-					    	{{page.model.name}}
-    					{{/link-to}}
+				      {{link-to page.name page.route tagName="div"}}
 		    		{{/if}}
 	    		</li>
     		{{/each}}
     	{{/if}}
     {{/if}}  
-</ul>
+</ul-->
 

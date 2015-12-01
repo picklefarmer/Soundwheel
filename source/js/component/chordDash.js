@@ -3,9 +3,13 @@ var debug;
 App.ChordDashComponent = Em.Component.extend({
   tagName:"ul",
   classNames:['sidebar','chordBank'],
-	model:function(){
-        return this.get('song.chords')//[[6,5,4]]
-	}.property('song.chords'),
+
+	model:Em.computed('song.chords',{
+		get(){
+			return this.get('song.chords')//[[6,5,4]]
+		}
+	}),
+
     song:Em.inject.service(),
 	selectedBinding:"song.chordSelected",
 	selectionBinding:"song.chordSelection",
@@ -122,121 +126,6 @@ App.ChordDashComponent = Em.Component.extend({
 			
 		}
 	}
-})
-
-App.ChordBtnComponent = Em.Component.extend({
-	tagName:"td",
-	classNameBindings:['value:chordbtn'],
-	value:true,
-	name:"+",
-	actions:{
-		toggleSelected(string,fret){
-			console.log([string,fret])
-			this.sendAction('action',string,fret)
-		}
-	}
-})
-
-App.ChordRowComponent = Em.Component.extend({
-	tagName:"tr",
-	classNameBindings:['value:chordedit'],
-	value:true,
-	rows:function(name,rows){
-		console.log(rows) 
-		var om = []
-		om.length = rows.length +2
-		return om
-	}.property(),
-	actions:{
-		toggleSelected(string,fret){
-			console.log ( "row" ,string, fret )
-		   this.sendAction('action',string,fret)	
-		}
-	}
-
-})
-
-App.ArPegComponent = Em.Component.extend({
-	tagName:"table",
-	classNameBindings:["isEditing"],
-	isEditing:false,
-	chordNotes:Em.computed.filter('chord',function(e){if(e)return true}),
-	low:Em.computed.min('chordNotes'),
-	high:Em.computed.max('chordNotes'),
-	difference:function(){
-		var aom = new Date().getTime()
-	Ember.run.scheduleOnce('afterRender',this,function(){
-			
-		var eom = new Date().getTime()
-			console.log('after Render', eom - aom)
-	})
-		var leng = [],
-            length =  Math.abs(this.get('low') - this.get('high'))+1;
-            console.log(length)
-
-            leng.length = length
-	return leng
-	}.property('high','low'),
-	click(){
-		console.log ( ' link  ' ,this.get('low') )
-		this.sendAction('action',this.getProperties('chord','difference','low'))
-	},
-    touchEnd(){
-        this.send('click') 
-    },
-	actions:{
-		toggleSelected(string,fret){
-			console.log ('toggleSelected',string, fret) 
-			this.get('higher').send('toggleSelected',string,fret) 
-		},
-		appendToSelectedCol(string,fret){
-			console.log ('appendToSelectedCol',string, fret) 
-			this.get('higher').send('appendToSelectedCol',string,fret,this.get('low')) 
-		},
-		appendToSelected(string,fret){
-			console.log ('appendToSelected',string, fret) 
-			this.get('higher').send('appendToSelected',string,fret,this.get('low')) 
-		}
-	},
-})
-
-App.ChordBodyComponent = Em.Component.extend({
-tagName:'table',
-actions:{
-		toggleSelected(string,fret){
-//			console.log([string,fret])
-			this.sendAction('action',string,fret)
-		},
-		appendToSelectedCol(string,fret){
-			console.log ('appendToSelectedCol',string, fret) 
-			this.sendAction('appendToSelectedCol',string,fret) 
-		}	
-	}
-})
-
-App.ANoteComponent = Em.Component.extend({
-	tagName:"td",
-	classNames:["chordbtn"],
-	classNameBindings:["noteClass:hit"],
-	content:function(){
-		if(this.get('noteClass')){
-			return " + " 
-		}else{
-			return " - " 
-		}
-	}.property('noteClass'),
-	fret:function(name,f){
-		return f - this.get('low')
-	}.property('low'),
-	note:function(name,f){
-		return this.get('index') + this.get('low')
-	}.property('low','index'),
-	noteClass:function(name,f){
-		var notes = this.get( 'index' ) ,
-				fret = this.get( 'fret');
-		//console.log ( notes+ " notes" +" "+ fret + " fret")
-	return notes===fret
-	}.property('index','fret','low'),
 })
 
 var debug2;

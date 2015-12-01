@@ -1,8 +1,9 @@
 {
  "option-panel"	: { "options":"right"	,"enabled":false	},
  "measure-bar"	: { "options":"left"	,"enabled":true 	},
- "chord-dash"	: { "options":"bottom","enabled":false 	},
- "play-bar"		: { "options":"middle","enabled":true  	},
- "lyrics-pane"	: { "options":"middle","enabled":false	}
+ "chord-dash"	: { "options":"bottom"	,"enabled":false 	},
+ "play-bar"		: { "options":"middle"	,"enabled":true  	},
+ "lyrics-pane"	: { "options":"middle"	,"enabled":false	},
+ "phrase-bar"	: { "options":"top"	  	,"enabled":false	}
 }
 

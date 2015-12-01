@@ -8,7 +8,7 @@
 			<button {{action "deleteSelection"}}>Remove</button>
 			<button {{action "chordCapture"}}>Capture</button>
 		{{#if selected }}
-			{{#ar-peg isEditing="isEditing" higher=controller click=null chord=selected as |string fret|}}
+			{{#ar-peg isEditing="isEditing" higher=this click=null chord=selected as |string fret|}}
 
 				<button	{{action "toggleSelected" string fret}}>
 						}{

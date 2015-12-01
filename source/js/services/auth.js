@@ -4,17 +4,20 @@ App.AuthService = Em.Service.extend({
         this.set('base',base) 
      },
 
-     uid:function(){
-       console.log( ' user id ' ) 
+     uid:Em.computed('base',{
+       get(){
+//       console.log( ' check if user is logged in  ' ) 
        var uid = this.get('base').getAuth()
            uid = uid ? uid.uid : null
-        return uid 
-     }.property('base'),
+        return uid }
+     }),
 
-     user:function(){
+     user:Em.computed('uid',{
+       get(){
        var user = this.get('uid')
         return this.get('base').child(user)
-     }.property('uid'),
+       }
+     }),
 
      userNew(user){
        var base = this.get('base')
@@ -42,6 +45,7 @@ App.AuthService = Em.Service.extend({
             })
           })
      },
+
      userNewCheck(user){
         this.get('base')
           .child(user.uid)
