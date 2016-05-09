@@ -1,0 +1,30 @@
+.blank{
+	display:inline-block;
+	background:white;
+}
+
+.nav {
+//	position:absolute;
+//	width:12%;
+//	top:0px;
+//	bottom:0px;
+//	right:0px;
+	padding-left:12px;
+}
+.nav label{
+	
+}
+.nav div{
+	width:60%;
+	margin-left:12px;
+}
+.navlabel{
+	background:#aaa;
+	display:block;
+	text-align:center;
+	//vertical-align:super;
+	//top:3px;
+	//padding:3px;
+	position:relative;
+}
+

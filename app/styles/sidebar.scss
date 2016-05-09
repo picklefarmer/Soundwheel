@@ -1,0 +1,32 @@
+.sidebar{
+	-webkit-transition:background 1s;
+	transition:background 1s;
+}
+.sidebar tr td{
+
+	border-left:7px inset #383838;
+}
+.sidebar li div{
+	display:inline-block;
+	cursor:pointer;
+	border-radius:15px;
+	border:7px inset #383838;
+	-webkit-box-shadow:inset 0px 0px 4px 4px #282828;
+	box-shadow:inset 0px 0px 4px 4px #282828;
+	
+	-webkit-box-shadow: rgba(0, 0, 0, 0.898438) 0px 0px 20px inset;
+	box-shadow: rgba(0, 0, 0, 0.898438) 0px 0px 20px inset;
+	
+	text-shadow: 0px 1px 2px #282828;
+    
+	-webkit-background-clip: text;
+  	-moz-background-clip: text;
+    background-clip: text;
+
+	font-size:20px;
+	padding:6px;
+   	text-align:center;
+	vertical-align:middle;	
+}
+
+@import "checkbox";

@@ -1,0 +1,53 @@
+@import "properties";
+
+@import "compass/css3/box-shadow";
+@import "compass/css3/user-interface";
+@import "compass/css3/text-shadow";
+@import "compass/css3/background-clip";
+@import "compass/css3/appearance";
+
+
+.menubar{
+
+	background: $blend;
+	display:block;
+	width:100%;
+	margin:0px;
+	padding:4px;
+	position:relative;
+	top:0px;
+	width:100%;
+	border-bottom:2px solid grey;
+	li{
+		div{
+			top:0px;
+			cursor:pointer;
+			border-radius:15px;
+			border:7px inset #383838;
+			@include box-shadow(inset 0px 0px 4px 4px $blend);
+			background:black;
+			@include box-shadow(rgba(0, 0, 0, 0.898438) 0px 0px 20px inset);
+			@include text-shadow(0px 1px 2px #282828);
+		    @include background-clip(text);
+
+			font-size:20px;
+			padding:6px;
+		   	text-align:center;
+			vertical-align:middle;	
+		    color: transparent;
+		}
+	}
+}
+
+/*
+.menu {
+	display:block;
+	background: #4f4f4f;
+	margin-bottom:12px;
+}
+.menu li{
+		display:inline-block;
+		border:black 2px solid;
+}
+*/
+
