@@ -8,7 +8,7 @@ module.exports = function(defaults) {
 			sassOptions: {
 		  	includePaths: [
 		      'bower_components/foundation/scss',
-					'node_modules/compass-mixins/lib/compass/'
+					'node_modules/compass-mixins/lib/'
 				]
 		}
 

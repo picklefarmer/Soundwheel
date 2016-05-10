@@ -1,10 +1,12 @@
+import Ember from 'ember';
+
 export function initialize(App) {
 
 		//default . routes
 		
    App.register('login:side',Ember.Object.extend({
-        song:Em.inject.service(),
-        menuBar:Em.computed({
+        song:Ember.inject.service(),
+        menuBar:Ember.computed({
 					get(){
           		return this.get('song.options')
           		return thi$.getJSON("./json/routes.json")
@@ -15,8 +17,8 @@ export function initialize(App) {
 	 //user . routes
 
    App.register('login:auth',Ember.Object.extend({
-        song:Em.inject.service(),
-        menuBar:Em.computed({
+        song:Ember.inject.service(),
+        menuBar:Ember.computed({
 			get(){
           		return this.get('song.options')
           		return $.getJSON("./json/routesAuth.json")
@@ -27,15 +29,15 @@ export function initialize(App) {
 	//default . config
     
   App.register('settings:side',Ember.Object.extend({
-  	song:Em.inject.service(),
+  	song:Ember.inject.service(),
     menuBars:["left","right","bottom","top","center","middle"],
-		datas:Em.computed({
+		datas:Ember.computed({
 			get(){
 				console.log('fetch panel-data' )
 				this.get('data').then(data => this.set('datas',data));
 			}
 		}),
-		data:Em.computed({
+		data:Ember.computed({
 			get(){
 				return this.get('song.panels')
 				return $.getJSON('./json/panelsAuth.json',function(err){});
@@ -44,10 +46,10 @@ export function initialize(App) {
    }));   
 
 	App.register('settings:auth',Ember.Object.extend({
-    auth:Em.inject.service(),
-    song:Em.inject.service(),
+    auth:Ember.inject.service(),
+    song:Ember.inject.service(),
     menuBars:["left","right","bottom","top","center","middle"],
-		datas:Em.computed({
+		datas:Ember.computed({
 			get(){
       	console.log('fetch auth panel-data' )
 		    this.get('data').then(data => {
@@ -56,7 +58,7 @@ export function initialize(App) {
       	});
 			}
    	}),
-    data:Em.computed({
+    data:Ember.computed({
 			get(){
 					//var om = this.get('auth.settings')
          	var om = this.get('song.panels')

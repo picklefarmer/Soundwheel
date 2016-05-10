@@ -1,0 +1,196 @@
+[?25hCould not start watchman; falling back to NodeWatcher for file system events.
+[?25hVisit http://ember-cli.com/user-guide/#watchman for more info.
+[?25l[?25h
+components/a-note.js: line 26, col 15, 'f' is defined but never used.
+components/a-note.js: line 26, col 13, '_' is defined but never used.
+components/a-note.js: line 32, col 15, 'f' is defined but never used.
+components/a-note.js: line 32, col 13, '_' is defined but never used.
+
+4 errors
+
+components/ar-peg.js: line 8, col 63, Expected '{' and instead saw 'return'.
+
+1 error
+
+components/chord-dash.js: line 59, col 17, 'selection' is defined but never used.
+components/chord-dash.js: line 92, col 21, Expected '{' and instead saw 'this'.
+components/chord-dash.js: line 3, col 5, 'debug' is defined but never used.
+components/chord-dash.js: line 3, col 12, 'debug2' is defined but never used.
+
+4 errors
+
+components/fret-board.js: line 15, col 15, A leading decimal point can be confused with a dot: '.25'.
+components/fret-board.js: line 41, col 64, A leading decimal point can be confused with a dot: '.5'.
+components/fret-board.js: line 79, col 68, A leading decimal point can be confused with a dot: '.5'.
+components/fret-board.js: line 108, col 27, A leading decimal point can be confused with a dot: '.5'.
+components/fret-board.js: line 28, col 13, 'measure' is defined but never used.
+components/fret-board.js: line 36, col 15, 'e' is defined but never used.
+components/fret-board.js: line 161, col 48, Expected '===' and instead saw '=='.
+components/fret-board.js: line 162, col 48, Expected '===' and instead saw '=='.
+components/fret-board.js: line 19, col 9, '$' is not defined.
+components/fret-board.js: line 23, col 9, '$' is not defined.
+
+10 errors
+
+components/instrument-type.js: line 114, col 40, A leading decimal point can be confused with a dot: '.65'.
+components/instrument-type.js: line 21, col 17, 'size' is defined but never used.
+components/instrument-type.js: line 30, col 17, 'size' is defined but never used.
+components/instrument-type.js: line 104, col 34, Expected an assignment or function call and instead saw an expression.
+components/instrument-type.js: line 101, col 17, 'dots' is not defined.
+components/instrument-type.js: line 151, col 21, 'dots' is not defined.
+components/instrument-type.js: line 153, col 27, 'dots' is not defined.
+components/instrument-type.js: line 155, col 43, 'dots' is not defined.
+components/instrument-type.js: line 159, col 21, 'dots' is not defined.
+components/instrument-type.js: line 161, col 27, 'dots' is not defined.
+components/instrument-type.js: line 163, col 44, 'dots' is not defined.
+components/instrument-type.js: line 167, col 21, 'dots' is not defined.
+components/instrument-type.js: line 169, col 27, 'dots' is not defined.
+components/instrument-type.js: line 171, col 57, 'dots' is not defined.
+components/instrument-type.js: line 102, col 17, 'L' is not defined.
+components/instrument-type.js: line 131, col 30, 'L' is not defined.
+components/instrument-type.js: line 132, col 30, 'L' is not defined.
+components/instrument-type.js: line 133, col 30, 'L' is not defined.
+components/instrument-type.js: line 134, col 30, 'L' is not defined.
+components/instrument-type.js: line 135, col 30, 'L' is not defined.
+components/instrument-type.js: line 136, col 30, 'L' is not defined.
+components/instrument-type.js: line 103, col 17, 'size' is not defined.
+components/instrument-type.js: line 144, col 32, 'size' is not defined.
+components/instrument-type.js: line 146, col 32, 'size' is not defined.
+components/instrument-type.js: line 155, col 31, 'size' is not defined.
+components/instrument-type.js: line 155, col 48, 'size' is not defined.
+components/instrument-type.js: line 163, col 31, 'size' is not defined.
+components/instrument-type.js: line 163, col 49, 'size' is not defined.
+components/instrument-type.js: line 171, col 31, 'size' is not defined.
+components/instrument-type.js: line 104, col 17, 'fret' is not defined.
+components/instrument-type.js: line 106, col 17, 'fret' is not defined.
+components/instrument-type.js: line 110, col 17, 'fret' is not defined.
+
+32 errors
+
+components/l-measure.js: line 26, col 13, 'f' is defined but never used.
+components/l-measure.js: line 26, col 11, 'e' is defined but never used.
+
+2 errors
+
+components/measure-bar.js: line 14, col 26, '$' is not defined.
+
+1 error
+
+components/play-bar.js: line 20, col 17, Expected '{' and instead saw 'Ember'.
+
+1 error
+
+components/rgb-pallet.js: line 12, col 6, '$' is not defined.
+components/rgb-pallet.js: line 18, col 13, '$' is not defined.
+components/rgb-pallet.js: line 19, col 13, '$' is not defined.
+components/rgb-pallet.js: line 26, col 5, '$' is not defined.
+
+4 errors
+
+components/select-range.js: line 6, col 15, 'list' is defined but never used.
+components/select-range.js: line 6, col 13, '_' is defined but never used.
+
+2 errors
+
+controllers/inventory.js: line 27, col 17, 'selection' is defined but never used.
+controllers/inventory.js: line 33, col 17, 'selection' is defined but never used.
+controllers/inventory.js: line 6, col 23, 'Firebase' is not defined.
+controllers/inventory.js: line 7, col 21, 'chords' is not defined.
+
+4 errors
+
+controllers/song.js: line 48, col 21, 'g' is defined but never used.
+controllers/song.js: line 48, col 19, 'f' is defined but never used.
+controllers/song.js: line 48, col 17, 'e' is defined but never used.
+controllers/song.js: line 132, col 25, 'self' is defined but never used.
+controllers/song.js: line 139, col 35, 'y' is defined but never used.
+controllers/song.js: line 139, col 33, 'x' is defined but never used.
+controllers/song.js: line 139, col 31, 'e' is defined but never used.
+controllers/song.js: line 178, col 25, 'test' is defined but never used.
+controllers/song.js: line 81, col 21, 'sub' is not defined.
+controllers/song.js: line 90, col 17, 'debug' is not defined.
+controllers/song.js: line 92, col 30, 'debug' is not defined.
+controllers/song.js: line 93, col 71, 'debug' is not defined.
+controllers/song.js: line 117, col 33, 'Firebase' is not defined.
+controllers/song.js: line 117, col 46, 'base' is not defined.
+controllers/song.js: line 184, col 25, 'blues' is not defined.
+
+15 errors
+
+helpers/max-height.js: line 4, col 20, '$' is not defined.
+
+1 error
+
+helpers/property-me.js: line 3, col 34, 'controller' is defined but never used.
+
+1 error
+
+helpers/type-of.js: line 4, col 13, 'value' is already defined.
+helpers/type-of.js: line 3, col 30, 'controller' is defined but never used.
+
+2 errors
+
+initializers/firebase-init.js: line 43, col 68, 'err' is defined but never used.
+initializers/firebase-init.js: line 12, col 26, 'thi$' is not defined.
+initializers/firebase-init.js: line 24, col 26, '$' is not defined.
+initializers/firebase-init.js: line 43, col 24, '$' is not defined.
+
+4 errors
+
+mixins/play.js: line 43, col 13, '_this' is defined but never used.
+mixins/play.js: line 59, col 13, 'phrase' is already defined.
+mixins/play.js: line 60, col 13, 'beat' is already defined.
+mixins/play.js: line 101, col 21, Expected '{' and instead saw 'return'.
+mixins/play.js: line 112, col 13, 'tempChord' is defined but never used.
+mixins/play.js: line 113, col 13, 'index' is defined but never used.
+mixins/play.js: line 49, col 70, 'l' is not defined.
+
+7 errors
+
+mixins/promise-proxy.js: line 12, col 18, 'App' is not defined.
+mixins/promise-proxy.js: line 23, col 14, 'App' is not defined.
+mixins/promise-proxy.js: line 34, col 18, 'App' is not defined.
+mixins/promise-proxy.js: line 47, col 18, 'App' is not defined.
+mixins/promise-proxy.js: line 61, col 14, 'App' is not defined.
+mixins/promise-proxy.js: line 74, col 16, 'App' is not defined.
+mixins/promise-proxy.js: line 3, col 7, 'RsvpE' is defined but never used.
+mixins/promise-proxy.js: line 4, col 7, 'RsvpO' is defined but never used.
+
+8 errors
+
+mixins/selected.js: line 20, col 39, 'f' is defined but never used.
+mixins/selected.js: line 48, col 19, 'measurePart' is not defined.
+
+2 errors
+
+mixins/tone-object.js: line 9, col 17, 'ac' is defined but never used.
+mixins/tone-object.js: line 28, col 25, 'ctx' is defined but never used.
+mixins/tone-object.js: line 81, col 17, 'offset' is already defined.
+
+3 errors
+
+mixins/tuning.js: line 27, col 21, 'r' is defined but never used.
+mixins/tuning.js: line 27, col 19, 'v' is defined but never used.
+mixins/tuning.js: line 27, col 17, '_' is defined but never used.
+mixins/tuning.js: line 99, col 20, '_this' is not defined.
+
+4 errors
+
+mixins/update-methods.js: line 16, col 19, 'proxy' is defined but never used.
+mixins/update-methods.js: line 26, col 25, '_this' is defined but never used.
+mixins/update-methods.js: line 46, col 23, 'e' is defined but never used.
+mixins/update-methods.js: line 61, col 25, 'rawNames' is defined but never used.
+mixins/update-methods.js: line 95, col 31, Unnecessary semicolon.
+mixins/update-methods.js: line 29, col 34, 'App' is not defined.
+mixins/update-methods.js: line 48, col 34, 'App' is not defined.
+
+7 errors
+
+routes/song.js: line 17, col 17, 'panels' is defined but never used.
+routes/song.js: line 2, col 5, 'DEBUG' is defined but never used.
+
+2 errors
+
+[?25h===== 23 JSHint Errors
+
+[?25h[?25hBuilt project successfully. Stored in "dist/".

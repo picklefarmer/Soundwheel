@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-	model:Em.computed({
+	model:Ember.computed({
 		get(){
 			return	Firebase.List.create({
 				ref:chords
@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
 		},
 
 		sendSelection(){
-		   	this.set('selected',Em.copy(this.get('selection')))
+		   	this.set('selected',Ember.copy(this.get('selection')))
 		},
 
 		selector({chord,difference,low}){

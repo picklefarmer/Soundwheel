@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export function typeOf(value,controller) {
-		var value = Em.typeOf(value),
+		var value = Ember.typeOf(value),
         component = "";
 
 				switch(value){

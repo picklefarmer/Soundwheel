@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
 
-/*	measure:Em.computed('index','content.@each.notes',{
+/*	measure:Ember.computed('index','content.@each.notes',{
 		get(){
 			console.log(  'measure ' ) 
 			return this.objectAt(this.get('index'))
@@ -11,7 +11,7 @@ export default Ember.Mixin.create({
 */
 	measureLength:0,
 
-	hex:Em.computed('measure.notes.[]',{
+	hex:Ember.computed('measure.notes.[]',{
 		get(){
 			console.log('hex init') 
 			let notes = this.get('measure.notes');
@@ -50,14 +50,14 @@ export default Ember.Mixin.create({
 	  },
 
 
-		lyrics:Em.computed('measure',{
+		lyrics:Ember.computed('measure',{
 			get(){
 				this.get('measure.lyric')
 			},
 			set(_,I,II){
 				console.log(I,II)
 				if(I){
-					Em.run.throttle(this,'updator',I,12)
+					Ember.run.throttle(this,'updator',I,12)
 					// 		this.set('measure.lyric',I)
 				}
 				return this.get('measure.lyric')
@@ -69,7 +69,7 @@ export default Ember.Mixin.create({
 			this.set('measure.lyric',I)
 		},
 /*
-		index:Em.computed('content.[]',{
+		index:Ember.computed('content.[]',{
 			get(){
 				console.log( 'null index of proxy ' ) 
 				return 0
@@ -80,7 +80,7 @@ export default Ember.Mixin.create({
 					b = this.get('length')-1
 				}
 				_ = b%this.get('length') || 0;
-				Em.run(this,'playNotes',_ ) 
+				Ember.run(this,'playNotes',_ ) 
 
 				return _
 			}

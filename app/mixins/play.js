@@ -9,14 +9,14 @@ export default Ember.Mixin.create({
 				if(typeof chord === 'object'){
 					return chord.map((e,part) => { 
 						if(e){
-							return  Em.run(this,'_simple',
+							return  Ember.run(this,'_simple',
 										   x,y,offset,
 										   scale,note,
 										   string,e,part)
 						}
 				  	})
 			  	}else if(chord){
-					return  Em.run(this,'_simple',
+					return  Ember.run(this,'_simple',
 								   x,y,offset,
 								   scale,note,
 								   string,chord)
@@ -32,7 +32,7 @@ export default Ember.Mixin.create({
 
 	 _simple(x,y,offset,scale,note,string,chord,part){
         
-		Em.run(note.objectAt(string),'play',chord,part || 0)
+		Ember.run(note.objectAt(string),'play',chord,part || 0)
 
         return [offset+(chord*x)+scale/2,
                 offset/2+(y*string)+scale/2
@@ -42,7 +42,7 @@ export default Ember.Mixin.create({
 	_method(notes,scale,rate,ctx,time){
     	var _this = this;
 
-        Em.run.later( () => {
+        Ember.run.later( () => {
         	window.requestAnimationFrame(()=>{  
         		ctx.beginPath()
                 notes.map(([fret,string]) => {
@@ -59,7 +59,7 @@ export default Ember.Mixin.create({
     	var phrase = phrase || this.get('song.selected.measureLength')+1,
         	beat = beat || this.get('song.beat'),
         	notes = [];
-			//  add Em.later , add tempChord=> clearRect
+			//  add Ember.later , add tempChord=> clearRect
 	        //rate = ~~(tempo/measureLength);
 
 	    if( beat < phrase){
@@ -82,8 +82,8 @@ export default Ember.Mixin.create({
                       `
                         phrase:`,phrase)
 
-	    	Em.run(this,'_method',notes,scale,rate,ctx,beat) 
-    		Em.run.later(this,'method',chord,scale,0,ctx,++beat,phrase,rate)
+	    	Ember.run(this,'_method',notes,scale,rate,ctx,beat) 
+    		Ember.run.later(this,'method',chord,scale,0,ctx,++beat,phrase,rate)
 
 		}else{
 
@@ -92,7 +92,7 @@ export default Ember.Mixin.create({
     	}
   },
 
-	playNotes(index){
+	playNotes(_index){
 
     	var chord =  this.get('measure');
 
@@ -110,7 +110,7 @@ export default Ember.Mixin.create({
         	scale = 36,
         	note = this.get('tones'),
         	tempChord = this.get('cacheNotes'),
-        	index = index || ~~this.get('song.selected.index').toString(),
+        	index = _index || ~~this.get('song.selected.index').toString(),
         	ctx =  this.get('options.frontView');
         	rate = ~~(tempo/2)-1;
 
@@ -120,9 +120,9 @@ export default Ember.Mixin.create({
 		
     	note.setEach('ctx.gain.value',0.1)
 
-	    chord = Em.run(this,'simple',x,y,offset,scale,note)
+	    chord = Ember.run(this,'simple',x,y,offset,scale,note)
           
-	     Em.run(this,'method',chord,scale,rate,ctx)
+	     Ember.run(this,'method',chord,scale,rate,ctx)
 	},
 
 
@@ -141,9 +141,9 @@ export default Ember.Mixin.create({
  chord.forEach((notes,string)=>{
 	if(typeof notes[0] === 'object'){
 	  notes.forEach( (part,time) => { if(part) 
-	  Em.run(this,'_method',part,scale,rate,ctx,time) })
+	  Ember.run(this,'_method',part,scale,rate,ctx,time) })
 	}else{ 
-	  Em.run(this,'_method',notes,scale,rate,ctx) }
+	  Ember.run(this,'_method',notes,scale,rate,ctx) }
 })
  */
 
@@ -163,7 +163,7 @@ r  |4|    [177,277]
 /*
 chord = chord.map((e,f) => { 
    if(e){
-     Em.run(note.objectAt(f),'play',e,+("0."+f))
+     Ember.run(note.objectAt(f),'play',e,+("0."+f))
         return  [ offset+(e*x)+scale/2,
         offset/2+(y*f)+scale/2
                ]
@@ -177,7 +177,7 @@ this.set('song.cacheNotes',chord)
 
 /* 
 for(var l = 0; l <rate; l++){	
-	Em.run.later(this,(l)=>{
+	Ember.run.later(this,(l)=>{
     	window.requestAnimationFrame(()=>{
     		tempChord.map(([fret,string]) => ctx.clearRect(fret-scale/2,string-scale/2,scale,scale))
       		if(this.get('song.selected.index') === index){

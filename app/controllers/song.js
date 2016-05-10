@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
       //		console.log('songController, INIT') 
     	},
 
-		songs:Em.computed({
+		songs:Ember.computed({
 			get(){
         	    var one = localStorage
 				console.log ( one , "LOCAL STORAGE") 
@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
 			}
 		}),
 
-		onLine:Em.computed({
+		onLine:Ember.computed({
 			get(){
 				return false
 			},
@@ -24,27 +24,27 @@ export default Ember.Controller.extend({
 			}
 		}),
 
-		songNames:Em.computed('songs',{
+		songNames:Ember.computed('songs',{
 			  get(){
 				return this.get('songs').names
 				//return this.get('songs').names
 			}
 		}),
                 
-		editScore:Em.computed({
+		editScore:Ember.computed({
 				get(){
-					return Em.A([[]])
+					return Ember.A([[]])
 				}
 		}),		
 
-		editIndex:Em.computed({
+		editIndex:Ember.computed({
 			set(a,b){
 				if(b < 0){b = this.get('editScore').length-1}
 				return b%this.get('editScore').length ||0
 			}
 		}),
 
-		lyric:Em.computed("editScore","editIndex",{
+		lyric:Ember.computed("editScore","editIndex",{
 			get(e,f,g){
 				//	console.log(e,f,g)
 				var base  = this.get('editScore.'+this.get('editIndex'))
@@ -56,7 +56,7 @@ export default Ember.Controller.extend({
 			}
 		}),
 
-		play:Em.computed({
+		play:Ember.computed({
 			set(i,ii){
 				console.log(ii,i, "play+prop" ) 
 				if(	ii[1] ){ return ii}
@@ -87,7 +87,7 @@ export default Ember.Controller.extend({
 						},
 				captureChord(){
 					console.log ( 'capture chord' ) 
-				debug  =  Em.copy(this.get('editScore').objectAt(this.get('editIndex'))).map(e=>e[0]||'')
+				debug  =  Ember.copy(this.get('editScore').objectAt(this.get('editIndex'))).map(e=>e[0]||'')
 				
 				console.log( debug) 
 					this.get('controllers.inventory.model').addObject(debug) 
@@ -117,7 +117,7 @@ export default Ember.Controller.extend({
 								Firebase.set(base.child(name),this.get('editScore'))
 									this.send('ride',"edit",this.get('model.y'))
 //									this.toggleProperty('state')
-									Em.run.later(()=>{
+									Ember.run.later(()=>{
 	//									this.toggleProperty('state')
 									},3000)
 								}
@@ -130,7 +130,7 @@ export default Ember.Controller.extend({
 						}
 					}
 					var self = this; 
-					Em.run.later(function(){
+					Ember.run.later(function(){
 //							self.toggleProperty('state')
 					},3000)
 

@@ -1,13 +1,13 @@
 import Ember from 'ember';
 
-const RsvpE = Em.ArrayProxy.extend(Em.PromiseProxyMixin);
-const RsvpO = Em.ObjectProxy.extend(Em.PromiseProxyMixin);
+const RsvpE = Ember.ArrayProxy.extend(Ember.PromiseProxyMixin);
+const RsvpO = Ember.ObjectProxy.extend(Ember.PromiseProxyMixin);
 
 export default Ember.Mixin.create({
 
     promise(method){
-      var promise = new Em.RSVP.Promise((res,rej) =>{
-              Em.run(this,this.get('content.' + method  ),res,rej)
+      var promise = new Ember.RSVP.Promise((res,rej) =>{
+              Ember.run(this,this.get('content.' + method  ),res,rej)
           })
           return App.RsvpE.create({promise})
     }, 
@@ -15,9 +15,9 @@ export default Ember.Mixin.create({
     promiseAsObject(method){
       console.log ( 'promise as object' , method)
 
-      var promise = new Em.RSVP.Promise((res,rej)=>{
+      var promise = new Ember.RSVP.Promise((res,rej)=>{
       
-        Em.run(this,this.get('content.' + method),res,rej)
+        Ember.run(this,this.get('content.' + method),res,rej)
       })
 
       return App.RsvpO.create({promise})
@@ -27,8 +27,8 @@ export default Ember.Mixin.create({
       
       console.log(method,"debug")
       var context = this.get('auth.uid') ? "firebase" : "local";
-      var promise = new Em.RSVP.Promise((res,rej)=>{
-              Em.run(this,this.get( context+"."+method    ) ,res  ,rej) 
+      var promise = new Ember.RSVP.Promise((res,rej)=>{
+              Ember.run(this,this.get( context+"."+method    ) ,res  ,rej) 
           });
       console.log(method,"debug _ 2")
           return App.RsvpO.create({promise})
@@ -39,8 +39,8 @@ export default Ember.Mixin.create({
       console.log(method,"debug")
       var context = this.get('auth.uid') ? "firebase" : "local";
       console.log ( context, method, "new")
-      var promise = new Em.RSVP.Promise((res,rej)=>{
-              Em.run(this,this.get( context+"."+method    ) ,res  ,rej) 
+      var promise = new Ember.RSVP.Promise((res,rej)=>{
+              Ember.run(this,this.get( context+"."+method    ) ,res  ,rej) 
           });
       console.log(method,"debug _ 2")
 
@@ -51,10 +51,10 @@ export default Ember.Mixin.create({
 
       console.log( ' selection ',selection )
 
-			var promise = new Em.RSVP.Promise((res,rej) =>{
+			var promise = new Ember.RSVP.Promise((res,rej) =>{
 			console.log('content object local/firebase', this.get('content'), method)
 
-      	Em.run(this,this.get('content' )
+      	Ember.run(this,this.get('content' )
            .get(  method  ),res,rej,selection)
       })
 
@@ -66,8 +66,8 @@ export default Ember.Mixin.create({
 
       console.log( ' selection object',selection )
 
-      var promise = new Em.RSVP.Promise((res,rej) =>{
-             Em.run(this, this.get( 'local.' + method ),
+      var promise = new Ember.RSVP.Promise((res,rej) =>{
+             Ember.run(this, this.get( 'local.' + method ),
                           res,  rej,  selection )
           });
 

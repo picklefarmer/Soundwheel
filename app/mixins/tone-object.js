@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-		toneObject:Em.Object.extend({
+		toneObject:Ember.Object.extend({
 		init(){
 			var MV   = this.get('masterVolume'),
 				tone = this.get('tone'),
@@ -10,14 +10,14 @@ export default Ember.Mixin.create({
 
 			console.log('tone init')
 		//  this.get('instruments.selected')
-		//  Em.run(this,"instrumentObserver")
+		//  Ember.run(this,"instrumentObserver")
 			this.get('tone').start(0)
 			tone.connect(ctx)
 			ctx.gain.value = 0.166
 			ctx.connect(MV)
 		},
 
-	    instrument:Em.computed('instruments.selected',{
+	    instrument:Ember.computed('instruments.selected',{
 			get(){     
 				console.log('tone init_instrumentObserver')
 
@@ -60,13 +60,13 @@ export default Ember.Mixin.create({
       return this.get('freqs').objectAt(tone)
     }.property('freqs'),
   */  
-     	ctx:Em.computed('ac',{
+     	ctx:Ember.computed('ac',{
 			get(){
       			return this.get('ac').createGain()
 			}
 		}),
 
-    	tone:Em.computed('ac',{
+    	tone:Ember.computed('ac',{
 			get(){
 				return this.get('ac').createOscillator()
 			}
@@ -96,7 +96,7 @@ export default Ember.Mixin.create({
       	this.get('ctx').gain.exponentialRampToValueAtTime(0.001,this.get('ctx').context.currentTime)
     	},
 
-	    volume:Em.computed({
+	    volume:Ember.computed({
 			set(value){
   				this.get('ctx').gain.value = value;
 			}

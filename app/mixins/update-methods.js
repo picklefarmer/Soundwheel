@@ -2,11 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
 
-    firebase:Em.inject.service(),
-    local:Em.inject.service(),
-    auth:Em.inject.service(),
+    firebase:Ember.inject.service(),
+    local:Ember.inject.service(),
+    auth:Ember.inject.service(),
 
-    instrument:Em.computed({
+    instrument:Ember.computed({
 		get(){
 			return false
 		},
@@ -19,7 +19,7 @@ export default Ember.Mixin.create({
 		}
 		}),
 
-		main:Em.computed('auth.uid',{
+		main:Ember.computed('auth.uid',{
 			get(_){
 				console.log(this, this.get('promiseWithContextAsObject'),_,'main error')
 				let proxy = this.promiseWithContextAsObject(_),
@@ -32,7 +32,7 @@ export default Ember.Mixin.create({
 		}
 		}),
 
-    selected:Em.computed('onLine',{
+    selected:Ember.computed('onLine',{
     	get(){
         	return null
       	},
@@ -51,7 +51,7 @@ export default Ember.Mixin.create({
 			}
 		}),
  
-    instrumentNames:Em.computed('auth.uid',{
+    instrumentNames:Ember.computed('auth.uid',{
 
     	get(_){
 			console.log( ' instrument Names in mixin' ) 
@@ -60,14 +60,14 @@ export default Ember.Mixin.create({
 
         	proxy.then((rawNames)=>{
           		proxy.reopen({
-            		filtered:Em.computed('@each.enabled',{
+            		filtered:Ember.computed('@each.enabled',{
 						get(){
               			return this.filterBy('enabled').getEach('name')
 						}
 					}),
             		update(hash){
                			console.log( ' got content observe ' )  
-               			Em.run(  _this.get('firebase'),
+               			Ember.run(  _this.get('firebase'),
 							  	 "updateInstruments",
 							   	 hash  )
             		}
@@ -78,14 +78,14 @@ export default Ember.Mixin.create({
 	}),
 
 
-    options:Em.computed('auth.uid',{
+    options:Ember.computed('auth.uid',{
       get(_){
         console.log ( 'getting the options object' ) 
         return this.promiseWithContext(_)
       }
     }),
 
-    panels:Em.computed('auth.id',{
+    panels:Ember.computed('auth.id',{
       get(_){
         console.log ( 'getting the panels object' ) 
         var promise = this.promiseWithContext(_),
@@ -102,7 +102,7 @@ export default Ember.Mixin.create({
                             "bottom"],
                   update(hash){
                     console.log( ' got content observe ' )  
-                    Em.run( _this.get('firebase'),
+                    Ember.run( _this.get('firebase'),
                             "updateOptions",
                             hash )
                    }
@@ -113,7 +113,7 @@ export default Ember.Mixin.create({
         }
     }), 
 
-	chords:Em.computed('onLine',{
+	chords:Ember.computed('onLine',{
 		get(_){
 			var promise = this.promise(_),
 				_this = this;
@@ -122,7 +122,7 @@ export default Ember.Mixin.create({
 					promise.reopen({
 						update(hash){
 							console.log( ' got chords observe ',_this,_this.get('content'))
-							Em.run ( _this.get('content'), 'updateChords', hash)
+							Ember.run ( _this.get('content'), 'updateChords', hash)
 
 					  	}
 					})
@@ -131,7 +131,7 @@ export default Ember.Mixin.create({
 		}
 	}),
   
-  names:Em.computed('onLine',{
+  names:Ember.computed('onLine',{
 		get(_){
       		return this.promise(_)
 		}

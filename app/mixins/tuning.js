@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
     
-		list:Em.computed('@each.enabled','@each.options',{
+		list:Ember.computed('@each.enabled','@each.options',{
 			get(){
 				var objArray = [];
 				var content = this.get('content');
@@ -20,7 +20,7 @@ export default Ember.Mixin.create({
 		stringsArr:[4,5,6],
 		fretsArr:[16,24,26],
 		tuningArr:['a','A','b','c','C','d','D','e','f','F','g','G'],
-		strings:Em.computed( 'content.tuning.options','content.strings.options',{
+		strings:Ember.computed( 'content.tuning.options','content.strings.options',{
 			get(){
 				return 6
 			},
@@ -59,7 +59,7 @@ export default Ember.Mixin.create({
 			}
 		}),
 
-		intervals:Em.computed('content.tuning.options',{
+		intervals:Ember.computed('content.tuning.options',{
 			get(){
 				console.log( ' init intervals ' ) ;
 				let notes     = this.get('tuningArr'),
@@ -96,7 +96,7 @@ export default Ember.Mixin.create({
 
 	update(hash,path){
 		console.log( ' got main observe ' )  
-		Em.run( _this.get('firebase'),
+		Ember.run( _this.get('firebase'),
 			  "updateMain",
 			 hash ,path)
 	}
