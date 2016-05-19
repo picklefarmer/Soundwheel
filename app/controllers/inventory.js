@@ -1,13 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+	/*
 	model:Ember.computed({
 		get(){
 			return	Firebase.List.create({
 				ref:chords
 			})
 		}
-	}),
+	}),*/
+
 	selected:[],
 	selectionBinding:"controllers.song.selection",
 	differenceBinding:"controllers.song.difference",

@@ -3,6 +3,8 @@ import Ember from 'ember';
 var debug, debug2;
 
 export default Ember.Component.extend({
+
+  song:Ember.inject.service(),
   tagName:"ul",
   classNames:['sidebar','chordBank'],
 
@@ -12,11 +14,9 @@ export default Ember.Component.extend({
 		}
 	}),
 
-    song:Ember.inject.service(),
 	selectedBinding:"song.chordSelected",
 	selectionBinding:"song.chordSelection",
 	differenceBinding:"song.chordDifference",
-    needs:"song",
 	lowBinding:"song.chordLow",
 	isEditingBinding:"song.chordEditFlag",
 	actions:{
@@ -88,8 +88,9 @@ export default Ember.Component.extend({
 				this.setProperties({selection:selection,
 							   	   	difference:difference.length,
 							   	   	low:low})
-                if(isEditing)
+                if(isEditing){
                     this.send('sendSelection')
+								}
 			}
 		},
 		toggleSelected(string,fret){

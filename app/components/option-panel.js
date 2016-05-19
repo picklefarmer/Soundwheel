@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-tagName:"ul",
+  song:Ember.inject.service(),
+  tagName:"ul",
   classNames:["nav","sidebar"],
   options:Ember.inject.service(),
    actions:{

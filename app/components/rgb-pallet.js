@@ -9,21 +9,21 @@ export default Ember.Component.extend({
 
     console.log('init rgb pallet',color,index)
 
-     $(this.get('element')).colpick({
+     Ember.$(this.get('element')).colpick({
     	colorScheme:'light',
     	layout:'rgbhex',
     	color:color,
     	onSubmit:(hsb,hex,rgb,el)=> {
             
-	    	$(el).css('background-color', '#'+hex);
-	    	$(el).colpickHide();
+	    	Ember.$(el).css('background-color', '#'+hex);
+	    	Ember.$(el).colpickHide();
             console.log('hex Submit')
             this.sendAction('action',hex,this.get('name'))
     	}
     }).css('background-color', '#'+color)
   },   
   willDestroyElement(){
-    $('.colpick').remove()
+    Ember.$('.colpick').remove()
   }
 
 });

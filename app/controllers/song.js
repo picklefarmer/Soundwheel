@@ -1,6 +1,8 @@
 import Ember from 'ember';
+var debug;
 
 export default Ember.Controller.extend({
+    song:Ember.inject.service(),
 		needs:'inventory',
    		init:function(){
       //		console.log('songController, INIT') 
@@ -8,9 +10,9 @@ export default Ember.Controller.extend({
 
 		songs:Ember.computed({
 			get(){
-        	    var one = localStorage
-				console.log ( one , "LOCAL STORAGE") 
-				return one
+        	var one = localStorage;
+					console.log ( one , "LOCAL STORAGE") 
+					return one
 			}
 		}),
 
@@ -76,9 +78,10 @@ export default Ember.Controller.extend({
 				
 				check:function(value){
 				
-					var y = this.get('model.y')
-					var x = this.get('model.x')
-					sub = this.get('direction')
+					var y = this.get('model.y'),
+							x = this.get('model.x'),
+							sub = this.get('direction');
+
 						//	x += sub
 						y[x] = value
 						this.set('model.y',y)

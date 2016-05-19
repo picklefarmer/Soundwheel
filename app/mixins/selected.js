@@ -2,13 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
 
-/*	measure:Ember.computed('index','content.@each.notes',{
+	measure:Ember.computed('index','content.@each.notes',{
 		get(){
 			console.log(  'measure ' ) 
 			return this.objectAt(this.get('index'))
 		}
 	}),
-*/
+
 	measureLength:0,
 
 	hex:Ember.computed('measure.notes.[]',{
@@ -43,12 +43,12 @@ export default Ember.Mixin.create({
 			return array
 	  }
 	  }),
-	 
+	 	/*
 	  update(){
-		return (+(measurePart.reduce((a,b)=> ~~a +""+ ~~b ))).toString(16)
+				return (+(measurePart.reduce((a,b)=> ~~a +""+ ~~b ))).toString(16)
 			
 	  },
-
+		*/
 
 		lyrics:Ember.computed('measure',{
 			get(){
@@ -68,7 +68,7 @@ export default Ember.Mixin.create({
 			console.log(I,J,K,"ASDF")
 			this.set('measure.lyric',I)
 		},
-/*
+
 		index:Ember.computed('content.[]',{
 			get(){
 				console.log( 'null index of proxy ' ) 
@@ -80,11 +80,13 @@ export default Ember.Mixin.create({
 					b = this.get('length')-1
 				}
 				_ = b%this.get('length') || 0;
+
+				console.log( ' pre ' ) 
 				Ember.run(this,'playNotes',_ ) 
 
 				return _
 			}
 		})
 
-*/
+
 })

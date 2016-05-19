@@ -1,0 +1,41 @@
+---------------------------
+|		Key 									|
+|			| mixin							|
+|			\ service						|
+|			- property mixin		|
+|			+ controller				|
+---------------------------
+
+
+
+Song Controller
+	\	song (Ƒ)
+		\	webaudio
+			| tone-object
+			\ instruments
+				\ song *
+			\ song *
+		\	tones
+			\ webaudio *
+			\ song *
+		|	updateMethods
+			-	selected
+			- tuning
+			\	local 
+			\ firebase 
+			\	auth
+			| promiseProxy 
+		|	play 
+
+(Ƒ)ObjectProxy,	content either local | firebase 
+
+Fret-Board Component
+	| play
+	\ options
+		\ song *
+	\	tones
+	\	globalKeydown
+	
+Instrument-Type Component
+	\ song
+	\ options	

@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 	tagName:"table",
 	classNameBindings:["isEditing"],
 	isEditing:false,
-	chordNotes:Ember.computed.filter('chord',function(e){if(e)return true}),
+	chordNotes:Ember.computed.filter('chord',function(e){if(e){return true}}),
 	low:Ember.computed.min('chordNotes'),
 	high:Ember.computed.max('chordNotes'),
 

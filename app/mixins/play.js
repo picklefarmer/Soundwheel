@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
 
 	simple(x,y,offset,scale,note){
+		console.log('debug --- starting', x, y, offset, scale, note, this.get('song.selected'))
 		var hex = this.get('song.selected.hex');
 			console.log( hex, 'fretboard hex reference' ) 
 		let	measure = hex.map((chord,string) => {
@@ -40,7 +41,7 @@ export default Ember.Mixin.create({
 	},
 	
 	_method(notes,scale,rate,ctx,time){
-    	var _this = this;
+    	var _this = this,l;
 
         Ember.run.later( () => {
         	window.requestAnimationFrame(()=>{  
@@ -96,9 +97,11 @@ export default Ember.Mixin.create({
 
     	var chord =  this.get('measure');
 
-//    	console.log(this.get('song.selected.measure'),chord,"log of measure")
+    	console.log(this.get('song.selected.measure'),chord,"log of measure")
 
-      	if(!chord)return
+      	if(!chord){
+					return
+				}
 
       	chord = chord.notes
 

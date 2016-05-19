@@ -9,7 +9,7 @@ export default Ember.Mixin.create({
       var promise = new Ember.RSVP.Promise((res,rej) =>{
               Ember.run(this,this.get('content.' + method  ),res,rej)
           })
-          return App.RsvpE.create({promise})
+          return RsvpE.create({promise})
     }, 
 
     promiseAsObject(method){
@@ -20,7 +20,7 @@ export default Ember.Mixin.create({
         Ember.run(this,this.get('content.' + method),res,rej)
       })
 
-      return App.RsvpO.create({promise})
+      return RsvpO.create({promise})
     },    
      
     promiseWithContextAsObject(method){
@@ -31,20 +31,20 @@ export default Ember.Mixin.create({
               Ember.run(this,this.get( context+"."+method    ) ,res  ,rej) 
           });
       console.log(method,"debug _ 2")
-          return App.RsvpO.create({promise})
+          return RsvpO.create({promise})
     },
 
     promiseWithContext(method){
       
       console.log(method,"debug")
       var context = this.get('auth.uid') ? "firebase" : "local";
-      console.log ( context, method, "new")
+      console.log ( this.get('local'),context, method, "new")
       var promise = new Ember.RSVP.Promise((res,rej)=>{
               Ember.run(this,this.get( context+"."+method    ) ,res  ,rej) 
           });
       console.log(method,"debug _ 2")
 
-          return App.RsvpE.create({promise})
+          return RsvpE.create({promise})
     },
 
     promiseWithSelection(method,selection){
@@ -58,7 +58,7 @@ export default Ember.Mixin.create({
            .get(  method  ),res,rej,selection)
       })
 
-      return App.RsvpE.create({promise,selection});
+      return RsvpE.create({promise,selection});
 
     }, 
 
@@ -71,7 +71,7 @@ export default Ember.Mixin.create({
                           res,  rej,  selection )
           });
 
-        return App.RsvpO.create({promise,selection});
+        return RsvpO.create({promise,selection});
 
     }
 })

@@ -1,6 +1,11 @@
 import Ember from 'ember';
+/* main property */
+import Tuning from '../mixins/tuning';
+/* selected property */
+import Selected from '../mixins/selected';
+import PromiseProxy from '../mixins/promise-proxy'; 
 
-export default Ember.Mixin.create({
+export default Ember.Mixin.create(PromiseProxy,{
 
     firebase:Ember.inject.service(),
     local:Ember.inject.service(),
@@ -26,7 +31,7 @@ export default Ember.Mixin.create({
 						_this = this;
 
       	proxy.then(()=>{//		  		if(this.get('auth.uid')){
-					proxy.reopen(App.Tuning)
+					proxy.reopen(Tuning)
 					})
 				return proxy
 		}
@@ -45,7 +50,7 @@ export default Ember.Mixin.create({
 
     	  proxy.then((e)=>{
 					console.log( ' prozy returned / then ... ' ) 
-					proxy.reopen(App.Selected)
+					proxy.reopen(Selected)
 				})
 					return proxy
 			}

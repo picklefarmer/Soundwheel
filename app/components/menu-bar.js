@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 //	classNameBindings:['col-lg-12'],
 //    settings:Em.inject.service(),
+  song:Ember.inject.service(),
 	menubar:"menubar",
 	barVisible:true,
 	sidebar:"sidebar",

@@ -2,6 +2,7 @@ import Ember from 'ember';
 import play from '../mixins/play';
 
 export default Ember.Component.extend(play,{
+  options:Ember.inject.service(),
 
  	tones:Ember.inject.service(),  
 	globalKeydown:Ember.inject.service(),	
@@ -12,15 +13,15 @@ export default Ember.Component.extend(play,{
 
 	chordTemp:[],
 	tempChord:[],
-	volume:.25,
+	volume:	0.25,
 
 	didInsertElement(){
    	this.get('tones.strings')
-		$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
+		Ember.$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
 	},
 
 	willDestroyElement(){
-    	$(document).off('keydown')
+    	Ember.$(document).off('keydown')
   },
 
 	pushNote(e){
@@ -38,7 +39,7 @@ export default Ember.Component.extend(play,{
     	var arr = this.get('song.chordSelection'),
         	[x,y] = [this.get('cacheX'),this.get('cacheY')],
         	low = this.get('song.chordLow'),
-        	diffX = ~~((this.get('song.chordDifference')/2) -.5),
+        	diffX = ~~((this.get('song.chordDifference')/2) -0.5),
 			diffY = ~~(arr.length/2),
      		theArr = arr.map(e => e - low + x - diffX),
         	measure = this.get('song.selected.measure.notes');
@@ -76,7 +77,7 @@ export default Ember.Component.extend(play,{
 			this.setProperties({cacheX:x,cacheY:y }) 
 
 			console.log(x,y,"cache",arr)	
-			let diffX = ~~((this.get('song.chordDifference')/2) -.5),
+			let diffX = ~~((this.get('song.chordDifference')/2) -0.5),
 				diffY = ~~(arr.length/2);
 				
 			arr = arr.map((fret,string)=>{
@@ -105,7 +106,7 @@ export default Ember.Component.extend(play,{
     	chordTemp.map(([fret,string]) => ctx.clearRect(fret+scale/2,string,scale,scale+offset))
         
         ctx.globalCompositeOperation = "source-over"
-		ctx.globalAlpha=.5
+		ctx.globalAlpha=	0.5
 		ctx.fillStyle = "white" 
 		
 		for(var [x,y] of chord){
@@ -172,9 +173,9 @@ export default Ember.Component.extend(play,{
 
 	    if(proxy){
     		this.addObserver('song.selected.measure.notes.@each',this.playNotes) 
-      		Ember.run.next(()=>{console.log( `play switch ${true}` , this.get('song.selected.measure'))})
+      		Ember.run.next(()=>{console.log( `play switch Ember.${true}` , this.get('song.selected.measure'))})
     	}else if(!proxy){
-    		console.log( `play switch ${false}` ) 
+    		console.log( `play switch Ember.${false}` ) 
       		this.removeObserver('song.selected.measure.notes.@each',this.playNotes) 
     	}
 

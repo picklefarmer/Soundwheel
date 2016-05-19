@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+    song:Ember.inject.service(),
     classNames:["scroll","sidebar"],
     tagName:"ul",
 
@@ -11,7 +12,7 @@ export default Ember.Component.extend({
 	dims:Ember.computed('width',{
 		get(){
 
-	    	let height = $(document).height(),
+	    	let height = Ember.$(document).height(),
     			width =  (this.get('width') || 1)* ~~(height/18) +"px";
 
     		console.log( height, width) 

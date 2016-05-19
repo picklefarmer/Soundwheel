@@ -89,18 +89,19 @@ export default Ember.Component.extend({
     	set(a,ctx){
         	//frets number
         	//heighti
-        	let b = ctx || this.get('ctx')
+        	let b = ctx || this.get('ctx');
 /*		    console.log(b,this.get('song.main.frets.options'),`the song 
       														   . main .
 												                frets `)
 															   */
+
 			var frets   = this.get('song.main.frets.options') || 24,
 	            height  = this.get('height'),
     	        width = this.get('width'),
-    	        color = ("#" + this.get('color.background'))
+    	        color = ("#" + this.get('color.background')),
     	        dots = 2,
     	        L = 775,
-				size = Math.ceil(1600/24),
+							size = Math.ceil(1600/24),
 	            fret = new Image();
 
 				fret.src = "images/fret.jpg";
@@ -109,9 +110,9 @@ export default Ember.Component.extend({
 
 				fret.onload = function(){
 					b.fillStyle = color; //"#012";
-			    	//b.fillRect(0,0,1600,300);
-		    		b.fillRect(0,0,width,height);
-					b.globalAlpha = .65;	
+		    	//b.fillRect(0,0,1600,300);
+	    		b.fillRect(0,0,width,height);
+					b.globalAlpha = 0.65;	
 					b.save()
 					b.translate(0,height)
 					b.scale(1, -1)

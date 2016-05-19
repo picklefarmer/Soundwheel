@@ -19,5 +19,7 @@ module.exports = function(defaults) {
 	app.import(bower_dir + 'jquery-colpick/js/colpick.js')
 	app.import(bower_dir + 'jquery-colpick/css/colpick.css')
 
+	app.import(bower_dir + 'firebase/firebase-debug.js')
+
   return app.toTree();
 };

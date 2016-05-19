@@ -93,12 +93,12 @@ export default Ember.Mixin.create({
 				return intervals
 			}
 	}),
-
+/*
 	update(hash,path){
 		console.log( ' got main observe ' )  
 		Ember.run( _this.get('firebase'),
 			  "updateMain",
 			 hash ,path)
 	}
-
+*/
 });

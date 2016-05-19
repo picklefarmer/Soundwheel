@@ -1,15 +1,14 @@
 import Ember from 'ember';
 
 export function initialize(App) {
-
 		//default . routes
-		
+	/*	
    App.register('login:side',Ember.Object.extend({
         song:Ember.inject.service(),
         menuBar:Ember.computed({
 					get(){
           		return this.get('song.options')
-          		return thi$.getJSON("./json/routes.json")
+          		//return thi$.getJSON("./json/routes.json")
 					}
 				})
    }));
@@ -21,11 +20,11 @@ export function initialize(App) {
         menuBar:Ember.computed({
 			get(){
           		return this.get('song.options')
-          		return $.getJSON("./json/routesAuth.json")
+          		//return $.getJSON("./json/routesAuth.json")
 			}
 		})
    }));
-
+*/
 	//default . config
     
   App.register('settings:side',Ember.Object.extend({
@@ -40,7 +39,7 @@ export function initialize(App) {
 		data:Ember.computed({
 			get(){
 				return this.get('song.panels')
-				return $.getJSON('./json/panelsAuth.json',function(err){});
+				//return $.getJSON('./json/panelsAuth.json',function(err){});
 			}
 		})
    }));   
