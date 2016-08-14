@@ -1,0 +1,301 @@
+Components
+
+	fret-board
+
+		pushNote
+		pushChord
+		chordHover
+		dotChord
+		clear
+		mouse:
+			click
+			mouseLeave
+		//playSwitch
+
+	instrument-type
+
+		color
+		height
+		width
+		style
+			
+		frontView
+		centerView
+		backView
+
+	play-bar
+		
+		back
+		stepLeft
+		stepRight
+		play
+
+	chord-dash
+		
+		*model
+		
+		bindings:
+			selected
+			selection
+			difference
+			low
+			isEditing
+
+		actions:
+			saveSelection
+			updateSelection
+			chordCapture
+			newSelection
+			deleteSelection
+			editSelection
+			
+			sendSelection
+			selector
+			toggleSelected
+			
+			appendToSelectedCol
+			appendToSelected		
+
+	log-in
+			
+			actions:
+				logout
+				login
+
+	options-panel
+			
+			actions:
+				actionHandler (pan handler)
+
+Controllers
+	
+	song
+
+		songs
+		onLine
+		songNames
+		editScore
+		editIndex
+		lyric
+		play
+		----
+		tempo
+		clear
+		isCleared
+		isFaded
+			
+		actions:
+			
+			play
+			check
+			save
+			load
+			line
+			clear
+			cleared
+			faded
+			type
+			songRead
+		
+Routes
+	
+	song
+
+		model	
+
+		actions:
+			
+			ride
+
+	user	
+		
+		actions
+			
+			login
+			logout
+
+Services
+
+	auth
+		
+		base
+		uid
+		user
+		userNew
+		userNewCheck
+		login
+		logout
+
+	firebase
+			
+		//instrument
+		instrumentNames
+		main
+		panels
+		options
+		updateChords
+		updateInstruments
+		updateMain
+		updateOptions
+		selected
+		update
+		chords
+		names
+
+	local
+		
+		instrument
+		instrumentNames
+		main
+		panels
+		options
+		updateChords
+		updateInstruments
+		updateMain
+		updateOptions
+		selected
+		update
+		chords
+		names
+	
+	globalKeyDown
+		
+		begin
+
+	instruments
+		
+		selected
+	
+	options
+		
+		clear
+		save
+
+		actionNames: ( actionHandler ) 
+			new
+			save
+			onLine
+			clear
+			isFaded
+			isCleared
+			noteType
+	
+	song
+		
+		content
+		
+		onLine
+		meter
+		bpm
+		tempo
+		pause
+		beat
+		cacheNotes
+		clock
+		index
+		measure
+		volume
+		chordSelection
+	
+	tones
+		
+		init
+
+		isLeft,	_isLeft
+		tuning
+		strings
+		update
+
+	webaudio
+
+		tone
+		tempo
+		masterVolume
+		ac
+
+Mixins
+
+	play
+		
+		simple, _simple
+		method, _method
+		playNotes
+		
+	promise-proxy
+		
+		promise
+		promiseAsObject
+		promiseWithContext
+		promiseWithContextAsObject
+		promiseWithSelection
+		promiseWithSelectionAsObject
+
+	selected
+		
+		measure
+		measureLength
+		hex * 
+		lyrics
+		index
+	
+	tone-object
+		
+		init
+		
+		instrument
+		//freq
+		ctx
+		tone
+		play
+		pause
+		volume
+		
+	tuning
+		
+		list
+		stringsArr
+		fretsArr
+		tuningArr
+		strings
+		intervals
+		
+	update-methods
+		
+		instrument
+		main
+		selected
+		instrumentNames
+		options
+		panels
+		chords
+		names
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,6 @@
+
+li
+  div: =song.chordEditFlag
 if chordEdit
   if isEditing
     li

@@ -5,7 +5,8 @@ export default Ember.Component.extend({
   tagName:"ul",
   classNames:["nav","sidebar"],
   options:Ember.inject.service(),
-   actions:{
+
+  actions:{
     instrument(a){
       console.log('instrument selection',a)
     },
@@ -14,6 +15,7 @@ export default Ember.Component.extend({
       Ember.run(this.get('options'),name)
     }  
   },		
+
 	didInsertElement:function(){
 	this.set('controller.belly',Ember.Binding.from("parentView.controller.belly").to("controller.belly")) 
 	//this.set('controller.state',Ember.Binding.from("parentView.controller.state").to("controller.state")) 

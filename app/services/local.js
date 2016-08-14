@@ -4,6 +4,7 @@ export default Ember.Service.extend({
 	init(){
 		console.log('init local')
 	},
+			
   instrument(res,rej,selection){
     console.log( ' instrument content' , selection)
     if(selection === "default"){
@@ -87,15 +88,15 @@ export default Ember.Service.extend({
         }) 
   },
 
-  options(res,rej){
-    console.log(  ' options get  ' ) 
+  routes(res,rej){
+    console.log(  ' routes get ' ) 
       Ember.$.getJSON("./json/routesDefault.json")
         .then(om => { console.log(om, "local options: routes");res(om) })
   },
 
   selected(res,rej,selection){
     var om;
-
+console.log(selection,'local and selected')
     if(localStorage.songs){
       om = JSON.parse(JSON.parse(localStorage.songs)[selection])
       res(om)
@@ -151,21 +152,66 @@ export default Ember.Service.extend({
     console.log(  'chords saved to local storage' ) 
   }, 
   update(value){
-    console.log('updating',value.length,this)
+  
+	//console.log('updating',value.length,this)
+		
+    let measure = this.get('selected.measure.notes'),
+				isBeat 	= this.get('isBeat'),
+				beat		= this.get('beat');
+			
+		if(isBeat){
 
-    var content = this.get('selected.measure.notes')
+			envelopBeat.call(this,value)
+			console.log(`
+											all aboard
+										 	the beat
+										 	train`,measure)
+			
+		}else{
 
       if(value.length === 6){
         console.log(6,value) 
-        content.replace(0,6,value)
+        measure.replace(0,6,value)
         console.log("end",this)
       }else{
         let [fret,string] = value;
         console.log(string,fret,this) 
-        content.replace(string,1,fret)
+        measure.replace(string,1,fret)
       }
+		}
   
   }
-
-
 });
+
+var envelopBeat = function(update){
+
+		let measure = this.get('selected.measure.notes'),
+				beat    = this.get('beat');
+
+		if(update.length){
+
+			let score = measure.map(
+				function(string,n){
+
+					if(string.length){//if string isArray
+						string[beat] = update[n]
+
+					}else{
+
+						string = []
+						string[beat] = update[n]
+
+					}
+
+					return string
+				});
+			console.log(score, `this is the
+										 	result of the map`)	
+			measure.replace(0,6,score)
+			//measure[arguments.length]
+		}else{
+			//let [fret,string];
+			//measure.replace(string,1,fret)
+//				
+		}
+}

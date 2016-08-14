@@ -45,7 +45,7 @@ export default Ember.Component.extend({
 
 		},
 
-        newSelection({chord:notes,high,difference,low}={}){
+     newSelection({chord:notes,high,difference,low}={}){
 
           console.log("pre-model",this.get('model'))
             notes = notes || Ember.A([1,1,1,1]);
@@ -62,15 +62,17 @@ export default Ember.Component.extend({
 
 		editSelected(){
 				this.toggleProperty('isEditing')
+        console.log(' is edit chord', this.get('selected'),this.get('selection'))
         		this.send('sendSelection')
 		},
 
 		sendSelection(){
-              this.set('selected',Ember.copy(this.get('selection')))
+       this.set('selected',Ember.copy(this.get('selection')))
+         console.log('selected from edit dash',this.get('selected'))
 		},
 
 		selector({chord:selection,difference,low}){
-//			console.log ("action selector",chord)
+			console.log ("action selector",selection)
           var isEditing = this.get('isEditing')
 			if(this.get('selection')===selection){
                 if(isEditing){

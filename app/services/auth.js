@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+
     /* init(){
 				console.log( 'init auth') 
         var base = new Firebase('http://acroeven.firebaseio.com/music');
@@ -8,24 +9,29 @@ export default Ember.Service.extend({
 
      },*/
 
-     base: new Firebase('http://acroeven.firebaseio.com/music'),
+//     base: new Firebase('http://acroeven.firebaseio.com/music'),
+		base:null,
 
-     uid:Ember.computed('base',{
-       get(){
-						console.log( ' check if user is logged in  ' ) 
+     uid:Ember.computed('base',function(){
+				var uid = null;
+				if(this.get('base')){
+			 		let  uid = this.get('base').getAuth();
 
-        var uid = this.get('base').getAuth()
-            console.log ( this.get('base') )
+				 //console.log( ' check if user is logged in  ' ) 
+
+         console.log ( uid , 'uid' )
+
             uid = uid ? uid.uid : null
-            
+				}
             return uid 
-       }
      }),
 
      user:Ember.computed('uid',{
        get(){
-       var user = this.get('uid')
-        return this.get('base').child(user)
+					if(this.get('base')){
+						let user = this.get('uid')
+      		  return this.get('base').child(user)
+					}
        }
      }),
 

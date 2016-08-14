@@ -8,9 +8,13 @@ export default Ember.Component.extend({
 	rows:Ember.computed({
 		set(_,rows){
 			console.log(rows) 
-			var om = [];
-
-			om.length = rows.length +2
+			let om = [],
+          count = rows.length+2;
+      while(count){
+        om.push(0)
+        count--
+      }
+		//	om.length = rows.length +2
 			return om
 		}
 	}),

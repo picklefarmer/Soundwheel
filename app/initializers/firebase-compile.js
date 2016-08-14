@@ -1,11 +1,13 @@
 export function initialize(App) {
-        //  mix each one of these out //
-//        App.inject('component:menu-bar',    'song',   'service:song')
-//       App.inject('component:tool-bar',    'song',   'service:song')
+
         App.inject('component:pa-nels',     'song',   'service:song')
         App.inject('component:selection-panel', 'song',   'service:song')
         App.inject('component:index-panel', 'song',   'service:song')
-        //chord dash
+
+         //  mix each one of these out //
+//        App.inject('component:menu-bar',    'song',   'service:song')
+//       App.inject('component:tool-bar',    'song',   'service:song')
+       //chord dash
 /*
 
 //      App.inject('component:option-panel' ,'song',   'service:song')

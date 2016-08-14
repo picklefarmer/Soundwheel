@@ -1,5 +1,18 @@
 import Ember from 'ember';
 
+
+var	isBeatCheck = function(direction){
+
+		if(this.get('song.isBeat')){
+			this[direction]('song.beat')
+		}else{
+			this[direction]('song.selected.index')
+      Ember.run(this.get('song'),this.get('song.playMatrix.audio'))
+		}
+
+}
+
+
 export default Ember.Service.extend({
 
 	begin(e){
@@ -14,19 +27,19 @@ export default Ember.Service.extend({
 
 			switch(e.keyCode){
 
-					case 37:this.decrementProperty('song.selected.index');
+					case 37:isBeatCheck.call(this,'decrementProperty');
 									break;
 
 					case 38:this.toggleProperty('song.pause');
+									Ember.run(this.get('song'),'clock',0)
 									console.log('play',this.get('song.pause'))
 									break;
 
-					case 39:this.incrementProperty('song.selected.index');
+					case 39:isBeatCheck.call(this,'incrementProperty');
 									break;
 
-					case 40:this.toggleProperty('pause');
-									Ember.run(this,'play',"decrementProperty");
-									this.set('controller.direction',1);
+					case 40:this.toggleProperty('song.isBeat');
+									console.log( ' drill down ' )
 									break;
 
 					case 32:Ember.run(this,"playNotes");

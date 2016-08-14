@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import SetIndex from '../mixins/functions/index';
+import hexCrunch from '../mixins/functions/hexcrunch';
 
 export default Ember.Mixin.create({
 
@@ -16,30 +18,13 @@ export default Ember.Mixin.create({
 			console.log('hex init') 
 			let notes = this.get('measure.notes');
 			console.log(' hex notes' , notes ) 	
-			let count = 0,
-				array = notes.map( (e,f) =>  {
-				  if(typeof e === 'object'){
-					 var hex = "0x"+e.shift(),
-						 notes = e,
-						 length = 0,
-						 output = [];
-						
-					while(hex>>=1){
-				   //   console.log(hex%2);
-						output[length++] = hex%2 ?
-						notes.shift():null;
-					}
+			
+			let array = notes.map(hexCrunch,this);
 
-					count = length>count?length:count;
-				
-					return output  
-				  }else{
-					return e
-				 }
-				});
-
-			this.set('measureLength',count)
-
+			console.log( 'count', this.get('count'),this.get('measureLength'))
+			this.set('measureLength',this.get('count'))
+			this.set('count',0)
+			
 			return array
 	  }
 	  }),
@@ -55,12 +40,17 @@ export default Ember.Mixin.create({
 				this.get('measure.lyric')
 			},
 			set(_,I,II){
-				console.log(I,II)
+
+				console.log(I,II,`assigning
+												lyric`)
+				return I
+								/*
 				if(I){
 					Ember.run.throttle(this,'updator',I,12)
 					// 		this.set('measure.lyric',I)
 				}
 				return this.get('measure.lyric')
+				*/
 			}
 		}),
 
@@ -69,24 +59,30 @@ export default Ember.Mixin.create({
 			this.set('measure.lyric',I)
 		},
 
-		index:Ember.computed('content.[]',{
+
+  index:Ember.computed('content.[]',{
 			get(){
-				console.log( 'null index of proxy ' ) 
+				console.log(this,SetIndex, 'set index')
+				console.log( 'get index of proxy ' ) 
 				return 0
 			},
-			set(_,b){
+
+			set:SetIndex
+							
+		/*
+		 * (_,b){
 				console.log(this,b,"index of proxy")
+				/*
 				if(b < 0){
 					b = this.get('length')-1
 				}
 				_ = b%this.get('length') || 0;
 
 				console.log( ' pre ' ) 
-				Ember.run(this,'playNotes',_ ) 
+				Ember.run(this,'playnotes',_ ) 
 
 				return _
 			}
+		*/
 		})
-
-
 })

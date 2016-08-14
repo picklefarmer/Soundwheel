@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 			this.sendAction('action',string,fret)
 		},
 		appendToSelectedCol(string,fret){
-			console.log ('appendToSelectedCol',string, fret) 
+//			console.log ('appendToSelectedCol',string, fret) 
 			this.sendAction('appendToSelectedCol',string,fret) 
 		}	
 	}

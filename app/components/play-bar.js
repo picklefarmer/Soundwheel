@@ -3,6 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   song:Ember.inject.service(),
 actions:{
+  loop(){
+    this.toggleProperty('song.isLoop')
+  },
 	back(){
 		console.log( 'debug ' ) 
         this.song.debug()

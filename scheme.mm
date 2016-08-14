@@ -1,0 +1,12 @@
+<map version="0.9.0">
+<!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
+<node CREATED="1463878403334" ID="ID_748270828" MODIFIED="1463878568413" TEXT="store">
+<node CREATED="1463878490650" ID="ID_188887791" MODIFIED="1463878659314" POSITION="right" TEXT="notes">
+<node CREATED="1463878532997" ID="ID_568230265" MODIFIED="1463878656838" TEXT="play control">
+<arrowlink DESTINATION="ID_51413004" ENDARROW="Default" ENDINCLINATION="-1;75;" ID="Arrow_ID_214501175" STARTARROW="None" STARTINCLINATION="-1;91;"/>
+<node CREATED="1463878538902" ID="ID_672728910" MODIFIED="1463878543024" TEXT="fret board"/>
+</node>
+</node>
+<node CREATED="1463878582915" ID="ID_51413004" MODIFIED="1463878635801" POSITION="right" TEXT="audio"/>
+</node>
+</map>

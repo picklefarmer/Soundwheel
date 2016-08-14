@@ -3,6 +3,7 @@ import play from '../mixins/play';
 
 export default Ember.Component.extend(play,{
   options:Ember.inject.service(),
+	song:Ember.inject.service(),
 
  	tones:Ember.inject.service(),  
 	globalKeydown:Ember.inject.service(),	
@@ -28,7 +29,10 @@ export default Ember.Component.extend(play,{
 		var f = Ember.run(this,"mouseFormat",e),
 			measure = this.get('song.measure');
 
-        console.log('this is firing')
+        console.log('this is firing',measure,this.get('song'))
+				console.log( measure,`
+												${this.get('song.measure')}
+												${this.set('song.measure.notes.'+f[1],f[0])}`)
 
 		Ember.run(this.get('song'),this.get('song.selected.unhex'),f)
 		Ember.run(this.get('song'),this.get('song.content.update'),f)
@@ -40,8 +44,9 @@ export default Ember.Component.extend(play,{
         	[x,y] = [this.get('cacheX'),this.get('cacheY')],
         	low = this.get('song.chordLow'),
         	diffX = ~~((this.get('song.chordDifference')/2) -0.5),
-			diffY = ~~(arr.length/2),
-     		theArr = arr.map(e => e - low + x - diffX),
+					diffY = ~~(arr.length/2),
+    	 		theArr = arr.map(e => e - low + x - diffX),
+					stringNum = 6,//this.get('song.options')
         	measure = this.get('song.selected.measure.notes');
 
 	    while(y--){
@@ -50,7 +55,7 @@ export default Ember.Component.extend(play,{
 	    while(diffY--){
 	      theArr.shift()
 	    }
-	    while(theArr.length < 6){
+	    while(theArr.length < stringNum){
 	      theArr.push(0)
 	    }
 
@@ -58,11 +63,11 @@ export default Ember.Component.extend(play,{
 
 	    console.log(theArr.toString(),measure)
 
-	    theArr = theArr.map( ( e , f ) => e ? e : ( measure[f] || 0 )) 
+	    //theArr = theArr.map( ( e , f ) => e ? e : ( measure[f] || 0 )) 
 
 	    console.log(theArr.toString(),measure)
 
-	    console.log('is firing')
+	    console.log('is firing',arr)
 
 	    Ember.run( this.get('song') ,this.get('song.content.update'),  theArr  )
 

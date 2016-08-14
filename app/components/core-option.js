@@ -4,11 +4,11 @@ export default Ember.Component.extend({
 //	classNames:['platformer'],
 		//
 	tagName:"span",
-	layout:Ember.computed({
+/*	layout:Ember.computed({
 		get(){
 			return Ember.Handlebars.compile("<button {{action 'click' name }} >{{name}}</button>")
 		}
-	}),
+	}),*/
 
 	colors:Ember.computed('value',{
 		get(){

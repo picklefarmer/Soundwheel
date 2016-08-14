@@ -29,6 +29,8 @@ export default Ember.ArrayProxy.reopenClass({
 
     _init:true,
 	init(){
+			let song = this.get('song');
+
       console.log(`
                   tone object created
                   `)
@@ -39,6 +41,9 @@ export default Ember.ArrayProxy.reopenClass({
                              this.get('webaudio'))
 
        this.set('content', Ember.A(strings))
+			 console.log(' after tones init' )
+
+			 Ember.run.next(this.get('song'),'clock', 'working from tones service')
     },
 
 	strings:Ember.computed('song.main.intervals',{
@@ -119,12 +124,12 @@ export default Ember.ArrayProxy.reopenClass({
 			if(this.get('_init')){
 				console.log('initializing tuning')
 				this.set('_init',false)
-				return arrays //strings
+				return arrays.reverse() //strings
 			}else{ 
 				console.log('updating tuning',this.get('_isLeft'))
-				if (this.get('isLeft')) {
+				if (this.get('isLeft') === true) {
 					arrays = arrays.reverse()
-				}
+			}
 
 				this.get('content').forEach( (e,f) => {
 					e.set('freqs',arrays[f])

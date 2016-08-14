@@ -12,32 +12,33 @@ li
       select-me selection=song.instrument content=song.instrumentNames.filtered
     else
       select-me something
-
-/li
+li
+  span are we live?
+  div: =song.isOnline
+    
+li
   div
-    input type="range" min=".01"  max="6" step=".1" value=options.song.volume
-    input type="text"  value=options.song.volume
+    =input type="range" min=".01"  max="6" step=".1" value=options.song.volume
+    =text-me value=(mut options.song.volume)
     span Volume
 
-/li
+li
   div
-    input type="range" min="264"  max="2000" value=options.song.bpm
-    input type="text"  value=options.song.meter
+    =input type="range" min="2264"  max="4000" value=song.bpm
+    =text-me value=(mut song.meter)
     span Tempo
 
-/li
-  textarea value=song.selected.selection
+li
+  div: =span-me value=(mut song.selected.selection) rows=1 cols=10
 
-/each options.actionNames as |com|
+each options.actionNames as |com|
   with com.name as |name|
     li
-      |<div class="{{if com.class com.class 'blank'}}">
-      component com.type name=name id=name ctrl=this click=actionHandler
+      div class="{{if com.class com.class 'blank'}}"
+        component com.type name=name id=name ctrl=this click=actionHandler
         label-for for=name
-      |</div>
       if com.class
         span.navlabel: =name
-
 /li
   div
     switch-option value=model.x

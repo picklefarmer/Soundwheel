@@ -21,10 +21,13 @@ export default Ember.Component.extend({
 			var leng = [],
         	    length =  Math.abs(this.get('low') - this.get('high'))+1;
 
-            console.log(length)
+            console.log('length of difference',length)
 
-            leng.length = length
-
+            while(length-- > 0){
+              leng.push(0)
+            }
+//            leng.length = length
+console.log('lenght array of dirrence',leng)
 			return leng
 		}
 	}),
@@ -46,12 +49,12 @@ export default Ember.Component.extend({
 		},
 
 		appendToSelectedCol(string,fret){
-			console.log ('appendToSelectedCol',string, fret) 
+			console.log ('appendToSelectedCol','string:',string,'fret', fret) 
 			this.get('higher').send('appendToSelectedCol',string,fret,this.get('low')) 
 		},
 
 		appendToSelected(string,fret){
-			console.log ('appendToSelected',string, fret) 
+			console.log ('appendToSelected',"string:",string,"fret:", fret) 
 			this.get('higher').send('appendToSelected',string,fret,this.get('low')) 
 		}
 	}

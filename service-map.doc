@@ -21,8 +21,10 @@ Song Controller
 		|	updateMethods
 			-	selected
 			- tuning
-			\	local 
+			\	local
+				\	auth 
 			\ firebase 
+				\ auth
 			\	auth
 			| promiseProxy 
 		|	play 

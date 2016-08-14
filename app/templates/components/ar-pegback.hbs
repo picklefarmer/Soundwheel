@@ -1,9 +1,0 @@
-{{#each read as |line index|}}
-	{{#if template}}
-		{{#a-note action="toggle" rod=rod line=line}} 
-			{{yield}}
-		{{/a-note}}
-	{{else}}
-		{{a-note rod=rod line=line}}
-	{{/if}}
-{{/each}}	

@@ -10,8 +10,10 @@
 @mixin fullBar($pos){
 	#{$pos}:0px;
 	position:absolute;
+	text-align:center;
 	background:#aaa;
 	@if ($pos == top) or ($pos == bottom) {
+		left:0px;
 		@if ($pos == top){
 			position:relative;
 		}
@@ -49,6 +51,18 @@
 		border-#{$opposite}:6px solid #ddd;
 		//background-image: url('/images/#{$animal}.png');
   	}
+}
+.middleFull {
+	text-align:center;
+}
+.toolbar{
+	overflow-y:hidden;
+	height:100%;
+}
+
+.backGround{
+	position:absolute;
+	bottom:0px;
 }
 
 .color-box {

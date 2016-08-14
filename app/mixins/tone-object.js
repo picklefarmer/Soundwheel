@@ -1,8 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
+
 		toneObject:Ember.Object.extend({
+
 		init(){
+
 			var MV   = this.get('masterVolume'),
 				tone = this.get('tone'),
 				ctx  = this.get('ctx'),
@@ -17,13 +20,17 @@ export default Ember.Mixin.create({
 			ctx.connect(MV)
 		},
 
-	    instrument:Ember.computed('instruments.selected',{
-			get(){     
-				console.log('tone init_instrumentObserver')
+    instrument:Ember.computed('instruments.selected',{
 
+			get(){     
+			
+				console.log('tone init_instrumentObserver')
+		
 				var instrument = this.get('instruments.selected');
 
+
 				if(instrument){
+
 					let tone = this.get('tone'),
 						ctx = this.get('ctx'),
 						ac = this.get('ac'),
@@ -33,24 +40,32 @@ export default Ember.Mixin.create({
 					if( typeof instrument === "object"){
 				  
 						I =  instrument;
-				  		W =  ac.createPeriodicWave(  I.real, I.imag)
+				  	W =  ac.createPeriodicWave(  I.real, I.imag);
+						
+						console.log(I,"tone object map")
 
-				  		console.log(I,"tone object map")
-
-				  		tone.setPeriodicWave(W);
+				  	tone.setPeriodicWave(W);
 
 					}else if(typeof instrument === "string"){
-				  		W	= ac.createPeriodicWave(new Float32Array([0.0,0.0]),
-						   							new Float32Array([1.0,1.0]));
-				  		tone.setPeriodicWave(W)
-				 	 	console.log('default') 
+				  	
+						W	= ac.createPeriodicWave(
+							new Float32Array([0.0,0.0]),
+							new Float32Array([1.0,1.0])
+						)
+				  	
+						tone.setPeriodicWave(W)
+				 	 		console.log('default') 
 					}
+
 					return tone
-			  	}else{
+			  	
+				}else{
 					
 					return this.get('tone')
 				} 
+
 			}
+
 		}),
 
 
@@ -60,35 +75,48 @@ export default Ember.Mixin.create({
       return this.get('freqs').objectAt(tone)
     }.property('freqs'),
   */  
-     	ctx:Ember.computed('ac',{
+   	ctx:Ember.computed('ac',{
 			get(){
-      			return this.get('ac').createGain()
+     			return this.get('ac').createGain()
 			}
 		}),
-
-    	tone:Ember.computed('ac',{
+		
+		tone:Ember.computed('ac',{
 			get(){
 				return this.get('ac').createOscillator()
 			}
 		}),
 
-	    play(tone,offset){
+    play(tone,stanza){
+
+			console.log( ' post _simple check' ) 
 
 			var ctx   = this.get('ctx'),
-				instrument = this.get('instrument'),
-				tempo = this.get('song.tempo'),
-				freq  = this.get('freqs').objectAt(tone),
-				offset= offset || 0,
-				currentTime = ctx.context.currentTime + offset;
+					instrument = this.get('instrument'),
+					tempo = this.get('song.tempo')/1000,
+					//tempo = this.get('song.tempo'),
 
-		  	console.log(tone,offset,"play")
+					freq  = this.get('freqs').objectAt(tone),
+					offset= tempo/8,
 
-		  	//ctx.gain.exponentialRampToValueAtTime(0.166,currentTime+tempo/16000)
-		  	ctx.gain.setTargetAtTime(0.166,currentTime+tempo/16000,0.15)
-		  	//ramp(0.166,currentTime+tempo/16000)
+					envelope = offset,//(Math.E/2),//  Math.PI/Math.E))/2,
+					endTime = (stanza?stanza/tempo:tempo)-offset,
+					currentTime = ctx.context.currentTime;
+
+		  	console.log(tone,endTime,"play")
+
+		  	ctx.gain.setTargetAtTime(0.166,currentTime, envelope)
 		  	instrument.frequency.setValueAtTime(freq,currentTime)
-		  	ctx.gain.exponentialRampToValueAtTime(0.001,currentTime+tempo/2000)
-		  	//ctx.gain.exponentialRampToValueAtTime(0.001,currentTime+tempo/2000)
+
+		  	ctx.gain.setTargetAtTime(0.001,currentTime + endTime,envelope)
+		  	//ramp(0.166,currentTime+tempo/16000)
+				//
+		  	//ctx.gain.exponentialRampToValueAtTime(0.001,currentTime)
+		  	//ctx.gain.setTargetAtTime(0.001,currentTime + tempo,0.15)
+	
+		  	//ctx.gain.exponentialRampToValueAtTime(0.166,currentTime+tempo/16000)
+				//
+		  	//ctx.gain.setTargetAtTime(0.166,currentTime+tempo/16000,0.15)
     	},
 
 	    pause(){

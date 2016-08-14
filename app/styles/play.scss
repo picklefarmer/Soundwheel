@@ -1,3 +1,12 @@
+@mixin fontFix($deg) {
+		$transforms: rotate($deg+deg);
+		-moz-transform: $transforms;
+	  -o-transform: $transforms;
+		-ms-transform: $transforms;
+		-webkit-transform: $transforms;
+		transform: $transforms;
+}
+
 @mixin topBot($height,$width,$direction){
 	width: 0; 
 	height: 0; 
@@ -19,7 +28,7 @@
 .playGroup{
 	margin-left:40%;
 	margin-right:40%;
-	padding:3px;
+	//padding:3px;
 	border:6px #777 groove;
 	border-radius:6px;
 }
@@ -29,32 +38,79 @@
 	position:relative;
 }
 
+.loopbtn{
+		display:block;
+		position:absolute;
+		bottom:0px;
+		right:0px;
+		@include topBot(80,86,right)
+}
+
+.light-square{
+	display:block;
+	left:0px;
+	@include topBot(80,86,right);
+	border-right-color: blue;
+
+	&:before{
+		@include fontFix(-45)
+		background:#bcc;
+		width:200px;
+		height:60px;
+		position:absolute;
+		content:"";
+		right:0px;	
+	};
+	&:before{
+		@include fontFix(-45)
+		background:red;
+		width:200px;
+		height:20px;
+		position:absolute;
+		content:"";
+		right:0px;	
+	};
+	&:after{
+		content:"";
+		display:block;
+		position:absolute;
+		bottom:0px;
+		right:0px;
+		@include topBot(80,86,right)
+	}
+
+}
 .arrow-play {
+	
 	@include topBot(38,56,left);
-	left: 15px;
+	left: 19px;
 	&:before{
 		@include boxRow(right,76,22,-38,64)
 
 	}
 }
-.arrow-back {
-	@include topBot(38,52,right);
-}
 
 .arrow-left {
-	@include topBot(32,48,right);	
-	margin-left:-3px;
+	@include topBot(36,54,right);	
+	left:0px;
+	top:72px;
+	margin-left:12px;
 	&:before{
 		@include boxRow(left);
 	}
 }
 
 .arrow-right {
-	@include topBot(32,48,left);
-	margin-right:-3px;
+	@include topBot(36,54,left);
+	left:0px;
+	bottom:70px;
+	margin-right:12px;
 	&:before{
 		@include boxRow(right);
 	}	
 }
 
 
+.arrow-back {
+	@include topBot(40,52,right);
+}

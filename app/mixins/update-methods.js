@@ -83,7 +83,7 @@ export default Ember.Mixin.create(PromiseProxy,{
 	}),
 
 
-    options:Ember.computed('auth.uid',{
+    routes:Ember.computed('auth.uid',{
       get(_){
         console.log ( 'getting the options object' ) 
         return this.promiseWithContext(_)

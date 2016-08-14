@@ -1,0 +1,9 @@
+song
+	fret-board
+		instrument-type
+	tool-bar
+		option-panel
+		measure-bar
+		chord-dash
+		play-bar
+		lyrics-pane

@@ -1,18 +1,13 @@
 import Ember from 'ember';
 import Play from '../mixins/play';
 import UpdateMethods from '../mixins/update-methods';
+import pulse from './functions/pulse';
+import beatIndex from '../mixins/functions/beat';
 
-export default Ember.ObjectProxy.reopenClass({
-
-  isServiceFactory:true
+export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 }).extend(UpdateMethods,Play,{
 
-	init(){
-		console.log('init song')
-	},
-  webaudio:Ember.inject.service(),
-	tones:Ember.inject.service(),
-
+  onLine:false,
   content:Ember.computed('onLine',{
 		get(){
 			var online = this.get('onLine')?"firebase":"local";
@@ -20,23 +15,41 @@ export default Ember.ObjectProxy.reopenClass({
 		}
 	}),
    
-    onLine:false,
   
+    	init(){
+		console.log('init song')
+		Ember.run(this,'clock','args from init')
+	},
+
+  webaudio:Ember.inject.service(),
+	tones:Ember.inject.service(),
+	options:Ember.inject.service(),
+
+  chordEditFlag:false,
+
+	isPulse:true,
+
+		stanza:Ember.computed('tempo',{
+			get(){
+				return this.get('tempo')/this.get('division')
+			}
+		}),
+  
+    bpm:2264,
+    
     meter:Ember.computed('tempo',{
-		get(){
-			return ~~((60/(this.get('tempo')))*1000) 
-		}
-	}),
-  
-    bpm:320,
-  
+		  get(){
+		  	return ~~((60/(this.get('tempo')))*1000) 
+		  } 
+	  }),
+
     tempo:Ember.computed('bpm',{
-		get(){
-			return 2264 - this.get('bpm')
-		}
-	}),
+		  get(){
+		  	return 4264 - this.get('bpm')
+		  }
+  	}),
  /*
-  	playNotes
+  	playMatrix
   		tempo,
 		tones,
 		cacheNotes,
@@ -46,41 +59,33 @@ export default Ember.ObjectProxy.reopenClass({
   	
   */ 
     pause:false,
-    beat:0,  
+		division:8,
     cacheNotes:[[]],
-  
-    clock(){
-		if(this.pause){ 
-           this.incrementProperty('selected.index')
+
+    beat:Ember.computed({
+      get(){ console.log( 'get beat'); return 0},
+      set:beatIndex
+    }),
+
+    pulse,
+
+    clock(args){
+			console.log(args,this.pause)
+			if(this.pause){
+					if(!args){
+            if(!this.get('isLoop')){  
+          	  this.incrementProperty('selected.index')
+            }
+					}
+					//	console.log(this.get('playMatrix'),"playMAtrix")
+					if(this.get('isBeat')){
+						Ember.run(this,'pulse',0)
+					}else{
+					 	Ember.run(this,this.get('playMatrix.audio'))
+					}
            Ember.run.later(this,'clock',this.get('tempo'))   
 		} 
     },
-
-	index:Ember.computed('selected.content.[]',{
-		get(){
-			console.log( 'null index of proxy ' ) 
-			return 0
-		},
-		set(_,b){
-			console.log(this,b,"index of proxy")
-			if(b < 0){
-				b = this.get('selected.content.length')-1
-			}
-			_ = b%this.get('selected.content.length') || 0;
-
-			console.log( ' pre ')
-			Ember.run(this,'playNotes',_ ) 
-
-			return _
-		}
-	}),
-
-	measure:Ember.computed('index','selected.content.@each.notes',{
-		get(){
-			console.log(  'measure ' ) 
-			return this.get('selected').objectAt(this.get('index'))
-		}
-	}),
 
     volume:Ember.computed({
 		get(){
@@ -92,13 +97,14 @@ export default Ember.ObjectProxy.reopenClass({
       		return I 
 		}
 	}),
-
+		//...bring in from options
     chordSelection:Ember.computed({
 		get(){
+      console.log( ' chord Selection from song',false)
 			return null
 		},
 		set(_,I){
-    		console.log(I)
+      console.log( ' chord Selection from song',I)
 		    return I 
 		}
 	}),
