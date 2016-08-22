@@ -31,14 +31,8 @@ li
 li
   div: =span-me value=(mut song.selected.selection) rows=1 cols=10
 
-each options.actionNames as |com|
-  with com.name as |name|
-    li
-      div class="{{if com.class com.class 'blank'}}"
-        component com.type name=name id=name ctrl=this click=actionHandler
-        label-for for=name
-      if com.class
-        span.navlabel: =name
+  =action-names
+
 /li
   div
     switch-option value=model.x

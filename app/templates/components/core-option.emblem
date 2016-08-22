@@ -1,1 +1,1 @@
-button{action 'click' name }: =name
+= yield

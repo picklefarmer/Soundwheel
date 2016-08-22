@@ -83,6 +83,10 @@ export default Ember.Mixin.create(PromiseProxy,{
 	}),
 
 
+		actionNames:Ember.computed('auth.uid',function(_){
+			return this.promiseWithContext(_)
+		}),	
+
     routes:Ember.computed('auth.uid',{
       get(_){
         console.log ( 'getting the options object' ) 
@@ -116,7 +120,7 @@ export default Ember.Mixin.create(PromiseProxy,{
 		}
         return promise
         }
-    }), 
+    }),
 
 	chords:Ember.computed('onLine',{
 		get(_){

@@ -10,11 +10,7 @@ export default Ember.Component.extend({
     instrument(a){
       console.log('instrument selection',a)
     },
-    actionHandler(name){
-      console.log ( 'actionHAndler',name)
-      Ember.run(this.get('options'),name)
-    }  
-  },		
+    },		
 
 	didInsertElement:function(){
 	this.set('controller.belly',Ember.Binding.from("parentView.controller.belly").to("controller.belly")) 

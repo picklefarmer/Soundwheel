@@ -41,9 +41,11 @@ export default Ember.ArrayProxy.reopenClass({
                              this.get('webaudio'))
 
        this.set('content', Ember.A(strings))
+
+			 this.setEach('ctx.gain.value',0.001)
 			 console.log(' after tones init' )
 
-			 Ember.run.next(this.get('song'),'clock', 'working from tones service')
+	//		 Ember.run.next(this.get('song'),'clock', 'working from tones service')
     },
 
 	strings:Ember.computed('song.main.intervals',{
@@ -57,6 +59,7 @@ export default Ember.ArrayProxy.reopenClass({
 				octave  = 0,
 				relativeTone = intervals.shift()+octave || 4,
 				arrays =  [],
+				indexes = [],
 				strings = this.get('song.main.strings.options') || 6,
 				frets   = this.get('song.main.frets.options') || 22,
 				string = 5,
@@ -96,8 +99,8 @@ export default Ember.ArrayProxy.reopenClass({
 				}
 		*/
 				//      should be 6
-
-			arrays = intervals
+			//this.set('song.notesMap',notesMap)
+				arrays = intervals
 						.map( (step,string) => {
 							let start;
 							if(string === 0){
@@ -107,12 +110,15 @@ export default Ember.ArrayProxy.reopenClass({
 									return f< string? a+b : a},
 								relativeTone);
 							}
-
+							indexes.push(start)
 							step  = notesMap.slice(start,start+frets)                 
 							step.unshift(1)
 
 							return step 
-						})
+						});
+
+			this.set('indexes',indexes)
+
 			console.log('arrays',`
 						  `,    
 						  intervals,`

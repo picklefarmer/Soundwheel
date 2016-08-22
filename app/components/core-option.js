@@ -3,7 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 //	classNames:['platformer'],
 		//
-	tagName:"span",
+	tagName:"button",
+  click(){
+    this.sendAction('action',this.get('name'))
+  },
 /*	layout:Ember.computed({
 		get(){
 			return Ember.Handlebars.compile("<button {{action 'click' name }} >{{name}}</button>")
@@ -15,13 +18,5 @@ export default Ember.Component.extend({
 			return ["hi","lo","match"][this.get('value')%this.get('inc')]
 		}
 	}),
-
-	actions:{
-		click(name){
-			console.log( "click" ,name) 
-			//  Ember.run(this.get('options'),name)
-	   	 	this.get('ctrl').send("actionHandler",name)
-		}
-	}	
 
 });

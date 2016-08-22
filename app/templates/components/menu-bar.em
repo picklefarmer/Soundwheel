@@ -1,13 +1,18 @@
 ul class=menubar
-  li{action 'click'} (----------------O)
+  li{action 'click'}
+    h2 (----------------O)
   if barVisible
     if song.routes.isFulfilled
       each song.routes as |page|
-        li{action "forActive" page.name} class="{{page.isActive:round}}"
+        li
           if page.x
-            link-to page.name page.route page.x page.y tagName="div"
+            link-to page.name (concat "isOnline." page.route) isOnline page.y tagName="div"
           else
             link-to page.name page.route tagName="div"
   else
-    | placeHolder
+    if song.selected.isFulfilled
+      li: h2: =song.selected.selection
+      each songOptions as | path |
+        li class="{{if (e-q isActive.option path) hit}}":  link-to path (concat "isOnline.song." path ) isOnline song.selected.selection tagName="div"
+
 

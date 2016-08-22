@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
     song:Ember.inject.service(),
 		needs:'inventory',
    		init:function(){
-      //		console.log('songController, INIT') 
+      		console.log('songController, INIT') 
     	},
 
 		songs:Ember.computed({

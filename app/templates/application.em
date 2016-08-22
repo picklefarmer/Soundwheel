@@ -1,2 +1,2 @@
-menu-bar
+menu-bar currentPath=this.currentPath
 outlet

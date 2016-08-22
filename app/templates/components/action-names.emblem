@@ -1,0 +1,10 @@
+each options.actionNames as |com|
+  if com.enabled
+    with com.name as |name|
+      li
+        div class="{{if com.class com.class 'blank'}}"
+          component com.type action="execute" name=name 
+            =name
+          label-for for=name
+        if com.class
+          span.navlabel: =name

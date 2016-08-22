@@ -1,0 +1,29 @@
+.row
+  .column.large-12.large-centered
+    h2
+      button{action 'toggleSet' 'tab'} tab 
+      button{action 'toggleSet' 'treble'} treble clef
+    if (e-q viewing "tab")
+      .tab-stave  
+        each theSong as |measure|
+          div style="display:inline-block;border:1px black solid;"
+            each measure as |string|
+              div style="border: solid 1px white"
+                each string as |beat|
+                  span
+                    if (e-q beat 0)
+                      |-
+                    else
+                      =beat
+    else
+
+      /clef-pane block=song.tones.indexes  noteMatrix=theSong           
+      each theSong as |part|
+        clef-pane block=song.tones.indexes noteMatrix=part
+
+    /each song.selected as |measure inx|
+      span
+        h4: =inx
+        each measure.notes as |string nmbr|
+          h5: =nmbr
+          span: =string

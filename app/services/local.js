@@ -71,6 +71,14 @@ export default Ember.Service.extend({
 
   },
 
+	actionNames(res,rej){
+		console.log( ' actionNames get ')
+			Ember.$.getJSON("./json/actionNamesDefault.json")
+				.then( e => {
+						res(e)
+				})
+	},
+
   panels(res,rej){
     console.log(  ' panels get  ' ) 
       Ember.$.getJSON("./json/panelsDefault.json")
