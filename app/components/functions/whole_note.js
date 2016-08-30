@@ -1,15 +1,24 @@
 
-export default function(x,y){
-      console.log('whole_note',x,y)
-      let note_width = this.get('note_width'),
+export default function(x,y,z){
+      console.log('whole_note',x,y,this)
+        let ctx = this.get('ctx'),
+            note_width = this.get('note_width');
+			
+/*
+        let note_width = this.get('note_width'),
           measure_width = this.get('measure_width'),
-          measureIndex = this.get('measureIndex'),
-          stave_key    =  this.get('stave_key'),
+          measureIndex = z || this.get('measureIndex'),
+          stave_key    = z? 0: this.get('stave_key'),
           ctx = this.get('ctx');
-
       console.log(note_width,measureIndex,' whole note' )
           y = y * note_width + y - stave_key 
           x = (x * note_width*2) + measureIndex*measure_width + 20;
+
+*/
+          y = y * note_width + y + 5
+          x = x * note_width*2
+
+          console.log(y,x, 'whole note')
           ctx.beginPath()
           ctx.ellipse(x,y,7,4,0,0,Math.PI*2)
           ctx.closePath()

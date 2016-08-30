@@ -10,6 +10,7 @@ ul class=menubar
           else
             link-to page.name page.route tagName="div"
   else
+    /note-type
     if song.selected.isFulfilled
       li: h2: =song.selected.selection
       each songOptions as | path |

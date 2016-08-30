@@ -1,6 +1,10 @@
 export default {
 
 		eigthRest(x,y,ctx){
+			let note_width = this.get('note_width');
+			y = y * note_width + y -4
+			x = x * note_width*2
+						ctx.beginPath()
 						ctx.arc(x,y,2,0,Math.PI*2)
 						ctx.fill()
 						ctx.beginPath()
@@ -12,6 +16,10 @@ export default {
 		},
 			
 		quarterRest(x,y,ctx){
+			let note_width = this.get('note_width');
+			y = y * note_width + y -4
+			x = x * note_width*2
+
 						let offset = -5;
 					 	y+=offset	
 						ctx.beginPath()
@@ -27,6 +35,10 @@ export default {
 						ctx.fill()
 		},
 		halfRest(x,y,ctx){
+			let note_width = this.get('note_width');
+			y = y * note_width + y -4
+			x = x * note_width*2
+
 			ctx.fillRect( x, y, 10, 4);
 		}
 

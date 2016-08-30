@@ -16,14 +16,12 @@
                     else
                       =beat
     else
+      if song.selected.isFulfilled 
+        each theSong as |part|
+          clef-pane [
+            block=song.tones.indexes
+            noteMatrix=part
+            elements=elements
+            graphics=canvas
+            ]
 
-      /clef-pane block=song.tones.indexes  noteMatrix=theSong           
-      each theSong as |part|
-        clef-pane block=song.tones.indexes noteMatrix=part
-
-    /each song.selected as |measure inx|
-      span
-        h4: =inx
-        each measure.notes as |string nmbr|
-          h5: =nmbr
-          span: =string

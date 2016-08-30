@@ -7,23 +7,21 @@ export default function(song){
 		let notes = {};
 		
     measure.forEach( function(string,stringIndex){
-      
-      string.forEach( function(beat,beatIndex){
+			if(typeof string === 'object'){      
+	      string.forEach( function(beat,beatIndex){
 
-        if(typeof notes[beatIndex] !== 'object'){
+  	      if(typeof notes[beatIndex] !== 'object'){
             notes[beatIndex] = []
-        }
+    	    }
 
-				if(beat){
-					let pitch = Pitch.call(this,beat,stringIndex);
-					notes[beatIndex].push(pitch)
-				}
-/*
-v				
-				}
-*/
-      }, this);
-
+					if(beat){
+						let pitch = Pitch.call(this,beat,stringIndex);
+						notes[beatIndex].push(pitch)
+					}
+      	}, this);
+			}else{
+				
+			}
 		},this)
 
 		let noteLength = function(noteTier,noteIndex){

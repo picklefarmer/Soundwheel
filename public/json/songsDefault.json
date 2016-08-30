@@ -1,5 +1,6 @@
 {
-	"promise":true,
-	"golden":true,
-	"showbury":true
+	"promise":false,
+	"golden":false,
+	"showbury":false,
+	"test":	true
 }

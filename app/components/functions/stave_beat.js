@@ -34,13 +34,17 @@ export default function(beatArray,index){
 							beat,
 							isOdd
             ];
-
-            augmentation.apply(this,note)
+        
+        let draw = function(args){
+          ctx.drawImage(context,x,y,elements[args],0,10,16)
+        }
+            //augmentation.apply(this,note)
 						switch(beat.l){
 		          case 2:  quarter_note.apply(this,note);break;
 		          case 3:  half_note.apply(this,note);break;
 		          default:  half_note.apply(this,note);break;
 						}
+
         },this)
 			}else{
 				console.log('implementing rest beat')

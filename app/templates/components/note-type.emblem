@@ -1,0 +1,7 @@
+each notes as |type name|
+  note-btn [
+    click=(action 'select' name)
+    name=name
+    type=type 
+    selection=selection
+  ]

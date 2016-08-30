@@ -1,5 +1,6 @@
 import Ember      from  'ember';
-import stave_Beat from  './functions/stave_beat';
+//import stave_Beat from  './functions/stave_beat';
+import beat_graphics from  './functions/beat_graphics';
 import Stave      from  './instances/stave';
 /*temp*/
 
@@ -35,18 +36,6 @@ export default Ember.Component.extend(Stave,{
    // console.log(index,'index measureBar',offset, this.get('measure_width'))
     this.get('ctx').fillRect(offset,yoffset,2,42)
   },
-  renderNotes(){
-    let notes = this.get('noteMatrix');
-    console.log(notes , 'noteMatrix ala stave-pane')
-
-    notes.forEach(function(measure,index){
-      this.set('measureIndex',index)
-      Ember.run(this,'measureBar',index)
-      measure.forEach(String,this)
-    },this)
-//    notes.forEach(measureString,this)
-
-  },
 	rememberNotes(){
 
 	  let notes = this.get('noteMatrix');
@@ -63,7 +52,7 @@ export default Ember.Component.extend(Stave,{
 				console.log(beats,beatKey,'beats')
 				if(beatKey.length){
 					console.log('beats it is')
-					stave_Beat.apply(this,[beatKey,beat])
+					beat_graphics.apply(this,[beatKey,beat])
 				}else{
 
 					let restLength = beats;
@@ -74,7 +63,7 @@ export default Ember.Component.extend(Stave,{
 					restLength-=beats
 					beatsAsObject[beats] = {rest:restLength}
 					console.log('rest of beats',restLength)
-					stave_Beat.apply(this,[beatsAsObject[beats],beat])
+					beat_graphics.apply(this,[beatsAsObject[beats],beat])
 					
 				}
 			},this)
@@ -83,9 +72,23 @@ export default Ember.Component.extend(Stave,{
     },this)
 
 //    notes.forEach(measureString,this)
-	}
+	},
+  /*
+  renderNotes(){
+    let notes = this.get('noteMatrix');
+    console.log(notes , 'noteMatrix ala stave-pane')
+
+    notes.forEach(function(measure,index){
+      this.set('measureIndex',index)
+      Ember.run(this,'measureBar',index)
+      measure.forEach(String,this)
+    },this)
+//    notes.forEach(measureString,this)
+
+  },
 
 
+*/
 
 });
 

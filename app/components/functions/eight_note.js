@@ -1,6 +1,6 @@
 //import Augmentation from 'augmentation';
 
-export default function(x,y,isHang){
+export default function(x,y,isHang,isMulti){
 /*
       let note_width = this.get('note_width'),
           measureIndex = this.get('measureIndex'),
@@ -19,24 +19,26 @@ export default function(x,y,isHang){
 */
 				let ctx = this.get('ctx'),
 						note_width = this.get('note_width');
-
-						y = y * note_width + y + 5;
-						x = x * note_width*2
+						y = y * note_width +y +5;
+						x = x * note_width*2 -2.5
 
 					if(isHang !== false){
 						ctx.beginPath()
-						ctx.moveTo(x+note_width-1,y)
-						ctx.lineTo(x+note_width-1,y+ (isHang?24:-24))
+						ctx.moveTo(x+note_width-2,y)
+						ctx.lineTo(x+note_width-1,y+(isHang?24:-24))
+						if(!isMulti){
+							ctx.bezierCurveTo(x+1,y+(isHang?16:-16),x+20,y+(isHang?12:-12),x+6,y+(isHang?4:-4))
+						}
 						ctx.lineWidth =2;
 						ctx.stroke()
 					}
 
 
-         	ctx.beginPath() 
+    	ctx.beginPath() 
 					ctx.ellipse(x,y,4,6,Math.PI/4,0,Math.PI*2)
 					ctx.fill()
         };
 
-
+			
 
 
