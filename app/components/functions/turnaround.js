@@ -32,9 +32,13 @@ export default function(song){
 			}else{
 
 					let noteLength = noteIndex;
-					
+			
+					try{	
 					while(!notes[++noteLength].length){
 						notes[noteLength] = {rest:true}
+					}
+					}catch(e){
+						console.error('error',notes)
 					}
 					noteLength -= noteIndex
 					notes[noteIndex-1].map( e => e.l = noteLength)

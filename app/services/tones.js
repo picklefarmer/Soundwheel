@@ -64,18 +64,18 @@ export default Ember.ArrayProxy.reopenClass({
 				frets   = this.get('song.main.frets.options') || 22,
 				string = 5,
 				frequencies = [
-								261.63,	//	0
-									277.18,	//	1
-									293.66,	//	2 
-									311.13,	//	3 
-									329.63,	//	4 
-									349.23,	//	5 
-									369.99,	//	6 
-									392,	  //	7
-									415.3, 	//	8
-									440,	  //	9	
-									466.16,	//	10 
-									493.88  //	11 
+								261.63,	//	0			C
+									277.18,	//	1 	e
+									293.66,	//	2 	D
+									311.13,	//	3 	e
+									329.63,	//	4 	E
+									349.23,	//	5 	F
+									369.99,	//	6 	g
+									392,	  //	7 	G
+									415.3, 	//	8 	a
+									440,	  //	9		A	
+									466.16,	//	10  b
+									493.88  //	11  B
 							  ];
 
 				intervals.unshift(relativeTone);
