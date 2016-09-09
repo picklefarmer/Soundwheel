@@ -21,7 +21,7 @@ testPlaceImage= function(ctx,graphics,source,measureIndex,x,y,isOdd){
 /*swidth*/  20,
 /*sheight*/ 70,
 /*dx*/      x*20 + measureIndex*240 + (isOdd?20:0),
-/*dy*/      10 - (y.note*5 - (y.o*25 )),
+/*dy*/      -32 - y,
 /*dwidth*/  20,
 /*dheight*/ 70)
 
@@ -43,17 +43,33 @@ placeImage = function(beat,x,y,beatLength,measureIndex,isOdd){
 		
 		}
 },
-barArray		=	[],
-drawBar		= function(){
-	
-},
 
-lengthFunc	=	function({beat:beat.l}){
-	let beatLength;
+lengthFunc	=	function(beat,x,y,noteIndex){
+	let beatLength,maximumOffset = this.get('maximumOffset'),barArray = this.get('barArray');
+		console.log('maximumOffset',maximumOffset,x,y)
 
-		switch(beat){
-      case undefined: beatLength = 'eight_note';beatArray.push(beat);break;
-      case 1: beatLength = 'eight_note';beatArray.push(beat);break;
+		switch(beat.l){
+
+			case undefined: beatLength = 'eight_note';
+											if(noteIndex === 0){
+												barArray.push({y,x,beat});
+											}else if(y > maximumOffset){
+												console.log('maximumOffset break')
+												this.set('maximumOffset',y)
+											}else{
+												console.log('maximumOffset pass', noteIndex,x,y)
+											}
+											break;
+      case 1: beatLength = 'eight_note';
+											if(noteIndex === 0){
+												barArray.push({y,x,beat});
+											}else if(y > maximumOffset){
+												console.log('maximumOffset break')
+												this.set('maximumOffset',y)
+											}else{
+												console.log('maximumOffset pass', noteIndex,x,y)
+											}
+											break;
       case 2: beatLength = 'quarter_note';break;
       case 3: beatLength = 'quarter_note';break;
       case 4: beatLength = 'half_note';break;
@@ -64,11 +80,12 @@ lengthFunc	=	function({beat:beat.l}){
 	return beatLength
 	
 },
+
 drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
 
 	let	octave				=	12,
 			current				= beat.note + (3-beat.o)*octave,
-			y							=	beat,
+			y							=	(beat.note * 6) - ((3-beat.o)*(6*7)),
 			note,
 			beatLength;
 
@@ -85,18 +102,8 @@ drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
     isOdd = false;
 
   }
-/*
-    switch(beat.l){
-      case undefined: beatLength = 'eight_note';break;
-      case 1: beatLength = 'eight_note';break;
-      case 2: beatLength = 'quarter_note';break;
-      case 3: beatLength = 'quarter_note';break;
-      case 4: beatLength = 'half_note';break;
-      case 5: beatLength = 'half_note';break;
-      default: beatLength = 'whole_note';break;
-    } 
-*/
-		beatLength = lengthFunc(beat)
+
+		beatLength = lengthFunc.call(this,beat,x,y,noteIndex)
     
     note = [ beat, x , y, beatLength, measureIndex, isOdd ] ;
     //note = [ beat, x , y,'quarter_note'/* beatLength*/, measureIndex, isOdd ] ;
@@ -113,7 +120,6 @@ export default function(beat,index){
 			measureIndex = this.get('measureIndex'),
 			noteIndex 	= 0;
 	
-	beatArray = []
 	console.log(beat,index,notesLength,'beat_graphics')
 
   if(!beat.rest){
@@ -125,5 +131,4 @@ export default function(beat,index){
   }else{
   
   }
-	drawBar()
 }

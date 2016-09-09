@@ -15,7 +15,7 @@ export default function(song){
     	    }
 
 					if(beat){
-						let pitch = Pitch.call(this,beat,stringIndex);
+						let pitch = Pitch.call(this,beat,stringIndex,beatIndex);
 						notes[beatIndex].push(pitch)
 					}
       	}, this);

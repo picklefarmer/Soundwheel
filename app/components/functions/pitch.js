@@ -1,15 +1,16 @@
 import Major from '../instances/C_major';
 
-export default function(fret,string,arrayType){
+export default function(fret,string,beatIndex){
 
   console.log('this is pitch',this.get('song'), fret, string)
 
-  let block = [4,9,14,19,23,28] || this.get('song.tone.indexes'),
+  let block = [28,23,19,14,9,4] || this.get('song.tone.indexes'),
       slab  = block[string]+fret,
       orb   = [],
-			offset=	3,
-			phase =	((slab%11)+offset)%11,
-      note  = Major[phase];
+			offset=	6,
+			phase =	slab%12 +1,
+      note  = Major[phase],
+			octave= Math.floor((slab)/12);
 
 
 
@@ -17,6 +18,12 @@ export default function(fret,string,arrayType){
 			string[0]  = 4
 			fret 		= 1
 		 	string[0] + fret = 5 = F
+
+
+			number = 26
+				26 = 11 + 11 + 4
+				o = 2
+				note = 4
 			|
 			|
 			|
@@ -27,9 +34,9 @@ export default function(fret,string,arrayType){
 */
 
       if(note){
-        console.log(note,orb,'temple')
+        console.log(phase,slab,fret,string,'temple')
        orb = { note: note.p ,
-               o: Math.floor(slab/12),
+               o:octave,
 							 natural: note.natural
              };
 
