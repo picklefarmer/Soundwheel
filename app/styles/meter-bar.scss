@@ -5,3 +5,22 @@
 		position:relative;
 		background:#444;
 }
+
+.note{
+	div{
+		background:#222
+	}
+}
+
+.rest{
+	div{
+		border-color:#fff !important;
+	}
+}
+
+.hit {
+	color:orange;
+	background-color:white;
+	display:inline-block;
+	border-radius:33px;	
+}

@@ -13,14 +13,14 @@ odd = function(difference,isOdd){
     isOdd = false;      
   }
 },
-testPlaceImage= function(ctx,graphics,source,measureIndex,x,y,isOdd){
+testPlaceImage= function(ctx,graphics,source,measureIndex,x,y,isOdd,isNatural){
     ctx.drawImage( 
 /*simage*/  graphics,
 /*sx*/      source,
 /*sy*/      10,
 /*swidth*/  20,
 /*sheight*/ 70,
-/*dx*/      x*20 + measureIndex*240 + (isOdd?20:0),
+/*dx*/      x*20 + measureIndex*240 + (isOdd?20:0) + isNatural,
 /*dy*/      -32 - y,
 /*dwidth*/  20,
 /*dheight*/ 70)
@@ -31,13 +31,20 @@ placeImage = function(beat,x,y,beatLength,measureIndex,isOdd){
 //    image, sx, sy, swidth, sheight, dx, dy, dwidth,dheight)  
     //placeImage(beat,x,y,beatLength)
     let graphics = this.get('graphics'),
-        source   =  this.get('elements')[beatLength].default *10 +12 /*[isOdd? 'stem':'default']*/;
+        source   = this.get('elements')[beatLength].default*10 +12 /*[isOdd? 'stem':'default']*/,
+				flats		 = this.get('elements').flat * 10 + 12;
     //this.get('ctx').fillText(source,x*30,y*10 - 20)
   //  this.get('ctx').fillText(beatLength,x*30,y*10)
 //    this.get('ctx').fillText(beat.l,x*30,y*10)
 //    this.get('ctx').fillText(this.get('elements')[beatLength].default,x*20,y*10)
-    console.log('place image graphics', beatLength,source)
-    testPlaceImage(this.get('ctx'),graphics,source,measureIndex,x,y,isOdd)
+    console.log('place image graphics', beatLength,source, this.get('elements'))
+
+    testPlaceImage(this.get('ctx'),graphics,source,measureIndex,x,y,isOdd,0)
+
+		if(!beat.natural){
+	    testPlaceImage(this.get('ctx'),graphics,flats,measureIndex,x,y,isOdd,-10)
+		}
+
 		if(beatLength === 'eight_note'){
 		
 		
@@ -129,6 +136,20 @@ export default function(beat,index){
       drawGraphics.call(this,beat[noteIndex],noteIndex,beat,index,measureIndex)
     }
   }else{
-  
+		console.log(beat,`rests 
+											is
+									 			rests`) 
+//		this.get('ctx').fillRect(index*20,0,20,20)
+   // testPlaceImage(this.get('ctx'),graphics,source,measureIndex,x,y,isOdd,0)
+	 	let source 			= this.get('elements'),
+				restLength	= ['default','eigthRest','quarterRest','quarterRest','halfRest','halfRest'][beat.rest] || 'default';
+	 	this.get('barArray').push('rest')
+		testPlaceImage(	this.get('ctx'),
+										this.get('graphics'),
+										source[restLength] * 10 +12,
+										measureIndex,
+										index+ ~~(beat.rest -1)/2,
+										-50,
+										false,0)
   }
 }

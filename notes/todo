@@ -1,0 +1,15 @@
+
+
+
+toggle button: sustain
+
+rest idication on measure index
+note indication on measure index
+
+notes:[],
+map:[S,R,R,B,R,B,S]
+				
+				S = sustain,
+				R = rest
+				B = beat
+

@@ -197,6 +197,8 @@ var envelopBeat = function(update){
 				beat    = this.get('beat');
 
 		if(update.length){
+			
+//			this.set('selected.measure.map['+this.get('beat')+']',~~this.get('sustain'))
 
 			let score = measure.map(
 				function(string,n){

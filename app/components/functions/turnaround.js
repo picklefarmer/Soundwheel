@@ -32,18 +32,18 @@ export default function(song){
 			}else{
 
 					let noteLength = noteIndex;
-			
-					try{	
-					while(!notes[++noteLength].length){
-						notes[noteLength] = {rest:true}
-					}
-					}catch(e){
+		
+				  if(!notes[noteLength].rest	){
+						while(!notes[++noteLength].length){
+							notes[noteLength] = {rest:true}
+						}
+						
 						console.error('error',notes)
+						noteLength -= noteIndex
+						notes[noteIndex-1].map( e => e.l = noteLength)
+						notes[noteIndex].rest = noteLength
+						console.log('noteLength of notes',noteLength)
 					}
-					noteLength -= noteIndex
-					notes[noteIndex-1].map( e => e.l = noteLength)
-					notes[noteIndex].rest = noteLength
-					console.log('noteLength of notes',noteLength)
 				}
 		};
 
