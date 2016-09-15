@@ -1,8 +1,9 @@
+import NoteLength from './notLength';
 import Pitch from './pitch';
 
 export default function(song){
 				
-  let pitchi = song.map(function(measure){
+  let pitchi = song.map(function(measure,measureIndex){
 
 		let notes = {};
 		
@@ -24,36 +25,24 @@ export default function(song){
 			}
 		},this)
 
-		let noteLength = function(noteTier,noteIndex){
-	console.log('noteTier',noteTier)
-				
-  		if(noteTier.length){
-					console.log(noteTier,noteIndex,'afirmed noteLength')
-			}else{
-
-					let noteLength = noteIndex;
+		let map	=	this.get('song.selected').objectAt(measureIndex)['map'],
+    pitches = Object.keys(notes).forEach(function(e,f){
 		
-				  if(!notes[noteLength].rest	){
-						while(!notes[++noteLength].length){
-							notes[noteLength] = {rest:true}
-						}
-						
-						console.error('error',notes)
-						noteLength -= noteIndex
-						notes[noteIndex-1].map( e => e.l = noteLength)
-						notes[noteIndex].rest = noteLength
-						console.log('noteLength of notes',noteLength)
-					}
-				}
-		};
+			let type = map[f]						
+			
+			NoteLength.call(notes,type,[map,notes[e],e])
 
-    let pitches = Object.keys(notes).forEach(function(e,f){
-										noteLength(notes[e],e)
-										if(notes[e].length){
-											notes[e].sort((a,b)=>a.note>b.note)
-										}
-									})
-  
+			if(notes[e].length){
+				notes[e].sort((a,b)=>(a.note + a.o*12)<(b.note+b.o*12))
+			}
+		},notes)
+
+ 		console.log(notes , `to
+									 see
+								 if
+							notes
+					 is properly
+			 applied`)		 
     console.log(pitches,'pitchi notes')
 
 		return Object.keys(notes).length ? notes: null

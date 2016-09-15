@@ -33,6 +33,10 @@ placeImage = function(beat,x,y,beatLength,measureIndex,isOdd){
     let graphics = this.get('graphics'),
         source   = this.get('elements')[beatLength].default*10 +12 /*[isOdd? 'stem':'default']*/,
 				flats		 = this.get('elements').flat * 10 + 12;
+
+		if(beatLength === "eight_note"){
+				source	 = this.get('elements')[beatLength].m_stem * 10 +12;
+		}
     //this.get('ctx').fillText(source,x*30,y*10 - 20)
   //  this.get('ctx').fillText(beatLength,x*30,y*10)
 //    this.get('ctx').fillText(beat.l,x*30,y*10)
@@ -130,7 +134,7 @@ export default function(beat,index){
 	console.log(beat,index,notesLength,'beat_graphics')
 
   if(!beat.rest){
-// drawBar()    
+// drawBar()   || grouping <= ! 
     for(noteIndex; noteIndex < notesLength;noteIndex++){
 			console.log(notesLength,noteIndex,' noteIndex check')
       drawGraphics.call(this,beat[noteIndex],noteIndex,beat,index,measureIndex)

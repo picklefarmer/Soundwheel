@@ -1,35 +1,35 @@
 [
 {
-	"map":[ "b","r","r","b","b","b","r","b"	],
+	"map":[ "b","r" ,"r" ,"b"	 , "r","b"	],
 	"notes":[
-				[null,null,null,null,null,null],
-				[null,null,null,3,null,null],
-				[null,null,null,null,	null,	5],
-				[null,null,null,		3,null,null],
-				[		3,		null,null,null,null,null],
-				[		null,null,null,null,null,null]
+				[null,null,null,null ,null,null ],
+				[null,null,null,		3,null,null ],
+				[null,null,null,null ,null,		 5],
+				[null,null,null,		3,null,null ],
+				[		3,null,null,null ,null,null ],
+				[null,null,null,null ,null,null ]
 	]
 },
 {
-	"map":[ "b","b","b","b","b","b","r","b"	],
+	"map":[ "s","r" ,"r" ,"r" ,"r" ,"b" ,"b"],
 	"notes":[
-				[null,null	,null,null,null,null,null],
-				[null,null	,null,null,null,null,null],
-				[		3,null	,null,null,null,null,null],
-				[null,null	,null,null,null,null,1	 ],
-				[null,null,null,null,	null,			3,3	 ],
-				[null,null,null,null,null,null, null ]
+				[null,null,null,null,null,null,null],
+				[null,null,null,null,null,null,null],
+				[		3,null,null,null,null,null,null],
+				[null,null,null,null,null,null,		1],
+				[null,null,null,null,null,	 3,		3],
+				[null,null,null,null,null,null,null]
 	]
 },
 {
-	"map":[ "b","b","b","b","b","b","r","b"	],
+	"map":[ "b","b" ,"b" ,"b" ,"b" ,"b" ,"b" ],
 	"notes":[
-				[null,null	,null,null,null,null,null],
-				[null,null	,null,null,null,null,null],
-				[		3,		1	,null,null,null,null,null],
-				[null,null	,		4,	 3,		1,null,1	 ],
-				[null,null,null,null,	null,			3,3	 ],
-				[null,null,null,null,null,null, null ]
+				[null,null,null,null,null,null,null],
+				[null,null,null,null,null,null,null],
+				[		3,	 1,null,null,null,null,null],
+				[null,null,		4,	 3,		1,null,		1],
+				[null,null,null,null,null,	 3,		3],
+				[null,null,null,null,null,null,null]
 	]
 }
 ]

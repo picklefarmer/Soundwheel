@@ -75,7 +75,6 @@ export default Ember.Component.extend(Stave,{
 							ctx.lineWidth = 4;
 							ctx.stroke()
 			}else{
-			
 			}
 		})	
 	},
