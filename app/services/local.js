@@ -194,11 +194,12 @@ console.log(selection,'local and selected')
 var envelopBeat = function(update){
 
 		let measure = this.get('selected.measure.notes'),
+				map			=	this.get('selected.measure.map'),
+				type		=	['b','s'][~~this.get('sustain')],
 				beat    = this.get('beat');
 
 		if(update.length){
-			
-//			this.set('selected.measure.map['+this.get('beat')+']',~~this.get('sustain'))
+			map.replace(beat,beat+1,type)
 
 			let score = measure.map(
 				function(string,n){

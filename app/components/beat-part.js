@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   classNameBindings:['active:hit','isRest:rest','isNote:note'],
   tagName:"li",
   beatType:Ember.computed('beatMap.[]','index',function(){
+					console.log('beatType')
     return this.get('beatMap')[this.get('index')]
   }),
   	measure:Ember.computed('index',{

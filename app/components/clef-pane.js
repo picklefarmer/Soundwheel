@@ -56,8 +56,22 @@ export default Ember.Component.extend(Stave,{
 		grouping = grouping.filter(e=>e !== undefined)
 		console.log(grouping, ' grouping ',grouping.length )
 
+		console.log(eighthArray,'single')
 		grouping.forEach( group => {
-			if(group[1]){
+			if((group[1] === "rest") || !group[1]){
+
+				console.log('drawing eight note singles',group)
+				ctx.drawImage(this.get('graphics'),
+				this.get('elements').eight_note.default * 10 + 12,
+				10,
+				20,
+				70,
+				group[0].x*20 + this.get('measureIndex')*240,
+				-32 - group[0].y,
+				20,
+				70)
+
+			}else{
 							let start = group[0],
 									end		= group[1],
 									width	=	20,
@@ -74,8 +88,8 @@ export default Ember.Component.extend(Stave,{
 							ctx.lineTo(endX,endY)
 							ctx.lineWidth = 4;
 							ctx.stroke()
-			}else{
 			}
+			
 		})	
 	},
 
