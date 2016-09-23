@@ -1,3 +1,6 @@
+import lengthFunc	from './beatLength';
+import restFunc	from './restLength';
+import testPlaceImage from './drawStaveItem';
 
 let isOdd = false,
 
@@ -13,83 +16,78 @@ odd = function(difference,isOdd){
     isOdd = false;      
   }
 },
-testPlaceImage= function(ctx,graphics,source,measureIndex,x,y,isOdd,isNatural){
-    ctx.drawImage( 
-/*simage*/  graphics,
-/*sx*/      source,
-/*sy*/      10,
-/*swidth*/  20,
-/*sheight*/ 70,
-/*dx*/      x*20 + measureIndex*240 + (isOdd?20:0) + isNatural,
-/*dy*/      -32 - y,
-/*dwidth*/  20,
-/*dheight*/ 70)
 
+flip = function(y){
+	return y > this.get('measure_midPoint')
 },
-placeImage = function(beat,x,y,beatLength,measureIndex,isOdd){
 
-//    image, sx, sy, swidth, sheight, dx, dy, dwidth,dheight)  
-    //placeImage(beat,x,y,beatLength)
-    let graphics = this.get('graphics'),
-        source   = this.get('elements')[beatLength].default*10 +12 /*[isOdd? 'stem':'default']*/,
-				flats		 = this.get('elements').flat * 10 + 12;
+placeImage = function(beat,x,y,beatLength,measureIndex,isOdd,isFlip){
 
-		if(beatLength === "eight_note"){
-				source	 = this.get('elements')[beatLength].m_stem * 10 +12;
+    let graphics	= this.get('graphics'),
+			 	dotted		= beatLength.mod,
+				beatName	=	beatLength.name,
+				source,
+				type		 	= isOdd?'stem':(isFlip?'flipVertical':'default');
+			
+		if(!beat.rest){	
+    		source   	= this.get('elements')[beatName][type] *10 +12
+		}else{
+				source		= this.get('elements')[beatName] * 10 +12
 		}
-    //this.get('ctx').fillText(source,x*30,y*10 - 20)
-  //  this.get('ctx').fillText(beatLength,x*30,y*10)
-//    this.get('ctx').fillText(beat.l,x*30,y*10)
-//    this.get('ctx').fillText(this.get('elements')[beatLength].default,x*20,y*10)
+
+		switch(dotted){
+				case undefined: break;
+				default: dotted = this.get('elements').dotted * 10 + 12;break;
+		}
+
+		// Just draw without stem for now | draw stem in with beam
+		if(beatName === "eight_note"){
+				if( isFlip ){		
+					source	 = this.get('elements')[beatName].stem * 10 +12;
+				}else{
+					source	 = this.get('elements')[beatName].m_stem * 10 +12;
+				}
+		}
+
+
     console.log('place image graphics', beatLength,source, this.get('elements'))
 
-    testPlaceImage(this.get('ctx'),graphics,source,measureIndex,x,y,isOdd,0)
+    testPlaceImage.call(this,this.get('ctx'),graphics,source,measureIndex,x,y,isOdd,0)
 
-		if(!beat.natural){
-	    testPlaceImage(this.get('ctx'),graphics,flats,measureIndex,x,y,isOdd,-10)
+		if(beat.natural === false){
+			let	flats		 	= this.get('elements').flat * 10 + 12;
+	    testPlaceImage.call(this,this.get('ctx'),graphics,flats,measureIndex,x,y,isOdd,-10)
 		}
-
-		if(beatLength === 'eight_note'){
-		
-		
+		if(dotted){
+			testPlaceImage.call(this,this.get('ctx'),graphics,dotted,measureIndex,x,y,isOdd,10)
 		}
 },
 
-lengthFunc	=	function(beat,x,y,noteIndex){
-	let beatLength,maximumOffset = this.get('maximumOffset'),barArray = this.get('barArray');
-		console.log('maximumOffset',maximumOffset,x,y)
+restGraphics = function(beat,x,measureIndex,index){
+	//	beat,measureIndex,index)
+	let restLength = restFunc.call(this,beat),
+			rest			 = [ beat , x , -50, restLength, measureIndex];
+			this.get('barArray').push('rest')
+			console.log('restmap', restLength)
+			placeImage.apply(this,rest)
+		/*				
+			console.log(beat,`rests 
+											is
+									 			rests`) 
+//		this.get('ctx').fillRect(index*20,0,20,20)
+   // testPlaceImage(this.get('ctx'),graphics,source,measureIndex,x,y,isOdd,0)
+	 	let source 			= this.get('elements'),
+				restLength	= ['default','eigthRest','quarterRest','quarterRest','halfRest','halfRest'][beat.rest] || 'default';
+	 	this.get('barArray').push('rest')
+		testPlaceImage.call(this,	this.get('ctx'),
+										this.get('graphics'),
+										source[restLength] * 10 +12,
+										measureIndex,
+										index+ ~~(beat.rest -1)/2,
+										-50,
+										false,0)
+										*/
 
-		switch(beat.l){
-
-			case undefined: beatLength = 'eight_note';
-											if(noteIndex === 0){
-												barArray.push({y,x,beat});
-											}else if(y > maximumOffset){
-												console.log('maximumOffset break')
-												this.set('maximumOffset',y)
-											}else{
-												console.log('maximumOffset pass', noteIndex,x,y)
-											}
-											break;
-      case 1: beatLength = 'eight_note';
-											if(noteIndex === 0){
-												barArray.push({y,x,beat});
-											}else if(y > maximumOffset){
-												console.log('maximumOffset break')
-												this.set('maximumOffset',y)
-											}else{
-												console.log('maximumOffset pass', noteIndex,x,y)
-											}
-											break;
-      case 2: beatLength = 'quarter_note';break;
-      case 3: beatLength = 'quarter_note';break;
-      case 4: beatLength = 'half_note';break;
-      case 5: beatLength = 'half_note';break;
-      default: beatLength = 'whole_note';break;
-    } 
-	
-	return beatLength
-	
 },
 
 drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
@@ -97,6 +95,7 @@ drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
 	let	octave				=	12,
 			current				= beat.note + (3-beat.o)*octave,
 			y							=	(beat.note * 6) - ((3-beat.o)*(6*7)),
+			isFlip				= flip.call(this,y),
 			note,
 			beatLength;
 
@@ -113,10 +112,9 @@ drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
     isOdd = false;
 
   }
-
-		beatLength = lengthFunc.call(this,beat,x,y,noteIndex)
+		beatLength = lengthFunc.call(this,beat,x,y,noteIndex,isFlip)
     
-    note = [ beat, x , y, beatLength, measureIndex, isOdd ] ;
+    note = [ beat, x , y, beatLength, measureIndex, isOdd, isFlip ] ;
     //note = [ beat, x , y,'quarter_note'/* beatLength*/, measureIndex, isOdd ] ;
 
 
@@ -126,34 +124,19 @@ drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
 
 
 export default function(beat,index){
-	
+
 	var notesLength = beat.length,
 			measureIndex = this.get('measureIndex'),
 			noteIndex 	= 0;
 	
 	console.log(beat,index,notesLength,'beat_graphics')
 
-  if(!beat.rest){
-// drawBar()   || grouping <= ! 
+  if(!beat.rest){	// drawBar()   || grouping <= ! 
     for(noteIndex; noteIndex < notesLength;noteIndex++){
 			console.log(notesLength,noteIndex,' noteIndex check')
       drawGraphics.call(this,beat[noteIndex],noteIndex,beat,index,measureIndex)
     }
   }else{
-		console.log(beat,`rests 
-											is
-									 			rests`) 
-//		this.get('ctx').fillRect(index*20,0,20,20)
-   // testPlaceImage(this.get('ctx'),graphics,source,measureIndex,x,y,isOdd,0)
-	 	let source 			= this.get('elements'),
-				restLength	= ['default','eigthRest','quarterRest','quarterRest','halfRest','halfRest'][beat.rest] || 'default';
-	 	this.get('barArray').push('rest')
-		testPlaceImage(	this.get('ctx'),
-										this.get('graphics'),
-										source[restLength] * 10 +12,
-										measureIndex,
-										index+ ~~(beat.rest -1)/2,
-										-50,
-										false,0)
+		restGraphics.call(this,beat,index,measureIndex)
   }
 }

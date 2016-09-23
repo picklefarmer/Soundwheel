@@ -8,21 +8,23 @@ const Router = Ember.Router.extend({
 //const lessons(){};
 
 Router.map(function() {
-	this.route(
-		'isOnline',{
-			path:'/:isOnline/'
-    },
-    function(){
-    	this.route('song',	{	
-      	path:'/song/:y'
-    	},
-			function(){
-				this.route('edit')
-				this.route('lyrics');
-				this.route('stave');
-				this.route('chord');
-      })
-	});
+  this.route(
+      'isOnline',{
+          path:'/:isOnline/'
+  },
+  function(){
+      this.route('song',	{	
+      path:'/song/:y'
+      },
+          function(){
+              this.route('edit')
+              this.route('lyrics');
+              this.route('stave',function(){
+                  this.route('preview')
+              });
+              this.route('chord');
+    })
+  });
 
   /*  this.route(
             'song',	{	
@@ -48,6 +50,7 @@ Router.map(function() {
   this.route('user');
 
   this.route(	'catchall',	{	path:'/*wildcard'}	)
+
 });
 
 export default Router;

@@ -1,0 +1,22 @@
+is the note flipped
+is the note part of a chord
+is the note part of a group
+
+if chord
+	connect dots
+
+/* [A,B] = (group Part 1), (group Part 2) */
+
+if group
+	if A is flipped
+		if B is flipped
+
+		else
+
+	else 
+		if B is flipped
+		
+		else 
+			draw beam
+
+

@@ -1,35 +1,38 @@
 [
 {
-	"map":[ "b","r" ,"r" ,"b"	 , "r","b"	],
+	"map":[ "b","b" ,"r" ,"r"	 , "b","b","r","r"],
+	"lyric":"knowing of you",
 	"notes":[
-				[null,null,null,null ,null,null ],
-				[null,null,null,		3,null,null ],
-				[null,null,null,null ,null,		 5],
-				[null,null,null,		3,null,null ],
-				[		3,null,null,null ,null,null ],
-				[null,null,null,null ,null,null ]
+				[null,null,null,null ,null,null ,null,null],
+				[null,null,null,null,			3,null ,null,null],
+				[null,null,null,null ,null,		 5,null,null],
+				[null,2,null,null,			3,null ,null,null],
+				[   1,null,null,null ,null,null ,null,null],
+				[null,null,null,null ,null,null ,null,null]
 	]
 },
 {
-	"map":[ "s","r" ,"r" ,"r" ,"r" ,"b" ,"b"],
+	"map":[ "s","r" ,"r" ,"r" ,"b" ,"b" ,"b","r"],
+	"lyric":"makes my soul, shiny",
 	"notes":[
-				[null,null,null,null,null,null,null],
-				[null,null,null,null,null,null,null],
-				[		3,null,null,null,null,null,null],
-				[null,null,null,null,null,null,		1],
-				[null,null,null,null,null,	 3,		3],
-				[null,null,null,null,null,null,null]
+				[null,null,null,null,null,null,null,null],
+				[null,null,null,null,null,null,null,null],
+				[		3,null,null,null,   5,null,null,null],
+				[null,null,null,null,null,null,		1,null],
+				[null,null,null,null,null,	 3,		3,null],
+				[null,null,null,null,null,null,null,null]
 	]
 },
 {
-	"map":[ "b","b" ,"b" ,"b" ,"b" ,"b" ,"b" ],
+	"lyric":"for - ever I'm en - joy - ing true",
+	"map":[ "b","s" ,"r" ,"r" ,"b" ,"b" ,"b","r" ],
 	"notes":[
-				[null,null,null,null,null,null,null],
-				[null,null,null,null,null,null,null],
-				[		3,	 1,null,null,null,null,null],
-				[null,null,		4,	 3,		1,null,		1],
-				[null,null,null,null,null,	 3,		3],
-				[null,null,null,null,null,null,null]
+				[null,null,null,null,null,null,null,null],
+				[null,null,null,null,null,null,null,null],
+				[		3,	 1,null,null,null,null,null,null],
+				[null,null,null,null,		1,null,		1,null],
+				[null,null,null,null,null,	 3,		3,null],
+				[null,null,null,null,null,null,null,null]
 	]
 }
 ]

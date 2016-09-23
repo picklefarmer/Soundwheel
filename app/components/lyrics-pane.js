@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-		classNames:["lyrics",'form-control','field'],
+		classNames:["lyrics"],
     song:Ember.inject.service(),
     full:false,
     fullPage:Ember.computed(function(){

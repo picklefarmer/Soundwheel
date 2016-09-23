@@ -38,11 +38,19 @@
 	position:relative;
 }
 
+.sustainbtn{
+		display:block;
+		position:absolute;
+		bottom:0px;
+		left:12px;
+		@include topBot(80,86,left)
+}
+
 .loopbtn{
 		display:block;
 		position:absolute;
 		bottom:0px;
-		right:0px;
+		right:12px;
 		@include topBot(80,86,right)
 }
 
@@ -93,7 +101,7 @@
 .arrow-left {
 	@include topBot(36,54,right);	
 	left:0px;
-	top:72px;
+	top:70px;
 	margin-left:12px;
 	&:before{
 		@include boxRow(left);

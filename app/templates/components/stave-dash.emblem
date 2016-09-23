@@ -17,11 +17,14 @@
                       =beat
     else
       if song.selected.isFulfilled 
-        each theSong as |part|
+        each theSong as |part index|
           clef-pane [
             block=song.tones.indexes
             noteMatrix=part
             elements=elements
             graphics=canvas
+            index=index
+            canvasCollect=canvasCollect
+            action=previewImage
             ]
 

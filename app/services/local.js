@@ -159,7 +159,7 @@ console.log(selection,'local and selected')
     localStorage.chords = JSON.stringify(update)
     console.log(  'chords saved to local storage' ) 
   }, 
-  update(value){
+  update(value,isRest){
   
 	//console.log('updating',value.length,this)
 		
@@ -169,7 +169,7 @@ console.log(selection,'local and selected')
 			
 		if(isBeat){
 
-			envelopBeat.call(this,value)
+			envelopBeat.call(this,value,isRest)
 			console.log(`
 											all aboard
 										 	the beat
@@ -191,11 +191,11 @@ console.log(selection,'local and selected')
   }
 });
 
-var envelopBeat = function(update){
+var envelopBeat = function(update,isRest){
 
 		let measure = this.get('selected.measure.notes'),
 				map			=	this.get('selected.measure.map'),
-				type		=	['b','s'][~~this.get('sustain')],
+				type		=	isRest? 'r' : (['b','s'][~~this.get('sustain')]),
 				beat    = this.get('beat');
 
 		if(update.length){

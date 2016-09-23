@@ -1,8 +1,20 @@
 export default {
 
 
+	dotted(x,y){
+		let ctx = this.get('ctx'),
+				note_width	= this.get('note_width');
 
+		y = y * note_width + y -4 + (  8)
+		x = x * note_width*2
+			
+		ctx.beginPath()
+		ctx.arc(x,y,2,0,Math.PI*2)
+		ctx.fill()
+
+	},
 	sharp(x,y){
+
 		let ctx = this.get('ctx'),
 			measure_width = this.get('measure_width'),
 			measureIndex = this.get('measureIndex'),
@@ -72,7 +84,8 @@ export default {
 				note_width = this.get('note_width');
 	//			y					=	yObject.note + yObject.o;
 			
-		y = y * note_width + y -4
+		y = y * note_width + y -4 + ( 8 )
+
 		x = x * note_width*2
 
 		//y = y * note_width + (y) - stave_key 

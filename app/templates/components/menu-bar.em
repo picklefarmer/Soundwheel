@@ -15,5 +15,9 @@ ul class=menubar
       li: h2: =song.selected.selection
       each songOptions as | path |
         li class="{{if (e-q isActive.option path) hit}}":  link-to path (concat "isOnline.song." path ) isOnline song.selected.selection tagName="div"
+      li: h1: |_ 
+      each songToggles as | bool |
+        =toggle-button bool=(get song bool)
+          =bool
 
 

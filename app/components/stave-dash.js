@@ -9,6 +9,10 @@ export default Ember.Component.extend(galleryMap,{
   classNames: 'stave-dash',
 
   actions:{
+previewImage(url){
+console.log('stave_dash')
+				this.sendAction('previewImage',url)
+},  
     toggleSet(view){
       this.set('viewing', view)
     }
@@ -25,25 +29,38 @@ export default Ember.Component.extend(galleryMap,{
 		Ember.run(this,'initFunc')
 		console.log('ctx', this.get('ctx'))
 	},
+
   theSong:Ember.computed('song.selected',function(){
-    let noteMatrix = this.get('song.selected.content').map(measure => measure.notes),
-		matrixLength = noteMatrix.length,
+
+		this.set('canvasCollect',[])
+
+    let content			= this.get('song.selected.content'),
+				lyrics			= content.map(measure => measure.lyric),
+				noteMatrix 	= content.map(measure => measure.notes),
+				matrixLength= noteMatrix.length,
         pod = [];
+
 	if(true){
 		noteMatrix = Turnaround.call(this,noteMatrix);
 		matrixLength = noteMatrix.length
 	}
 	if(matrixLength%2){
-		pod.unshift([noteMatrix[matrixLength-1]])
+		pod.unshift([{stave:noteMatrix[matrixLength-1],lyric:lyrics[matrixLength-1]}])
 	}
-    while(matrixLength--){
+  
+	while(matrixLength--){
 		if(matrixLength%2){
 		  pod.unshift([
-						noteMatrix[matrixLength-1],
-						noteMatrix[matrixLength]
-						])
+						{	stave:noteMatrix[matrixLength-1],
+							lyric:lyrics[matrixLength-1]
+						},
+						{
+							stave:noteMatrix[matrixLength],
+							lyric:lyrics[matrixLength]
+						}
+			])
 		}
-    }
+  }
 
  
       /*

@@ -42,23 +42,7 @@ let Suspension =	function(){
 };
 	
 export default Ember.Mixin.create(Stave,{
-	/*init(){
-			this._super()
-		console.log('this is ctx' , this)
-		if(!this.get('ctx')){
-		let	context = document.createElement('canvas'),
-			ctx = context.getContext('2d');
 
-			context = document.body.appendChild(context)
-
-			console.log(context,ctx,'mixin of gallery')
-			this.set('ctx',ctx)
-			this.set('canvas',context)
-		context.width=1200	
-			Ember.run(this,'fillResources')
-		}
-	},
-*/
 	initFunc(){
 		console.log('this is ctx' , this)
 		let	context = document.createElement('canvas'),

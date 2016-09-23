@@ -7,6 +7,11 @@ export default Ember.Component.extend({
 					console.log('beatType')
     return this.get('beatMap')[this.get('index')]
   }),
+	index:Ember.computed({set(_,II){
+		console.log('message from index meterbar',_,II)
+
+		return II-1
+	}}),
   	measure:Ember.computed('index',{
 		get(){
 			var measure = this.get('index').toString()

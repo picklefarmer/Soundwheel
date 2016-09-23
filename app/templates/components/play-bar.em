@@ -1,5 +1,7 @@
 .playGroup
   .btn-group.btn-group-justified
+    span.btn.btn-default{action "sustain"}
+      .sustainbtn
     span.btn.btn-default{action "loop"}
       .loopbtn
     span.btn.btn-default{action "stepLeft"}

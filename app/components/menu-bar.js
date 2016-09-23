@@ -22,7 +22,7 @@ export default Ember.Component.extend({
 	}),
 
 	songOptions:['edit','lyrics','stave','chord'],
-
+  songToggles:['sustain','loop'],
 	actions:{
 		click(){
 		  this.toggleProperty('barVisible')

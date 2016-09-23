@@ -1,15 +1,9 @@
 
+flip notes on midpoint : vertical
 
+dotted notes - graphics add dot: beat_graphics | noteLength
 
-toggle button: sustain
+del button as seperate function : rest | meter-bar
+	| clear 
 
-rest idication on measure index
-note indication on measure index
-
-notes:[],
-map:[S,R,R,B,R,B,S]
-				
-				S = sustain,
-				R = rest
-				B = beat
-
+add save/print preview | stave 

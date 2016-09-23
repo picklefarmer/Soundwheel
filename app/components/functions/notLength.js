@@ -2,7 +2,7 @@ const sustain = function(map,noteTier,noteIndex){
 
 	let notes = this,
 			mapBudge = noteIndex,
-			noteLength = 0;
+			noteLength = 1;
 
 	while(map[++mapBudge] === 'r'){
 		notes[mapBudge] = {rest:true}

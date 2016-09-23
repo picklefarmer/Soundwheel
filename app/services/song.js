@@ -1,9 +1,9 @@
-import Ember from 'ember';
-import Play from '../mixins/play';
-import GalleryMap from '../mixins/galleryMap';
-import UpdateMethods from '../mixins/update-methods';
-import pulse from './functions/pulse';
-import beatIndex from '../mixins/functions/beat';
+import Ember          from 'ember';
+import pulse          from './functions/pulse';
+import Play           from '../mixins/play';
+import beatIndex      from '../mixins/functions/beat';
+import GalleryMap     from '../mixins/galleryMap';
+import UpdateMethods  from '../mixins/update-methods';
 
 export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 }).extend(UpdateMethods,Play,GalleryMap,{

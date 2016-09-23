@@ -43,5 +43,16 @@
   },
   "dependencies": {
 		"vexflow":"1.2.76"
+	},
+	"window": {			
+        "title": "soundLab",
+        "icon": "/home/acroeven/Dropbox/art/jungle/leopard.png"
+	},
+
+	"main":"./app/index.html",
+	"webkit":{
+		"plugin":true
 	}
+
+
 }
