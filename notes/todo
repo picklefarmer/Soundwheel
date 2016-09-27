@@ -1,9 +1,5 @@
 
 flip notes on midpoint : vertical
 
-dotted notes - graphics add dot: beat_graphics | noteLength
-
-del button as seperate function : rest | meter-bar
-	| clear 
-
-add save/print preview | stave 
+---- svg --- to ⦑⢑ canvas ----
+	 add relative C -> c

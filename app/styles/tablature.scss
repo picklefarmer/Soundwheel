@@ -1,6 +1,14 @@
 @import "compass/css3/box-shadow";
 
 
+.vertical-tab{
+	transform: translateX(-540px) translateY(545px) rotateZ(90deg);
+}
+
+.flip-button{
+
+
+}
 
 .tablet{
 	border-radius:15px;
@@ -16,7 +24,7 @@
 
 .tablature{
 	border-radius:8px;
-	margin-left:100px;
+	margin-left:10px;
 	display:inline-block;
 	height:300px;
 	position:absolute;

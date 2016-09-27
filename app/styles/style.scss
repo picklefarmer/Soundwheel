@@ -9,7 +9,7 @@
 
 @mixin fullBar($pos){
 	#{$pos}:0px;
-	position:absolute;
+	position:fixed;
 	text-align:center;
 	background:#aaa;
 	@if ($pos == top) or ($pos == bottom) {
@@ -54,6 +54,9 @@
 }
 .middleFull {
 	text-align:center;
+	&.verticalTab{
+		background:black;
+	}
 }
 .toolbar{
 	overflow-y:hidden;

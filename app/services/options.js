@@ -3,6 +3,7 @@ import Save from './functions/saveAction';
 
 export default Ember.Service.extend({
 
+  verticalTab:true,
 	song:Ember.inject.service(),
 
 	clear(){

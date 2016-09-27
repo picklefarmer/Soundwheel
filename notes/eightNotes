@@ -12,9 +12,10 @@ if group
 		if B is flipped
 
 		else
-
+			flip A
 	else 
 		if B is flipped
+			flip B
 		
 		else 
 			draw beam

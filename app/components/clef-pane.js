@@ -2,12 +2,17 @@ import Ember      		from  'ember';
 import beat_graphics	from  './functions/beat_graphics';
 import Beams 					from  './functions/beams';
 import Stave      		from  './instances/stave';
-import TrebleGraph		from  './instances/test';
+import svgToCtx				from  './functions/svgToCtx';
+import TrebleGraph		from  './instances/treble';
+import FourFour				from  './instances/4';
+
 
 export default Ember.Component.extend(Stave,{
+
   tagName:'canvas',
   attributeBindings:['height','width','src'],
   width:640,
+
 	click(){
 	
 		let element = this.get('element'),
@@ -29,6 +34,7 @@ export default Ember.Component.extend(Stave,{
 			this.sendAction('action',url)
 
 	},
+
   didInsertElement(){
 
     let element = this.get('element'),
@@ -41,10 +47,20 @@ export default Ember.Component.extend(Stave,{
 		ctx.font = this.get('stave_font')
 
     console.log(ctx, 'clef pane ctx')
-     Ember.run(this,'clef',5) 
+     Ember.run(this,'clef',5)
+		if(this.get('index') === 0)
+     Ember.run(this,'timeSignature',5) 
      Ember.run(this,'rememberNotes') 
 
   },
+
+	timeSignature(){
+
+		svgToCtx.call(this,FourFour,100,80)
+		svgToCtx.call(this,FourFour,75,80)
+		this.set('stave_offset',90)
+	},
+
   clef(bars){
 
     let ctx = this.get('ctx'),
@@ -56,25 +72,10 @@ export default Ember.Component.extend(Stave,{
     }
 		
 		ctx.fillRect(stave_width-2,40, 640, 50)
-		
-    let length = TrebleGraph.curve.length;
 
-    ctx.beginPath()
-    let k = 65;
-    ctx.moveTo(40+TrebleGraph.start[0],k+TrebleGraph.start[1])
-    for(var i = 0; i < length; i++){
-      let [a,b,c] = TrebleGraph.curve[i];
-
-      ctx.bezierCurveTo(40+a[0],k+a[1],
-                        40+b[0],k+b[1],
-                        40+c[0],k+c[1])
-    }
-
-    ctx.stroke()
-    ctx.fill()
-  
-
+		svgToCtx.call(this,TrebleGraph,65,40)
   },
+
   lyric:Ember.computed('index',function(){
   
   }),

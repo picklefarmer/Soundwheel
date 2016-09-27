@@ -16,7 +16,10 @@ export default Ember.Component.extend(play,{
 	names:['backView','frontView','centerView'],
 
 	classNames:['tablet'],
-	
+	classNameBindings:['verticalTab'],
+	verticalTab:Ember.computed('options.verticalTab',function(){
+				return this.get('options.verticalTab')
+	}),
 	mouseFormat,
 	pushChord,
 	pushNote,

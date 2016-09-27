@@ -1,1 +1,1 @@
-div: =yield
+div{action 'flip' bubbles=false}: =yield

@@ -36,7 +36,7 @@ obj.beat = function(beat){
         boardX = offset+(fret*x)+scale/2,
         boardY = offset/2+(y*string)+scale/2;
     if(fret){
-		  Ember.run(this.get('tones').objectAt(string),'play',fret,8)
+		  Ember.run(this.get('tones').objectAt(string),'play',fret,2)
       boardWalk.call(this.get('options.frontView'),boardX,boardY)
     }    
   },this)

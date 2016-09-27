@@ -1,3 +1,4 @@
+
 export default function(ctx,graphics,source,measureIndex,x,y,isOdd,isNatural){
 		let stave_offset = this.get('stave_offset');
     ctx.drawImage( 
