@@ -3,7 +3,8 @@ import beat_graphics	from  './functions/beat_graphics';
 import Beams 					from  './functions/beams';
 import Stave      		from  './instances/stave';
 import svgToCtx				from  './functions/svgToCtx';
-import TrebleGraph		from  './instances/treble';
+import Treble					from  './instances/treble';
+import Bass						from  './instances/bass';
 import FourFour				from  './instances/4';
 
 
@@ -57,7 +58,7 @@ export default Ember.Component.extend(Stave,{
 	timeSignature(){
 
 		svgToCtx.call(this,FourFour,100,80)
-		svgToCtx.call(this,FourFour,75,80)
+		svgToCtx.call(this,FourFour,76,80)
 		this.set('stave_offset',90)
 	},
 
@@ -65,15 +66,29 @@ export default Ember.Component.extend(Stave,{
 
     let ctx = this.get('ctx'),
 				stave_width = this.get('stave_width'),
-        offset = 40;
-    
-		while(bars--){
-     ctx.fillRect(0,bars*12 + offset,stave_width,2)
-    }
+				staffs	=	this.get('isBass')?2:1,
+				staffOffset = 60,
+        offset = 40,
+				barsTemp = bars;
+   
+	 	while(staffs--){
+			while(bars--){
+    	 ctx.fillRect(0,bars*12 + (staffOffset* staffs)+offset,stave_width,2)
+    	}
+			bars = barsTemp
+		}
 		
 		ctx.fillRect(stave_width-2,40, 640, 50)
 
-		svgToCtx.call(this,TrebleGraph,65,40)
+		svgToCtx.call(this,Treble,65,40)
+
+		if(this.get('isBass')){
+			svgToCtx.call(this,Bass,122,15)
+			ctx.beginPath()
+			ctx.arc(42,120,3,0,Math.PI*2)
+			ctx.arc(42,132,3,0,Math.PI*2)
+			ctx.fill()
+		}
   },
 
   lyric:Ember.computed('index',function(){
@@ -82,9 +97,10 @@ export default Ember.Component.extend(Stave,{
   lyrics(measureIndex,lyric){
     let ctx     = this.get('ctx'),
         x       = this.get('measure_width') * measureIndex + this.get('stave_offset'),
-				y = 140;
+				y = this.get('isBass')?10:140;
 
     if(lyric){
+
       ctx.fillText(lyric,x,y)
     }
 
@@ -96,6 +112,9 @@ export default Ember.Component.extend(Stave,{
 
    // console.log(index,'index measureBar',offset, this.get('measure_width'))
     this.get('ctx').fillRect(offset,yoffset,2,50)
+		if(this.get('isBass')){
+    	this.get('ctx').fillRect(offset,yoffset+60,2,50)
+		}
   },
 
 	barArray:[],
@@ -120,19 +139,14 @@ export default Ember.Component.extend(Stave,{
 
 				let notesArray = measureAsObject[notes];
 
-						console.log(notes,notesArray,'beats')
-
+				//chord
 				if(notesArray.length){
-
-						console.log('beats it is')
-
 					beat_graphics.apply(this,[notesArray,notesIndex])
-
+				//rest
 				}else{
-					
-					console.log(measureAsObject[notes],'rest is rest')		
-					if(measureAsObject[notes].rest !== true){	
-						beat_graphics.apply(this,[measureAsObject[notes],notesIndex])
+					//sustained rest
+					if(notesArray.rest !== true){	
+						beat_graphics.apply(this,[notesArray,notesIndex,true])
 					}
 				}
 			},this)

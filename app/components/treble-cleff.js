@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import three from './instances/3';
 
 export default Ember.Component.extend({
   tagName:'canvas',
@@ -7,6 +8,9 @@ export default Ember.Component.extend({
         ctx     = content.getContext('2d'),
         style   = content.style;
 
+		let path = new Path2D(three);
+		console.log(path,three)
+		ctx.fill(path)
     content.width = 300
     content.height = 300
     
@@ -35,7 +39,7 @@ export default Ember.Component.extend({
     ];
 
     let length = trebleArr.length;
-
+/*
     ctx.beginPath()
     let k = 100;
     ctx.moveTo(k+-1,k+20)
@@ -48,5 +52,6 @@ export default Ember.Component.extend({
 
     ctx.stroke()
     ctx.fill()
+	*/
   }
 });

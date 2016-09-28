@@ -22,7 +22,9 @@ const groupFunc = function(){
 		return grouping
 
 };
-
+let getY = function(beat){
+	return (beat.note * 6) - ((3-beat.o)*(6*7))
+};
 export default function(index){
 		console.log('beams')
 
@@ -33,17 +35,46 @@ export default function(index){
 		let grouping = groupFunc.call(this);
 
 
-		console.log(eighthArray,'single')
+		console.error(eighthArray,'single')
 		grouping.forEach( group => {
+			let groupInt = 2,
+					tempY,
+					groupTemp;
 
-			let flip = group[0].y > this.get('measure_midPoint');
+			//check if rests	
+			if(group.some(a => a === "rest")){
+				if(!group.every(a => a === "rest")){
+
+				}else{
+
+				}
+			//check if is flipped
+			}else if(group.every(a => !a.isFlip) || group.every(a => a.isFlip)){
+				// draw beam
+				console.error('all/not flipped')
+			}else if(group.some(a => a.chord)){
+				//group.map(  beat =>  beat.chord?beat.chord[beat.chord.length-1])
+				while(group[--groupInt]){
+					groupTemp = group[groupInt]
+					if(groupTemp.chord && groupTemp.isFlip){
+						tempY	= groupTemp.chord[groupTemp.chord.length-1];
+			
+						group[groupInt].y = (tempY.note * 6) - ((3-tempY.o)*(6*7))
+					}
+				}
+				console.error('a chord',group)	
+			}else{
+				console.error('a flip')	
+				group[0].isFlip = group[1].isFlip
+			}
+				//all aren't flipped
 
 			if((group[1] === "rest") || !group[1]){
 
-				let source = this.get('elements').eight_note[flip?'flipVertical':'default'] * 10 + 12;
+	//			let source = this.get('elements').eight_note[flip?'flipVertical':'default'] * 10 + 12;
 
 				console.log('drawing eight note singles',group)
-				drawItem.call(this,ctx,this.get('graphics'),source,this.get('measureIndex'),group[0].x,group[0].y)
+//				drawItem.call(this,ctx,this.get('graphics'),source,this.get('measureIndex'),group[0].x,group[0].y)
 
 			}else{
 							let start = group[0],

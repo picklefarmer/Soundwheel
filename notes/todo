@@ -1,5 +1,8 @@
+have stave draw initial stavebars and clef canvas | efficiency
 
 flip notes on midpoint : vertical
+
+add scroll toggle for mobile | edit mode
 
 ---- svg --- to ⦑⢑ canvas ----
 	 add relative C -> c

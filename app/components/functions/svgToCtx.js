@@ -15,7 +15,7 @@ export default function(TrebleGraph,vO,hO){
 			}
 
 			for(var cInt = 0; cInt < cLen;cInt++){
-				console.error(curve.C[cInt],curve.C,cInt,'allow')
+//				console.error(curve.C[cInt],curve.C,cInt,'allow')
 				let	[a,b,c] = curve.C[cInt];
 
       	ctx.bezierCurveTo(hO+a[0],vO+a[1],

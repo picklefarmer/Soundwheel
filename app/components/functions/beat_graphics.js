@@ -2,7 +2,54 @@ import lengthFunc	from './beatLength';
 import restFunc	from './restLength';
 import testPlaceImage from './drawStaveItem';
 
-let isOdd = false,
+export default function(beat,index,isRest){
+
+	var notesLength = beat.length,
+			measureIndex = this.get('measureIndex'),
+			noteIndex 	= 0;
+	
+  if(!isRest){	// drawBar()   || grouping <= ! 
+    for(noteIndex; noteIndex < notesLength;noteIndex++){
+      drawGraphics.call(this,beat[noteIndex],noteIndex,beat,index,measureIndex)
+    }
+  }else{
+		restGraphics.call(this,beat,index,measureIndex)
+  }
+}
+
+let drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
+
+	let	octave				=	12,
+			current				= beat.note + (3-beat.o)*octave,
+			y							=	(beat.note * 6) - ((3-beat.o)*(6*7)),
+			isFlip				= flip.call(this,y),
+			note,
+			beatLength;
+
+  if(noteIndex){
+
+    let next        = m_beat[noteIndex-1],
+        nextBeat    = next.note + (3-next.o)*octave,
+        difference  = Math.abs(nextBeat - current);
+    
+		odd(difference,isOdd)
+
+  }else{
+
+    isOdd = false;
+
+  }
+		beatLength = lengthFunc.call(this,beat,x,y,noteIndex,isFlip,m_beat)
+    
+    note = [ beat, x , y, beatLength, measureIndex, isOdd, isFlip ] ;
+    //note = [ beat, x , y,'quarter_note'/* beatLength*/, measureIndex, isOdd ] ;
+
+
+    placeImage.apply(this,note)
+            
+},
+
+isOdd = false,
 
 odd = function(difference,isOdd){
 
@@ -67,9 +114,9 @@ restGraphics = function(beat,x,measureIndex,index){
 	//	beat,measureIndex,index)
 	let restLength = restFunc.call(this,beat),
 			rest			 = [ beat , x , -50, restLength, measureIndex];
-			this.get('barArray').push('rest')
 			console.log('restmap', restLength)
 			placeImage.apply(this,rest)
+};
 		/*				
 			console.log(beat,`rests 
 											is
@@ -88,55 +135,4 @@ restGraphics = function(beat,x,measureIndex,index){
 										false,0)
 										*/
 
-},
 
-drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
-
-	let	octave				=	12,
-			current				= beat.note + (3-beat.o)*octave,
-			y							=	(beat.note * 6) - ((3-beat.o)*(6*7)),
-			isFlip				= flip.call(this,y),
-			note,
-			beatLength;
-
-  if(noteIndex){
-
-    let next        = m_beat[noteIndex-1],
-        nextBeat    = next.note + (3-next.o)*octave,
-        difference  = Math.abs(nextBeat - current);
-    
-		odd(difference,isOdd)
-
-  }else{
-
-    isOdd = false;
-
-  }
-		beatLength = lengthFunc.call(this,beat,x,y,noteIndex,isFlip)
-    
-    note = [ beat, x , y, beatLength, measureIndex, isOdd, isFlip ] ;
-    //note = [ beat, x , y,'quarter_note'/* beatLength*/, measureIndex, isOdd ] ;
-
-
-    placeImage.apply(this,note)
-            
-};
-
-
-export default function(beat,index){
-
-	var notesLength = beat.length,
-			measureIndex = this.get('measureIndex'),
-			noteIndex 	= 0;
-	
-	console.log(beat,index,notesLength,'beat_graphics')
-
-  if(!beat.rest){	// drawBar()   || grouping <= ! 
-    for(noteIndex; noteIndex < notesLength;noteIndex++){
-			console.log(notesLength,noteIndex,' noteIndex check')
-      drawGraphics.call(this,beat[noteIndex],noteIndex,beat,index,measureIndex)
-    }
-  }else{
-		restGraphics.call(this,beat,index,measureIndex)
-  }
-}

@@ -4,17 +4,18 @@
       button{action 'toggleSet' 'tab'} tab 
       button{action 'toggleSet' 'treble'} treble clef
     if (e-q viewing "tab")
-      .tab-stave  
-        each theSong as |measure|
-          div style="display:inline-block;border:1px black solid;"
-            each measure as |string|
-              div style="border: solid 1px white"
-                each string as |beat|
-                  span
-                    if (e-q beat 0)
-                      |-
-                    else
-                      =beat
+      if song.selected.isFulfilled 
+        each theSong as |part index|
+          clef-pane [
+            block=song.tones.indexes
+            noteMatrix=part
+            elements=elements
+            graphics=canvas
+            isBass=true
+            index=index
+            canvasCollect=canvasCollect
+            action=previewImage
+            ]
     else
       if song.selected.isFulfilled 
         each theSong as |part index|
@@ -27,4 +28,16 @@
             canvasCollect=canvasCollect
             action=previewImage
             ]
+    /if (e-q viewing "tab")
+      .tab-stave  
+        each theSong as |measure|
+          div style="display:inline-block;border:1px black solid;"
+            each measure as |string|
+              div style="border: solid 1px white"
+                each string as |beat|
+                  span
+                    if (e-q beat 0)
+                      |-
+                    else
+                      =beat
 

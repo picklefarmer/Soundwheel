@@ -1,25 +1,25 @@
 [
 {
-	"map":[ "b","b" ,"r" ,"r"	 , "b","b","r","r"],
+	"map":[ "b","b" ,"r" ,"r"	 , "b",  "b", "r", "r"],
 	"lyric":"knowing of you",
 	"notes":[
 				[null,null,null,null ,null,null ,null,null],
-				[null,null,null,null,			3,null ,null,null],
-				[null,null,null,null ,null,		 5,null,null],
-				[null,2,null,null,			3,null ,null,null],
+				[null,null,null,null ,	 3,null ,null,null],
+				[null,null,null,null ,null, 	 5,null,null],
+				[null,	 2,null,null ,	 3,null ,null,null],
 				[   1,null,null,null ,null,null ,null,null],
 				[null,null,null,null ,null,null ,null,null]
 	]
 },
 {
-	"map":[ "s","r" ,"r" ,"r" ,"b" ,"b" ,"b","r"],
+	"map":[ "s","r" ,"b" ,"b" ,"b" ,"r" ,"b"	,"b"],
 	"lyric":"makes my soul, shiny",
 	"notes":[
 				[null,null,null,null,null,null,null,null],
 				[null,null,null,null,null,null,null,null],
 				[		3,null,null,null,   5,null,null,null],
-				[null,null,null,null,null,null,		1,null],
-				[null,null,null,null,null,	 3,		3,null],
+				[null,null,	 12,null,null,null,null,	12],
+				[null,null,	 11,   3,null,null,	 3,		11],
 				[null,null,null,null,null,null,null,null]
 	]
 },
