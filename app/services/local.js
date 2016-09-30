@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import EnvelopBeat from './functions/envelopBeat';
+import SustainBeat from './functions/sustainBeat';
 
 export default Ember.Service.extend({
 	init(){
@@ -169,60 +171,25 @@ console.log(selection,'local and selected')
 			
 		if(isBeat){
 
-			envelopBeat.call(this,value,isRest)
+			EnvelopBeat.call(this,value,isRest)
 			console.log(`
 											all aboard
 										 	the beat
 										 	train`,measure)
 			
 		}else{
-
       if(value.length === 6){
-        console.log(6,value) 
-        measure.replace(0,6,value)
-        console.log("end",this)
+  //      measure.replace(0,6,value)
+				SustainBeat.call(this,value)
       }else{
         let [fret,string] = value;
         console.log(string,fret,this) 
         measure.replace(string,1,fret)
       }
 		}
+    this.get('playMatrix.beat').call(this,beat)
   
   }
 });
 
-var envelopBeat = function(update,isRest){
 
-		let measure = this.get('selected.measure.notes'),
-				map			=	this.get('selected.measure.map'),
-				type		=	isRest? 'r' : (['b','s'][~~this.get('sustain')]),
-				beat    = this.get('beat');
-
-		if(update.length){
-			map.replace(beat,beat+1,type)
-
-			let score = measure.map(
-				function(string,n){
-
-					if(string.length){//if string isArray
-						string[beat] = update[n]
-
-					}else{
-
-						string = []
-						string[beat] = update[n]
-
-					}
-
-					return string
-				});
-			console.log(score, `this is the
-										 	result of the map`)	
-			measure.replace(0,6,score)
-			//measure[arguments.length]
-		}else{
-			//let [fret,string];
-			//measure.replace(string,1,fret)
-//				
-		}
-}

@@ -44,7 +44,7 @@ export default Ember.Route.extend({
 				},
 
 			ride:function(x,y){
-
+console.error('ride', x,y)
 				this.router.replaceWith("song",{x:x,y:y})
 
 			},

@@ -4,10 +4,10 @@
 	"lyric":"knowing of you",
 	"notes":[
 				[null,null,null,null ,null,null ,null,null],
-				[null,null,null,null ,	 3,null ,null,null],
-				[null,null,null,null ,null, 	 5,null,null],
-				[null,	 2,null,null ,	 3,null ,null,null],
-				[   1,null,null,null ,null,null ,null,null],
+				[null,	3,null,null ,	 3,null ,null,null],
+				[	  5,null,null,null ,null, 	 5,null,null],
+				[null,	3,null,null ,	 3,null ,null,null],
+				[null,null ,null,null ,null,null ,null,null],
 				[null,null,null,null ,null,null ,null,null]
 	]
 },
@@ -24,14 +24,26 @@
 	]
 },
 {
-	"lyric":"for - ever I'm en - joy - ing true",
-	"map":[ "b","s" ,"r" ,"r" ,"b" ,"b" ,"b","r" ],
+	"map":[ "s","r" ,"b" ,"b" ,"r" ,"r" ,"b"	,"b"],
+	"lyric":"it has it's ups and downs",
 	"notes":[
 				[null,null,null,null,null,null,null,null],
 				[null,null,null,null,null,null,null,null],
-				[		3,	 1,null,null,null,null,null,null],
-				[null,null,null,null,		1,null,		1,null],
-				[null,null,null,null,null,	 3,		3,null],
+				[		3,null,null,null,null,null,null,null],
+				[null,null,	 12,   2,null,null,  2,		12],
+				[null,null,null,   3,null,null,	 3,	null],
+				[null,null,null,null,null,null,null,null]
+	]
+},
+{
+	"lyric":"for - ever I'm en - joy - ing true",
+	"map":[ "b","b" ,"r" ,"r" ,"b" ,"b" ,"b","b" ],
+	"notes":[
+				[null,null,null,null,null,null,null,null],
+				[		3,null,null,null,null,	 3,null,null],
+				[null,	 5,null,null,	 5 ,null,null,null],
+				[		3,null,null,null,null,	 3,null,		1],
+				[null,	 5,null,null,	 5 ,null,	  3,		3],
 				[null,null,null,null,null,null,null,null]
 	]
 }

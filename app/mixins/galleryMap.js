@@ -41,14 +41,15 @@ let Suspension =	function(){
 
 };
 	
-export default Ember.Mixin.create(Stave,{
+
+let MIXIN = Ember.Mixin.create(Stave,{
 
 	initFunc(){
 		console.log('this is ctx' , this)
 		let	context = document.createElement('canvas'),
 			ctx = context.getContext('2d');
 
-			context = document.body.appendChild(context)
+			//context = document.body.appendChild(context)
 
 			console.log(context,ctx,'mixin of gallery')
 			this.set('song.options.stave',ctx)
@@ -101,5 +102,6 @@ export default Ember.Mixin.create(Stave,{
 		},this)
 		console.log(this.get('elements'),'elements graphic array')
 	}
-})
-
+});
+MIXIN[Ember.NAME_KEY] = "Gallery_Stave"
+export default MIXIN

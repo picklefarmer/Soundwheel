@@ -15,4 +15,6 @@ export default function(){
 		}catch(e){
 		    console.log(e)
   		}
+   this.sendAction('save')
+					 //return this.get('song.selected.selection')
 }

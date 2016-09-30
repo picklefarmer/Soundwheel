@@ -1,10 +1,11 @@
 [	{	"name":	"new",		"type":"core-option"	,"enabled":true},
 	{	"name":	"save",		"type":"core-option"	,"enabled":true},
-	 {	"name":	"onLine",	"type":"check-option","class":"slideThree"},
-	 {	"name":	"clear",	"type":"core-option"},
-	 {	"name":	"isFaded",	"type":"check-option","class":"slideTwo"},
-	 {	"name":	"isCleared","type":"check-option","class":"slideTwo"},
-	 {	"name":	"noteType",	"type":"check-option","class":"slideTwo"}
-	]
+
+  {	"name":	"onLine",	"type":"check-option","class":"slideThree"},
+  {	"name":	"clear",	"type":"core-option"},
+  {	"name":	"isFaded",	"type":"check-option","class":"slideTwo"},
+  {	"name":	"isCleared","type":"check-option","class":"slideTwo"},
+  {	"name":	"noteType",	"type":"check-option","class":"slideTwo"}
+]
 
 

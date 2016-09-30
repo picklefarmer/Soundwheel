@@ -1,6 +1,7 @@
 import lengthFunc	from './beatLength';
 import restFunc	from './restLength';
-import testPlaceImage from './drawStaveItem';
+import drawImage from './drawStaveItem';
+import placeImage from './placeStaveImage';
 
 export default function(beat,index,isRest){
 
@@ -66,48 +67,6 @@ odd = function(difference,isOdd){
 
 flip = function(y){
 	return y > this.get('measure_midPoint')
-},
-
-placeImage = function(beat,x,y,beatLength,measureIndex,isOdd,isFlip){
-
-    let graphics	= this.get('graphics'),
-			 	dotted		= beatLength.mod,
-				beatName	=	beatLength.name,
-				source,
-				type		 	= isOdd?'stem':(isFlip?'flipVertical':'default');
-			
-		if(!beat.rest){	
-    		source   	= this.get('elements')[beatName][type] *10 +12
-		}else{
-				source		= this.get('elements')[beatName] * 10 +12
-		}
-
-		switch(dotted){
-				case undefined: break;
-				default: dotted = this.get('elements').dotted * 10 + 12;break;
-		}
-
-		// Just draw without stem for now | draw stem in with beam
-		if(beatName === "eight_note"){
-				if( isFlip ){		
-					source	 = this.get('elements')[beatName].stem * 10 +12;
-				}else{
-					source	 = this.get('elements')[beatName].m_stem * 10 +12;
-				}
-		}
-
-
-    console.log('place image graphics', beatLength,source, this.get('elements'))
-
-    testPlaceImage.call(this,this.get('ctx'),graphics,source,measureIndex,x,y,isOdd,0)
-
-		if(beat.natural === false){
-			let	flats		 	= this.get('elements').flat * 10 + 12;
-	    testPlaceImage.call(this,this.get('ctx'),graphics,flats,measureIndex,x,y,isOdd,-10)
-		}
-		if(dotted){
-			testPlaceImage.call(this,this.get('ctx'),graphics,dotted,measureIndex,x,y,isOdd,10)
-		}
 },
 
 restGraphics = function(beat,x,measureIndex,index){
