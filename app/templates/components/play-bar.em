@@ -1,12 +1,12 @@
 .playGroup
   .btn-group.btn-group-justified
-    span.btn.btn-default{action "sustain"}
+    a.btn.btn-default{action "sustain"}
       .sustainbtn
-    span.btn.btn-default{action "loop"}
+    a.btn.btn-default{action "loop"}
       .loopbtn
-    span.btn.btn-default{action "stepLeft"}
+    a.btn.btn-default{action "stepLeft"}
       .arrowbtn.arrow-left
-    span.btn.btn-default{action "play"}
+    a.btn.btn-default{action "play"}
       .arrowbtn.arrow-play
-    span.btn.btn-default{action "stepRight"}
+    a.btn.btn-default{action "stepRight"}
       .arrowbtn.arrow-right

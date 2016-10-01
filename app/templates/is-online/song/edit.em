@@ -1,2 +1,2 @@
 fret-board
-tool-bar
+tool-bar updateUrl="updateUrl"

@@ -1,6 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+
+  actions:{
+    updateUrl(){
+    
+      console.error('hello there')
+    }
+  }
 /*
 
 

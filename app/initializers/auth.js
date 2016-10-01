@@ -12,6 +12,7 @@ export function initialize(App) {
 
 
 	 App.inject('route:song', 'song', `service:song`)
+//	 App.inject('component:action-names', 'router', 'router:main')
 
     // isLogged = true ->
 /*

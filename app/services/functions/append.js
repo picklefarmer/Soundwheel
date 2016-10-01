@@ -1,17 +1,6 @@
+import blank from './generateBlank'
 export default function(index){
-	let beatDivision 	= this.get('song.division'),
-			map 					= [],
-			notes					= [],
-			strings 			= this.get('song.main.strings');
-
-	while(strings--){
-		notes.push([null])
-	}
-
-	while(beatDivision--){
-		map.push('r')
-	}
-
+  let {map,notes} = blank.call(this);
 
 	this.get('song.selected')
 					.insertAt(	index+1	,{

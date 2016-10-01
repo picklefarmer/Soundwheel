@@ -1,5 +1,6 @@
 	{
 		"default":true,
 		"organ":true,
-		"03_Square":true
-	}
+		"03_Square":true,
+		"01_Saw":true
+		}

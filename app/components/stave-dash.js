@@ -9,10 +9,10 @@ export default Ember.Component.extend(galleryMap,{
   classNames: 'stave-dash',
 
   actions:{
-previewImage(url){
-console.log('stave_dash')
-				this.sendAction('previewImage',url)
-},  
+	previewImage(url){
+		console.log('stave_dash')
+		this.sendAction('previewImage',url)
+	},  
     toggleSet(view){
       this.set('viewing', view)
     }

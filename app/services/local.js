@@ -106,10 +106,11 @@ export default Ember.Service.extend({
 
   selected(res,rej,selection){
     var om;
-console.log(selection,'local and selected')
     if(localStorage.songs){
+			console.log(selection,'local and selected')
       om = JSON.parse(JSON.parse(localStorage.songs)[selection])
       res(om)
+			Ember.run(this.get('options'),this.get('options.updateUrl'),selection)
     }else{
       Ember.$.getJSON("./scores/"+selection+".json")
        .then(om => {

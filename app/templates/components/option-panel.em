@@ -1,5 +1,6 @@
 li
   div
+    span Songs
     if song.names.isFulfilled
       select-me selection=song.selected content=song.names
     else
@@ -8,6 +9,7 @@ li
 
 li
   div
+    span Instrument
     if song.instrumentNames.isFulfilled
       select-me selection=song.instrument content=song.instrumentNames.filtered
     else
@@ -31,7 +33,7 @@ li
 li
   div: =span-me value=(mut song.selected.selection) rows=1 cols=10
 
-  =action-names
+  =action-names 
 
 /li
   div

@@ -1,21 +1,25 @@
-even out spacial differnces / add elongated stem | 
+lessons
 
-chord - groups : left/right | chord Bank
-
-lyrics 1_border "3d" graphic | pane
+key signature
 
 flipToggle chordBank --➙ stems and augmentation
 flipToggle lyricsPane --➙ stave preview
 
+chord - groups : left/right | chord Bank
+
+
+
 per routeOrComponent config - adjustable zoom level
 
+
+
+
+
 chordBank connect dots into constelations ⢑ chord ,Chart
-
-lessons
-
-key signature
 
 animate notes to pace L:R along noteLength
 
 maze on guitar ==➙ think quick minigame
 Jungle Stratego ⢑ minigame
+
+lyrics 1_border "3d" graphic | pane
