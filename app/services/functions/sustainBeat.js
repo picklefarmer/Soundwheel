@@ -15,10 +15,10 @@ let 	division 			=	this.get('division'),
 		newNotes.push([null])
 	}
 */
-		newMap.push('s')
+		newMap.push(8)
 
 	while(divisionCount--){
-		newMap.push('r')
+		newMap.push(0)
 	}
 	
 	map.replace(0,division,newMap)

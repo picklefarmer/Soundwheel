@@ -1,3 +1,6 @@
+$borderWidth:.15rem;
+@import "compass/css3/box-shadow";
+@import "compass/functions/lists";
 .inventory{
 	display:inline-block;
 	height:100%;
@@ -5,6 +8,10 @@
 }
 
 .chordBank{
+  li{
+    margin:$borderWidth;
+    outline:none;
+  }
 	background:#aaa;
 //	width:100%;
 //	left:0px;
@@ -42,6 +49,12 @@
 		}
 	}
 }
+.match{
+  @include box-shadow( rgba(0,0,0,0.75) 0px 0px 6px 4px);
+  margin:0 !important;
+	border:$borderWidth solid cyan;
+}
+
 /*
 .loading{
 	background-image:url(../images/loading.gif);

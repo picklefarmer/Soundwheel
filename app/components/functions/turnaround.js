@@ -30,7 +30,7 @@ export default function(song){
 		
 			let type = map[f]						
 			
-			NoteLength.call(notes,type,[map,notes[e],e])
+			NoteLength.call(notes,type,[map,notes[e],e,type])
 
 			if(notes[e].length){
 				notes[e].sort((a,b)=>(a.note + a.o*12)<(b.note+b.o*12))

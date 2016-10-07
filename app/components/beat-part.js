@@ -24,8 +24,10 @@ export default Ember.Component.extend({
 		}
 	}),
 
-  isRest:Ember.computed.equal('beatType','r'),
-  isNote:Ember.computed.equal('beatType','b'),
+  //isRest:Ember.computed.equal('beatType','r'),
+  isRest:Ember.computed.equal('beatType',0),
+  //isNote:Ember.computed.equal('beatType','b'),
+  isNote:Ember.computed.equal('beatType',1),
 
 didInsertElement(){
     this.set('active',Ember.computed.equal('boundValue',this.get('index')))

@@ -13,6 +13,9 @@ export default function(beat,x,y,beatLength,measureIndex,isOdd,isFlip){
 		}else{
 				source		= this.get('elements')[beatName] * 10 +12
 		}
+		if(beatName === 'whole_note'){
+			source = this.get('elements')[beatName].default * 10 +12
+		}
 
 		switch(dotted){
 				case undefined: break;

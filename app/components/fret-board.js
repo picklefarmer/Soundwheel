@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import play from '../mixins/play';
+//import play from '../mixins/play';
 import chordHover from './functions/chordHover';
 import dotChord from './functions/dotChord';
 import mouseFormat from './functions/mouseFormat';
 import pushChord from './functions/pushChord';
 import pushNote from './functions/pushNote';
 
-export default Ember.Component.extend(play,{
+export default Ember.Component.extend({
   options:Ember.inject.service(),
 	song:Ember.inject.service(),
 
@@ -20,6 +20,7 @@ export default Ember.Component.extend(play,{
 	verticalTab:Ember.computed('options.verticalTab',function(){
 				return this.get('options.verticalTab')
 	}),
+
 	mouseFormat,
 	pushChord,
 	pushNote,
@@ -31,9 +32,6 @@ export default Ember.Component.extend(play,{
 	volume:	0.25,
 
 	didInsertElement(){
-
-		//TODO: check this //
-   	this.get('tones.strings')
 
 		Ember.$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
 	},

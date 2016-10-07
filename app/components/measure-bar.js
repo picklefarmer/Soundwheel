@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 
     time:Ember.computed.oneWay('controller.editScore.length'),
 
-    attributeBindings:["dims:style"],
+//    attributeBindings:["dims:style"],
 
 	dims:Ember.computed('width',{
 		get(){

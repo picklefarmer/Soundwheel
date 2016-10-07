@@ -24,23 +24,41 @@ const mayu = function(a,beat){
 
 
 const targetScale = 1;
-
+var yFactor = offset+(scale/2),
+		xFactor	=	offset/2 + (scale/2);
 var meterCache = [[],[],[],[],[],[]];
 var obj = {};
 export default obj;
 
 obj.beat = function(beat){
-  this.get('selected.measure').notes.forEach(function(a,string){
-			console.log('what is it:',a,beat,a[beat])
-    let fret = a[beat] || mayu.call(this,a,beat),
-        boardX = offset+(fret*x)+scale/2,
-        boardY = offset/2+(y*string)+scale/2;
-    if(fret){
-		  Ember.run(this.get('tones').objectAt(string),'play',fret,2)
-      boardWalk.call(this.get('options.frontView'),boardX,boardY)
-    }    
-  },this)
+	let audio = this.get('tones'),
+			view	=	this.get('options.frontView'),
+			time	= this.get('selected.measure.map').objectAt(beat);
+
+		this.get('selected.measure').notes
+						.map( (string,idx) => [string[beat],idx]	)
+						.filter( group => group[0])
+						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx])
+						.forEach ( obj => {
+								Ember.run(audio.objectAt(obj[3]),'play',obj[2],time)
+								boardWalk.call(view,obj[0],obj[1])						
+						},this)
 }
+
+const boardWalk = function(boardX,boardY){
+		window.requestAnimationFrame(()=>{
+       	this.clearRect(0,boardY-y/2,900,y) 
+ 				this.beginPath()
+ 				this.arc(boardX,	
+				boardY,
+				((scale/2)/rate)*20 || l,
+				0,
+				2*Math.PI)
+   			this.closePath();
+   			this.fill()
+	})
+};
+
 
 obj.audio = function(measure,args){
 	
@@ -48,7 +66,7 @@ obj.audio = function(measure,args){
 				tempo = this.get('tempo'),
 				measure = this.get('selected.measure');
 	
-		tones.setEach('ctx.gain.value',0.001)
+		//tones.setEach('ctx.gain.value',0.001)
 		
 		//Ember.run.next(this,'pulse')
 
@@ -57,7 +75,7 @@ obj.audio = function(measure,args){
 		if(measure.notes){
 
 			//Audio 
-			measure.notes.forEach( Matrix , tones )
+			//measure.notes.forEach( Matrix , tones )
 	
 
   		// Visual
@@ -67,20 +85,16 @@ obj.audio = function(measure,args){
 		}	
 }
 
-const Matrix = function(fret,string){
+const Matrix = function(string,stringIdx){
 		
 		let time = 0;
-		if(typeof fret === "object"){
-			fret.forEach(function(fret,time){
+			string.forEach(function(fret,time){
 				if(fret !== null){
-					Ember.run(this.objectAt(string),'play',fret, time)
+					Ember.run(this.objectAt(stringIdx),'play',fret, time)
 				}else{
 					console.log(' is null ',fret )
 				}
 			},this)
-		}else{
-			Ember.run(this.objectAt(string),'play',fret, time)
-		}
 }
 
 const Draw = function(fret,string){
@@ -124,19 +138,4 @@ obj.stanzaFunc = function(time){
 		}
 	})
 };
-
-const boardWalk = function(boardX,boardY){
-		window.requestAnimationFrame(()=>{
-       	this.clearRect(0,boardY-y/2,900,y) 
- 				this.beginPath()
- 				this.arc(boardX,	
-				boardY,
-				((scale/2)/rate)*20 || l,
-				0,
-				2*Math.PI)
-   			this.closePath();
-   			this.fill()
-	})
-};
-
 

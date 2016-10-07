@@ -4,7 +4,7 @@ import New from './functions/newAction';
 
 export default Ember.Service.extend({
 
-  verticalTab:true,
+  verticalTab:false,
 	song:Ember.inject.service(),
   router:Ember.inject.service('-routing'),
   updateUrl(selected){

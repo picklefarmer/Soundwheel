@@ -1,6 +1,6 @@
 ul class=menubar
   li{action 'click'}
-    h2 (----------------O)
+    h2 &#127913;
   if barVisible
     if song.routes.isFulfilled
       each song.routes as |page|

@@ -26,8 +26,7 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	tones:Ember.inject.service(),
 	options:Ember.inject.service(),
 
-  chordEditFlag:false,
-
+  chordEditFlag:true,
 	isPulse:true,
 
 		stanza:Ember.computed('tempo',{
@@ -71,6 +70,12 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
     pulse,
 
     clock(args){
+
+			if(this.pause){
+					if(!args){
+						Ember.run(this,'pulse',0)
+					}}
+						/*
 			console.log(args,this.pause)
 			if(this.pause){
 					if(!args){
@@ -84,8 +89,9 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 					}else{
 					 	Ember.run(this,this.get('playMatrix.audio'))
 					}
-           Ember.run.later(this,'clock',this.get('tempo'))   
+  //         Ember.run.later(this,'clock',this.get('tempo'))   
 		} 
+		*/
     },
 
     volume:Ember.computed({

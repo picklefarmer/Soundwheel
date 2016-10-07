@@ -50,6 +50,14 @@ let drawGraphics = function(beat,noteIndex,m_beat,x,measureIndex){
             
 },
 
+restGraphics = function(beat,x,measureIndex,index){
+	//	beat,measureIndex,index)
+	let restLength = restFunc.call(this,beat),
+			rest			 = [ beat , x , -50, restLength, measureIndex];
+			console.log('restmap', restLength)
+			placeImage.apply(this,rest)
+},
+
 isOdd = false,
 
 odd = function(difference,isOdd){
@@ -67,14 +75,6 @@ odd = function(difference,isOdd){
 
 flip = function(y){
 	return y > this.get('measure_midPoint')
-},
-
-restGraphics = function(beat,x,measureIndex,index){
-	//	beat,measureIndex,index)
-	let restLength = restFunc.call(this,beat),
-			rest			 = [ beat , x , -50, restLength, measureIndex];
-			console.log('restmap', restLength)
-			placeImage.apply(this,rest)
 };
 		/*				
 			console.log(beat,`rests 

@@ -1,30 +1,42 @@
 [
 {
-	"map":[ "b","b" ,"r" ,"r"	 , "b",  "b", "r", "r"],
-	"lyric":"knowing of you",
+	"map":[ 	8,	0 ,		0,		0, 	 0,		0,	 0,		0],
+	"lyric":"as it stands",
 	"notes":[
-				[null,null,null,null ,null,null ,null,null],
-				[null,	3,null,null ,	 3,null ,null,null],
-				[	  5,null,null,null ,null, 	 5,null,null],
-				[null,	3,null,null ,	 3,null ,null,null],
-				[null,null ,null,null ,null,null ,null,null],
-				[null,null,null,null ,null,null ,null,null]
+				[null,null,null,null ,null,null,null,null],
+				[	 11,null, null,null ,null,null,null,null],
+				[	  5,null,null,null ,null,null,null,null],
+				[null,null, null,null ,null,null,null,null],
+				[null,null,null,null ,null,null,null,null],
+				[null,null,null,null ,null,null,null,null]
 	]
 },
 {
-	"map":[ "s","r" ,"b" ,"b" ,"b" ,"r" ,"b"	,"b"],
+	"map":[ 	1,	1 ,		0,		0, 	 1,		1,	 0,		0],
+	"lyric":"knowing of you",
+	"notes":[
+				[null,null,null,null ,null,null,null,null],
+				[null,	3, null,null ,	 3,null,null,null],
+				[	  5,null,null,null ,null, 	5,null,null],
+				[null,	3, null,null ,	 3,null,null,null],
+				[null,null,null,null ,null,null,null,null],
+				[null,null,null,null ,null,null,null,null]
+	]
+},
+{
+	"map":[ 	2,	 0,		1, 	 1,		1,	 0,	  1,	 1],
 	"lyric":"makes my soul, shiny",
 	"notes":[
 				[null,null,null,null,null,null,null,null],
 				[null,null,null,null,null,null,null,null],
 				[		3,null,null,null,   5,null,null,null],
 				[null,null,	 12,null,null,null,null,	12],
-				[null,null,	 11,   3,null,null,	 3,		11],
+				[null,null,	 11,   3,null,null,	  3,	11],
 				[null,null,null,null,null,null,null,null]
 	]
 },
 {
-	"map":[ "s","r" ,"b" ,"b" ,"r" ,"r" ,"b"	,"b"],
+	"map":[ 2,0 ,1 ,1 ,0 ,0 ,1	,1],
 	"lyric":"it has it's ups and downs",
 	"notes":[
 				[null,null,null,null,null,null,null,null],
@@ -37,7 +49,7 @@
 },
 {
 	"lyric":"for - ever I'm en - joy - ing true",
-	"map":[ "b","b" ,"r" ,"r" ,"b" ,"b" ,"b","b" ],
+	"map":[ 1,1 ,0 ,0 ,1 ,1 ,1,1 ],
 	"notes":[
 				[null,null,null,null,null,null,null,null],
 				[		3,null,null,null,null,	 3,null,null],

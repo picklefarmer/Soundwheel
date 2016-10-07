@@ -1,12 +1,51 @@
+//import noteLength from './notLength';
+//
+const noteLength = function(noteIndex,map){
+	let notes = this,
+			mapForward = noteIndex,
+			mapReverse = noteIndex,
+			prevLength = 0,
+			noteLength = 1;
+
+	while(map[++mapForward] === 0){
+		noteLength++
+	}
+
+//	notes.map( note => note.l = noteLength)
+	map.replace(noteIndex,1, noteLength)
+
+},
+
+backCheck = function(){
+
+	while(map[--mapReverse] < 1){
+		prevLength--
+	}
+
+	if((map[mapReverse] > 1) && prevLength){
+		map[mapReverse] = (-prevLength)
+	}
+
+	map.replace(1,8,map)
+};
+
+
 export default function(update,isRest){
 
 		let measure = this.get('selected.measure.notes'),
 				map			=	this.get('selected.measure.map'),
-				type		=	isRest? 'r' : (['b','s'][~~this.get('sustain')]),
+				type		=	isRest? 0 : ([1,'s'][~~this.get('sustain')]),
+				//type		=	isRest? 'r' : (['b','s'][~~this.get('sustain')]),
 				beat    = this.get('beat');
 
+
 		if(update.length){
-			map.replace(beat,1,type)
+
+			if(type === 's'){
+				noteLength.call(update,beat,map)
+			}else{
+				map.replace(beat,1,type)
+			}
 
 			let score = measure.map(
 				function(string,n){

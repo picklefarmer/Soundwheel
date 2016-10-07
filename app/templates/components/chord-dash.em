@@ -1,6 +1,4 @@
-
 li
-  div: =song.chordEditFlag
 if chordEdit
   if isEditing
     li
@@ -13,7 +11,8 @@ if chordEdit
           button{action "chordCapture"} Capture
       if selected
         ar-peg isEditing="isEditing" higher=this click=null chord=selected as |string fret|
-          button{action "toggleSelected" string fret}  |}{|
+          button{action "toggleSelected" string fret} &#x2609;
+          /&#x2600;
 
 else
   li
@@ -24,5 +23,5 @@ else
     button{action "saveSelection"} Save
   if song.chords.isFulfilled
     each song.chords as |chord|
-      li class="{{if (arr-comp selection chord) match}}"
+      li class="{{if (arr-comp selection chord) 'match'}}"
         ar-peg chord=chord action="selector"
