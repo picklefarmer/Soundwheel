@@ -14,7 +14,7 @@ export default Ember.Component.extend(Stave,{
   }),
   width:40,
   height:40,
-  didInsertElement(){
+  willRender(){
 
     let ctx = this.get('element').getContext('2d'),
         type = this.get('type');

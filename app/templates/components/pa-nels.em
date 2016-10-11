@@ -1,12 +1,10 @@
-    .panel.panel-default
-      h3.panel-heading Panel Layout
-      ul.list-group.panel-body
-        if song.panels.isFulfilled
-          each song.panels as |configuration|
-            li.list-group-item
-              span.badge = configuration.name
-              | {{capitalize configuration.name}} Panel
-              .panel-body
-                /view "select" content=song.panels.menuBars value=configuration.options
-                /boolean-switch bar=configuration main=song.panels
-                  | Auto-hide
+.panel.panel-default
+  h3 Panel Layout
+  ul.list-group.panel-body
+    if song.panels.isFulfilled
+      each song.panels as |configuration|
+        li.list-group-item
+          span.badge {{caps-please configuration.name}}
+          .panel-body
+            select-me class="form-control" content=panelOptions selection=configuration.options
+            toggle-me isEnabled=configuration.enabled

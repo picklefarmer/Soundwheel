@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     //["|","-","|","-","|","-","|","-"]
 	/*
 	options:Ember.inject.service(),
-	didInsertElement(){
+	willRender(){
 		var element = this.get('element'),
 				ctx     = element.getContext('2d'),
 				width = Ember.$(document)[0].body.offsetWidth;

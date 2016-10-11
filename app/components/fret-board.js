@@ -17,9 +17,7 @@ export default Ember.Component.extend({
 
 	classNames:['tablet'],
 	classNameBindings:['verticalTab'],
-	verticalTab:Ember.computed('options.verticalTab',function(){
-				return this.get('options.verticalTab')
-	}),
+  verticalTab:Ember.computed.bool('options.verticalTab'),
 
 	mouseFormat,
 	pushChord,
@@ -31,7 +29,7 @@ export default Ember.Component.extend({
 	tempChord:[],
 	volume:	0.25,
 
-	didInsertElement(){
+	willRender(){
 
 		Ember.$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
 	},

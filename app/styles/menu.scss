@@ -1,6 +1,7 @@
 @import "properties";
 
 @import "compass/css3/box-shadow";
+@import "compass/functions/lists";
 @import "compass/css3/user-interface";
 @import "compass/css3/text-shadow";
 @import "compass/css3/background-clip";
@@ -18,7 +19,14 @@
 	top:0px;
 	width:100%;
 	border-bottom:2px solid grey;
+	h1{
+		background:#333;
+		color: #444;
+		margin:0px;	
+	}
 	li{
+		padding:none;
+		vertical-align:middle;
 		div{
 			top:0px;
 			cursor:pointer;

@@ -27,6 +27,7 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	options:Ember.inject.service(),
 
   chordEditFlag:true,
+	isBeat:false,
 	isPulse:true,
 
 		stanza:Ember.computed('tempo',{

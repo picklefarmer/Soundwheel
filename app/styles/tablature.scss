@@ -1,5 +1,10 @@
 @import "compass/css3/box-shadow";
+@import "compass/functions/lists";
 
+
+.vertical-dash{
+	transform: rotateZ(90deg);
+}
 
 .vertical-tab{
 	transform: translateX(-540px) translateY(545px) rotateZ(90deg);

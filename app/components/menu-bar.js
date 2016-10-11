@@ -1,9 +1,11 @@
 import Ember from 'ember';
+import Clock from '../mixins/clock';
 
 export default Ember.Component.extend({
 //	classNameBindings:['col-lg-12'],
 //    settings:Em.inject.service(),
   song:Ember.inject.service(),
+  icon:'\uD83D\uDD61',
 	menubar:"menubar",
 	barVisible:false,
 	sidebar:"sidebar",

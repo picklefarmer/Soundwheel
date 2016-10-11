@@ -9,10 +9,12 @@ export default Ember.Component.extend(Keydown,{
       this.set('selection',value)
     }
   },
+  willRender(){
+    this.set('selected',this.get('selection'))
+  },
   change(val){
     console.log('beginning',val.target.value)
     this.send('updateSelected',val.target.value)
   },
-  selection:"null"
 
 });

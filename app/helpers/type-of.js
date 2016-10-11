@@ -1,18 +1,18 @@
 import Ember from 'ember';
 
-export function typeOf(val,controller) {
-		let value = Ember.typeOf(val),
-        component = "";
+export function typeOf(val) {
+		let value = Ember.typeOf(val[0]),
+        component;
 
 				switch(value){
-            case 'number' : component   = "option-set";     break;
+            case 'number' : component   = "select-me";     break;
             case 'string' : component   = "rgb-pallet";     break;
-            case 'array'  : component   = "select-range";   break;
+            case 'array'  : component   = "option-set";   break;
             case 'object' : component   = "select-set";     break;
-            default       : component   = "boolean-switch"; break;
+            default       : component   = "toggle-me"; break;
         }
           
-    	  console.log(component,"component")
+    	  console.log(component,value,"component")
     return component
 
 }

@@ -9,19 +9,21 @@ if chordEdit
           button{action "deleteSelection"} Remove
         li
           button{action "chordCapture"} Capture
+        li
+          button{action "newSelection"} New
+        li
+          button{action "editSelected"} Edit
+        li
+          button{action "saveSelection"} Save
+
       if selected
-        ar-peg isEditing="isEditing" higher=this click=null chord=selected as |string fret|
-          button{action "toggleSelected" string fret} &#x2609;
+        ar-peg ableBody=true class=(if verticalTab 'vertical-dash') isEditing="isEditing" higher=this click=null chord=selected as |string fret type|
+          button{action "toggleSelected" string fret}: =type
           /&#x2600;
 
 else
-  li
-    button{action "newSelection"} New
-  li
-    button{action "editSelected"} Edit
-  li
-    button{action "saveSelection"} Save
   if song.chords.isFulfilled
     each song.chords as |chord|
-      li class="{{if (arr-comp selection chord) 'match'}}"
+      li class="{{if verticalTab 'vertical-dash'}} {{if (arr-comp selection chord) 'match'}}"
         ar-peg chord=chord action="selector"
+        /  =clock

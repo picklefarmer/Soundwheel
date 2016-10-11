@@ -57,18 +57,6 @@ export default Ember.Service.extend({
       Ember.$.getJSON("./json/mainDefault.json")
         .then( e => {
           res(e)
-          /*
-          var om = Object.keys(e)
-              .map(hash => {
-                return {
-                        "name"    : hash,
-                        "enabled" : e[hash].enabled,
-                        "options" : e[hash].options
-                        }
-              })
-
-              res(om)
-          */
         }) 
 
   },

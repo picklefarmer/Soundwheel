@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   classNames:['color-box'],
   didInsertElement(){
     var index = this.get('index'),
-        color = this.get('color')   ||  this.get('bar.options');
+        color = this.get('color');
 
 
     console.log('init rgb pallet',color,index)
@@ -17,10 +17,13 @@ export default Ember.Component.extend({
             
 	    	Ember.$(el).css('background-color', '#'+hex);
 	    	Ember.$(el).colpickHide();
-            console.log('hex Submit')
-            this.sendAction('action',hex,this.get('name'))
+        console.log('hex Submit')
+
+//        this.set('color',hex)
+        this.sendAction('action',hex)
     	}
     }).css('background-color', '#'+color)
+
   },   
   willDestroyElement(){
     Ember.$('.colpick').remove()

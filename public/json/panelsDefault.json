@@ -1,7 +1,7 @@
 {
- "option-panel"	: { "options":"right"	,"enabled":false	},
+ "option-panel"	: { "options":"right"	,"enabled":true	},
  "measure-bar"	: { "options":"bottom"	,"enabled":true 	},
- "chord-dash"	  : { "options":"left","enabled":false	},
+ "chord-dash"	  : { "options":"left","enabled":true	},
  "lyrics-pane"  : { "options":"middle","enabled":false 	},
  "meter-bar"	  : { "options":"middle","enabled":true	},
  "play-bar"		  : { "options":"middle","enabled":true  	}

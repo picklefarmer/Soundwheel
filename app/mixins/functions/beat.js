@@ -14,7 +14,7 @@ export default function(_,b){
 				return _
 
 
-		}
+	}
 
 /* 		updateMeter(beat,ctx,prog){
 //			var ctx = this.get('options.meterBar');

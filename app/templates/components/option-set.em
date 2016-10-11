@@ -1,7 +1,5 @@
 .panel-body
-  span.float.right
-    if selection
-      = selection
-    else
-      = bar.options
-  /view "select" content=range value=selected
+  each list as |string index|
+    .panel-body
+      span.float.right: =index
+      select-me class="form-control" selection=string content=content

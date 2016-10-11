@@ -20,6 +20,7 @@ export default Ember.Mixin.create({
 		stringsArr:[4,5,6],
 		fretsArr:[16,24,26],
 		tuningArr:['a','A','b','c','C','d','D','e','f','F','g','G'],
+						/*
 		strings:Ember.computed( 'content.tuning.options','content.strings.options',{
 			get(){
 				return 6
@@ -59,6 +60,7 @@ export default Ember.Mixin.create({
 			}
 		}),
 
+			*/
 		intervals:Ember.computed('content.tuning.options',{
 			get(){
 				console.log( ' init intervals ' ) ;

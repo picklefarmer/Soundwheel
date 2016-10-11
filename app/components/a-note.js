@@ -33,7 +33,11 @@ export default Ember.Component.extend({
 			return this.get('index') + this.get('low')
 		}
 	}),
-
+  
+  type:Ember.computed('noteClass',function(){
+    //return this.get('noteClass')?'&#x2600;':'&#127761;';
+    return this.get('noteClass')?'\u2600':'\uD83C\uDF11';
+  }),
 	noteClass:Ember.computed('index','fret','low',{
 		get(){
       console.log('note class')

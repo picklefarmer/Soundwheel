@@ -16,14 +16,16 @@ const noteLength = function(noteIndex,map){
 
 },
 
-backCheck = function(){
+backCheck = function(mapReverse){
+	let map = this,
+			prevLength = 0;
 
 	while(map[--mapReverse] < 1){
 		prevLength--
 	}
 
 	if((map[mapReverse] > 1) && prevLength){
-		map[mapReverse] = (-prevLength)
+		map.replace(mapReverse,1, -prevLength)
 	}
 
 	map.replace(1,8,map)
@@ -46,7 +48,7 @@ export default function(update,isRest){
 			}else{
 				map.replace(beat,1,type)
 			}
-
+			backCheck.call(map)
 			let score = measure.map(
 				function(string,n){
 

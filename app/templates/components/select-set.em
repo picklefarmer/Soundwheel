@@ -1,5 +1,9 @@
 .panel-body
-  each list as |value index|
+  each-in list as | name hex | 
     .panel-body
-      = value.name
-      rgb-pallet class="float right" action="updater" name=value.name color=value.hex
+      =name 
+      rgb-pallet [
+        class="float right"
+        action=(action "updater" name )
+        color=hex
+        ]

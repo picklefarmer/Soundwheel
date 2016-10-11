@@ -1,5 +1,5 @@
 if hasBlock
-  yield note
+  yield note type
 else
   div (*)
 

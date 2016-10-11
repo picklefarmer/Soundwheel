@@ -7,5 +7,4 @@
         li.list-group-item
           span.badge = configuration.name
           .panel-body
-            boolean-switch bar=configuration main=song.instrumentNames
-              | {{configuration.name}}
+            toggle-me isEnabled=configuration.enabled

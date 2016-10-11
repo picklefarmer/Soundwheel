@@ -7,6 +7,7 @@ module.exports = function(defaults) {
     // Add options here
 			sassOptions: {
 		  	includePaths: [
+					'bower_components/bootstrap-theme-bootswatch-flatly/scss/',
 		      'bower_components/foundation/scss',
 					'node_modules/compass-mixins/lib/'
 
@@ -19,7 +20,9 @@ module.exports = function(defaults) {
 
 	app.import(bower_dir + 'jquery-colpick/js/colpick.js')
 	app.import(bower_dir + 'jquery-colpick/css/colpick.css')
-
+	
+	app.import('vendor/bootstrap.min.css');
+	
 	app.import(bower_dir + 'firebase/firebase-debug.js')
 
   return app.toTree();

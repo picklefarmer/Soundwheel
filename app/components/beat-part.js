@@ -29,7 +29,7 @@ export default Ember.Component.extend({
   //isNote:Ember.computed.equal('beatType','b'),
   isNote:Ember.computed.equal('beatType',1),
 
-didInsertElement(){
+	willRender(){
     this.set('active',Ember.computed.equal('boundValue',this.get('index')))
   },
   click(){

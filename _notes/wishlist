@@ -7,6 +7,7 @@ flipToggle lyricsPane --➙ stave preview
 
 chord - groups : left/right | chord Bank
 
+animate chordDash buttons as moon cycle emojis
 
 
 per routeOrComponent config - adjustable zoom level

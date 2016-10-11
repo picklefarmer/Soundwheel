@@ -42,17 +42,7 @@ export default Ember.Service.extend({
           objArray = [];
 
           root.on("value", (snapshot) => {
-
-/*            snapshot.forEach(hash =>  {
-              objArray.push({
-                            "name":hash.key(),
-                            "enabled":hash.val().enabled,
-                            "options":hash.val().options
-                            })
-            })
-*/
               res(snapshot.val())
-  //          res(objArray)
           })
     },
 

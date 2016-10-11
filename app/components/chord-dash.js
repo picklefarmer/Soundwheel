@@ -1,9 +1,12 @@
 import Ember from 'ember';
+import Clock from '../mixins/clock';
 
 var debug, debug2;
 
 export default Ember.Component.extend({
 
+  options:Ember.inject.service(),
+  verticalTab:Ember.computed.bool('options.verticalTab'),
   song:Ember.inject.service(),
   tagName:"ul",
   classNames:['sidebar','chordBank'],

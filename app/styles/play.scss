@@ -1,3 +1,11 @@
+.playbar {
+  button{
+    margin:.25rem;
+    font-family:monospace;
+    font-size:6rem;
+  }
+
+} 
 @mixin fontFix($deg) {
 		$transforms: rotate($deg+deg);
 		-moz-transform: $transforms;
