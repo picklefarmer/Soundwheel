@@ -2,20 +2,19 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   song:Ember.inject.service(),
-	loopBtn:'\uD83D\uDD01',
 	classNames: ['playbar'],
   buttons:{
     sustain:"\u221e",
     stepLeft:"\u25c0",
     play:"\u23ef",
     stepRight:"\u25b6",
- //   loop:"=loopBtn",
+    isLoop:"\uD83D\uDD01",
   },  
 actions:{
   sustain(){
     this.toggleProperty('song.sustain')
   },
-  loop(){
+  isLoop(){
     this.toggleProperty('song.isLoop')
   },
 	back(){

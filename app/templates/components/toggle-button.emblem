@@ -1,3 +1,4 @@
 
-button{action 'actionUp'}: =yield
+=yield
+=bool
 /div{action 'flip' bubbles=false}: =yield

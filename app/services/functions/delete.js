@@ -15,14 +15,16 @@ export default function(index){
 	}else{
 
 		let beatIndex = this.get('song.beatIndex'),
-				strings		=	this.get('song.main.strings')+1,
+				strings		=	this.get('song.main.strings.options')+1,
 				map 			= this.get('song.selected.measure.map'),
 				theArr		=	[];
-		console.error(map,'pre - map')	
 //		map.replace(beatIndex,1,'r')
-		while(strings--){
+		console.error(map,'pre - map')	
+
+		for(var l = 0;l <= strings;l++){
 			theArr.push(null)	
 		}
+		console.error('theArr', theArr ) 
 
     Ember.run( this.get('song') ,this.get('song.content.update'),  theArr , true )
 

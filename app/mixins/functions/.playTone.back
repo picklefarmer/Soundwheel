@@ -1,0 +1,20 @@
+
+		  	//ctx.gain.setTargetAtTime(0.166,currentTime, envelope)
+//				ctx.gain.setTargetAtTime(0.001,currentTime + stanza,2)
+//		  	console.log(tone,endTime,"play")
+	//				endTime = (stanza?stanza/tempo:tempo)-offset,
+			//		tempo = this.get('song.tempo')/1000,
+					//tempo = this.get('song.tempo'),
+		//			offset= tempo/8,
+
+//					envelope = offset,//(Math.E/2),//  Math.PI/Math.E))/2,
+		  	//ramp(0.166,currentTime+tempo/16000)
+				//
+		  	//ctx.gain.exponentialRampToValueAtTime(0.001,currentTime)
+		  	//ctx.gain.setTargetAtTime(0.001,currentTime + tempo,0.15)
+	
+		  	//ctx.gain.exponentialRampToValueAtTime(0.166,currentTime+tempo/16000)
+				//
+		  	//ctx.gain.setTargetAtTime(0.166,currentTime+tempo/16000,0.15)
+
+

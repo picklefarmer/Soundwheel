@@ -22,6 +22,6 @@ let 	division 			=	this.get('division'),
 	}
 	
 	map.replace(0,division,newMap)
-	measure.replace(0,6,newNotes)
+	measure.replace(0,strings-1,newNotes)
 
 }

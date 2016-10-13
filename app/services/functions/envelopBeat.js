@@ -1,8 +1,7 @@
 //import noteLength from './notLength';
 //
-const noteLength = function(noteIndex,map){
-	let notes = this,
-			mapForward = noteIndex,
+const noteLength = function(notes,noteIndex,map){
+	let mapForward = noteIndex,
 			mapReverse = noteIndex,
 			prevLength = 0,
 			noteLength = 1;
@@ -16,19 +15,21 @@ const noteLength = function(noteIndex,map){
 
 },
 
-backCheck = function(mapReverse){
-	let map = this,
+backCheck = function(beat,map){
+
+	let divisions	 = this.get('division'),
+			mapReverse = beat,
 			prevLength = 0;
 
 	while(map[--mapReverse] < 1){
-		prevLength--
+		prevLength++
 	}
 
+	
+	console.log(map,beat, mapReverse,prevLength,"__check sustain")
 	if((map[mapReverse] > 1) && prevLength){
-		map.replace(mapReverse,1, -prevLength)
+		map.replace(mapReverse,1, [prevLength])
 	}
-
-	map.replace(1,8,map)
 };
 
 
@@ -40,19 +41,22 @@ export default function(update,isRest){
 				//type		=	isRest? 'r' : (['b','s'][~~this.get('sustain')]),
 				beat    = this.get('beat');
 
+				console.log(update,isRest,type,'is rest check')
 
 		if(update.length){
 
 			if(type === 's'){
-				noteLength.call(update,beat,map)
+				noteLength.call(this,update,beat,map)
 			}else{
-				map.replace(beat,1,type)
+				map.replace(beat,1,[type])
 			}
-			backCheck.call(map)
+			backCheck.call(this,beat,map)
 			let score = measure.map(
 				function(string,n){
 
 					if(string.length){//if string isArray
+						let test_input = update[n];
+						console.log(test_input, "test_input",update,string)
 						string[beat] = update[n]
 
 					}else{

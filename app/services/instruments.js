@@ -1,4 +1,7 @@
 import Ember from 'ember';
+const equalizer = function( a,b) {
+	return a-0.01
+};
 
 export default Ember.Service.extend({
 	song:Ember.inject.service(),
@@ -11,13 +14,15 @@ export default Ember.Service.extend({
 			if(instrument.isFulfilled){
 			  console.log("service _ instrument" , instrument)
 			  if(instrument.get('real')){
-				real = instrument.get('real');
-				imag = instrument.get('imag');
-				console.log(real,imag, " did inserst correctly " ) 
-				return {real,imag} 
+					real = instrument.get('real');
+					imag = instrument.get('imag');
+					console.log(real,imag, " did inserst correctly " ) 
+
+					return {			real,			imag			} 
 			  }else{
-				console.log('service _ instrument, "default"')
-				return "default"
+					console.log('service _ instrument, "default"')
+
+					return "default"
 			  }
 			}
 		}

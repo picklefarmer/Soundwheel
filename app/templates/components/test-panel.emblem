@@ -1,0 +1,8 @@
+.btn.panel
+  button.btn{action 'ren'}
+.panel
+  if song.selected.isFulfilled
+    h1: =song.selected.measure.map
+    h1: =song.selected.measure.notes
+    each song.selected.measure as |note|
+      h1: =note.map

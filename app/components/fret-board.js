@@ -29,7 +29,7 @@ export default Ember.Component.extend({
 	tempChord:[],
 	volume:	0.25,
 
-	willRender(){
+	didInsertElement(){
 
 		Ember.$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
 	},

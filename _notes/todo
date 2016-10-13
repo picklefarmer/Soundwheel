@@ -1,5 +1,12 @@
-meter-bar error
 sound | endtime (better) scoping
+remove test-panel
+
+*inch noteGraphics && animate dropInNotes
+note graphics available in panel Options as ;emoji character,
+clearNotes | function mixins + property on service
+ctrl+arrow keys "swapBlocks" | meter-panel/measure-panel  &&  click+drag/drop
+
+loop button / highlight-toggle: component 
 
 
 have stave draw initial stavebars and clef canvas | efficiency

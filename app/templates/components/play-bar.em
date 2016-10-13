@@ -1,5 +1,6 @@
+h1: song.isLoop
 each-in buttons as |name desc|
-  toggle-button action=('action' name)
+  toggle-button action=('action' name) 
     desc
 
 /button{action "sustain"} href="sustain" &infin;

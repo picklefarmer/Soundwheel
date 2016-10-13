@@ -1,5 +1,7 @@
 .panel-body
-  each list as |string index|
-    .panel-body
-      span.float.right: =index
-      select-me class="form-control" selection=string content=content
+  .list-group 
+    each list as |string index|
+      .list-group-item
+        .panel-body
+          select-me class="form-control" selection=string content=content
+          span.float.badge: =index

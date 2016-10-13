@@ -1,3 +1,5 @@
+import NoteGraphic from "./noteGraphic";
+
 const x = 67;
 const y = 50;
 const offset = 18;
@@ -47,15 +49,8 @@ obj.beat = function(beat){
 
 const boardWalk = function(boardX,boardY){
 		window.requestAnimationFrame(()=>{
-       	this.clearRect(0,boardY-y/2,900,y) 
- 				this.beginPath()
- 				this.arc(boardX,	
-				boardY,
-				((scale/2)/rate)*20 || l,
-				0,
-				2*Math.PI)
-   			this.closePath();
-   			this.fill()
+       	this.clearRect(0,boardY-y/2,900,y)
+				NoteGraphic.call(this,boardX,boardY)	
 	})
 };
 
