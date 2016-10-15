@@ -26,4 +26,5 @@ else
     each song.chords as |chord|
       li class="{{if verticalTab 'vertical-dash'}} {{if (arr-comp selection chord) 'match'}}"
         ar-peg chord=chord action="selector"
+          =song.main.bankmoji.options
         /  =clock

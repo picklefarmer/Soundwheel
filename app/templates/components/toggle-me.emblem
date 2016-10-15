@@ -1,1 +1,3 @@
-button.btn{action 'switchy'}: =yield
+=input type='checkbox' action='action' checked=prop
+/(mut (get song name))
+

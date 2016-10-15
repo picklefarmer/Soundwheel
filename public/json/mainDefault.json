@@ -3,5 +3,8 @@
 	"frets"		:{"enabled":true, 	"options":24	},
 	"strings"	:{"enabled":true,	"options":6		},
 	"fretboard"	:{"enabled":true,	"options":{	"background":"012","fret marker":"012","notes":"fff"}},
-	"tuning"	:{"enabled":true,	"options":["e","a","d","g","b","e"]}
+	"tuning"	:{"enabled":true,	"options":["e","a","d","g","b","e"]},
+	"notemoji":{"enabled":true,"options":["\u2600"]},
+	"bankmoji":{"enabled":true,"options":["\uD83D\uDD18"]
+  }
 }

@@ -1,0 +1,294 @@
+.
+├── app.js
+├── components
+│   ├── action-names.js
+│   ├── a-note.js
+│   ├── ar-peg.js
+│   ├── back-ground.js
+│   ├── beat-part.js
+│   ├── boolean-switch.js
+│   ├── check-option.js
+│   ├── chord-body.js
+│   ├── chord-btn.js
+│   ├── chord-dash.js
+│   ├── chord-row.js
+│   ├── clef-pane.js
+│   ├── core-option.js
+│   ├── fret-board.js
+│   ├── functions
+│   │   ├── augmentation.js
+│   │   ├── beams.js
+│   │   ├── beat_graphics.js
+│   │   ├── beatLength.js
+│   │   ├── chordHover.js
+│   │   ├── connectDots.js
+│   │   ├── dotChord.js
+│   │   ├── drawBar.js
+│   │   ├── drawStaveItem.js
+│   │   ├── eight_note.js
+│   │   ├── half_note.js
+│   │   ├── mouseFormat.js
+│   │   ├── Notes.js
+│   │   ├── notLength.js
+│   │   ├── pitch.js
+│   │   ├── placeStaveImage.js
+│   │   ├── playSwitch.js
+│   │   ├── pushChord.js
+│   │   ├── pushNote.js
+│   │   ├── quarter_note.js
+│   │   ├── restLength.js
+│   │   ├── rest_note.js
+│   │   ├── Rests.js
+│   │   ├── stave_beat.js
+│   │   ├── staveGroup.js
+│   │   ├── stave_string.js
+│   │   ├── svgToCtx.js
+│   │   ├── test_note.js
+│   │   ├── turnaround.js
+│   │   └── whole_note.js
+│   ├── index-panel.js
+│   ├── instances
+│   │   ├── 2.js
+│   │   ├── 3.js
+│   │   ├── 44.js
+│   │   ├── 4.js
+│   │   ├── bass.js
+│   │   ├── beatLength.js
+│   │   ├── C_major.js
+│   │   ├── restLength.js
+│   │   ├── stave.js
+│   │   ├── trebleGraph.js
+│   │   └── treble.js
+│   ├── instrument-type.js
+│   ├── label-for.js
+│   ├── light-night.js
+│   ├── l-measure.js
+│   ├── log-in.js
+│   ├── lyrics-pane.js
+│   ├── measure-bar.js
+│   ├── menu-bar.js
+│   ├── meter-bar.js
+│   ├── note-btn.js
+│   ├── notes
+│   │   └── augmentation
+│   ├── note-type.js
+│   ├── option-me.js
+│   ├── option-panel.js
+│   ├── option-set.js
+│   ├── option-type.js
+│   ├── pa-nels.js
+│   ├── phrase-bar.js
+│   ├── play-bar.js
+│   ├── print-preview.js
+│   ├── rgb-pallet.js
+│   ├── selection-panel.js
+│   ├── select-me.js
+│   ├── select-range.js
+│   ├── select-set.js
+│   ├── side-bar.js
+│   ├── span-me.js
+│   ├── stave-dash.js
+│   ├── switch-option.js
+│   ├── test-panel.js
+│   ├── text-me.js
+│   ├── toggle-button.js
+│   ├── toggle-me.js
+│   ├── tool-bar.js
+│   └── treble-cleff.js
+├── controllers
+│   ├── null.js
+│   └── song.js
+├── error_list
+├── helpers
+│   ├── arr-comp.js
+│   ├── btn-out.js
+│   ├── btn-row.js
+│   ├── caps-please.js
+│   ├── chord-len.js
+│   ├── e-q.js
+│   ├── is-classy.js
+│   ├── look-up.js
+│   ├── max-height.js
+│   ├── property-me.js
+│   └── type-of.js
+├── index.html
+├── initializers
+│   ├── auth.js
+│   ├── firebase-compile.js
+│   └── firebase-init.js
+├── mixins
+│   ├── clock.js
+│   ├── functions
+│   │   ├── beat.js
+│   │   ├── fretnoise.js
+│   │   ├── hexcrunch.js
+│   │   ├── hexCrunch.js
+│   │   ├── index.js
+│   │   ├── noteGraphic.js
+│   │   ├── playmatrix.js
+│   │   ├── playmethod.js
+│   │   ├── playnotes.js
+│   │   ├── playTone.js
+│   │   ├── simple.js
+│   │   └── soupedip.js
+│   ├── galleryMap.js
+│   ├── instances
+│   │   └── notemoji.js
+│   ├── keydown.js
+│   ├── notes
+│   │   ├── play.js
+│   │   └── timehandling
+│   ├── play.js
+│   ├── promise-proxy.js
+│   ├── roses.js
+│   ├── selected.js
+│   ├── tone-object.js
+│   ├── tuning.js
+│   └── update-methods.js
+├── models
+├── resolver.js
+├── router.js
+├── routes
+│   ├── about.js
+│   ├── catchall.js
+│   ├── config
+│   │   ├── instruments.js
+│   │   └── panels.js
+│   ├── config.js
+│   ├── is-online
+│   │   ├── song
+│   │   │   ├── chord-edit.js
+│   │   │   ├── chord.js
+│   │   │   ├── edit.js
+│   │   │   ├── lyrics.js
+│   │   │   ├── stave
+│   │   │   │   └── preview.js
+│   │   │   └── stave.js
+│   │   └── song.js
+│   ├── is-online.js
+│   ├── song
+│   │   ├── chord-edit.js
+│   │   └── edit.js
+│   ├── song.js
+│   └── user.js
+├── services
+│   ├── auth.js
+│   ├── firebase.js
+│   ├── functions
+│   │   ├── append.js
+│   │   ├── copy.js
+│   │   ├── delete.js
+│   │   ├── envelopBeat.js
+│   │   ├── generateBlank.js
+│   │   ├── newAction.js
+│   │   ├── playPause.js
+│   │   ├── pulse.js
+│   │   ├── saveAction.js
+│   │   ├── step.js
+│   │   └── sustainBeat.js
+│   ├── global-keydown.js
+│   ├── instruments.js
+│   ├── local.js
+│   ├── options.js
+│   ├── song.js
+│   ├── tones.js
+│   └── webaudio.js
+├── Session.vim
+├── styles
+│   ├── app.scss
+│   ├── chord.scss
+│   ├── flatly.scss
+│   ├── foundation.scss
+│   ├── lyrics.scss
+│   ├── menu.scss
+│   ├── meter-bar.scss
+│   ├── nav.scss
+│   ├── panels.scss
+│   ├── play.scss
+│   ├── _primatives.scss
+│   ├── _properties.scss
+│   ├── screen.scss
+│   ├── scroll.scss
+│   ├── Session.vim
+│   ├── _settings.scss
+│   ├── sidebar.scss
+│   ├── _stave-dash.scss
+│   ├── style.scss
+│   └── tablature.scss
+├── templates
+│   ├── about.em
+│   ├── application.em
+│   ├── catchall.em
+│   ├── components
+│   │   ├── action-names.emblem
+│   │   ├── a-great.hbs
+│   │   ├── a-noteback.hbs
+│   │   ├── a-note.em
+│   │   ├── ar-peg.em
+│   │   ├── back-ground.em
+│   │   ├── beat-part.emblem
+│   │   ├── boolean-switch.em
+│   │   ├── chord-body.em
+│   │   ├── chord-btn.em
+│   │   ├── chord-dash.em
+│   │   ├── chord-row.em
+│   │   ├── clef-pane.emblem
+│   │   ├── core-option.emblem
+│   │   ├── for-fret.hbs
+│   │   ├── fret-board.em
+│   │   ├── index-panel.em
+│   │   ├── light-night.emblem
+│   │   ├── l-measure.em
+│   │   ├── log-in.em
+│   │   ├── lyrics-pane.em
+│   │   ├── measure-bar.em
+│   │   ├── menu-bar.em
+│   │   ├── meter-bar.em
+│   │   ├── note-btn.emblem
+│   │   ├── note-type.emblem
+│   │   ├── null.ar-peg.hbs
+│   │   ├── option-me.em
+│   │   ├── option-panel.em
+│   │   ├── option-set.em
+│   │   ├── option-type.em
+│   │   ├── pa-nels.em
+│   │   ├── phrase-bar.em
+│   │   ├── play-bar.em
+│   │   ├── print-preview.emblem
+│   │   ├── rgb-pallet.em
+│   │   ├── selection-panel.em
+│   │   ├── select-me.em
+│   │   ├── select-range.em
+│   │   ├── select-set.em
+│   │   ├── Session.vim
+│   │   ├── side-bar.em
+│   │   ├── span-me.emblem
+│   │   ├── stave-dash.emblem
+│   │   ├── test-panel.emblem
+│   │   ├── text-me.emblem
+│   │   ├── toggle-button.emblem
+│   │   ├── toggle-me.emblem
+│   │   ├── tool-bar.em
+│   │   └── treble-cleff.emblem
+│   ├── config
+│   │   ├── index.em
+│   │   ├── instruments.em
+│   │   ├── loading.em
+│   │   └── panels.em
+│   ├── config.em
+│   ├── is-online
+│   │   ├── song
+│   │   │   ├── chord-edit.emblem
+│   │   │   ├── chord.emblem
+│   │   │   ├── edit.em
+│   │   │   ├── index.em
+│   │   │   ├── lyrics.emblem
+│   │   │   └── stave
+│   │   │       ├── index.emblem
+│   │   │       └── preview.emblem
+│   │   └── song.em
+│   ├── is-online.em
+│   └── user.em
+└── treegraph
+
+53 directories, 379 files

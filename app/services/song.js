@@ -28,6 +28,7 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 
   chordEditFlag:true,
 	isBeat:true,
+	sustain:true,
 	isPulse:true,
   isLoop:true,
 

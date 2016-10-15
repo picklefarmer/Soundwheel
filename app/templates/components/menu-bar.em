@@ -7,7 +7,7 @@ ul class=menubar
     if song.routes.isFulfilled
       each song.routes as |page|
         li
-          if page.x
+          if page.y
             link-to page.name (concat "isOnline." page.route) isOnline page.y tagName="div"
           else
             link-to page.name page.route tagName="div"

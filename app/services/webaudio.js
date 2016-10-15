@@ -22,14 +22,22 @@ export default Ember.Service.extend(Tone,{
     		return this.get('song.tempo')
 		}
   	}),
+  analyser:Ember.computed('ac','masterVolume',function(){
+    let analyser = this.get('ac').createAnalyser();
+    this.get('masterVolume').connect(analyser);
 
+    return analyser
+
+  }),
 	masterVolume:Ember.computed({
   		get(){
 		    var ac = this.get('ac'),
+          analyzer = ac.createAnalyser(),
         	gain = ac.createGain(),
         	comp = ac.createDynamicsCompressor();
 
         	gain.connect(comp)
+          comp.connect(analyzer)
         	comp.connect(ac.destination)
 
         	return gain

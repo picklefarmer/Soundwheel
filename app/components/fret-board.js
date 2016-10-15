@@ -13,11 +13,15 @@ export default Ember.Component.extend({
  	tones:Ember.inject.service(),  
 	globalKeydown:Ember.inject.service(),	
 
-	names:['backView','frontView','centerView'],
+	names:[
+    'backView',
+    'frontView',
+    'centerView',
+    //'graphView'
+  ],
 
 	classNames:['tablet'],
 	classNameBindings:['verticalTab'],
-  verticalTab:Ember.computed.bool('options.verticalTab'),
 
 	mouseFormat,
 	pushChord,

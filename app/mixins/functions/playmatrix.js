@@ -29,28 +29,33 @@ const targetScale = 1;
 var yFactor = offset+(scale/2),
 		xFactor	=	offset/2 + (scale/2);
 var meterCache = [[],[],[],[],[],[]];
-var obj = {};
+var obj = {}, lastNotes = [];
 export default obj;
 
 obj.beat = function(beat){
 	let audio = this.get('tones'),
 			view	=	this.get('options.frontView'),
+			print	= this.get('main.notemoji.options'),
 			time	= this.get('selected.measure.map').objectAt(beat);
-
-		this.get('selected.measure').notes
+lastNotes.forEach(function(coords){
+	window.requestAnimationFrame(()=>{
+		view.clearRect(coords[0]-24,coords[1]-24,48,48)
+	})
+})
+	lastNotes = this.get('selected.measure').notes
 						.map( (string,idx) => [string[beat],idx]	)
 						.filter( group => group[0])
-						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx])
-						.forEach ( obj => {
+						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx]);
+	lastNotes.forEach ( obj => {
 								Ember.run(audio.objectAt(obj[3]),'play',obj[2],time)
-								boardWalk.call(view,obj[0],obj[1])						
+								boardWalk.call(view,obj[0],obj[1],print)						
 						},this)
 }
 
-const boardWalk = function(boardX,boardY){
+const boardWalk = function(boardX,boardY,print){
 		window.requestAnimationFrame(()=>{
-       	this.clearRect(0,boardY-y/2,900,y)
-				NoteGraphic.call(this,boardX,boardY)	
+//       	this.clearRect(0,boardY-y/2,900,y)
+				NoteGraphic.call(this,boardX,boardY,print)	
 	})
 };
 
@@ -114,23 +119,30 @@ const Draw = function(fret,string){
 	
 	 			boardWalk.call(this,boardX,boardY)	
 	}
-}
+},
+format = function(string,numer){
+	if(string[time]){
+		return [
+		 	offset + ( string[time]*x) + scale/2,
+			offset/2 + ( y * number ) + scale/2
+		];
+	}
+};
 
 obj.stanzaFunc = function(time){
 	var ctx = this.get('options.frontView');
+	
+	this.get('song.lastNotes').forEach(function(coords){
+		console.log(' coords ',coords)
+		ctx.fillStyle = "black";
+		ctx.fillRect(coords[0],coords[1],11,11)
+						ctx.fill()
+//		ctx.clearRect(coords[0]-3,coords[1]-3,6,6)
+	})
+	this.set('song.lastNotes',this.get('selected.measure').notes.map(format))
 
-	this.get('selected.measure').notes.forEach(function(string,numer){
-		if(string[time]){
-			let boardX = offset + (string[time]*x) + scale/2,
-					boardY = offset/2 + (y * numer ) + scale/2;
-
-			boardWalk.call(ctx,boardX,boardY)
-		}else{
-			let boardX = offset + (string*x) + scale/2,
-					boardY = offset/2 + (y * numer ) + scale/2;
-
-					boardWalk.call(ctx,boardX,boardY)
-		}
+	this.get('song.lastNotes').forEach(function(coords){
+				boardWalk.apply(ctx,coords)
 	})
 };
 

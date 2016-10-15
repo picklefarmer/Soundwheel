@@ -1,4 +1,7 @@
+with (concat elementId "-name") as |idName|
 
-=yield
-=bool
-/div{action 'flip' bubbles=false}: =yield
+  label{action 'actionUp'} for=idName
+    =desc
+
+  =yield idName
+

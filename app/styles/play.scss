@@ -1,6 +1,26 @@
+$activeColor:red;
+$darkenColor: yellow;
+
+
+.squaredOne {
+	padding:0 20px 0 0;
+	margin:.25rem;
+	display:inline-block;
+	position:relative;
+	label{
+		position:absolute;
+		width:100%;
+	}
+  input[type=checkbox] {
+    visibility: hidden;
+	}
+}
+
+
 .playbar {
+	width:100%;
   button{
-    margin:.25rem;
+  //  margin:.25rem;
     font-family:monospace;
     font-size:6rem;
   }

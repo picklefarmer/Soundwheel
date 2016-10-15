@@ -1,5 +1,5 @@
 {
- "option-panel"	: { "options":"right"	,"enabled":true	},
+ "option-panel"	: { "options":"left"	,"enabled":true	},
  "measure-bar"	: { "options":"bottom"	,"enabled":true 	},
  "chord-dash"	  : { "options":"left","enabled":true	},
  "lyrics-pane"  : { "options":"middle","enabled":false 	},

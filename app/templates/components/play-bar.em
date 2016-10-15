@@ -1,7 +1,6 @@
-h1: song.isLoop
 each-in buttons as |name desc|
-  toggle-button action=('action' name) 
-    desc
+  toggle-button action=(action name) bool=(get song name) desc=desc as |idName|
+    toggle-me id=idName checked=(mut (get song name))
 
 /button{action "sustain"} href="sustain" &infin;
 /button{action "stepLeft"} href="" &#9664;

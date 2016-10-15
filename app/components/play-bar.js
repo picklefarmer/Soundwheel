@@ -17,10 +17,6 @@ actions:{
   isLoop(){
     this.toggleProperty('song.isLoop')
   },
-	back(){
-		console.log( 'debug ' ) 
-        this.song.debug()
-	},
 	stepLeft(){
 		console.log( 'stepLeft ' ) 
         this.decrementProperty('song.selected.index')

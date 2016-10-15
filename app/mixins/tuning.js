@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import notemojiArr from './instances/notemoji';
 
 export default Ember.Mixin.create({
     
@@ -17,6 +18,8 @@ export default Ember.Mixin.create({
 				return objArray
 			}
 		}),            
+		bankmojiArr:notemojiArr,
+		notemojiArr,
 		stringsArr:[4,5,6],
 		fretsArr:[16,24,26],
 		tuningArr:['a','A','b','c','C','d','D','e','f','F','g','G'],

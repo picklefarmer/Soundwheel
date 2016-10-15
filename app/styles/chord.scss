@@ -21,6 +21,7 @@ $borderWidth:.15rem;
 }
 
 .chordBank table{
+	 border-collapse:separate;
 	 background: rgb(37, 66, 90);
 	 border:14px groove grey;
 	 margin:2px;

@@ -1,6 +1,68 @@
 import Ember from 'ember';
+const requestAnimationFrame = window.requestAnimationFrame;
+const WIDTH = 1400;
+const HEIGHT = 300;
+const draw = function(analyser,bufferLength,dataArray){
+
+      requestAnimationFrame(()=>{
+        draw.call(this,analyser,bufferLength,dataArray)
+      })  
+
+      analyser.getByteTimeDomainData(dataArray);
+
+      this.clearRect(0, 0, WIDTH, HEIGHT);
+
+      this.lineWidth = 2;
+      this.strokeStyle = 'white';
+
+      this.beginPath();
+
+      var sliceWidth = WIDTH * 1.0 / bufferLength;
+      var x = 0;
+
+      for(var i = 0; i < bufferLength; i++) {
+   
+        var v = dataArray[i] / 128.0;
+        var y = v * HEIGHT/2;
+
+        if(i === 0) {
+          this.moveTo(x, y);
+        } else {
+          this.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+      this.closePath()
+      //this.lineTo(canvas.width, canvas.height/2);
+//      this.lineTo(HEIGHT,WIDTH)/2;
+      this.stroke();
+    };
 
 export default Ember.Component.extend({
+  graphView:Ember.computed({set(){
+    let canvasCtx = this.get('ctx');
+    var audioCtx = this.get('song.webaudio.ac')
+    var analyser = this.get('song.webaudio.analyser');
+ //   var scheduler= audioCtx.createScriptProcessor(512,1,1);
+
+   // analyser.connect(scheduler)
+
+    analyser.fftSize = 2048;
+    var bufferLength = analyser.frequencyBinCount;
+    var dataArray = new Uint8Array(bufferLength);
+//    scheduler.connect(audioCtx.destination)
+   // scheduler.onaudioprocess = function(){
+//    }
+    
+    requestAnimationFrame(()=>{
+//        draw.call(canvasCtx,analyser,bufferLength,dataArray);
+    })
+    
+
+    return canvasCtx
+  }}),
+
 	name:null,
 	tagName:'canvas',
 	classNames:['tablature'],
