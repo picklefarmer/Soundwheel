@@ -1,0 +1,4 @@
+if song.isBeat
+  meter-bar
+else
+  measure-bar 

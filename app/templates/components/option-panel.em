@@ -11,7 +11,7 @@ li
   div
     span Instrument
     if song.instrumentNames.isFulfilled
-      select-me selection=song.instrument content=song.instrumentNames.filtered
+      select-me selection=(mut song.instrument) content=song.instrumentNames.filtered
     else
       select-me something
 li

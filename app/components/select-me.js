@@ -6,6 +6,7 @@ export default Ember.Component.extend(Keydown,{
   tagName:"select",
   actions:{
     updateSelected(value){
+				console.log(value,'value from option')
       this.set('selection',value)
     }
   },
@@ -14,7 +15,11 @@ export default Ember.Component.extend(Keydown,{
   },
   change(val){
     console.log('beginning',val.target.value)
-    this.send('updateSelected',val.target.value)
+    if(this.isObj){
+      this.action(val.target.value,val.target.prop)
+    }else{
+      this.set('selection',val.target.value)
+    }
   },
 
 });

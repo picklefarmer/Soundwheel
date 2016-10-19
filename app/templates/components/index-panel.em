@@ -14,5 +14,6 @@
                   class='form-control'
                   target=song.main
                   list=configuration.options
+                  selection=(mut configuration.name)
                   content=(get up (concat configuration.name 'Arr'))
                   ]

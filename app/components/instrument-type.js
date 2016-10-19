@@ -1,69 +1,7 @@
 import Ember from 'ember';
-const requestAnimationFrame = window.requestAnimationFrame;
-const WIDTH = 1400;
-const HEIGHT = 300;
-const draw = function(analyser,bufferLength,dataArray){
-
-      requestAnimationFrame(()=>{
-        draw.call(this,analyser,bufferLength,dataArray)
-      })  
-
-      analyser.getByteTimeDomainData(dataArray);
-
-      this.clearRect(0, 0, WIDTH, HEIGHT);
-
-      this.lineWidth = 2;
-      this.strokeStyle = 'white';
-
-      this.beginPath();
-
-      var sliceWidth = WIDTH * 1.0 / bufferLength;
-      var x = 0;
-
-      for(var i = 0; i < bufferLength; i++) {
-   
-        var v = dataArray[i] / 128.0;
-        var y = v * HEIGHT/2;
-
-        if(i === 0) {
-          this.moveTo(x, y);
-        } else {
-          this.lineTo(x, y);
-        }
-
-        x += sliceWidth;
-      }
-      this.closePath()
-      //this.lineTo(canvas.width, canvas.height/2);
-//      this.lineTo(HEIGHT,WIDTH)/2;
-      this.stroke();
-    };
-
+import DrawOsc from './functions/drawSpec'
 export default Ember.Component.extend({
-  graphView:Ember.computed({set(){
-    let canvasCtx = this.get('ctx');
-    var audioCtx = this.get('song.webaudio.ac')
-    var analyser = this.get('song.webaudio.analyser');
- //   var scheduler= audioCtx.createScriptProcessor(512,1,1);
-
-   // analyser.connect(scheduler)
-
-    analyser.fftSize = 2048;
-    var bufferLength = analyser.frequencyBinCount;
-    var dataArray = new Uint8Array(bufferLength);
-//    scheduler.connect(audioCtx.destination)
-   // scheduler.onaudioprocess = function(){
-//    }
-    
-    requestAnimationFrame(()=>{
-//        draw.call(canvasCtx,analyser,bufferLength,dataArray);
-    })
-    
-
-    return canvasCtx
-  }}),
-
-	name:null,
+  	name:null,
 	tagName:'canvas',
 	classNames:['tablature'],
 	attributeBindings:['id',"height","width"], //STYLE
@@ -113,15 +51,24 @@ export default Ember.Component.extend({
     	//console.log('did Insert Element',this.get('name'))
 
       	var name = this.get('name'),
-        	ctx  = this.get('element').getContext('2d');
+        	canvas = this.get('element'),
+					ctx  = canvas.getContext('2d');
 
         this.set('ctx',ctx)
 
         this.set(name,ctx);
         ctx = this.get(name)
+				if(name === 'graphView'){
+					this.get('options').set(name+'Canvas',canvas)
+				}
         this.get('options').set(name,ctx)
 	},
-
+	graphView:Ember.computed('color',{
+			set(a,ctx){
+				//DrawOsc.call(this.get('song'),a,ctx)
+				return ctx
+			}
+	}),
 	frontView:Ember.computed('color',{
     	get(){
     		return this.get('ctx')
@@ -170,8 +117,10 @@ export default Ember.Component.extend({
 		//		console.log(width) 
 				//	fret.src = "lightning.svg";
 
-				fret.onload = function(){
-					b.fillStyle = color; //"#012";
+//				fret.onload =
+				begin()
+				function begin(){
+					b.fillStyle = "rgba(33,33,0,.5)";//color; //"#012";
 		    	//b.fillRect(0,0,1600,300);
 	    		b.fillRect(0,0,width,height);
 					b.globalAlpha = 0.65;	

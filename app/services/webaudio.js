@@ -23,8 +23,9 @@ export default Ember.Service.extend(Tone,{
 		}
   	}),
   analyser:Ember.computed('ac','masterVolume',function(){
-    let analyser = this.get('ac').createAnalyser();
-    this.get('masterVolume').connect(analyser);
+    const analyser = this.get('ac').createAnalyser();
+		analyser.fftSize = 512;
+		analyser.smoothingTimeConstant = 0.5;
 
     return analyser
 
@@ -32,13 +33,12 @@ export default Ember.Service.extend(Tone,{
 	masterVolume:Ember.computed({
   		get(){
 		    var ac = this.get('ac'),
-          analyzer = ac.createAnalyser(),
         	gain = ac.createGain(),
         	comp = ac.createDynamicsCompressor();
 
         	gain.connect(comp)
-          comp.connect(analyzer)
         	comp.connect(ac.destination)
+		    	comp.connect(this.get('analyser'));
 
         	return gain
 		},

@@ -4,35 +4,20 @@ export default Ember.Component.extend({
   song:Ember.inject.service(),
 	classNames: ['playbar'],
   buttons:{
-    sustain:"\u221e",
-    stepLeft:"\u25c0",
-    play:"\u23ef",
-    stepRight:"\u25b6",
-    isLoop:"\uD83D\uDD01",
-  },  
-actions:{
-  sustain(){
-    this.toggleProperty('song.sustain')
-  },
-  isLoop(){
-    this.toggleProperty('song.isLoop')
-  },
-	stepLeft(){
-		console.log( 'stepLeft ' ) 
-        this.decrementProperty('song.selected.index')
-	},
-	stepRight(){
-		console.log( 'stepRight ')
-       this.incrementProperty('song.selected.index')
-	},	
-	play(){
-			console.log( 'play ' ,this.get('song.pause')) 
-	    
-			if(this.toggleProperty('song.pause')){
-				Ember.run.next(this.get('song'),'clock')
-			}
-  },	
+		sustain:	{name:"\u221e", type:"toggle"},
+		stepLeft:	{name:"\u25c0",	type:"action"},
+		play:			{name:"\u23ef",	type:"action"},
+    stepRight:{name:"\u25b6", type:"action"},
+    isLoop:		{name:"\uD83D\uDD01",type:"toggle"},
+		isOsc:{type:"select", name:{
+						Osc:"\uD83C\uDF0A",
+						Spec:"\uD83D\uDC88",
+						Chord:"\uD83C\uDFB2",
+						Bars:"\u231b"
+				}
+		},
+		isBeat:{name:'\uD83D\uDCCF',type:"toggle"}
 
-}
+  }
 	
 });

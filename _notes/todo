@@ -1,5 +1,5 @@
-sepctral graph graphics
 
+toggle Fullscreen button
 
 *inch noteGraphics && animate dropInNotes
 background fretboard gradient patterns
@@ -7,6 +7,7 @@ ctrl+arrow keys "swapBlocks" | meter-panel/measure-panel  &&  click+drag/drop
 
 loop button / highlight-toggle: component 
 
+toolbars functional in all placement settings;
 
 have stave draw initial stavebars and clef canvas | efficiency
 
@@ -15,7 +16,6 @@ even out spacial differnces / add elongated stem |
 flip chordDash with edit
 	| fix spacing { create chord groups }
 
-emoji labels
 
 flip notes on midpoint : vertical
 

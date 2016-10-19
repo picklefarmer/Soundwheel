@@ -22,6 +22,7 @@ module.exports = function(defaults) {
 	app.import(bower_dir + 'jquery-colpick/css/colpick.css')
 	
 	app.import('vendor/bootstrap.min.css');
+	app.import('vendor/chroma.min.js');
 	
 	app.import(bower_dir + 'firebase/firebase-debug.js')
 

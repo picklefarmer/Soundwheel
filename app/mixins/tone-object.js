@@ -8,9 +8,9 @@ export default Ember.Mixin.create({
 		init(){
 
 			var MV   = this.get('masterVolume'),
-				tone = this.get('tone'),
-				ctx  = this.get('ctx'),
-				ac   = this.get('ac');
+  				tone = this.get('tone'),
+	  			ctx  = this.get('ctx'),
+		  		ac   = this.get('ac');
 
 			console.log('tone init')
 		//  this.get('instruments.selected')
@@ -81,7 +81,15 @@ export default Ember.Mixin.create({
      			return this.get('ac').createGain()
 			}
 		}),
-		
+	
+    analyser:Ember.computed('ac',function(){
+        let analyser =  this.get('ac').createAnalyser();
+        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 1;
+         this.get('ctx').connect(analyser)
+         return analyser
+    }),  
+
 		tone:Ember.computed('ac',{
 			get(){
 				return this.get('ac').createOscillator()

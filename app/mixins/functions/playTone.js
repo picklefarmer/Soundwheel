@@ -13,5 +13,6 @@ export default function(tone,stanza){
 		  	instrument.frequency.setValueAtTime(freq,currentTime)
 
 		  	ctx.gain.exponentialRampToValueAtTime(0.0001,currentTime + (stanza))
+		  	//ctx.gain.setValueAtTime(0.0001,currentTime + (stanza))
 
   	};

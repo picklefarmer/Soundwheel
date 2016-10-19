@@ -1,6 +1,6 @@
 with (concat elementId "-name") as |idName|
 
-  label{action 'actionUp'} for=idName
+  label for=idName
     =desc
 
   =yield idName

@@ -14,10 +14,10 @@ export default Ember.Component.extend({
 	globalKeydown:Ember.inject.service(),	
 
 	names:[
+    'graphView',
     'backView',
     'frontView',
     'centerView',
-    //'graphView'
   ],
 
 	classNames:['tablet'],
