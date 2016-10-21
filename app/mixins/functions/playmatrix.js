@@ -35,6 +35,7 @@ export default obj;
 obj.beat = function(beat){
 	let audio = this.get('tones'),
 			view	=	this.get('options.frontView'),
+      stanza= this.get('stanza')/rate,
 			print	= this.get('main.notemoji.options'),
 			time	= this.get('selected.measure.map').objectAt(beat);
 lastNotes.forEach(function(coords){
@@ -48,14 +49,14 @@ lastNotes.forEach(function(coords){
 						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx]);
 	lastNotes.forEach ( obj => {
 								Ember.run(audio.objectAt(obj[3]),'play',obj[2],time)
-								boardWalk.call(view,obj[0],obj[1],print)						
+								boardWalk.call(view,obj[0],obj[1],print,stanza)						
 						},this)
 }
 
-const boardWalk = function(boardX,boardY,print){
+const boardWalk = function(boardX,boardY,print,stanza){
 		window.requestAnimationFrame(()=>{
 //       	this.clearRect(0,boardY-y/2,900,y)
-				NoteGraphic.call(this,boardX,boardY,print)	
+				NoteGraphic.call(this,boardX,boardY,print,stanza)	
 	})
 };
 

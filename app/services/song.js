@@ -32,6 +32,8 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	isPulse:true,
   isLoop:true,
 
+	minTempVal:264,
+
 		stanza:Ember.computed('tempo',{
 			get(){
 				return this.get('tempo')/this.get('division')

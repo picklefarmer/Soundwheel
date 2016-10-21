@@ -19,10 +19,10 @@ export default function(a,ctx){
 
 const requestAnimationFrame = window.requestAnimationFrame;
 const WIDTH = 1400;
-const HEIGHT = 300;
+const HEIGHT = 256;
 const sHeight= HEIGHT/6;
 const vHeight= sHeight/2;
-const  ampl	= sHeight;
+const ampl = sHeight;
 const draw = function(ctx,chord){
 
       requestAnimationFrame(()=>{
@@ -43,7 +43,7 @@ const draw = function(ctx,chord){
      		var x = 0;
 
 
-				let height = sHeight*f +vHeight;
+				let height = sHeight*f -vHeight;
 
       	for(var i = 0; i < bufferLength; i++) {
    

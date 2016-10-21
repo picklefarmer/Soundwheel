@@ -37,8 +37,9 @@ export default Ember.ArrayProxy.reopenClass({
 
 
       var strings = this.get('strings')
-                        .map(this.get('webaudio.tone'),
-                             this.get('webaudio'))
+                        .map(
+                            this.get('webaudio.tone'),
+                            this.get('webaudio'))
 
        this.set('content', Ember.A(strings))
 
@@ -55,7 +56,7 @@ export default Ember.ArrayProxy.reopenClass({
 						this.get('song.main.intervals') ) 
 			let notesMap = [ ],
 				octaves = [.5,1,2,4],
-				intervals = this.get('song.main.intervals') || [7,5,5,5,4,5],
+				intervals = [5,5,5,4,5,5],//this.get('song.main.intervals') || [7,5,5,5,4,5],
 				octave  = 0,
 				relativeTone = intervals.shift()+octave || 4,
 				arrays =  [],

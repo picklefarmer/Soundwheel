@@ -35,6 +35,7 @@ export default Ember.Component.extend({
 
 	didInsertElement(){
 
+   	Ember.$(document).off('keydown')
 		Ember.$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
 	},
 

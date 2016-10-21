@@ -17,6 +17,7 @@ li
 li
   span are we live?
   div: =song.isOnline
+
     
 li
   div
@@ -24,11 +25,14 @@ li
     =text-me value=(mut options.song.volume)
     span Volume
 
+
+
 li
   div
-    =input type="range" min="2264"  max="4000" value=song.bpm
+    =input type="range" min=song.minTempVal  max="4000" value=song.bpm
     =text-me value=(mut song.meter)
     span Tempo
+
 
 li
   div: =span-me value=(mut song.selected.selection) rows=1 cols=10

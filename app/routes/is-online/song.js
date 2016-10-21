@@ -20,13 +20,15 @@ export default Ember.Route.extend({
 
 		let arg = "fetching clock! from song route",
 //				songName = "showbury" ,//this.get('context.y'),
-				song = this.get('song');
+				song = this.get('song'),
+				selection = song.get('selected.selection');
 
 		console.log(songName,'model')
-		console.log('clock from song')
+		console.log('clock from song',song.get('selected.selection'))
 
-		song.set('selected',songName)
-
+		if(selection !== songName){
+			song.set('selected',songName)
+		}
 		if(this.get('isAutoplay')){
 				song.set('pause',true)
 		}

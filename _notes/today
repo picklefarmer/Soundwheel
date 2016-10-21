@@ -1,4 +1,4 @@
-NEXT
-	:oscArray
-		| configure overlay /w frontView
-		? cutoff Oscilation at fret
+fix
+	|	new measure
+
+write song

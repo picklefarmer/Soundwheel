@@ -1,4 +1,10 @@
 
+NEXT
+	single note edit running advance beat
+		|	or paint
+	:oscArray
+		| configure overlay /w frontView
+		? cutoff Oscilation at fret
 toggle Fullscreen button
 
 *inch noteGraphics && animate dropInNotes
