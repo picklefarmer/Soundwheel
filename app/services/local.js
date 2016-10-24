@@ -156,16 +156,20 @@ export default Ember.Service.extend({
 		
     let measure = this.get('selected.measure.notes'),
 				isBeat 	= this.get('isBeat'),
+				isPaint = this.get('isPaint'),
 				beat		= this.get('beat');
 			
 		if(isBeat){
 
-			EnvelopBeat.call(this,value,isRest)
-			console.log(`
+			if(isPaint){
+				measure[value[1]].replace(beat,1,value[0])	
+			}else{
+				EnvelopBeat.call(this,value,isRest)
+				console.log(`
 											all aboard
 										 	the beat
 										 	train`,measure)
-			
+			}
 		}else{
       if(value.length === 6){
   //      measure.replace(0,6,value)

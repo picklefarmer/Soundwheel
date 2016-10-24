@@ -22,6 +22,9 @@ actions:{
   isLoop(){
 				this.toggleProperty('isLoop')
   },
+	isPaint(){
+		this.toggleProperty('isPaint')
+	},
 	isOsc(val){
 				console.log(val, 'val from isOsc')
 				let ctx =this.get('options.graphView'); 

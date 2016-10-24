@@ -5,6 +5,7 @@ import dotChord from './functions/dotChord';
 import mouseFormat from './functions/mouseFormat';
 import pushChord from './functions/pushChord';
 import pushNote from './functions/pushNote';
+var C = 'instrument-type';
 
 export default Ember.Component.extend({
   options:Ember.inject.service(),
@@ -13,12 +14,13 @@ export default Ember.Component.extend({
  	tones:Ember.inject.service(),  
 	globalKeydown:Ember.inject.service(),	
 
-	names:[
-    'graphView',
-    'backView',
-    'frontView',
-    'centerView',
-  ],
+	names:{
+    'graphView':C,
+    'backView':C,
+    'frontView':C,
+		'spritzView':'spritz-inc',
+    'centerView':C,
+	},
 
 	classNames:['tablet'],
 	classNameBindings:['verticalTab'],

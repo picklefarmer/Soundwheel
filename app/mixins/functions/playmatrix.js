@@ -2,7 +2,7 @@ import NoteGraphic from "./noteGraphic";
 
 const x = 67;
 const y = 50;
-const offset = 18;
+const offset = 10;
 const scale = 36;
 const rate = 16;
 let tempo = 1944;

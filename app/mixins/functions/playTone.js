@@ -2,6 +2,8 @@ export default function(tone,stanza){
 
 			console.log( ' post _simple check' ) 
 
+
+			this.set('toneIndex',tone)
 			var ctx   = this.get('ctx'),
 					instrument = this.get('instrument'),
 

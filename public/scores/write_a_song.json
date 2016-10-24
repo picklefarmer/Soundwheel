@@ -1,0 +1,55 @@
+[{
+"map":[1,	0,	1,	0,	4,	0,	0,	0
+],	
+"lyric":"knowing of you",	
+"notes":[
+	[1,	null,	1,	null,	1,	null,	null,	null
+],	[3,	null,	3,	null,	3,	null,	null,	null
+],	[4,	null,	4,	null,	4,	null,	null,	null
+],	[3,	null,	3,	null,	3,	null,	null,	null
+],	[0,	null,	0,	null,	0,	null,	null,	null
+],	[0,	null,	0,	null,	0,	null,	null,	null
+]
+]
+}
+,	{
+"notes":[
+	[0,	null,	0,	null,	0,	null,	0
+],	[1,	null,	1,	null,	1,	null,	1
+],	[2,	null,	2,	null,	2,	null,	2
+],	[3,	null,	3,	null,	3,	null,	3
+],	[3,	null,	3,	null,	3,	null,	3
+],	[1,	null,	1,	null,	1,	null,	1
+]
+],	
+"map":[1,	0,	1,	0,	1,	0,	2,	0
+]
+}
+,	{
+"notes":[
+	[0,	null,	0,	null,	0,	null,	0
+],	[3,	null,	3,	null,	3,	null,	3
+],	[4,	null,	4,	null,	4,	null,	4
+],	[5,	null,	5,	null,	5,	null,	5
+],	[5,	null,	5,	null,	5,	null,	5
+],	[3,	null,	3,	null,	3,	null,	3
+]
+],	
+"map":[1,	0,	1,	0,	1,	0,	2,	0
+]
+}
+,	{
+"notes":[
+	[0,	null,	null,	null,	0
+],	[5,	null,	null,	null,	5
+],	[5,	null,	null,	null,	5
+],	[5,	null,	null,	null,	5
+],	[7,	null,	null,	null,	7
+],	[5,	null,	null,	null,	5
+]
+],	
+"map":[3,	0,	0,	0,	4,	0,	0,	0
+]
+}
+
+]

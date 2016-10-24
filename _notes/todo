@@ -5,6 +5,9 @@ NEXT
 	:oscArray
 		| configure overlay /w frontView
 		? cutoff Oscilation at fret
+
+	fret-pane as toolbar option | lyrics pane
+
 toggle Fullscreen button
 
 *inch noteGraphics && animate dropInNotes

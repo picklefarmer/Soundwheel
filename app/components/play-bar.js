@@ -12,11 +12,12 @@ export default Ember.Component.extend({
 		isOsc:{type:"select", name:{
 						Osc:"\uD83C\uDF0A",
 						Spec:'\uD83D\uDC53',
-//"\uD83D\uDC88",
+//
 						Chord:"\uD83C\uDFB2",
 						Bars:"\u231b"
 				}
 		},
+		isPaint:{name:"\uD83D\uDC88",type:"toggle"},
 		isBeat:{name:'\uD83D\uDCCF',type:"toggle"}
 
   }

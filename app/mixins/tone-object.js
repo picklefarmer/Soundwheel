@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import createWaveTable from './functions/createWaveTable';
 import play from './functions/playTone';
 
 export default Ember.Mixin.create({
@@ -41,7 +42,7 @@ export default Ember.Mixin.create({
 					if( typeof instrument === "object"){
 				  
 						I =  instrument;
-				  	W =  ac.createPeriodicWave(  I.real, I.imag);
+				  	W =  ac.createPeriodicWave(  I.real, I.imag,{disableNormalization:true});
 						
 						console.log(I,"tone object map")
 
@@ -49,11 +50,8 @@ export default Ember.Mixin.create({
 
 					}else if(typeof instrument === "string"){
 				  	
-						W	= ac.createPeriodicWave(
-							new Float32Array([0.0,0.0]),
-							new Float32Array([1.0,1.0])
-						)
-				  	
+						W	= createWaveTable(ac)
+									  	
 						tone.setPeriodicWave(W)
 				 	 		console.log('default') 
 					}
@@ -61,8 +59,14 @@ export default Ember.Mixin.create({
 					return tone
 			  	
 				}else{
-					
-					return this.get('tone')
+					let ac = this.get('ac')	;
+					let W	= createWaveTable(ac);
+									  	
+					let tone = this.get('tone');
+
+					tone.setPeriodicWave(W)
+
+					return tone
 				} 
 
 			}

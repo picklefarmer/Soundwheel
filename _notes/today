@@ -1,4 +1,1 @@
-fix
-	|	new measure
-
-write song
+fixed link-to error, added fret parsing for oscArray

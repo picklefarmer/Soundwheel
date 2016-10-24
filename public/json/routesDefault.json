@@ -1,6 +1,5 @@
 [
   {"route":"about","name":"about"},
-  {"route":"song","name":"song","y":"test"},
   {"route":"user","name":"login"},
 	{"route":"config","name":"config"}
 ]

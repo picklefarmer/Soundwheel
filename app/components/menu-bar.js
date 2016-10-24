@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Clock from '../mixins/clock';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(Clock,{
 //	classNameBindings:['col-lg-12'],
 //    settings:Em.inject.service(),
   song:Ember.inject.service(),
@@ -19,23 +19,17 @@ export default Ember.Component.extend({
 				}
 
 	}),
+	willRender(){
+		console.error( this.get('y'), 'y')
+	},
 	isOnline:Ember.computed(function(){
 				return this.get('song.isOnline')?"online":"offline"
 	}),
-
 	songOptions:['edit','lyrics','stave','chord'],
-  songToggles:['sustain','loop'],
 	actions:{
 		click(){
 		  this.toggleProperty('barVisible')
     },
-   	forActive:function(e){
-			console.log(e, this,this.get('controller'), 'active action')
-	  	//	console.log(e)
-	  	//	this.notifyPropertyChange('active')
-		//this.set('active',e)
-	  	//	console.log(this.get('active'))
-		}
 	},
 	menuArray:[],
   menuBar:function(){

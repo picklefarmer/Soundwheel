@@ -12,7 +12,7 @@ export default function(a,ctx){
 		
 
     var analyser = this.get('webaudio.analyser');
-		analyser.fftSize = 512
+		analyser.fftSize = 1024
 		analyser.smoothingTimeConstant = 0
     var bufferLength = analyser.frequencyBinCount;
     var dataArray = new Uint8Array(bufferLength);
@@ -35,8 +35,8 @@ export default function(a,ctx){
 }
 
 const requestAnimationFrame = window.requestAnimationFrame;
-const WIDTH = 800;
-const HEIGHT = 256;
+const WIDTH = 1024;
+const HEIGHT = 512;
 const draw = function(ctx,analyser,bufferLength,dataArray,tempCtx,canvas,tempCanvas){
 
       requestAnimationFrame(()=>{
@@ -51,8 +51,8 @@ const draw = function(ctx,analyser,bufferLength,dataArray,tempCtx,canvas,tempCan
 
 			tempCtx.drawImage(canvas,0,0,WIDTH,HEIGHT)
 		
-			var stretch = 4;
-console.error (bufferLength)
+			var stretch = 4;//this.get('stanza');
+console.error (stretch,bufferLength)
 			for(var i = 0; i < bufferLength; i++) {
         let grade = dataArray[i];
         ctx.fillStyle = hot(grade).css();

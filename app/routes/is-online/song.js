@@ -14,7 +14,7 @@ export default Ember.Route.extend({
 			return params
 		},
 			//			params.y = [params.y.split("")][params.x] || params.y
-    isAutoplay:false,
+    isAutoplay:true,
 
 		autoplay(songName){
 
@@ -31,9 +31,9 @@ export default Ember.Route.extend({
 		}
 		if(this.get('isAutoplay')){
 				song.set('pause',true)
+				Ember.run.next(song,'clock')
 		}
 
-		//Ember.run.next(song,'clock',arg)
 
 		//		mrun(song, )
 
