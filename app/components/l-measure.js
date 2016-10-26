@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-	classNameBindings:'active:hit',
+  classNameBindings:['active:hit','highlight:selected'],
 	tagName:"li",
 
 	measure:Ember.computed('index',{

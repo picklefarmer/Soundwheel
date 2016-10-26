@@ -14,12 +14,14 @@ export default Ember.Mixin.create({
 	actions:{
 		bindGlobalEvents(){
 			Ember.$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
+			Ember.$(document).keyup(e => Ember.run(this,this.get('globalKeydown.end'),e))
 
 				console.log(`global hotkeys reinstated`)
 		},
 		unbindGlobalEvents(){
 
 			Ember.$(document).off('keydown')
+			Ember.$(document).off('keyup')
 				console.log(`global hotkeys removed`)
 		}
 	}

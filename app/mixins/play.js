@@ -19,6 +19,23 @@ actions:{
   sustain(){
 				this.toggleProperty('sustain')
   },
+	isConvolver(){
+		let wa = this.get('webaudio'),
+				ac = wa.get('ac'),
+				co = wa.get('compressor'),
+				re = wa.get('reverb'),
+				ga = wa.get('masterVolume');
+
+		if(this.toggleProperty('isConvolver')){
+			ga.disconnect(co)
+			ga.connect(re)
+			re.connect(co)
+		}else{
+			re.disconnect(co)
+			ga.disconnect(re)
+			ga.connect(co)					
+		}
+	},
   isLoop(){
 				this.toggleProperty('isLoop')
   },

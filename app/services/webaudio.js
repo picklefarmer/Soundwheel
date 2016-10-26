@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Tone from '../mixins/tone-object';
+import ImpulseResponse from './functions/impulseResponse';
 
 export default Ember.Service.extend(Tone,{
   	instruments:Ember.inject.service(),
@@ -30,16 +31,31 @@ export default Ember.Service.extend(Tone,{
     return analyser
 
   }),
+	reverb:Ember.computed('ac',function(){
+					console.error(' is con volver from web audio' ) 
+			let ac = this.get('ac'),
+					reverb = ac.createConvolver();
+
+			reverb.buffer = ImpulseResponse(ac,4,4,false)
+			return reverb
+	}),
+	compressor:Ember.computed('ac',function(){
+		let ac 					=	this.get('ac'),
+				analyser		=	this.get('analyser'),
+				compressor 	= ac.createDynamicsCompressor();
+
+				compressor.connect(ac.destination)
+		   	compressor.connect(this.get('analyser'));
+
+		return compressor
+	}),
 	masterVolume:Ember.computed({
   		get(){
-		    var ac = this.get('ac'),
-        	gain = ac.createGain(),
-        	comp = ac.createDynamicsCompressor();
+		    var ac 			= this.get('ac'),
+        		gain		= ac.createGain(),
+	        	comp = this.get('compressor');
 
-        	gain.connect(comp)
-        	comp.connect(ac.destination)
-		    	comp.connect(this.get('analyser'));
-
+					gain.connect(comp)
         	return gain
 		},
 		set(_,volume){

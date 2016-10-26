@@ -1,3 +1,6 @@
+window.onerror = function(e){
+	window.alert(e)
+}
 const HEIGHT = 256,
 			WIDTH	 = 400;
 const plain = function(x,ctx,dataArray,bufferLength,sliceWidth){   
@@ -39,7 +42,8 @@ const plain = function(x,ctx,dataArray,bufferLength,sliceWidth){
 
 import Ember  from 'ember';
 import MF     from './functions/mouseFormat';
-const ac 				= new AudioContext() || new webkitAudioContext(),
+let audoContext = window.AudioContext || window.webkitAudioContext;
+const ac 				= new audoContext(),
 			gain			=	ac.createGain(),
 			analyser	= ac.createAnalyser();
 gain.gain.value = 0.25

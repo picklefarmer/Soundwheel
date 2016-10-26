@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     'graphView':C,
     'backView':C,
     'frontView':C,
-		'spritzView':'spritz-inc',
+//		'spritzView':'spritz-inc',
     'centerView':C,
 	},
 
@@ -38,6 +38,8 @@ export default Ember.Component.extend({
 	didInsertElement(){
 
    	Ember.$(document).off('keydown')
+   	Ember.$(document).off('keyup')
+		Ember.$(document).keyup(e => Ember.run(this,this.get('globalKeydown.end'),e))
 		Ember.$(document).keydown(e => Ember.run(this,this.get('globalKeydown.begin'),e))
 	},
 

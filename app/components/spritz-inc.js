@@ -13,7 +13,11 @@ export default Ember.Component.extend({
   classNames:['spritz'],
   words:Ember.computed('song.selected.measure.lyric',{
     get(){
-      return this.get('song.selected.measure.lyric').split(' ')
+			let words = this.get('song.selected.measure.lyric');
+			
+			if(words){
+				return words.split(' ')
+			}
     },
     set(_,words){
       return words.split(' ')

@@ -4,11 +4,14 @@ export default Ember.Component.extend({
   song:Ember.inject.service(),
 	classNames: ['playbar'],
   buttons:{
-		sustain:	{name:"\u221e", type:"toggle"},
-		stepLeft:	{name:"\u25c0",	type:"action"},
-		play:			{name:"\u23ef",	type:"action"},
-    stepRight:{name:"\u25b6", type:"action"},
-    isLoop:		{name:"\uD83D\uDD01",type:"toggle"},
+		sustain:			{name:"\u221e", 			type:"toggle"},
+		isConvolver:	{name:"\uD83D\uDCEF", type:"action"},
+
+//\u27b0"
+		stepLeft:			{name:"\u25c0",	type:"action"},
+		play:					{name:"\u23ef",	type:"action"},
+    stepRight:		{name:"\u25b6", type:"action"},
+    isLoop:				{name:"\uD83D\uDD01",type:"toggle"},
 		isOsc:{type:"select", name:{
 						Osc:"\uD83C\uDF0A",
 						Spec:'\uD83D\uDC53',

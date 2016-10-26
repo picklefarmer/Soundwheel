@@ -1,3 +1,7 @@
+window.onerror = function(e){
+	window.alert(e)
+}
+
 import Ember from 'ember';
 import createWaveTable from './functions/createWaveTable';
 import play from './functions/playTone';
@@ -92,7 +96,7 @@ export default Ember.Mixin.create({
         analyser.smoothingTimeConstant = 1;
          this.get('ctx').connect(analyser)
          return analyser
-    }),  
+    }), 
 
 		tone:Ember.computed('ac',{
 			get(){

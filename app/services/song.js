@@ -22,6 +22,7 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 		Ember.run(this,'clock','args from init')
 	},
 
+	isConvolver:false,
   webaudio:Ember.inject.service(),
 	tones:Ember.inject.service(),
 	options:Ember.inject.service(),
