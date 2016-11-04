@@ -14,8 +14,9 @@ export default Ember.Component.extend(Stave,{
   attributeBindings:['height','width','src'],
   width:640,
 
-	click(){
-	
+	click(e){
+    console.log(e)
+if(e.button == 2){
 		let element = this.get('element'),
 				canvas = document.createElement('canvas'),
 				canvasCollect	= this.get('canvasCollect'),
@@ -33,7 +34,7 @@ export default Ember.Component.extend(Stave,{
 		}
 		let url = canvas.toDataURL();	
 			this.sendAction('action',url)
-
+      }
 	},
 
   didInsertElement(){

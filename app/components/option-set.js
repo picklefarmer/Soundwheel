@@ -1,23 +1,29 @@
 import Ember from 'ember';
+var expand = function(e){
+  let v = e[Object.keys(e)[0]]
+    if(typeof v === 'object'){
+      return '\\u'+v[0]+'\\u'+v[1]
+    }
+      return '\\u'+v
+};
 
 export default Ember.Component.extend({
-	selected:Ember.computed({
-		set(_,I,II){
-		    console.log(II,I)
-    		if(I && II){
-      			if(I !== II){
-        			console.log(I," option set stuff")
-			        this.send('updater',I, this.get('index')) 
-      			}
-			}
-    		return I || this.get('selection') || this.get('bar.options')
-		}
-	}),
-
+  song:Ember.inject.service(),
+  modContent:Ember.computed('list','content',function(){
+    let content = this.get('content'),
+        list    = this.get('list').length ===1;
+    if(list){
+      return Object.keys(content).map( key => content[key])
+    }
+      return content
+  }),
 	actions:{
-    	updater(val,index){
-		 	this.sendAction('action',val,index)
-			console.log('actions',val,index)
+    	updater(name,val,index){
+				//this.sendAction('action',val,index)
+				this.get('song.main.'+name+'.options').replace(val,1,[index]);
+				let trial = this.get('song.main.'+name+'.options')
+
+			console.log('actions',name,val,index,trial)
 		}
  	}
 

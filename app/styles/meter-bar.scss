@@ -1,3 +1,25 @@
+.bar-hit{
+	background:#443322;
+}
+
+.beat-blanket{
+	.selected{
+		div{
+			background:rgba(255,255,255,0.42) !important;
+		}
+	}
+	background:rgba(0,0,0,0.3);
+}
+
+.bar-beat{
+	div, li{
+		width:100%;
+	}
+	width:58px;
+	padding:0px;
+	margin-left:0px;
+	border:none;
+}
 .meter-bar{
 		border:3px black solid;
 		height: 160px;
@@ -22,7 +44,7 @@
 }
 .hit {
 	color:orange;
-	background-color:white;
+	background-color:white !important;
 	display:inline-block;
-	border-radius:33px;	
+	border-radius:16px;	
 }

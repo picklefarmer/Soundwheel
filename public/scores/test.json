@@ -2,6 +2,7 @@
 {
 	"map":[ 	8,	0 ,		0,		0, 	 0,		0,	 0,		0],
 	"lyric":"as it stands",
+	"kit":[5,0,1,0,0,1,0,1],
 	"notes":[
 				[null,null,null,null ,null,null,null,null],
 				[	 11,null, null,null ,null,null,null,null],
@@ -14,6 +15,7 @@
 {
 	"map":[ 	1,	1 ,		0,		0, 	 1,		1,	 0,		0],
 	"lyric":"knowing of you",
+	"kit":[0,0,1,0,0,1,0,1],
 	"notes":[
 				[null,null,null,null ,null,null,null,null],
 				[null,	3, null,null ,	 3,null,null,null],
@@ -26,6 +28,7 @@
 {
 	"map":[ 	2,	 0,		1, 	 1,		1,	 0,	  1,	 1],
 	"lyric":"makes my soul, shiny",
+	"kit":[0,0,1,0,0,1,0,1],
 	"notes":[
 				[null,null,null,null,null,null,null,null],
 				[null,null,null,null,null,null,null,null],
@@ -38,6 +41,7 @@
 {
 	"map":[ 2,0 ,1 ,1 ,0 ,0 ,1	,1],
 	"lyric":"it has it's ups and downs",
+	"kit":[0,0,1,0,0,1,0,1],
 	"notes":[
 				[null,null,null,null,null,null,null,null],
 				[null,null,null,null,null,null,null,null],
@@ -50,6 +54,7 @@
 {
 	"lyric":"for - ever I'm en - joy - ing true",
 	"map":[ 1,1 ,0 ,0 ,1 ,1 ,1,1 ],
+	"kit":[0,0,1,0,0,1,0,1],
 	"notes":[
 				[null,null,null,null,null,null,null,null],
 				[		3,null,null,null,null,	 3,null,null],

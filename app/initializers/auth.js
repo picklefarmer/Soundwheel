@@ -7,11 +7,14 @@ export function initialize(App) {
       type = isLogged ? "auth" : "side";
 
   console.log( 'post init auth' , isLogged)
+
     App.inject('route:song'   ,'settings', `settings:${type}`)
+		 
   console.log( 'pre init song to route service')
 
 
 	 App.inject('route:song', 'song', `service:song`)
+
 //	 App.inject('component:action-names', 'router', 'router:main')
 
     // isLogged = true ->

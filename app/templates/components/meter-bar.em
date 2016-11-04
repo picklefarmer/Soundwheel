@@ -1,9 +1,19 @@
 if song.isBeat
-  each timeSignature as |beat index|
+  //each timeSignature as |beat index|
+  each song.selected.measure.map as |type index|
     =beat-part  [
-      index=beat
+      index=('array-me' index)
       boundValue=song.beat
-      beatMap=song.selected.measure.map
+      beatType=type
       highlight=('is-classy' index song.beatInputIndex)
-      //highlight=('of-array' index song.beatInputIndex)
     ]
+
+.beat-blanket
+  each song.measureKit as |kitBin index|
+    =beat-bar  [
+      index=index
+      boundValue=song.beat
+      kitBin=(mut kitBin)
+    ]
+
+    /highlight=('of-array' index song.beatInputIndex)

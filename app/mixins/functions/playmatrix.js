@@ -37,6 +37,8 @@ obj.beat = function(beat){
 			view	=	this.get('options.frontView'),
       stanza= this.get('stanza')/rate,
 			print	= this.get('main.notemoji.options'),
+			kit		= this.get('selected.measure.kit'),
+			isMoji	=	this.get('isMoji'),
 			time	= this.get('selected.measure.map').objectAt(beat);
 lastNotes.forEach(function(coords){
 	window.requestAnimationFrame(()=>{
@@ -47,16 +49,31 @@ lastNotes.forEach(function(coords){
 						.map( (string,idx) => [string[beat],idx]	)
 						.filter( group => group[0])
 						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx]);
+
+	if(kit){
+		toKitBin.call(this,kit.objectAt(beat))
+	}
 	lastNotes.forEach ( obj => {
 								Ember.run(audio.objectAt(obj[3]),'play',obj[2],time)
-								boardWalk.call(view,obj[0],obj[1],print,stanza)						
+								boardWalk.call(this,view,obj[0],obj[1],print,stanza,isMoji)						
 						},this)
 }
-
-const boardWalk = function(boardX,boardY,print,stanza){
+const toKitBin = function(a){
+		let val = a.toString(2);
+		let kit = this.get('kit');
+		while(val.length < 3){
+			val = "0"+val
+		}
+		val.split('').forEach((e,f)=>{
+			if(+e){
+				kit.objectAt(f).play()
+			}
+		})
+};
+const boardWalk = function(ctx,boardX,boardY,print,stanza,isMoji){
 		window.requestAnimationFrame(()=>{
 //       	this.clearRect(0,boardY-y/2,900,y)
-				NoteGraphic.call(this,boardX,boardY,print,stanza)	
+				NoteGraphic.call(this,ctx,boardX,boardY,print,stanza,isMoji)	
 	})
 };
 

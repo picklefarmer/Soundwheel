@@ -12,8 +12,9 @@
                 component [
                   type
                   class='form-control'
+                  name=configuration.name
                   target=song.main
                   list=configuration.options
-                  selection=(mut configuration.name)
+                  selected=(mut configuration.options)
                   content=(get up (concat configuration.name 'Arr'))
                   ]

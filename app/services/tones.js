@@ -22,11 +22,6 @@ export default Ember.ArrayProxy.reopenClass({
 		}
 	}),
 
-	tuning:Ember.observer('song.main.tuning.options',()=>{
-    	console.log('tunings from'+`
-        	      `+'the instruments') 
-	}),
-
     _init:true,
 	init(){
 			let song = this.get('song');
@@ -144,10 +139,6 @@ export default Ember.ArrayProxy.reopenClass({
 				return arrays
 			}
 		}
-	}),
-	
-	update:Ember.computed('song.strings','isLeft',{
-		get(){
-		}
 	})
+	
 })

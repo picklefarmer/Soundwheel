@@ -1,10 +1,24 @@
 $borderWidth:.15rem;
+$midnight-sea:rgba(0,0,0,0.31);
 @import "compass/css3/box-shadow";
 @import "compass/functions/lists";
 .inventory{
 	display:inline-block;
 	height:100%;
 	cursor:crosshair;
+}
+.chord-panel{
+	float:left;
+	margin:1.5rem;
+	border:6px grey groove;
+
+}
+.chord-stack{
+	outline:solid $midnight-sea 1.2rem;
+	border:groove 2rem grey;
+	position:absolute;
+	height:95%;
+	overflow-y:scroll;
 }
 
 .chordBank{
@@ -13,10 +27,6 @@ $borderWidth:.15rem;
     outline:none;
   }
 	background:#aaa;
-//	width:100%;
-//	left:0px;
-//	bottom:0px;
-//	position:absolute;
 	margin:0px;
 }
 

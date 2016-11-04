@@ -4,7 +4,6 @@ export default Ember.Component.extend({
 
   classNameBindings:['active:hit','highlight:selected'],
 	tagName:"li",
-
 	measure:Ember.computed('index',{
 		get(){
 			var measure = this.get('index').toString()

@@ -57,6 +57,15 @@ actions:{
 	isBeat(){
 				this.toggleProperty('isBeat')
 	},
+	isKit(){
+console.log('isKit',this.get('isKit'))
+		this.toggleProperty('isKit')
+
+		if(!this.get('selected.measure.kit')){
+			//this.get('selected').setEach('kit',[0,5,0,5,0,5,0,0])  | copy drum loop?
+			this.get('selected').forEach( e => e.kit = [0,2,2,2,0,2,2,0])
+		}
+	},
 	stepLeft(){
 		console.log( 'stepLeft ' ) 
     if(this.get('isBeat')){

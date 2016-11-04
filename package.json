@@ -8,6 +8,7 @@
     "test": "tests"
   },
   "scripts": {
+		"win": "electron --disable-gpu --enable-transparent-visuals electronMain.js",
     "build": "ember build",
     "start": "ember server",
     "test": "ember test"

@@ -18,7 +18,8 @@ ul class=menubar
   else
       each songOptions as | path |
         li class="{{if (e-q isActive.option path) hit}}":  link-to path (concat "isOnline.song." path ) isOnline song.selected.selection tagName="div"
-      li: h1 &#x2637; 
+      li: h1 &#x2637;
+      li: =points-pane 
       li: =play-bar
       /each songToggles as | bool |
         =toggle-button name=bool bool=(get song bool)

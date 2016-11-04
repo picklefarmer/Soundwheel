@@ -20,8 +20,10 @@ export default Ember.Component.extend({
 						Bars:"\u231b"
 				}
 		},
+		//graphics | points
 		isPaint:{name:"\uD83D\uDC88",type:"toggle"},
-		isBeat:{name:'\uD83D\uDCCF',type:"toggle"}
+		isBeat:{name:'\uD83D\uDCCF',type:"toggle"},
+		isKit:{name:"\uD83D\uDC50",type:"action"}
 
   }
 	

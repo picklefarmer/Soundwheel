@@ -24,7 +24,8 @@ export default Ember.Component.extend({
 
 	classNames:['tablet'],
 	classNameBindings:['verticalTab'],
-
+  
+  verticalTab:Ember.computed.alias('song.verticalTab'),
 	mouseFormat,
 	pushChord,
 	pushNote,

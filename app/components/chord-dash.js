@@ -6,7 +6,7 @@ var debug, debug2;
 export default Ember.Component.extend({
 
   options:Ember.inject.service(),
-  verticalTab:Ember.computed.bool('options.verticalTab'),
+  verticalTab:Ember.computed.bool('song.verticalTab'),
   song:Ember.inject.service(),
   tagName:"ul",
   classNames:['sidebar','chordBank'],
@@ -22,6 +22,14 @@ export default Ember.Component.extend({
 	differenceBinding:"song.chordDifference",
 	lowBinding:"song.chordLow",
 	isEditingBinding:"song.chordEditFlag",
+  acts:{
+    updateSelection:"Update",
+    deleteSelection:"Remove",
+    chordCapture:   "Capture Chord",
+    newSelection:   "New",
+    editSelected:   "Edit",
+    saveSelection:  "Save"
+  },
 	actions:{
 
 		saveSelection(){

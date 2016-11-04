@@ -48,19 +48,20 @@ table{
 }
 
 input{
-	text-align:center;
-	display:inline-block;
+	//text-align:center;
+	//display:inline-block;
 	width:46px;
-	border:7px solid #383838;
-	border-radius:15px;
-	@include box-shadow(0px 0px 5px 5px #222222);
+	height:44px;
+	//border:7px solid #383838;
+	//border-radius:15px;
+	//@include box-shadow(0px 0px 5px 5px #222222);
 	&:focus {
 		background:black;
 		color:white;
 		outline:none;
 	}
 }
-
+//
 button{
 	//width:60px;
 	display:inline-block;

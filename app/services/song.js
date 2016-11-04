@@ -25,6 +25,14 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	isConvolver:false,
   webaudio:Ember.inject.service(),
 	tones:Ember.inject.service(),
+	isKit:true,
+	kit:Ember.inject.service(),
+	measureKit:Ember.computed('isKit','selected.index',function(){
+		if(this.get('isKit')){
+			return this.get('selected.measure.kit');
+		}
+	}),
+
 	options:Ember.inject.service(),
 
   chordEditFlag:true,
@@ -81,23 +89,7 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 					if(!args){
 						Ember.run(this,'pulse',0)
 					}}
-						/*
-			console.log(args,this.pause)
-			if(this.pause){
-					if(!args){
-            if(!this.get('isLoop')){  
-          	  this.incrementProperty('selected.index')
-            }
-					}
-					//	console.log(this.get('playMatrix'),"playMAtrix")
-					if(this.get('isBeat')){
-						Ember.run(this,'pulse',0)
-					}else{
-					 	Ember.run(this,this.get('playMatrix.audio'))
-					}
-  //         Ember.run.later(this,'clock',this.get('tempo'))   
-		} 
-		*/
+
     },
 
     volume:Ember.computed({

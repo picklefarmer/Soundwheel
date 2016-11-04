@@ -1,0 +1,6 @@
+{
+	"scripts":{
+		"start": "electron --disable-gpu --enable-transparent-visuals electronMain.js"
+	
+	}
+}			

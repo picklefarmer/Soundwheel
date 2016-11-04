@@ -14,6 +14,14 @@ const scaleUp = function(x,y,print,m){
  			this.closePath();
 		 	this.fill()
 },
+			scaleDown = function(x,y,print,m){
+			this.beginPath()
+//			this.fillStyle = 'white'
+			this.arc(	x , y,(rate- m),	0,	2*Math.PI)
+ 			this.closePath();
+		 	this.fill()
+			},
+
 			noteMoji=function(x,y,print,m){
 				m = rate - m
 				this.fillStyle = hot(m)
@@ -22,10 +30,26 @@ const scaleUp = function(x,y,print,m){
 
 			},
 
-			upImp		= function(x,y,print,stanza){
+			downImp		= function(x,y,print,stanza){
 				let m = rate;
 
-				while(m--){
+				while(m-- > -1){
+					setTimeout((m)=>{
+							requestAnimationFrame(()=>{
+								this.clearRect(x-20,y-20,40,40)
+								scaleDown.call(this,x,y,print,m)
+							})
+					},m*stanza,m)
+				}
+			/*	setTimeout(()=>{
+					this.clearRect(x-20,y-20,40,40)
+				},rate*playRATE)
+*/
+			},
+		upImp		= function(x,y,print,stanza){
+				let m = rate;
+
+				while(m-- > -1){
 					setTimeout((m)=>{
 							requestAnimationFrame(()=>{
 								this.clearRect(x-20,y-20,40,40)
@@ -40,8 +64,14 @@ const scaleUp = function(x,y,print,m){
 */
 			};
 
-export default function(boardX,boardY,print,stanza){
-				upImp.call(this,boardX,boardY,print,stanza)
+export default function(ctx,boardX,boardY,print,stanza,isMoji){
+		if(isMoji){
+			upImp.call(ctx,boardX,boardY,print,stanza)
+		}else{
+			console.error(this.get('main.fretboard.options.notes'))
+			ctx.fillStyle = "#"+this.get('main.fretboard.options.notes')	
+			downImp.call(ctx,boardX,boardY,print,stanza)
+		}
 				/*
 				this.beginPath()
  				this.arc(boardX,	

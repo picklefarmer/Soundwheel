@@ -7,7 +7,17 @@
 }
 
 .vertical-tab{
-	transform: translateX(-540px) translateY(545px) rotateZ(90deg);
+	float:left;
+	width:auto;
+	height:auto !important;
+	div{
+		height:1400px;
+		width:300px;
+	}
+	canvas{
+		position:absolute;
+		transform: translateX(-40%) translateY(190%) rotateZ(90deg);
+	}
 }
 
 .flip-button{
@@ -38,7 +48,7 @@
 	margin:2rem;
 	//border:7px inset #383838;
 	//background-color:#269;
-	@include strings();
+	//@include strings();
 	@include box-shadow(inset 0px 0px 4px 4px #282828);
 	vertical-align:top;
 	position:relative;

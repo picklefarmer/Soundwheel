@@ -1,6 +1,3 @@
-window.onerror = function(e){
-	window.alert(e)
-}
 
 import Ember from 'ember';
 import createWaveTable from './functions/createWaveTable';

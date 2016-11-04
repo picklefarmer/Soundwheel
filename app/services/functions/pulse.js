@@ -15,7 +15,9 @@ export default function pulse(beat){
 			}else{
 	     	//Ember.run.later(this,function(beat,stanza){}'pulse',++beat,this.get('stanza'))   
 	     	Ember.run.later(this,function(){
-					this.incrementProperty('selected.index')
+					if(this.get('isLoop')){
+						this.incrementProperty('selected.index')
+					}
 					this.pulse.call(this,0)	
 				},this.get('stanza'))   
 			}

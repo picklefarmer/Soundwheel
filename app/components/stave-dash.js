@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import Turnaround from './functions/turnaround';
 import galleryMap from '../mixins/galleryMap';
+import pickUpNote	from './functions/pickUpNote';
 
 export default Ember.Component.extend(galleryMap,{
-
+	mouseDown:pickUpNote,	
   song:Ember.inject.service(),
   viewing:"treble",
   classNames: 'stave-dash',
