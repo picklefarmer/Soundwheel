@@ -20,6 +20,16 @@ export default Ember.Mixin.create({
 		}),            
 		bankmojiArr:notemojiArr,
 		notemojiArr,
+		fretboard:Ember.computed('content.fretboard.[]',{
+			set(_,info){
+					localStorage.bank = JSON.strigify(info)
+		
+		},get(){
+			let storage = this.get('content.fretboard');
+			storage.options.notes = "ff0"
+//			let userSet = localStorage.songs.
+			return storage //this.get('storageName')
+		}}),
 		stringsArr:[4,5,6],
 		fretsArr:[16,24,26],
 		tuningArr:['a','A','b','c','C','d','D','e','f','F','g','G'],

@@ -38,15 +38,20 @@ obj.beat = function(beat){
       stanza= this.get('stanza')/rate,
 			print	= this.get('main.notemoji.options'),
 			kit		= this.get('selected.measure.kit'),
+			holdNote=this.get('holdNote'),
 			isMoji	=	this.get('isMoji'),
 			time	= this.get('selected.measure.map').objectAt(beat);
-lastNotes.forEach(function(coords){
-	window.requestAnimationFrame(()=>{
-		view.clearRect(coords[0]-24,coords[1]-24,48,48)
-	})
-})
+
+	if(holdNote){
+		lastNotes.forEach(function(coords){
+			window.requestAnimationFrame(()=>{
+				view.fillRect(coords[0]-24,coords[1]-24,48,48)
+			})
+		})
+	}
 	lastNotes = this.get('selected.measure').notes
 						.map( (string,idx) => [string[beat],idx]	)
+
 						.filter( group => group[0])
 						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx]);
 

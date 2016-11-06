@@ -1,5 +1,11 @@
 .panel.panel-default
-  h3.panel-heading Main
+  h3.panel-heading
+    |Main
+    .float-right: =action-property [
+      action=(action 'saveToStorage' target=song)
+      name="main"
+      desc="Save Settings"
+    ]
   ul.list-group.panel-body
     with song.main as |up|
       if up.isFulfilled

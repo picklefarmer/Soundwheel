@@ -8,12 +8,4 @@ if song.isBeat
       highlight=('is-classy' index song.beatInputIndex)
     ]
 
-.beat-blanket
-  each song.measureKit as |kitBin index|
-    =beat-bar  [
-      index=index
-      boundValue=song.beat
-      kitBin=(mut kitBin)
-    ]
-
     /highlight=('of-array' index song.beatInputIndex)

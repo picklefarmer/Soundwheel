@@ -7,9 +7,13 @@ export default Ember.Service.extend({
   verticalTab:false,
 	song:Ember.inject.service(),
   router:Ember.inject.service('-routing'),
+  songConfig(params){
+    this.set('song.bpm',params.tempo)
+    this.set('song.instrument',params.voice)
+  },
   updateUrl(selected){
-      let router = this.get('router.router'),
-       selection = selected || this.get('song.selected.selection');
+    let router = this.get('router.router'),
+        selection = selected || this.get('song.selected.selection');
 
       router.replaceWith(router.currentPath,{y:selection})
   },
@@ -22,7 +26,7 @@ export default Ember.Service.extend({
 	actionNames:Ember.computed(function(){
 		let actionNames = this.get('song.actionNames');
 			console.log(actionNames, 	`Action Names
-											from 
+											from
 											Options Service`)
 
 		return actionNames

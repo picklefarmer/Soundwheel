@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     'graphView':C,
     'backView':C,
     'frontView':C,
-//		'spritzView':'spritz-inc',
+		'spritzView':'spritz-inc',
     'centerView':C,
 	},
 

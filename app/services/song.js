@@ -3,10 +3,11 @@ import pulse          from './functions/pulse';
 import Play           from '../mixins/play';
 import beatIndex      from '../mixins/functions/beat';
 import GalleryMap     from '../mixins/galleryMap';
+import Storage	 	    from '../mixins/storage';
 import UpdateMethods  from '../mixins/update-methods';
 
 export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
-}).extend(UpdateMethods,Play,GalleryMap,{
+}).extend(UpdateMethods,Play,GalleryMap,Storage,{
 
   onLine:false,
   content:Ember.computed('onLine',{
@@ -40,6 +41,8 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	sustain:true,
 	isPulse:true,
   isLoop:true,
+	areFrets:true,
+	areStrings:true,
 
 	minTempVal:264,
 

@@ -21,9 +21,7 @@ export default Ember.Component.extend({
     	updater(name,val,index){
 				//this.sendAction('action',val,index)
 				this.get('song.main.'+name+'.options').replace(val,1,[index]);
-				let trial = this.get('song.main.'+name+'.options')
 
-			console.log('actions',name,val,index,trial)
 		}
  	}
 

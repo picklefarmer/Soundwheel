@@ -1,6 +1,7 @@
 {
  "option-panel"	: { "options":"right"	,"enabled":true	},
  "chord-dash"	  : { "options":"left","enabled":true	},
+ "test-panel"	  : { "options":"middle","enabled":true	},
  "omni-bar"	  : { "options":"middle","enabled":true	},
  "lyrics-pane"  : { "options":"middle","enabled":false 	}
 }

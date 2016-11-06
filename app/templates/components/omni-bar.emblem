@@ -2,3 +2,13 @@ if song.isBeat
   meter-bar
 else
   measure-bar 
+
+.beat-blanket
+  each song.measureKit as |kitBin index|
+    =beat-bar  [
+      index=index
+      boundValue=song.beat
+      kitBin=(mut kitBin)
+    ]
+
+

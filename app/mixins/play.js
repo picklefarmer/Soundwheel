@@ -16,6 +16,10 @@ const scale = 36;
 export default Ember.Mixin.create({
 
 actions:{
+	saveToStorage(){
+		localStorage[this.get('storageName')] = JSON.stringify(this.get('storage'));
+		console.log('saveToStorage')
+	},
   sustain(){
 				this.toggleProperty('sustain')
   },

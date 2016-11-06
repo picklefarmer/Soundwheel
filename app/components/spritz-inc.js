@@ -1,23 +1,57 @@
 import Ember from 'ember';
 
 const space = function(num){
-  return "_".repeat(num)
+  return " ".repeat(num)
+},
+
+requate = function(index,num,words){
+    num = (words[index]+",").repeat(num).split(',')
+    num.pop()
+    return num
+
 },
 
 spritz = function(num){
-  return (Math.round(num-1)*0.35)+1
+  if(num <=3 ){
+    return 2
+  }
+  return (Math.round(num)*0.35)
 };
 
 export default Ember.Component.extend({
+  isVisible:Ember.computed.bool('song.isSpritz'),
   song:Ember.inject.service(),
   classNames:['spritz'],
   words:Ember.computed('song.selected.measure.lyric',{
     get(){
-			let words = this.get('song.selected.measure.lyric');
-			
-			if(words){
-				return words.split(' ')
-			}
+			let words = this.get('song.selected.measure.lyric').trim(),column = [];
+      if(words){
+        words = words.split(' ')
+        let length = words.length,
+            difference = 8 - length;
+
+        if(length >= 8){
+          return words
+        }else{
+
+
+        switch(difference){
+          case 7: column = requate(0,8,words);break;
+          case 6: column = requate(0,4,words)
+                            .concat(requate(1,4,words));break;
+          case 5: column = requate(0,2,words)
+                            .concat(requate(1,2,words))
+                            .concat(requate(2,4,words));break;
+          case 4: column = requate(0,2,words)
+                            .concat(requate(1,2,words))
+                            .concat(requate(2,2,words))
+                            .concat(requate(3,2,words));break;
+          default: column = words.concat(requate(length-1,difference,words));break;
+        }
+        return column
+
+        }
+      }
     },
     set(_,words){
       return words.split(' ')
@@ -32,10 +66,10 @@ export default Ember.Component.extend({
     amidst = errorProne.sortBy('length').reverse()[0].length;
 
       //.sort((a,b)=>a.length<b.length)
-     return amidst 
+     return amidst
       //[0].length;
       console.error(errorProne,amidst)
-      
+
 //    return this.get('words').sort((a,b)=>a.length<b.length)[0].length
   }),
 
@@ -50,12 +84,8 @@ export default Ember.Component.extend({
 	    	stop = spritz(word_length),
 		    prefix_space = (this.get('max_orp') - stop),
         postfix_space = (this.get('max_length') - word_length - prefix_space);
-  
+
         return space(prefix_space) + word + space(postfix_space);
 
   })
 });
-
-
-
-

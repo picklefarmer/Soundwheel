@@ -1,0 +1,64 @@
+controllers/.backsong.js:13:        	var one = localStorage;
+controllers/.backsong.js:129:						if(localStorage[name]){	
+controllers/.backsong.js:130:							localStorage[prompt("update song ?",name)] = JSON.stringify(this.get('editScore'))
+controllers/.backsong.js:132:							localStorage[name] = JSON.stringify(this.get('editScore'))
+Binary file mixins/.play.js.swl matches
+Binary file mixins/.tuning.js.swo matches
+mixins/storage.js:6:		let storage = JSON.parse(localStorage.songs);
+mixins/play.js:20:		localStorage[this.get('storageName')] = JSON.stringify(this.get('storage'));
+mixins/tuning.js:25:					localStorage.bank = JSON.strigify(info)
+mixins/tuning.js:30://			let userSet = localStorage.songs.
+Binary file mixins/.storage.js.swp matches
+routes/restore.js:5:		console.log('restoring localStorage')
+routes/restore.js:6:		delete localStorage.songs	
+services/local.js:97:    if(localStorage.songs){
+services/local.js:99:      om = JSON.parse(JSON.parse(localStorage.songs)[selection])
+services/local.js:114:					 console.log( ' no localstorage found  grabbing / json ', om)
+services/local.js:123:    if(localStorage.songs){
+services/local.js:124:    var names = Object.keys(JSON.parse(localStorage.songs))
+services/local.js:141:      if(localStorage.chords){
+services/local.js:143:          om = JSON.parse(localStorage.chords);
+services/local.js:160:    localStorage.chords = JSON.stringify(update)
+Binary file services/.local.js.swn matches
+Binary file services/.auth.js.swp matches
+Binary file services/.local.js.swp matches
+services/auth.js:6:					storage 		=	localStorage[storageName],
+services/auth.js:21:			localStorage[storageName] = JSON.stringify(hydraStore);
+Binary file services/functions/.saveAction.js.swp matches
+services/functions/saveAction.js:12:   if(!localStorage.songs){
+services/functions/saveAction.js:13:      localStorage.songs = "{}"
+services/functions/saveAction.js:16:  let storage = JSON.parse(localStorage.songs);
+services/functions/saveAction.js:21:  localStorage.songs= JSON.stringify(storage) 
+Binary file services/.local.js.swo matches
+controllers/.backsong.js:13:        	var one = localStorage;
+controllers/.backsong.js:129:						if(localStorage[name]){	
+controllers/.backsong.js:130:							localStorage[prompt("update song ?",name)] = JSON.stringify(this.get('editScore'))
+controllers/.backsong.js:132:							localStorage[name] = JSON.stringify(this.get('editScore'))
+Binary file mixins/.play.js.swl matches
+Binary file mixins/.tuning.js.swo matches
+mixins/storage.js:6:		let storage = JSON.parse(localStorage.songs);
+mixins/play.js:20:		localStorage[this.get('storageName')] = JSON.stringify(this.get('storage'));
+mixins/tuning.js:25:					localStorage.bank = JSON.strigify(info)
+mixins/tuning.js:30://			let userSet = localStorage.songs.
+Binary file mixins/.storage.js.swp matches
+routes/restore.js:5:		console.log('restoring localStorage')
+routes/restore.js:6:		delete localStorage.songs	
+services/local.js:97:    if(localStorage.songs){
+services/local.js:99:      om = JSON.parse(JSON.parse(localStorage.songs)[selection])
+services/local.js:114:					 console.log( ' no localstorage found  grabbing / json ', om)
+services/local.js:123:    if(localStorage.songs){
+services/local.js:124:    var names = Object.keys(JSON.parse(localStorage.songs))
+services/local.js:141:      if(localStorage.chords){
+services/local.js:143:          om = JSON.parse(localStorage.chords);
+services/local.js:160:    localStorage.chords = JSON.stringify(update)
+Binary file services/.local.js.swn matches
+Binary file services/.auth.js.swp matches
+Binary file services/.local.js.swp matches
+services/auth.js:6:					storage 		=	localStorage[storageName],
+services/auth.js:21:			localStorage[storageName] = JSON.stringify(hydraStore);
+Binary file services/functions/.saveAction.js.swp matches
+services/functions/saveAction.js:12:   if(!localStorage.songs){
+services/functions/saveAction.js:13:      localStorage.songs = "{}"
+services/functions/saveAction.js:16:  let storage = JSON.parse(localStorage.songs);
+services/functions/saveAction.js:21:  localStorage.songs= JSON.stringify(storage) 
+Binary file services/.local.js.swo matches

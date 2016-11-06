@@ -10,8 +10,8 @@ export default Ember.Mixin.create(PromiseProxy,{
     firebase:Ember.inject.service(),
     local:Ember.inject.service(),
     auth:Ember.inject.service(),
-
-    instrument:Ember.computed({
+		storageName:'songs',
+		    instrument:Ember.computed({
 		get(){
 			return false
 		},
@@ -28,10 +28,11 @@ export default Ember.Mixin.create(PromiseProxy,{
 			get(_){
 				console.log(this, this.get('promiseWithContextAsObject'),_,'main error')
 				let proxy = this.promiseWithContextAsObject(_),
+						storageName	=	this.get('storageName'),
 						_this = this;
 
       	proxy.then(()=>{//		  		if(this.get('auth.uid')){
-					proxy.reopen(Tuning)
+					proxy.reopen(Tuning,{storageName})
 					})
 				return proxy
 		}

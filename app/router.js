@@ -33,6 +33,7 @@ Router.map(function() {
   });
 
   this.route('user');
+  this.route('restore');
 
   this.route(	'catchall',	{	path:'/*wildcard'}	)
 

@@ -1,6 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+	init(){
+			let storageName = "songs",//this.get('storageName'),
+					storage 		=	localStorage[storageName],hydraStore;
+					if(storage){
+						hydraStore	=	JSON.parse(storage);
+					}else{
+						hydraStore = {songs:{}}
+					}
+
+					if(!hydraStore.settings){
+						hydraStore.settings = {
+							main:{	
+							},
+							instrumentNames:[
+							],
+							panels:[
+							],
+							chords:[
+							]
+						}
+					}
+			localStorage[storageName] = JSON.stringify(hydraStore);
+		},
 
     /* init(){
 				console.log( 'init auth') 

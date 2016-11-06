@@ -1,4 +1,8 @@
-[
+{"params":{
+	"tempo":2222,
+	"voice":"organ"
+},
+	"song":[
 {
 	"map":[ 	8,	0 ,		0,		0, 	 0,		0,	 0,		0],
 	"lyric":"as it stands",
@@ -65,3 +69,4 @@
 	]
 }
 ]
+}

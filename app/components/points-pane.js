@@ -6,7 +6,8 @@ export default Ember.Component.extend({
 		graphics:{
 			verticalTab:"\uD83D\uDCA2",
 			isMoji:"M",
-			areStrings:"S",
+//			areStrings:"S",
+			isSpritz:'S',
       areFrets:"F"
 		}
 })
