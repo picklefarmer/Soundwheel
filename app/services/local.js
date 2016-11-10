@@ -108,11 +108,16 @@ export default Ember.Service.extend({
 			}
 			Ember.run(this.get('options'),this.get('options.updateUrl'),selection)
     }else{
+				console.log('local_om',om)
       Ember.$.getJSON("./scores/"+selection+".json")
        .then(om => {
+				console.log('local_om',om)
 				 if(!om.length){
+
 					 Ember.run(this.get('options'),this.get('options.songConfig'),om.params)
+						
 					 res(om.song)
+					 this.set('selected.playOrder',Ember.A(om.playOrder))
 				 }else{
 					 console.log( ' no localstorage found  grabbing / json ', om)
 	   			res(om)

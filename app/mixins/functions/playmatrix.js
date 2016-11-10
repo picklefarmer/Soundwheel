@@ -33,14 +33,16 @@ var obj = {}, lastNotes = [];
 export default obj;
 
 obj.beat = function(beat){
+				console.log(beat, 'playMatrix')
 	let audio = this.get('tones'),
 			view	=	this.get('options.frontView'),
       stanza= this.get('stanza')/rate,
 			print	= this.get('main.notemoji.options'),
 			kit		= this.get('selected.measure.kit'),
+			isKit = this.get('isKit'),
 			holdNote=this.get('holdNote'),
-			isMoji	=	this.get('isMoji'),
-			time	= this.get('selected.measure.map').objectAt(beat);
+			isMoji	=	this.get('isMoji');
+			var time	= this.get('selected.measure.map').objectAt(beat);
 
 	if(holdNote){
 		lastNotes.forEach(function(coords){
@@ -49,20 +51,36 @@ obj.beat = function(beat){
 			})
 		})
 	}
-	lastNotes = this.get('selected.measure').notes
+
+	/*(	lastNotes = this.get('selected.measure').notes
 						.map( (string,idx) => [string[beat],idx]	)
 
 						.filter( group => group[0])
 						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx]);
+	) */
 
-	if(kit){
+	lastNotes = this.get('selected.fretMeasure')
+							.getEach(""+beat)
+							.filter( a =>a?true:false)
+
+	if(isKit && kit){
 		toKitBin.call(this,kit.objectAt(beat))
 	}
+
 	lastNotes.forEach ( obj => {
-								Ember.run(audio.objectAt(obj[3]),'play',obj[2],time)
-								boardWalk.call(this,view,obj[0],obj[1],print,stanza,isMoji)						
-						},this)
+
+		if( !obj[2].length){
+			Ember.run(audio.objectAt(obj[3]),'play',obj[2],stanza/(9-time))
+			boardWalk.call(this,view,obj[0],obj[1],print,stanza,isMoji)						
+		}else{
+
+			Ember.run(audio.objectAt(obj[3]),'glide',obj[2],stanza/(9-time))
+
+			slideWalk.call(this,view,obj[0],obj[1],print,stanza,isMoji)						
+		}
+	},this)
 }
+
 const toKitBin = function(a){
 		let val = a.toString(2);
 		let kit = this.get('kit');
@@ -75,7 +93,11 @@ const toKitBin = function(a){
 			}
 		})
 };
-const boardWalk = function(ctx,boardX,boardY,print,stanza,isMoji){
+const slideWalk		= function(ctx,boardX,boardY,print,stanza,isMoji){
+
+},
+
+			boardWalk = function(ctx,boardX,boardY,print,stanza,isMoji){
 		window.requestAnimationFrame(()=>{
 //       	this.clearRect(0,boardY-y/2,900,y)
 				NoteGraphic.call(this,ctx,boardX,boardY,print,stanza,isMoji)	

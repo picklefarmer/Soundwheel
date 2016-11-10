@@ -26,7 +26,7 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	isConvolver:false,
   webaudio:Ember.inject.service(),
 	tones:Ember.inject.service(),
-	isKit:true,
+	isKit:false,
 	kit:Ember.inject.service(),
 	measureKit:Ember.computed('isKit','selected.index',function(){
 		if(this.get('isKit')){
@@ -37,13 +37,13 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	options:Ember.inject.service(),
 
   chordEditFlag:true,
-	isBeat:true,
+	isBeat:false,
 	sustain:true,
 	isPulse:true,
   isLoop:true,
 	areFrets:true,
 	areStrings:true,
-
+	barType:'measure',
 	minTempVal:264,
 
 		stanza:Ember.computed('tempo',{

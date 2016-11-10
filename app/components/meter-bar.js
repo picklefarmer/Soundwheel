@@ -1,9 +1,23 @@
 import Ember from 'ember';
+const hue = new chroma.scale('Spectral').domain([0,8])
 
 export default Ember.Component.extend({
   song:Ember.inject.service(),
 	tagName:"ul",
-	classNames:["sidebar"],
+  attributeBindings:['style'],
+  style:Ember.computed('song.isToneToHue',function(){
+    let style = 'background-image:linear-gradient(90deg';
+    if(this.get('song.isToneToHue')){
+      for(var i = 0; i < 8; i++){
+        style+=","+hue(i)+" "+i+"0%"  
+      }
+
+      style+=")"
+
+      return style
+    }
+  }),
+	classNames:["sidebar","scroll"],
   timeSignature:Ember.computed('song.division',{get(){
 
     var arr = [],

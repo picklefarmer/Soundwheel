@@ -1,4 +1,5 @@
-spritz-inc
---replace areStrings |w spritz-toggle;
-song specific settings ; 
-user specific settings ; 
+begin part--based lyrics
+color-to-time gradient | option on fretboard noteGraphic
+reassign up/down actions | include "space" to replace play
+implement part naming convention
+

@@ -13,17 +13,18 @@ export default function(chord){
 	ctx.fillStyle = "white" 
 		
 	for(var [x,y] of chord){
-		ctx.beginPath()
+		if(x){
+			ctx.beginPath()
 
-		ctx.arc(offset+x+scale/2,
-			offset/2+y+scale/2,
-			((scale/2)/8)*l,
-			0,2*Math.PI
-		)
+			ctx.arc(offset+x+scale/2,
+				offset/2+y+scale/2,
+				((scale/2)/8)*l,
+				0,2*Math.PI
+			)
 
-		ctx.fill();
+			ctx.fill();
+		}
 	}
-
 	ctx.globalAlpha=1
 
 	this.set('chordTemp',chord)

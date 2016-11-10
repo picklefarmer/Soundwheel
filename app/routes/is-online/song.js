@@ -8,7 +8,9 @@ export default Ember.Route.extend({
 			console.log( 'init , from isOnline song route model ', this.get('song'),params)
     
 
-	  Ember.run(this,'autoplay',params.y)
+	  if(this.get('isAutoplay')){
+				Ember.run(this,'autoplay',params.y)
+		}
 
 
 			return params

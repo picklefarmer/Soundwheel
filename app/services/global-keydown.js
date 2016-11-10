@@ -1,10 +1,20 @@
-import Ember 			from 'ember';
-import Delete 		from './functions/delete';
-import Append 		from './functions/append';
-import Copy 			from './functions/copy';
-import DupBeat		from './functions/DupBeat';
-import Step 			from './functions/step';
-import PlayPause	from './functions/playPause';
+import Ember 				from 'ember';
+import Delete 			from './functions/delete';
+import Append 			from './functions/append';
+import Copy 				from './functions/copy';
+import DupBeat			from './functions/DupBeat';
+import SwitchBar		from './functions/switchBar';
+import Step 				from './functions/step';
+import PlayPause		from './functions/playPause';
+import PlayPreview 	from './functions/playPreview';
+
+const Return = function(index){
+	if(this.get('song.isBeat')){
+		PlayPreview.call(this.get('song'))
+	}else{
+		Append.call(this,index)
+	}
+};
 
 export default Ember.Service.extend({
 	end(e){
@@ -72,15 +82,16 @@ export default Ember.Service.extend({
 			switch(e.keyCode){
 
 /*left*/	case 37:Step.call(this,'decrementProperty',ctrl);break;
-					case 38:PlayPause.call(this);break;
+					case 32:PlayPause.call(this);break;
+					case 38:SwitchBar.call(this,-1);break;
 /*right*/	case 39:Step.call(this,'incrementProperty',ctrl);break;
 
 					//show_meter_bar
-					case 40:this.toggleProperty('song.isBeat');console.log( ' drill down ' );break;
+					case 40:SwitchBar.call(this,1);break;
 					// preview ? 
-					case 32:Ember.run(this,"playNotes");break;
+//					case 34:PlayPreview.call(this);break;
 
-					case 13:Append.call(this,index);break;
+					case 13:Return.call(this,index);break;
 					case 46:Delete.call(this,index);break;
 					case 45:Copy.call(this,index);	break;
 

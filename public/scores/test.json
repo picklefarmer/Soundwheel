@@ -4,13 +4,13 @@
 },
 	"song":[
 {
-	"map":[ 	8,	0 ,		0,		0, 	 0,		0,	 0,		0],
+	"map":[ 	1,	0 ,		0,		0, 	 0,		0,	 0,		0],
 	"lyric":"as it stands",
-	"kit":[5,0,1,0,0,1,0,1],
+	"kit":[0,0,0,0,0,0,0,0],
 	"notes":[
+				[[3,5],null,null,null ,null,null,null,null],
+				[null,null, null,null ,null,null,null,null],
 				[null,null,null,null ,null,null,null,null],
-				[	 11,null, null,null ,null,null,null,null],
-				[	  5,null,null,null ,null,null,null,null],
 				[null,null, null,null ,null,null,null,null],
 				[null,null,null,null ,null,null,null,null],
 				[null,null,null,null ,null,null,null,null]

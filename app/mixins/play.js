@@ -23,6 +23,94 @@ actions:{
   sustain(){
 				this.toggleProperty('sustain')
   },
+  barType(barType){
+    if(barType === 'meter'){
+      this.set('isBeat',true)
+    }else{
+      this.set('isBeat',false)
+    }
+    if(barType === 'part'){
+      this.set('isPart',true) 
+    }else{
+      this.set('isPart',false)
+    }
+    
+    this.set('barType',barType)
+  },
+	isConvolver(){
+		let wa = this.get('webaudio'),
+				ac = wa.get('ac'),
+				co = wa.get('compressor'),
+				re = wa.get('reverb'),
+				ga = wa.get('masterVolume');
+
+		if(this.toggleProperty('isConvolver')){
+			ga.disconnect(co)
+			ga.connect(re)
+			re.connect(co)
+		}else{
+			re.disconnect(co)
+			ga.disconnect(re)
+			ga.connect(co)					
+		}
+	},
+  isLoop(){
+				this.toggleProperty('isLoop')
+  },
+	isPaint(){
+		this.toggleProperty('isPaint')
+	},
+	isOsc(val){
+				console.log(val, 'val from isOsc')
+				let ctx =this.get('options.graphView'); 
+				this.toggleProperty('isOsc')
+				switch(val){
+					case "Spec":Spec.call(this,null,ctx);break;
+					case "Osc":Osc.call(this,null,ctx);break;
+					case "Bars":Bar.call(this,null,ctx);break;
+					case "Chord":Chord.call(this,null,ctx);break;
+				}				
+				this[val].call(this,null,ctx)
+	},
+	isBeat(){
+				this.toggleProperty('isBeat')
+	},
+	isKit(){
+console.log('isKit',this.get('isKit'))
+		this.toggleProperty('isKit')
+
+		if(!this.get('selected.measure.kit')){
+			//this.get('selected').setEach('kit',[0,5,0,5,0,5,0,0])  | copy drum loop?
+			this.get('selected').forEach( e => e.kit = [0,2,2,2,0,2,2,0])
+		}
+	},
+	stepLeft(){
+		console.log( 'stepLeft ' ) 
+    if(this.get('isBeat')){
+			this.decrementProperty('beat')
+		}else{
+			this.decrementProperty('selected.index')
+		}
+	},
+	stepRight(){
+    if(this.get('isBeat')){
+			this.incrementProperty('beat')
+		}else{
+			this.incrementProperty('selected.index')
+		}
+	},	
+	play(){
+//			console.log( 'play ' ,this.get('song.pause')) 
+	    
+			if(this.toggleProperty('pause')){
+				Ember.run.next(this,'clock')
+			}
+  }},
+
+
+    }
+    this.set('barType',barType)
+  },
 	isConvolver(){
 		let wa = this.get('webaudio'),
 				ac = wa.get('ac'),

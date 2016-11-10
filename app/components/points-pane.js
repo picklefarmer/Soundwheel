@@ -8,6 +8,7 @@ export default Ember.Component.extend({
 			isMoji:"M",
 //			areStrings:"S",
 			isSpritz:'S',
-      areFrets:"F"
+      isToneToHue:'F'
+//      areFrets:"F"
 		}
 })

@@ -1,6 +1,7 @@
 
 import Ember from 'ember';
 import createWaveTable from './functions/createWaveTable';
+import glide from './functions/glideTone';
 import play from './functions/playTone';
 
 export default Ember.Mixin.create({
@@ -102,6 +103,7 @@ export default Ember.Mixin.create({
 		}),
 
 		play,
+		glide,
     pause(){
     	// console.log( 'pause' ) 
       	this.get('ctx').gain.exponentialRampToValueAtTime(0.001,this.get('ctx').context.currentTime)

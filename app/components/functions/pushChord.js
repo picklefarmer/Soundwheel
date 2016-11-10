@@ -5,7 +5,7 @@ export default function(e){
         	low = this.get('song.chordLow'),
         	diffX = ~~((this.get('song.chordDifference')/2) -0.5),
 					diffY = ~~(arr.length/2),
-    	 		theArr = arr.map(e => e - low + x - diffX),
+    	 		theArr = arr.map(e => e?e - low + x - diffX:0),
 					stringNum = 6,//this.get('song.options')
         	measure = this.get('song.selected.measure.notes');
 

@@ -1,11 +1,11 @@
 
 
 const scale = 36;
-const rate = 19;
-//original rate 16
-const playRATE=6;
+const rate = 19;//original rate 16
+const playRATE=6;//original playRate 10
 var hot = new chroma.scale(['black', 'red', 'yellow', 'white']).domain([0,rate]);
-//original playRate 10
+var spectral = new chroma.scale('Spectral').domain([0,8]);
+// implement measureLength to domain top
 
 const scaleUp = function(x,y,print,m){
 			this.beginPath()
@@ -14,13 +14,20 @@ const scaleUp = function(x,y,print,m){
  			this.closePath();
 		 	this.fill()
 },
-			scaleDown = function(x,y,print,m){
+			scaleDown = function(x,y,print,m,beat){
 			this.beginPath()
-//			this.fillStyle = 'white'
 			this.arc(	x , y,(rate- m),	0,	2*Math.PI)
  			this.closePath();
 		 	this.fill()
 			},
+      
+      toneToHue = function(x,y,print,m,beat){
+			  this.beginPath()
+			  this.fillStyle = spectral(beat)
+			  this.arc(	x , y,(rate- m),	0,	2*Math.PI)
+ 			  this.closePath();
+		 	  this.fill()
+      },
 
 			noteMoji=function(x,y,print,m){
 				m = rate - m
@@ -30,47 +37,51 @@ const scaleUp = function(x,y,print,m){
 
 			},
 
-			downImp		= function(x,y,print,stanza){
+      animationFrame= function(ctx,func,x,y,print,m,beat){
+     		requestAnimationFrame(()=>{
+						ctx.clearRect(x-20,y-20,40,40)
+            func.forEach(func=>func.call(ctx,x,y,print,m,beat))
+				})
+      },
+			tonesToHue		= function(ctx,x,y,print,stanza){
+				let m = rate,
+            beat = this.get('beat');
+				while(m-- > -1){
+					setTimeout(animationFrame,m*stanza,ctx,[toneToHue],x,y,null,m,beat)
+			  }
+      },
+
+      downImp		= function(ctx,x,y,print,stanza){
 				let m = rate;
 
 				while(m-- > -1){
-					setTimeout((m)=>{
-							requestAnimationFrame(()=>{
-								this.clearRect(x-20,y-20,40,40)
-								scaleDown.call(this,x,y,print,m)
-							})
-					},m*stanza,m)
+					setTimeout(animationFrame,m*stanza,ctx,[scaleDown],x,y,null,m)
 				}
-			/*	setTimeout(()=>{
-					this.clearRect(x-20,y-20,40,40)
-				},rate*playRATE)
-*/
 			},
-		upImp		= function(x,y,print,stanza){
+  		upImp		= function(ctx,x,y,print,stanza){
 				let m = rate;
 
 				while(m-- > -1){
-					setTimeout((m)=>{
-							requestAnimationFrame(()=>{
-								this.clearRect(x-20,y-20,40,40)
-								scaleUp.call(this,x,y,print,m)
-								noteMoji.call(this,x,y,print,m)
-							})
-					},m*stanza,m)
+					setTimeout(animationFrame,m*stanza,ctx,[scaleUp,noteMoji],x,y,print,m)
 				}
+			};
+
 			/*	setTimeout(()=>{
 					this.clearRect(x-20,y-20,40,40)
 				},rate*playRATE)
 */
-			};
 
 export default function(ctx,boardX,boardY,print,stanza,isMoji){
 		if(isMoji){
-			upImp.call(ctx,boardX,boardY,print,stanza)
+			upImp.call(this,ctx,boardX,boardY,print,stanza)
 		}else{
 			console.error(this.get('main.fretboard.options.notes'))
-			ctx.fillStyle = "#"+this.get('main.fretboard.options.notes')	
-			downImp.call(ctx,boardX,boardY,print,stanza)
+      if(this.get('isToneToHue')){
+			  tonesToHue.call(this,ctx,boardX,boardY,print,stanza)
+      }else{
+			  ctx.fillStyle = "#"+this.get('main.fretboard.options.notes')	
+			  downImp.call(this,ctx,boardX,boardY,print,stanza)
+      }
 		}
 				/*
 				this.beginPath()

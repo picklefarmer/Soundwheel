@@ -2,15 +2,85 @@ import Ember from 'ember';
 import SetIndex from '../mixins/functions/index';
 import hexCrunch from '../mixins/functions/hexcrunch';
 
+var offset =  10,
+		scale		= 36,
+		x				= 67,
+		y				= 50,
+		yFactor = offset+(scale/2),
+		xFactor	=	offset/2 + (scale/2);
+
 export default Ember.Mixin.create({
 
-	measure:Ember.computed('index','content.@each.notes',{
-		get(){
-			console.log(  'measure ' ) 
-			return this.objectAt(this.get('index'))
+
+	partNames:Ember.computed('playOrder',function(){
+		let names = ['verse','chorus','bridge','outro','intro'],
+				order	=	this.get('playOrder').uniq().map( name => names[name]);
+			return order
+	}),
+
+	part:Ember.computed('partIndex',function(_){
+		_ = this.get('partIndex')
+						console.log(_, 'part_index')
+		if(_ !== undefined ){
+			return this.objectAt(this.get('playOrder').objectAt(_));
+		}else{
+			return this.get('content')
 		}
 	}),
 
+	measure:Ember.computed('part','index','content.@each.notes',{
+		get(){
+			console.log(  'measure ' ) 
+			if(this.get('partIndex') !== undefined){
+				return this.get('part').objectAt(this.get('index'))
+			}else{
+				return this.objectAt(this.get('index'))
+			}
+		}
+	}),
+
+	partIndex:Ember.computed('playOrder.[]',{
+		get(){
+			if(this.get('playOrder')){
+				return 0
+			}			
+		},
+		set(_,index){
+
+				_  = this.get('playOrder');
+				if(index >= _.length){
+					return 0
+				}else if(index < 0){
+					return _.length-1
+				}
+				
+			return index	
+		}
+	}),
+	fretboard:Ember.computed('measure.notes.[]',function(){
+console.error( 'fretbard refresh',this.get('index'))	
+			return this.get('part')
+							.getEach('notes')
+							.map( measure => measure.map( (string,indx) => string.length?string.map( fret =>{
+								if(fret){
+									return [fret*x + xFactor, indx*y + yFactor,fret,indx]
+								}
+								}):false
+							))
+/*
+							.map( (string,idx) => string
+								.map(beat=>[beat,idx])
+								.filter( group => group[0])
+								.map( ([note,id]) => [note*x + xFactor, id*y + yFactor,note,id])
+							)
+							*/
+
+		
+	}),
+
+	fretMeasure:Ember.computed('index','fretboard',function(){
+		return this.get('fretboard').objectAt(this.get('index'))			
+	}),
 	measureLength:0,
 
 	hex:Ember.computed('measure.notes.[]',{

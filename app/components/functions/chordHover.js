@@ -12,14 +12,18 @@ export default function(e){
 				diffY = ~~(arr.length/2);
 				
 			arr = arr.map((fret,string)=>{
-				fret-=low;
-				fret+=x;	
-				string+=y;					
-				fret-=diffX;
-				string-=diffY;
-				fret*=67;
-				string*=50;
-				return [fret,string]
+				if(fret){
+					fret-=low;
+					fret+=x;	
+					string+=y;					
+					fret-=diffX;
+					string-=diffY;
+					fret*=67;
+					string*=50;
+					return [fret,string]
+				}else{
+					return [null,null]
+				}
 			})
 
 			Ember.run(this,'dotChord',arr)
