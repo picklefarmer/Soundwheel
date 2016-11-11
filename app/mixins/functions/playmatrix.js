@@ -33,6 +33,9 @@ var obj = {}, lastNotes = [];
 export default obj;
 
 obj.beat = function(beat){
+		if(!this.get('selected.isFulfilled')){
+			return
+		}
 				console.log(beat, 'playMatrix')
 	let audio = this.get('tones'),
 			view	=	this.get('options.frontView'),

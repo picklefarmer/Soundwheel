@@ -12,17 +12,41 @@ var offset =  10,
 export default Ember.Mixin.create({
 
 
-	partNames:Ember.computed('playOrder',function(){
-		let names = ['verse','chorus','bridge','outro','intro'],
-				order	=	this.get('playOrder').uniq().map( name => names[name]);
-			return order
-	}),
+	partNames:Ember.computed('parts',function(){
+			let names = this.get('parts').getEach('name');
+			console.log('name', names)
+				return names
 
+	}),
+//"playOrder":[[0,0],[0,1],1,[0,2],1,1],
+	partOrder:Ember.computed('playOrder',function(){
+		let order= this.get('playOrder');
+		if(order){
+
+			return order.map( each => {
+				let couple = {};
+
+				if(each.length){
+					couple.index = each[0]
+					couple.instance = each[1]
+				}else{
+					couple.index=  each
+					couple.instance = 0
+				}
+
+				return couple
+			})
+		}
+	}),
 	part:Ember.computed('partIndex',function(_){
 		_ = this.get('partIndex')
 						console.log(_, 'part_index')
 		if(_ !== undefined ){
-			return this.objectAt(this.get('playOrder').objectAt(_));
+			let part 		= this.get('playOrder').objectAt(_);
+					part		= part.length? part[0] : part
+					part 		= this.objectAt(part);
+					console.log(part , 'part',this.get('content'))
+			return part
 		}else{
 			return this.get('content')
 		}
@@ -104,24 +128,15 @@ console.error( 'fretbard refresh',this.get('index'))
 			
 	  },
 		*/
-
-		lyrics:Ember.computed('measure',{
+		lyricInstance:Ember.computed('partIndex','parts',function(){
+					let key = this.get('partOrder').objectAt(this.get('partIndex'));
+					return	this.get('parts').objectAt(key.index).lyrics.objectAt(key.instance);
+		}),
+		lyrics:Ember.computed('lyricInstance','index',{
 			get(){
-				this.get('measure.lyric')
+				//return this.get('part').
+					return	this.get('lyricInstance')
 			},
-			set(_,I,II){
-
-				console.log(I,II,`assigning
-												lyric`)
-				return I
-								/*
-				if(I){
-					Ember.run.throttle(this,'updator',I,12)
-					// 		this.set('measure.lyric',I)
-				}
-				return this.get('measure.lyric')
-				*/
-			}
 		}),
 
 		updator(I,J,K){

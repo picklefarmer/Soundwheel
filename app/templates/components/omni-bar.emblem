@@ -1,5 +1,5 @@
-play-bar inline=true buttons=left
-component (concat song.barType "-bar")
+play-bar playbar=true inline=true buttons=left
+component (concat song.barType "-bar") class='big-me'
 play-bar playbar=true inline=true buttons=right
 
 .beat-blanket

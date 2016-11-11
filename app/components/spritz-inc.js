@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+var spectral = chroma.scale('Spectral').domain([0,8]);
+
 const space = function(num){
   return " ".repeat(num)
 },
@@ -22,9 +24,12 @@ export default Ember.Component.extend({
   isVisible:Ember.computed.bool('song.isSpritz'),
   song:Ember.inject.service(),
   classNames:['spritz'],
-  words:Ember.computed('song.selected.measure.lyric',{
+  toneToHue:Ember.computed('song.beat',function(){
+    return "color:"+spectral(this.get('song.beat'))+";"
+  }),
+  words:Ember.computed('song.selected.lyrics','song.selected.index',{
     get(){
-			let words = this.get('song.selected.measure.lyric').trim(),column = [];
+			let words = this.get('song.selected.lyrics').objectAt(this.get('song.selected.index')).trim(),column = [];
       if(words){
         words = words.split(' ')
         let length = words.length,

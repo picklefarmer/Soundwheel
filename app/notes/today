@@ -1,5 +1,3 @@
 begin part--based lyrics
-color-to-time gradient | option on fretboard noteGraphic
-reassign up/down actions | include "space" to replace play
-implement part naming convention
-
+	|	par-view lyrics show entire verse / chorus
+explore online route

@@ -20,6 +20,14 @@
 	margin-left:0px;
 	border:none;
 }
+.big-me{
+//  vertical-align:super;
+ li div{
+   font-size:4rem;
+   vertical-align:super;
+ }
+}
+
 .meter-bar{
 		border:3px black solid;
 		height: 160px;

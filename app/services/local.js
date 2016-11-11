@@ -118,6 +118,7 @@ export default Ember.Service.extend({
 						
 					 res(om.song)
 					 this.set('selected.playOrder',Ember.A(om.playOrder))
+					 this.set('selected.parts',Ember.A(om.parts))
 				 }else{
 					 console.log( ' no localstorage found  grabbing / json ', om)
 	   			res(om)

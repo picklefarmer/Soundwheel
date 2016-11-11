@@ -4,7 +4,22 @@
 		"voice":"organ"
 
 },
-"playOrder":[0,0,1,0,1,1],
+"playOrder":[[0,0],[0,1],1,[0,2],1,1],
+"parts":[
+	{	"name":"verse",
+		"lyrics":[
+		["from time to time","it doesn't matter","forever"],
+		["all of the while" ,"thinking of ways" , "but better"],
+		["times of the day"	,"can there be too" , "when is now"]	]
+	},{
+		"name":"chorus",
+		"lyrics":[
+			["in the end",
+			"there is still time",
+	 		"to change"]
+		]
+	}
+],
 "song":[
 	[
 		{

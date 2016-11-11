@@ -1,1 +1,5 @@
-h1: =word
+if song.isSpritz
+  if song.isToneToHue
+    h1 style=toneToHue: =word
+  else
+    h1: =word

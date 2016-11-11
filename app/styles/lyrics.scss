@@ -1,9 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Crimson+Text);
 .spritz{
-	//position:absolute;
+	position:relative;
 	margin:0px;
 	text-align: center;
 	h1{
+//		transition:color ease .5s;
 		font-size:16rem;
 		text-indent:36rem;
 		color:white;
