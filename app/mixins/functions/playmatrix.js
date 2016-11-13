@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import NoteGraphic from "./noteGraphic";
 
 const x = 67;
@@ -41,10 +42,12 @@ obj.beat = function(beat){
 			view	=	this.get('options.frontView'),
       stanza= this.get('stanza')/rate,
 			print	= this.get('main.notemoji.options'),
-			kit		= this.get('selected.measure.kit'),
+			kit		= this.get('measureKit'),
 			isKit = this.get('isKit'),
 			holdNote=this.get('holdNote'),
 			isMoji	=	this.get('isMoji');
+
+		console.error(this.get('selected').getProperties('composition','part','measure'))
 			var time	= this.get('selected.measure.map').objectAt(beat);
 
 	if(holdNote){

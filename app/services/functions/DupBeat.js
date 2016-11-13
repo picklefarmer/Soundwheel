@@ -14,9 +14,19 @@ export default function(index, prev, swap){
 			string[prev]	=	temp;
 		})
 	}else{
+			let score = measure.notes.map(
+				function(string){
+					string[index] = string[prev]
+					return string
+				});
+
+			console.log(score,'dup_beat')
+		measure.notes.replace(0,score)
+/*
 		measure.notes.forEach((string)=>{
 		 string[index] = string[prev]
 		})
+		*/
 	}
-	measure.map.replace(index,1,measure.map[prev])
+	measure.map.replace(index,1,[measure.map[prev]])
 }

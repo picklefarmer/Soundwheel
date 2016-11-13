@@ -26,7 +26,7 @@ export default function(index){
 		}
 		console.error('theArr', theArr ) 
 
-    Ember.run( this.get('song') ,this.get('song.content.update'),  theArr , true )
+    Ember.run( this.get('song') ,this.get('song.content.update'),  [theArr] , true )
 
 		console.error(map,'post - map')	
 

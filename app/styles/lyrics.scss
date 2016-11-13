@@ -3,11 +3,16 @@
 	position:relative;
 	margin:0px;
 	text-align: center;
+	height:100%;
 	h1{
 //		transition:color ease .5s;
+		transition: border-color .5s ease;
 		font-size:16rem;
 		text-indent:36rem;
-		color:white;
+		display:block;//height:100%;
+		color:black;
+		border:16px solid;
+		background:white;
 	}
 	width:100%;
 	height:100%;

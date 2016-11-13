@@ -1,5 +1,5 @@
 export default Ember.Component.extend({
-  classNameBindings:['highlight:selected','active:hit','isRest:rest','isNote:note'],
+  classNameBindings:['highlight:selected','current:hit','isRest:rest','isNote:note'],
   tagName:"li",
   beatType:Ember.computed('beatMap.[]','index',function(){
 					console.log('beatType')

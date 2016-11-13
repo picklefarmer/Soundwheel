@@ -1,18 +1,20 @@
-export default function(_,b){
 
+
+
+export default function(_,b){
+				// anything
 				console.log(this,b,"index of proxy")
-				console.log('part_index',this.get('partIndex'),b)
+				console.error('part_index',this.getProperties('compIndex','part'),b)
 				
-				if(this.get('partIndex') !== undefined	){
-					let block 	= 	this.get('partIndex'),
-							length	=		this.get('part.length');
+				if(this.get('compIndex') !== undefined	){
+					let	length	=		this.get('part.fretboard.length');
 
 					if(b < 0){
 						b = length-1
-						this.decrementProperty('partIndex')
+						this.decrementProperty('compIndex')
 					}else if(b >= length){
 						b	=	0
-						this.incrementProperty('partIndex')
+						this.incrementProperty('compIndex')
 					}
 					return b
 

@@ -7,14 +7,15 @@ export default function(){
 				voice:this.get('song.instrument.selection'),
 				tempo:this.get('song.bpm')
 			},
-      song 		= this.get('song.selected.content'),
-			songBlock	=	{params,song};
+      parts 		= this.get('song.selected.content'),
+			composition=this.get('song.selected.composition'),
+			songBlock	=	{params,parts,composition};
 /*
    if(!localStorage[storageName]){
       localStorage[storageName] = "{}"
    }
 */
-	this.set('storage.songs.'+selected,songBlock)
+	this.set('song.storage.songs.'+selected,songBlock)
   let storage = this.get('song.storage');//JSON.parse(localStorage.songs);
   
 	console.log('storage is current', storage) 

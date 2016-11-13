@@ -79,7 +79,7 @@ actions:{
 console.log('isKit',this.get('isKit'))
 		this.toggleProperty('isKit')
 
-		if(!this.get('selected.measure.kit')){
+		if(!this.get('selected.part.kit')){
 			//this.get('selected').setEach('kit',[0,5,0,5,0,5,0,0])  | copy drum loop?
 			this.get('selected').forEach( e => e.kit = [0,2,2,2,0,2,2,0])
 		}

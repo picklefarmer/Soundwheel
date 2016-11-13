@@ -101,8 +101,9 @@ export default Ember.Service.extend({
       om = storage.songs[selection]
 
 			if(!om.length){
-				Ember.run(this.get('options'),this.get('options.songConfig'),om.params)
-				res(om.song)
+				Ember.run(this,this.get('options.songConfig'),om.params)
+				this.set('composition',om.composition)
+				res(om.parts)
 			}else{
       	res(om)
 			}
@@ -110,20 +111,18 @@ export default Ember.Service.extend({
     }else{
 				console.log('local_om',om)
       Ember.$.getJSON("./scores/"+selection+".json")
-       .then(om => {
-				console.log('local_om',om)
-				 if(!om.length){
+      	.then(om => {
+					console.log('local_om',om)
+					if(!om.length){
 
-					 Ember.run(this.get('options'),this.get('options.songConfig'),om.params)
-						
-					 res(om.song)
-					 this.set('selected.playOrder',Ember.A(om.playOrder))
-					 this.set('selected.parts',Ember.A(om.parts))
-				 }else{
-					 console.log( ' no localstorage found  grabbing / json ', om)
-	   			res(om)
-				}
-	   })
+						Ember.run(this,this.get('options.songConfig'),om.params)
+						this.set('composition',om.composition)
+					 	res(om.parts)
+				 	}else{
+						console.log( ' no localstorage found  grabbing / json ', om)
+	   				res(om)
+					}
+	  	})
     }
 
   },

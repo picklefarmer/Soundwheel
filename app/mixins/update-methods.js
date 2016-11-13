@@ -11,7 +11,7 @@ export default Ember.Mixin.create(PromiseProxy,{
     local:Ember.inject.service(),
     auth:Ember.inject.service(),
 		storageName:'songs',
-		    instrument:Ember.computed({
+		instrument:Ember.computed({
 		get(){
 			return false
 		},
@@ -47,11 +47,12 @@ export default Ember.Mixin.create(PromiseProxy,{
 
 	    	console.log(selection, 'from song service' )
 
-    		let proxy =  this.promiseWithSelection(_,selection)
+    		let proxy 			= 	this.promiseWithSelection(_,selection);
 
     	  proxy.then((e)=>{
-					console.log( ' prozy returned / then ... ' ) 
-					proxy.reopen(Selected)
+					console.log(e, ' prozy returned / then ... ' ) 
+					let composition = this.get('composition');
+					proxy.reopen(Selected,{composition})
 				})
 					return proxy
 			}

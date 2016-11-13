@@ -8,8 +8,10 @@ export default Ember.Service.extend({
 	song:Ember.inject.service(),
   router:Ember.inject.service('-routing'),
   songConfig(params){
-    this.set('song.bpm',params.tempo)
-    this.set('song.instrument',params.voice)
+		let {tempo:bpm,voice:instrument} = params;
+
+		console.error(bpm,instrument,'params')
+		this.setProperties({bpm,instrument})
   },
   updateUrl(selected){
     let router = this.get('router.router'),

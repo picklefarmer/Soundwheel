@@ -11,7 +11,7 @@ console.log(this.get('song.isBeat'), 'isBeat')
 		}
 		this[direction]('song.beat')
 	}else if(this.get('song.isPart')){
-		this[direction]('song.selected.partIndex')
+		this[direction]('song.selected.compIndex')
 	}else{
 		if(ctrl && this.get('song.inputIndex')===undefined){
 			//this.get('song.inputIndex').insertAt(0,1,this.get('song.selected.index'))

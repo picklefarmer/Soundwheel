@@ -11,16 +11,24 @@ var offset =  10,
 
 export default Ember.Mixin.create({
 
-
 	partNames:Ember.computed('parts',function(){
-			let names = this.get('parts').getEach('name');
+			//this.getEach('name')
+			let names = this.getEach('name');
 			console.log('name', names)
-				return names
+			return names
 
 	}),
+	partInstance:Ember.computed('composition','compIndex',function(){
+		let {compIndex,composition}	= this.getProperties('compIndex','composition'),
+				c			= composition.objectAt(compIndex);
+
+		console.error( c, 'partInstance')
+				return c[0]!==undefined? c[0]:c
+	}),
 //"playOrder":[[0,0],[0,1],1,[0,2],1,1],
-	partOrder:Ember.computed('playOrder',function(){
-		let order= this.get('playOrder');
+	
+	partOrder:Ember.computed('composition',function(){
+		let order= this.get('composition');
 		if(order){
 
 			return order.map( each => {
@@ -38,40 +46,72 @@ export default Ember.Mixin.create({
 			})
 		}
 	}),
-	part:Ember.computed('partIndex',function(_){
+	part:Ember.computed('compIndex','partInstance',function(_){
+		_ =this.objectAt(this.get('partInstance'));
+			console.error(_,this.get('partInstance'),'part')
+			return _
+	}),
+	/*
+	
 		_ = this.get('partIndex')
 						console.log(_, 'part_index')
 		if(_ !== undefined ){
+			//this.get('composition')
 			let part 		= this.get('playOrder').objectAt(_);
 					part		= part.length? part[0] : part
 					part 		= this.objectAt(part);
+
 					console.log(part , 'part',this.get('content'))
 			return part
 		}else{
 			return this.get('content')
 		}
 	}),
-
+*/
 	measure:Ember.computed('part','index','content.@each.notes',{
 		get(){
 			console.log(  'measure ' ) 
-			if(this.get('partIndex') !== undefined){
-				return this.get('part').objectAt(this.get('index'))
+			if(this.get('compIndex') !== undefined){
+				console.error(this.getProperties('index','part','compIndex','composition'),fretboard,'fretboard')
+				let fretboard = this.get('part').fretboard.objectAt(this.get('index'));
+				return fretboard
 			}else{
 				return this.objectAt(this.get('index'))
 			}
 		}
 	}),
 
-	partIndex:Ember.computed('playOrder.[]',{
+	measureLength:0,
+
+	lyricInstance:Ember.computed('composition','compIndex','parts',function(_){
+		
+		_	=	this.get('composition');
+					
+			console.log('composition', _,this)
+			if(!_){return}
+
+			let compInstance = this.get('partOrder').objectAt(this.get('compIndex')).instance;
+
+					return	this.get('part').lyrics.objectAt(compInstance)
+////									.lyrics.objectAt(key.instance);
+	}),
+
+	lyrics:Ember.computed('lyricInstance','index',{
 		get(){
-			if(this.get('playOrder')){
+			//return this.get('part').
+			return	this.get('lyricInstance')
+		},
+	}),
+
+	compIndex:Ember.computed('composition.[]',{
+		get(){
+			if(this.get('composition')){
 				return 0
 			}			
 		},
 		set(_,index){
 
-				_  = this.get('playOrder');
+				_  = this.get('composition');
 				if(index >= _.length){
 					return 0
 				}else if(index < 0){
@@ -81,9 +121,16 @@ export default Ember.Mixin.create({
 			return index	
 		}
 	}),
+
+ 	index:Ember.computed('content.[]',{
+		get(){return 0},
+		set:SetIndex
+	}),
+
+
 	fretboard:Ember.computed('measure.notes.[]',function(){
 console.error( 'fretbard refresh',this.get('index'))	
-			return this.get('part')
+			return this.get('part.fretboard')
 							.getEach('notes')
 							.map( measure => measure.map( (string,indx) => string.length?string.map( fret =>{
 								if(fret){
@@ -103,71 +150,8 @@ console.error( 'fretbard refresh',this.get('index'))
 	}),
 
 	fretMeasure:Ember.computed('index','fretboard',function(){
-		return this.get('fretboard').objectAt(this.get('index'))			
+		 return this.get('fretboard').objectAt(this.get('index'))
 	}),
-	measureLength:0,
-
-	hex:Ember.computed('measure.notes.[]',{
-		get(){
-			console.log('hex init') 
-			let notes = this.get('measure.notes');
-			console.log(' hex notes' , notes ) 	
-			
-			let array = notes.map(hexCrunch,this);
-
-			console.log( 'count', this.get('count'),this.get('measureLength'))
-			this.set('measureLength',this.get('count'))
-			this.set('count',0)
-			
-			return array
-	  }
-	  }),
-	 	/*
-	  update(){
-				return (+(measurePart.reduce((a,b)=> ~~a +""+ ~~b ))).toString(16)
-			
-	  },
-		*/
-		lyricInstance:Ember.computed('partIndex','parts',function(){
-					let key = this.get('partOrder').objectAt(this.get('partIndex'));
-					return	this.get('parts').objectAt(key.index).lyrics.objectAt(key.instance);
-		}),
-		lyrics:Ember.computed('lyricInstance','index',{
-			get(){
-				//return this.get('part').
-					return	this.get('lyricInstance')
-			},
-		}),
-
-		updator(I,J,K){
-			console.log(I,J,K,"ASDF")
-			this.set('measure.lyric',I)
-		},
 
 
-  index:Ember.computed('content.[]',{
-			get(){
-				console.log(this,SetIndex, 'set index')
-				console.log( 'get index of proxy ' ) 
-				return 0
-			},
-
-			set:SetIndex
-							
-		/*
-		 * (_,b){
-				console.log(this,b,"index of proxy")
-				/*
-				if(b < 0){
-					b = this.get('length')-1
-				}
-				_ = b%this.get('length') || 0;
-
-				console.log( ' pre ' ) 
-				Ember.run(this,'playnotes',_ ) 
-
-				return _
-			}
-		*/
-		})
 })

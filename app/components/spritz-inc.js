@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   song:Ember.inject.service(),
   classNames:['spritz'],
   toneToHue:Ember.computed('song.beat',function(){
-    return "color:"+spectral(this.get('song.beat'))+";"
+    return "border-color:"+spectral(this.get('song.beat'))+";"
   }),
   words:Ember.computed('song.selected.lyrics','song.selected.index',{
     get(){
@@ -65,9 +65,11 @@ export default Ember.Component.extend({
   beat:Ember.computed('song.beat',function(){
     return this.get('song.beat')
   }),
-  max_length:Ember.computed('words',function(){
+  max_length:Ember.computed('song.selected.parts.@each.lyrics',function(){
+    
+  let errorProne = this.get('song.selected.parts').getEach('lyrics').reduce((a,b)=>a.concat(b)).reduce((a,b)=>a.concat(b)).join(' ').split(' '), 
 
-   let errorProne = this.get('song.selected').map(a=>a.lyric).reduce((a,b)=>a+" "+b).split(' '),
+//   let errorProne = this.get('song.selected').map(a=>a.lyric).reduce((a,b)=>a+" "+b).split(' '),
     amidst = errorProne.sortBy('length').reverse()[0].length;
 
       //.sort((a,b)=>a.length<b.length)

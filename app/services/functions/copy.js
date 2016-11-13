@@ -2,9 +2,9 @@ import Ember from 'ember';
 export default function(index,outdex,swap){
 
 
-	var score = this.get('song.selected'),
-			output 	=	outdex!==undefined ? score.objectAt(outdex).notes : score.get('measure.notes'),
-			outMap	=	outdex!==undefined ? score.objectAt(outdex).map		:	score.get('measure.map'),
+	var score = this.get('song.selected.part.fretboard'),
+			output 	=	outdex!==undefined ? score.objectAt(outdex).notes : this.get('song.selected.measure.notes'),
+			outMap	=	outdex!==undefined ? score.objectAt(outdex).map		:	this.get('song.selected.measure.map'),
 			notes = Ember.copy(output),
 			map		=	Ember.copy(outMap);
 
@@ -19,6 +19,7 @@ export default function(index,outdex,swap){
 		score.replace(index,1,{notes,map});
 		this.set('song.selected.index',index)
 	}else{
+		console.error(output,outMap,notes,map)
 		score.insertAt(index+1,{notes,map});
 		this.incrementProperty('song.selected.index');
 	}

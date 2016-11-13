@@ -30,12 +30,29 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	kit:Ember.inject.service(),
 	measureKit:Ember.computed('isKit','selected.index',function(){
 		if(this.get('isKit')){
-			return this.get('selected.measure.kit');
+
+		let kit = this.get('selected.part').kit.objectAt(this.get('selected.index'));
+		console.error(kit,'kit')
+			return kit
+					//measure.kit');
 		}
 	}),
 
 	options:Ember.inject.service(),
 
+  isFullScreen:Ember.computed({
+    get(){
+      return false
+    },
+    set(_,I){
+      if(I){
+        document.documentElement.webkitRequestFullscreen()
+      }else{
+        document.webkitExitFullscreen() 
+      }
+      return I
+    }
+  }),
   chordEditFlag:true,
 	isBeat:false,
 	sustain:true,
