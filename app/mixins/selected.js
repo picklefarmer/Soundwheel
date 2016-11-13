@@ -11,7 +11,7 @@ var offset =  10,
 
 export default Ember.Mixin.create({
 
-	partNames:Ember.computed('parts',function(){
+	partNames:Ember.computed('content.@each.name',function(){
 			//this.getEach('name')
 			let names = this.getEach('name');
 			console.log('name', names)
@@ -27,7 +27,7 @@ export default Ember.Mixin.create({
 	}),
 //"playOrder":[[0,0],[0,1],1,[0,2],1,1],
 	
-	partOrder:Ember.computed('composition',function(){
+	partOrder:Ember.computed('composition.[]',function(){
 		let order= this.get('composition');
 		if(order){
 

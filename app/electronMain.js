@@ -15,7 +15,7 @@ function createWindow () {
 		'node-integration':false
 	});
 
-  mainWindow.loadURL('http://localhost:4200/offline/song/test/stave');
+  mainWindow.loadURL('http://localhost:4200/offline/song/destiny/edit');
   //mainWindow.loadURL('file://' + __dirname + '/../index.html');
 			mainWindow.webContents.openDevTools();
 

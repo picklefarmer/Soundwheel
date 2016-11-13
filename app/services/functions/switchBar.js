@@ -7,6 +7,9 @@ export default function(val){
 
 
 	if(val > 2 || val < 0){
+    if(val > 2){
+      this.set('song.isEdit',true)
+    }
 		return 	
 	}else if(val === 0){
 		this.set('song.isBeat',true)

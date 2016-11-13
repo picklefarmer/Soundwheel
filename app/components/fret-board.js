@@ -45,7 +45,8 @@ export default Ember.Component.extend({
 	},
 
 	willDestroyElement(){
-    	Ember.$(document).off('keydown')
+    Ember.$(document).off('keydown')
+    Ember.$(document).off('keyup')
   },
 
 	//cut	

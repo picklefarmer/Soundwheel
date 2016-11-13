@@ -16,16 +16,4 @@ export default Ember.Component.extend({
     return arr
   
   }}),
-    
-    //["|","-","|","-","|","-","|","-"]
-	/*
-	options:Ember.inject.service(),
-	willRender(){
-		var element = this.get('element'),
-				ctx     = element.getContext('2d'),
-				width = Ember.$(document)[0].body.offsetWidth;
-				element.width = width/2;
-				this.set('options.meterBar',ctx)
-	}	
-	*/
 });

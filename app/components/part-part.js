@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 export default Ember.Component.extend({
   classNameBindings:['highlight:selected','current:hit','isRest:rest','isNote:note'],
   tagName:"li",
@@ -5,6 +7,18 @@ export default Ember.Component.extend({
 					console.log('beatType')
     return this.get('beatMap')[this.get('index')]
   }),
+
+  isEdit:Ember.computed('current','song.isEdit',function(){
+    console.log(this.getProperties('current'),this.get('song.isEdit'))
+    if(this.get('song.isEdit') && this.get('current')){
+      return true
+    }
+  }),
+  toFocus(){
+    console.log(this.get('element'))
+    this.get('element').focus()
+  },
+
   	measure:Ember.computed('index',{
 		get(){
 			var measure = this.get('index').toString()

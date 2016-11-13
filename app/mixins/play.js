@@ -14,8 +14,15 @@ const offset = 18;
 const scale = 36;
 
 export default Ember.Mixin.create({
+  globalKeydown:Ember.inject.service(),
 
 actions:{
+  isEdit(event){
+    console.log(event,' this is of isEdit')
+    event.stopPropagation()
+    event.target.blur()
+    this.set('isEdit',false)    
+  },
 	saveToStorage(){
 		localStorage[this.get('storageName')] = JSON.stringify(this.get('storage'));
 		console.log('saveToStorage')
