@@ -8,6 +8,9 @@ export default Ember.Component.extend({
     return this.get('beatMap')[this.get('index')]
   }),
 
+  partName:Ember.computed('song.selected.names','part',function(){
+    return this.get('song.selected.partNames').objectAt(this.get('part').objectAt(0))
+  }),
   isEdit:Ember.computed('current','song.isEdit',function(){
     console.log(this.getProperties('current'),this.get('song.isEdit'))
     if(this.get('song.isEdit') && this.get('current')){

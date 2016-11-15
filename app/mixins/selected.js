@@ -10,7 +10,7 @@ var offset =  10,
 		xFactor	=	offset/2 + (scale/2);
 
 export default Ember.Mixin.create({
-
+	
 	partNames:Ember.computed('content.@each.name',function(){
 			//this.getEach('name')
 			let names = this.getEach('name');
@@ -18,6 +18,7 @@ export default Ember.Mixin.create({
 			return names
 
 	}),
+
 	partInstance:Ember.computed('composition','compIndex',function(){
 		let {compIndex,composition}	= this.getProperties('compIndex','composition'),
 				c			= composition.objectAt(compIndex);
@@ -25,27 +26,7 @@ export default Ember.Mixin.create({
 		console.error( c, 'partInstance')
 				return c[0]!==undefined? c[0]:c
 	}),
-//"playOrder":[[0,0],[0,1],1,[0,2],1,1],
-	
-	partOrder:Ember.computed('composition.[]',function(){
-		let order= this.get('composition');
-		if(order){
 
-			return order.map( each => {
-				let couple = {};
-
-				if(each.length){
-					couple.index = each[0]
-					couple.instance = each[1]
-				}else{
-					couple.index=  each
-					couple.instance = 0
-				}
-
-				return couple
-			})
-		}
-	}),
 	part:Ember.computed('compIndex','partInstance',function(_){
 		_ =this.objectAt(this.get('partInstance'));
 			console.error(_,this.get('partInstance'),'part')
@@ -83,17 +64,15 @@ export default Ember.Mixin.create({
 
 	measureLength:0,
 
-	lyricInstance:Ember.computed('composition','compIndex','parts',function(_){
-		
-		_	=	this.get('composition');
-					
-			console.log('composition', _,this)
-			if(!_){return}
+	instance:Ember.computed('compIndex','composition.[]',function(){
+		return this.get('composition').objectAt(this.get('compIndex')).objectAt(1)
+	}),
 
-			let compInstance = this.get('partOrder').objectAt(this.get('compIndex')).instance;
+	lyricInstance:Ember.computed('instance','parts',function(_){
+		
+			let compInstance = this.get('instance');
 
 					return	this.get('part').lyrics.objectAt(compInstance)
-////									.lyrics.objectAt(key.instance);
 	}),
 
 	lyrics:Ember.computed('lyricInstance','index',{

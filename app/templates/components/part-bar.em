@@ -1,6 +1,6 @@
 if song.selected.isFulfilled
 
-  each song.selected.partOrder as |color measure|
+  each song.selected.composition as |color measure|
 
     part-part [
       song=song
@@ -8,6 +8,6 @@ if song.selected.isFulfilled
       highlight=("is-classy" measure song.inputIndex)
       index=measure
       beatType=false
-      measure=(get song.selected.partNames (concat "" color.index))
+      part=color
       boundValue=song.selected.compIndex
     ]

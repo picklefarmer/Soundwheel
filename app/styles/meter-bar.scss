@@ -5,7 +5,12 @@
 	margin:0;
 	padding:0;
 	width:100%;
-	font-size:4rem;
+	& .span-me{
+		background:yellow !important;
+		width:inherit;
+	}
+	background:white;
+	font-size:inherit;
 	color:black;
 	line-height:26px;
 }
