@@ -2,6 +2,15 @@
 	//-webkit-transition:background 1s;
 	//transition:background 1s;
 }
+.tutorial-pane{
+	position:absolute;
+	height:50%;
+	display:block;
+	image{
+		height:50%;
+	}
+}
+
 .sidebar tr td{
 
 	border-left:7px inset #383838;

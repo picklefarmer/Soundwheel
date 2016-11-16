@@ -7,10 +7,11 @@ export default function(index){
     let compIndex= Number(this.get('song.selected.compIndex')),
         composition = this.get('song.selected.composition'),
 				index		= composition.objectAt(compIndex).objectAt(0);
+
     if(!composition.any( ([a,b]) => a===index )){
-//			console.log({index,composition},this.getProperties('song.selected.content'))
 			this.get('song.selected.content').removeAt(index)
 		}
+
 		composition.removeAt(compIndex,1);
 		this.set('song.selected.compIndex',compIndex-1)
 

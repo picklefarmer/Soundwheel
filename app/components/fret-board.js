@@ -19,11 +19,12 @@ export default Ember.Component.extend({
     'backView':C,
     'frontView':C,
 		'spritzView':'spritz-inc',
-    'centerView':C,
+    'centerView':C
 	},
 
 	classNames:['tablet'],
-	classNameBindings:['verticalTab'],
+	classNameBindings:['verticalTab','isTutorial'],
+  isTutorial:Ember.computed.alias('song.isExplain'),
   
   verticalTab:Ember.computed.alias('song.verticalTab'),
 	mouseFormat,

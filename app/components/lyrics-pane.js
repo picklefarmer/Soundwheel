@@ -10,6 +10,11 @@ export default Ember.Component.extend({
       console.log(fullPage,'fullPage')
         return fullPage
     }),
+    partsOrder:Ember.computed('song.selected.composition',function(){
+      return this.get('song.selected.composition').map( function(e){
+        return {index:e[0],instance:e[1]}
+      })
+    }),
     actions:{
 				update(data){
 						console.log(data,`action of the

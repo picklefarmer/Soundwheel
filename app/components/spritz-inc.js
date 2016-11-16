@@ -29,16 +29,15 @@ export default Ember.Component.extend({
   }),
   words:Ember.computed('song.selected.lyrics','song.selected.index',{
     get(){
-			let words = this.get('song.selected.lyrics').objectAt(this.get('song.selected.index')).trim(),column = [];
+			let words = this.get('song.selected.lyrics').objectAt(this.get('song.selected.index')),column = [];
       if(words){
-        words = words.split(' ')
+        words = words.trim().split(' ')
         let length = words.length,
             difference = 8 - length;
 
         if(length >= 8){
           return words
         }else{
-
 
         switch(difference){
           case 7: column = requate(0,8,words);break;
@@ -53,6 +52,7 @@ export default Ember.Component.extend({
                             .concat(requate(3,2,words));break;
           default: column = words.concat(requate(length-1,difference,words));break;
         }
+        this.set('proximity',column)
         return column
 
         }
@@ -62,12 +62,10 @@ export default Ember.Component.extend({
       return words.split(' ')
     }
   }),
-  beat:Ember.computed('song.beat',function(){
-    return this.get('song.beat')
-  }),
+
   max_length:Ember.computed('song.selected.parts.@each.lyrics',function(){
     
-  let errorProne = this.get('song.selected.parts').getEach('lyrics').reduce((a,b)=>a.concat(b)).reduce((a,b)=>a.concat(b)).join(' ').split(' '), 
+  let errorProne = this.get('song.selected').getEach('lyrics').reduce((a,b)=>a.concat(b)).reduce((a,b)=>a.concat(b)).join(' ').split(' '), 
 
 //   let errorProne = this.get('song.selected').map(a=>a.lyric).reduce((a,b)=>a+" "+b).split(' '),
     amidst = errorProne.sortBy('length').reverse()[0].length;
@@ -85,7 +83,7 @@ export default Ember.Component.extend({
   }),
 
   word:Ember.computed('words','beat',function(){
-    let beat = this.get('beat'),
+    let beat = this.get('song.beat'),
         word = this.get('words')[beat],
         word_length = word.length,
 	    	stop = spritz(word_length),

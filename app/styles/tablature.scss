@@ -1,6 +1,15 @@
 @import "compass/css3/box-shadow";
 @import "compass/functions/lists";
-
+.countdown{
+  width:102rem;
+  height:1rem;
+}
+.is-tutorial{
+  background:black;
+  height:54rem !important;
+  width:102rem;
+  overflow-x:hidden !important;
+}
 
 .vertical-dash{
 	transform: rotateZ(90deg);
@@ -42,7 +51,6 @@
 	background-position: 26px 0px, 29px 0px;
 	background-color:transparent;
 }
-
 .tablet{
 	border-radius:15px;
 	margin:2rem;
@@ -53,7 +61,7 @@
 	vertical-align:top;
 	position:relative;
   display:block;
-  height:312px;
+	height:312px;
 	overflow-x:	scroll;
 	overflow-y:	hidden;
 	//width:1400px;

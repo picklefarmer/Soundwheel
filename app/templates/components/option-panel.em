@@ -22,7 +22,7 @@
       
   li
     div
-      =input type="range" min=".01"  max="6" step=".1" value=options.song.volume
+      =input type="range" min=".01"  max="6" step=".05" value=options.song.volume
       =text-me value=(mut options.song.volume)
       span Volume
 

@@ -9,7 +9,8 @@ export default Ember.Component.extend({
 //			areStrings:"S",
 			isSpritz:'S',
       isToneToHue:'F',
-      isFullScreen:'O'
+      isFullScreen:'O',
+      isExplain:'?'
 //      areFrets:"F"
 		}
 })

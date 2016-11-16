@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     return this.get('beatMap')[this.get('index')]
   }),
 
-  partName:Ember.computed('song.selected.names','part',function(){
+  partName:Ember.computed('song.selected.partNames','part',function(){
     return this.get('song.selected.partNames').objectAt(this.get('part').objectAt(0))
   }),
   isEdit:Ember.computed('current','song.isEdit',function(){

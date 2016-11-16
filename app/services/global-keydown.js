@@ -22,8 +22,10 @@ export default Ember.Service.extend({
 			let ctrl 		= e.ctrlKey,
 				inputIndex	= this.get('song.inputIndex'),
 				beatInputIndex	= this.get('song.beatInputIndex'),
+				partInputIndex	=	this.get('song.partInputIndex'),
 				beat		= this.get('song.beat'),
-				outdex	=	this.get('song.selected.index');
+				outdex	=	this.get('song.selected.index'),
+				partOut	=	this.get('song.selected.compIndex');
 		
 				console.error('end',inputIndex,outdex,e.keyCode)	
 
@@ -36,6 +38,11 @@ export default Ember.Service.extend({
 					DupBeat.call(this,beat,beatInputIndex)
 					this.set('song.beatInputIndex',undefined)
 				}	
+			}else if(this.get('song.isPart')){
+				if(e.keyCode === 17 && (partInputIndex !== undefined)){
+					Copy.call(this,partOut,partInputIndex,false,true)
+					this.set('song.partInputIndex',undefined)
+				}	
 			}else{
 				if(e.keyCode === 16 && (inputIndex !== undefined)){
 					Copy.call(this,outdex,inputIndex,true)
@@ -46,28 +53,6 @@ export default Ember.Service.extend({
 					this.set('song.inputIndex',undefined)
 				}	
 			}
-
-/*			if(this.get('song.isBeat')){
-				if(e.keyCode === 16 && (beatInputIndex.length)){
-					DupBeat.call(this,beat,beatInputIndex,true)
-					this.set('song.beatInputIndex',Ember.A([]))
-				}
-				if(e.keyCode === 17 && (beatInputIndex.length)){
-					DupBeat.call(this,beat,beatInputIndex)
-					this.set('song.beatInputIndex',Ember.A([]))
-				}	
-			}else{
-				if(e.keyCode === 16 && (inputIndex.length)){
-					Copy.call(this,outdex,inputIndex,true)
-					this.set('song.inputIndex',Ember.A([]))
-				}
-				if(e.keyCode === 17 && (inputIndex.length)){
-					Copy.call(this,outdex,inputIndex)
-					this.set('song.inputIndex',Ember.A([]))
-				}	
-			}
-		}		
-*/
 		}		
 	},
 	begin(e){

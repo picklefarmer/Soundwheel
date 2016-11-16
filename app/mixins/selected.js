@@ -32,23 +32,7 @@ export default Ember.Mixin.create({
 			console.error(_,this.get('partInstance'),'part')
 			return _
 	}),
-	/*
-	
-		_ = this.get('partIndex')
-						console.log(_, 'part_index')
-		if(_ !== undefined ){
-			//this.get('composition')
-			let part 		= this.get('playOrder').objectAt(_);
-					part		= part.length? part[0] : part
-					part 		= this.objectAt(part);
 
-					console.log(part , 'part',this.get('content'))
-			return part
-		}else{
-			return this.get('content')
-		}
-	}),
-*/
 	measure:Ember.computed('part','index','content.@each.notes',{
 		get(){
 			console.log(  'measure ' ) 

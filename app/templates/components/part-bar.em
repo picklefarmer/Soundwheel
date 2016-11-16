@@ -5,7 +5,7 @@ if song.selected.isFulfilled
     part-part [
       song=song
       current=("is-classy" measure song.selected.compIndex)
-      highlight=("is-classy" measure song.inputIndex)
+      highlight=("is-classy" measure song.partInputIndex)
       index=measure
       beatType=false
       part=color

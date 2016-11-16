@@ -12,7 +12,7 @@ if song.selected.isFulfilled
         else
           .form-control.field
             h1: =song.selected.selection
-            each song.selected.partOrder as |line|
+            each partsOrder as |line|
               with (get song.selected.content (concat "" line.index)) as |part|
                 each-in (get part.lyrics (concat "" line.instance)) as |indx|
                   |{{span-me value=(mut (get (get (get (get song.selected.content (concat "" line.index)) 'lyrics') (concat '' line.instance)) indx))}}
