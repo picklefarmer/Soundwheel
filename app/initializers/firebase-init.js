@@ -1,32 +1,25 @@
 import Ember from 'ember';
 
 export function initialize(App) {
-		//default . routes
-	/*	
-   App.register('login:side',Ember.Object.extend({
-        song:Ember.inject.service(),
-        menuBar:Ember.computed({
-					get(){
-          		return this.get('song.options')
-          		//return thi$.getJSON("./json/routes.json")
-					}
-				})
-   }));
 
-	 //user . routes
+/*
+ *
+"https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"
+"https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"
+"https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"
+//		"https://www.gstatic.com/firebasejs/3.6.1/firebase.js"
 
-   App.register('login:auth',Ember.Object.extend({
-        song:Ember.inject.service(),
-        menuBar:Ember.computed({
-			get(){
-          		return this.get('song.options')
-          		//return $.getJSON("./json/routesAuth.json")
-			}
-		})
-   }));
+	   var config = {
+	       apiKey: "AIzaSyCxvW0b58v6Nmn0FhdM-ZMWKequ4P2-tDo",
+         authDomain: "overlap-4468c.firebaseapp.com",
+         databaseURL: "https://overlap-4468c.firebaseio.com",
+         storageBucket: "overlap-4468c.appspot.com",
+         messagingSenderId: "359400789124"
+     };
+
+		 firebase.initializeApp(config);
 */
-	//default . config
-    
+
   App.register('settings:side',Ember.Object.extend({
   	song:Ember.inject.service(),
     menuBars:["left","right","bottom","top","center","middle"],

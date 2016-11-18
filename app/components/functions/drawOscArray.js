@@ -19,19 +19,19 @@ export default function(a,ctx){
 }
 
 const requestAnimationFrame = window.requestAnimationFrame;
-const WIDTH = 1400;
+const WIDTH = 1400.0;
 const HEIGHT = 300;
 const sHeight= HEIGHT/6;
 const vHeight= sHeight/2;
 const ampl = sHeight;
+const dyna = Math.ceil(1600/24);
 const draw = function(ctx,chord){
-
       requestAnimationFrame(()=>{
 				if(this.get('isOsc'))
         draw.call(this,ctx,chord)
       })  
 
-  	  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  	  ctx.clearRect(0, 0, 1472, HEIGHT);
 		
 			chord.forEach(({analyser,bufferLength,dataArray,string},f)=>{
 
@@ -40,13 +40,14 @@ const draw = function(ctx,chord){
 
      	 	ctx.beginPath();
 
-     	 	var sliceWidth = WIDTH * 1.0 / bufferLength;
-     		var x = bufferLength;
+     	 	var sliceWidth = WIDTH/ bufferLength,
+						offset		 = this.get('options.fretboard.scrollLeft'),
+						x = bufferLength + offset + 78;
 
 
 				let height = sHeight*f -vHeight;
 
-				var stop = 316+string.get('toneIndex') *50;
+				var stop = -(offset*0.73125) + (string.get('toneIndex') * 49)+270;
       	for(var i = bufferLength; i > stop; i--) {
    
         	var v = dataArray[i] / 128.0;
@@ -59,7 +60,7 @@ const draw = function(ctx,chord){
         	x -= sliceWidth;
       	}
 				ctx.lineTo(x,height+ampl)	
-				ctx.lineTo(0,height+ampl)	
+				ctx.lineTo(x-2,height+ampl)	
 	      ctx.stroke();
 
 			})

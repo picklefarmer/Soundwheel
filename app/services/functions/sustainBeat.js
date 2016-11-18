@@ -7,7 +7,7 @@ let 	division 			=	this.get('division'),
 			map						=	this.get('selected.measure.map'),
 			newMap 				= [],
 			newNotes,
-			strings 			= this.get('main.strings');
+			strings 			= this.get('main.strings.options');
 
 		newNotes = update.map( e => [e])
 
@@ -22,6 +22,6 @@ let 	division 			=	this.get('division'),
 	}
 	
 	map.replace(0,division,newMap)
-	measure.replace(0,strings-1,newNotes)
+	measure.replace(0,6,newNotes)
 
 }

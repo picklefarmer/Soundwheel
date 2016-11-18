@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   auth:Ember.inject.service(),
-  variab:"TRICK:",
+  displayName:Ember.computed('auth.displayName',function(){
+    return this.get('auth.displayName').split(' ')[0]
+  }),
   actions:{
     logout(){
       this.sendAction('logout')

@@ -1,32 +1,19 @@
 export function initialize(App) {
 
-        App.inject('component:pa-nels',     'song',   'service:song')
-        App.inject('component:selection-panel', 'song',   'service:song')
-        App.inject('component:index-panel', 'song',   'service:song')
+  var config = {
+     apiKey: "AIzaSyCxvW0b58v6Nmn0FhdM-ZMWKequ4P2-tDo",
+     authDomain: "overlap-4468c.firebaseapp.com",
+     databaseURL: "https://overlap-4468c.firebaseio.com",
+     storageBucket: "overlap-4468c.appspot.com",
+     messagingSenderId: "359400789124"
+  };
 
-         //  mix each one of these out //
-//        App.inject('component:menu-bar',    'song',   'service:song')
-//       App.inject('component:tool-bar',    'song',   'service:song')
-       //chord dash
-/*
-
-//      App.inject('component:option-panel' ,'song',   'service:song')
-        App.inject('component:phrase-bar'   ,'song',   'service:song')
-        App.inject('component:play-bar'     ,'song',   'service:song')
-        App.inject('component:measure-bar'  ,'song',   'service:song')
-        App.inject('component:fret-board'   ,'song',   'service:song')
-        App.inject('controller:song'        ,'song',   'service:song')
+ firebase.initializeApp(config);
 
 
-//        App.inject('route:user',            'auth',   'service:auth')
-        App.inject('component:log-in',      'auth',   'service:auth')
-
-        App.inject('component:fret-board',  'options','service:options')
-
-
-       //  App.inject('component:pa-nels','_actions', 'settings:actions')
-       //  App.inject('view:song','song', 'service:song')
-*/
+  App.inject('component:pa-nels',     'song',   'service:song')
+  App.inject('component:selection-panel', 'song',   'service:song')
+  App.inject('component:index-panel', 'song',   'service:song')
 }
 
 export default {

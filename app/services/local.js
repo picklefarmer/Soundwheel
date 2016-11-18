@@ -203,8 +203,8 @@ export default Ember.Service.extend({
         console.log(string,fret,this)
         measure.replace(string,1,fret)
       }
+			beat=0
 		}
     this.get('playMatrix.beat').call(this,beat)
-
   }
 });

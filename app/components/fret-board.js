@@ -15,11 +15,11 @@ export default Ember.Component.extend({
 	globalKeydown:Ember.inject.service(),	
 
 	names:{
-    'graphView':C,
     'backView':C,
-    'frontView':C,
+    'graphView':C,
+    'centerView':C,
 		'spritzView':'spritz-inc',
-    'centerView':C
+    'frontView':C,
 	},
 
 	classNames:['tablet'],
@@ -38,7 +38,7 @@ export default Ember.Component.extend({
 	volume:	0.25,
 
 	didInsertElement(){
-
+		this.set('options.fretboard',this.get('element'))
    	Ember.$(document).off('keydown')
    	Ember.$(document).off('keyup')
 		Ember.$(document).keyup(e => Ember.run(this,this.get('globalKeydown.end'),e))

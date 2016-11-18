@@ -1,18 +1,19 @@
 .row
   .column.large-2.large-centered
-    h1{action 'login'} = auth.uid
 .row
   .column.large-4
     .panel.panel-default
       .panel-heading 
         if auth.uid
-          h3 Welcome {{auth.uid}}
+          img class='badge icon' src=auth.photoURL
+          h3 Welcome {{displayName}}
       .panel-body
         ul.list-group
-          li.list-group-item
-            span.badge{action 'login'} LOGIN
-            .panel-body 
-              a.btn.btn-success{action 'login'} Login
+          unless auth.uid
+            li.list-group-item
+              span.badge{action 'login'} LOGIN
+              .panel-body 
+                a.btn.btn-success{action 'login'} Login
           li.list-group-item
             span.badge{action 'logout'} LOGOUT
             .panel-body 

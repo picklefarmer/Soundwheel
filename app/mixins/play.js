@@ -37,7 +37,10 @@ actions:{
       this.set('isBeat',false)
     }
     if(barType === 'part'){
-      this.set('isPart',true) 
+      this.set('isPart',true)
+        if(!this.get('pause')){
+           this.set('selected.index',0) 
+        }
     }else{
       this.set('isPart',false)
     }

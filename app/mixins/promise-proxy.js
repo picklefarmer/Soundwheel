@@ -28,7 +28,7 @@ export default Ember.Mixin.create({
       console.log(method,"debug")
       var context = this.get('auth.uid') ? "firebase" : "local";
       var promise = new Ember.RSVP.Promise((res,rej)=>{
-              Ember.run(this,this.get( context+"."+method    ) ,res  ,rej) 
+              Ember.run(this.get(context),this.get( context+"."+method    ) ,res  ,rej) 
           });
       console.log(method,"debug _ 2")
           return RsvpO.create({promise})
@@ -40,7 +40,7 @@ export default Ember.Mixin.create({
       var context = this.get('auth.uid') ? "firebase" : "local";
       console.log ( this.get('local'),context, method, "new")
       var promise = new Ember.RSVP.Promise((res,rej)=>{
-              Ember.run(this,this.get( context+"."+method    ) ,res  ,rej) 
+              Ember.run(this.get(context),this.get( context+"."+method    ) ,res  ,rej) 
           });
       console.log(method,"debug _ 2")
 

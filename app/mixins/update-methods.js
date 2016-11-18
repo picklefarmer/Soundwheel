@@ -11,17 +11,22 @@ export default Ember.Mixin.create(PromiseProxy,{
     local:Ember.inject.service(),
     auth:Ember.inject.service(),
 		storageName:'songs',
+
 		instrument:Ember.computed({
-		get(){
-			return false
-		},
-		set(_,selection){
 
-			console.log( ' instrument in mixin' ) 
-      		var proxy;
-        	return this.promiseWithSelectionAsObject(_,selection)
+			get(){
+				return false
+			},
+			set(_,selection){
 
-		}
+				console.log( ' instrument in mixin' ) 
+
+     		var proxy;
+
+       	return this.promiseWithSelectionAsObject(_,selection)
+
+			}
+
 		}),
 
 		main:Ember.computed('auth.uid',{
@@ -96,7 +101,7 @@ export default Ember.Mixin.create(PromiseProxy,{
       }
     }),
 
-    panels:Ember.computed('auth.id',{
+    panels:Ember.computed('auth.uid',{
       get(_){
         console.log ( 'getting the panels object' ) 
         var promise = this.promiseWithContext(_),
@@ -144,7 +149,11 @@ export default Ember.Mixin.create(PromiseProxy,{
   
   names:Ember.computed('onLine',{
 		get(_){
-      		return this.promise(_)
+			if(this.get('onLine')&&this.get('auth.id')){
+				return this.promiseWithContext(_)
+			}else{
+     		return this.promise(_)
+			}
 		}
 	})
 

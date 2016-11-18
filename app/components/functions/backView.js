@@ -31,10 +31,20 @@ export default function(a,ctx ) {
 
 //				fret.onload =
 				begin()
+
+
 				function begin(){
+
+					b.fillStyle = "rgba(19,34,16,.58)"
+					b.fillRect(0,0,size,height);
+
 					b.fillStyle = "rgba(33,33,0,.5)";//color; //"#012";
+					//b.fillStyle = this.get('song.main.fretboard.color.options') || "rgba(33,33,0,.5)";//color; //"#012";
 		    	//b.fillRect(0,0,1600,300);
 	    		b.fillRect(0,0,width,height);
+
+
+
 					b.globalAlpha = 0.65;	
 					b.save()
 					b.translate(0,height)
@@ -54,7 +64,7 @@ export default function(a,ctx ) {
 
 					while(dots--){
 						b.beginPath()
-						b.arc(size*2.5+3+(dots*size*2),height/2,16,0,2*Math.PI)
+						b.arc(size*3.5+3+(dots*size*2),height/2,16,0,2*Math.PI)
 						b.fill()
 					}
 
@@ -62,7 +72,7 @@ export default function(a,ctx ) {
 
 					while(dots--){
 						b.beginPath()
-						b.arc(size*14.5+3+(dots*size*2),height/2,16,0,2*Math.PI)
+						b.arc(size*15.5+3+(dots*size*2),height/2,16,0,2*Math.PI)
 						b.fill()
 					}
 
@@ -70,7 +80,7 @@ export default function(a,ctx ) {
 		
 					while(dots--){
 						b.beginPath()
-						b.arc(size*11.5+3,75+(height/2)*dots,16,0,2*Math.PI)
+						b.arc(size*12.5+3,75+(height/2)*dots,16,0,2*Math.PI)
 						b.fill()
 					}
 

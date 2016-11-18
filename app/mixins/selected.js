@@ -92,15 +92,22 @@ export default Ember.Mixin.create({
 
 
 	fretboard:Ember.computed('measure.notes.[]',function(){
-console.error( 'fretbard refresh',this.get('index'))	
-			return this.get('part.fretboard')
-							.getEach('notes')
-							.map( measure => measure.map( (string,indx) => string.length?string.map( fret =>{
+		console.error( 'fretbard refresh',this.get('index'))	
+		 let fretboard=  this.get('part.fretboard')
+							.getEach('notes');
+					console.log('fretboard', fretboard)
+		return fretboard.map( measure => {
+								if(!measure.length){
+									let argArr = [];
+									Object.keys(measure).forEach( key => argArr[key] = measure[key])
+									measure = argArr
+								}
+								return measure.map( (string,indx) => string.length?string.map( fret =>{
 								if(fret){
 									return [fret*x + xFactor, indx*y + yFactor,fret,indx]
 								}
-								}):false
-							))
+								}):false)
+							})
 /*
 							.map( (string,idx) => string
 								.map(beat=>[beat,idx])

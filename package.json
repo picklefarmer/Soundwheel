@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-		"win": "electron --disable-gpu --enable-transparent-visuals electronMain.js",
+    "win": "electron --disable-gpu --enable-transparent-visuals electronMain.js",
     "build": "ember build",
     "start": "ember server",
     "test": "ember test"
@@ -43,17 +43,14 @@
     "loader.js": "^4.0.1"
   },
   "dependencies": {
-		"vexflow":"1.2.76"
-	},
-	"window": {			
-        "title": "soundLab",
-        "icon": "/home/acroeven/Dropbox/art/jungle/leopard.png"
-	},
-
-	"main":"./app/index.html",
-	"webkit":{
-		"plugin":true
-	}
-
-
+    "vexflow": "1.2.76"
+  },
+  "window": {
+    "title": "soundLab",
+    "icon": "/home/acroeven/Dropbox/art/jungle/leopard.png"
+  },
+  "main": "./app/index.html",
+  "webkit": {
+    "plugin": true
+  }
 }

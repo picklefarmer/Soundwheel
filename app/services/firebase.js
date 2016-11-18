@@ -4,65 +4,62 @@ export default Ember.Service.extend({
 		init(){
 			console.log('init firebase')
 		},
-   /* 
-    instrument(res,rej,selection){
-      var root = this.get('auth.base')
-                     .child('instruments')
-                     .child(selection);
 
-          root.on("value",(snapshot)  =>{
-            res(snapshot.val())
-          })
-    },
-    */
+		auth:Ember.inject.service(),
+
+		base:firebase.database(),
+
+		user:Ember.computed('auth.uid','base',function(){
+			if(this.get('auth.uid')){
+				console.log('this.get.base',this.get('base').ref(this.get('auth.uid')))
+				return this.get('base').ref(this.get('auth.uid'))
+			}
+		}),
 
     instrumentNames(res,rej){
       console.log ( 'instrument Names Auth ' ) 
-      var root = this.get('auth.user')
-                     .child('instruments'),
-          objArray = [];
-
-        root.on("value",(snapshot) =>{
-          snapshot.forEach(hash  => {
-          
+			let objArray = [];
+      this.get('user').child('instruments')
+				.on("value",(instrumentNames) =>{
+          instrumentNames.forEach(hash  => {
             objArray.push({
-                            "name":hash.key(),
-                            "enabled":hash.val()
-                          })
-          })
-
+              "name":hash.key,
+              "enabled":hash.val()
+            })
+        	})
           res(objArray)
-
         }) 
     },
 
     main(res,rej){
-      var root = this.get('auth.user')
-                     .child('settings/main'),
-          objArray = [];
-
-          root.on("value", (snapshot) => {
-              res(snapshot.val())
-          })
+			console.log(this.get('user'),'main ref')
+			this.get('user').child('settings/main')
+      	.on("value", (main) =>  res(main.val()))
     },
 
     panels(res,rej){
-      var root = this.get('auth.user')
-                  .child('settings/panels'),
-          objArray = [];
-        
-         root.on("value",(snapshot) => {
-           snapshot.forEach(hash => {
-            objArray.push({
-                            "name":hash.key(),
-                            "enabled":hash.val().enabled,
-                            "options":hash.val().options
-                          })
-            })
+			let objArray = [];
 
-            res(objArray)
-         })
+    	this.get('user').child('settings/panels')
+        .on("value",(panels) => {
+
+        	panels.forEach(hash => {
+          	objArray.push({
+            	"name":hash.key,
+              "enabled":hash.val().enabled,
+              "options":hash.val().options
+            })
+          })
+
+      		res(objArray)
+      })
     },
+
+		routes(res,rej){
+			console.log(this.get('user'),'routes ref')
+			this.get('user').child('settings/routes')
+				.on('value',(routes)=>res(routes.val()))
+		},
 
     options(res,rej){
       var root = this.get('auth.user')
@@ -146,15 +143,23 @@ export default Ember.Service.extend({
     
     },
 
-     selected(res,rej,selection){
-      var root = this.get('auth.user')
-         .child('songs')
-         .child(selection);
-         
-
-         root.on("value",(snapshot) => {
-          res(snapshot.val())
-         })
+    selected(res,rej,selection){
+    	this.get('user').child('songs').child(selection)    
+         .on("value",(song) => {
+					 let om = song.val();
+					 Ember.run(this,this.get('options.songConfig'),om.params)
+					 this.set('composition',om.composition)
+					 //om.parts.map( part => {
+						 /*
+						 part.fretboard.map( board =>{
+						 		if(board.notes.length){
+									board.notes = board.notes
+								}	
+						 })
+					 }*/
+					 res(om.parts)
+				 })
+			/*			 
          root.off('value')
          root.on('child_changed',((snapshot) => {
 
@@ -164,7 +169,7 @@ export default Ember.Service.extend({
             .replace(0,6,snapshot.val().notes)
 
          }))
-
+*/
     },
  
     update(value){
@@ -192,22 +197,15 @@ export default Ember.Service.extend({
        } 
     },
 
-     chords(res,rej){
-        this.get('auth.user')
-          .child('chords')
-          .on('value',(snapshot) => {  
-            res(snapshot.val())
-          })
-     },
+ chords(res,rej){
+	 this.get('user').child('chords')
+  	 .on('value',(chords) => res(chords.val()))
+ },
 
-     names(res,rej){
-        this.get('auth.user')
-          .child('songs')
-          .on("value",(snapshot) => {
-            var names = Object.keys(snapshot.val())
-            res( names)
-            })
-     },
+	names(res,rej){
+  	this.get('user').child('songs')
+    	.on("value",(songs) => res(Object.keys(songs.val())))
+  },
 
 
      auth:Ember.inject.service(),

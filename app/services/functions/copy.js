@@ -1,11 +1,29 @@
 import Ember from 'ember';
+import reseat from './reseatComposition';
+
 export default function(index,outdex,swap){
 
 if(this.get('song.isPart')){
 
 
-
+	index = this.get('song.selected.compIndex')
 	var score = this.get('song.selected.composition'),
+	/*
+
+		 composition: [
+		 	{ name:'verse',instance:0},
+		 	{ name:'chorus',instance:0},
+		 	{ name:'verse',instance:1},
+		 	{ name:'chorus',instance:0},
+		 	{ name:'verse',instance:2},
+		 ] 
+
+		 content: [
+			 {name:'verse', ...},
+			 {name:'chorus', ...},
+		 ]
+
+	*/
 			output 	=	outdex!==undefined ? score.objectAt(outdex).objectAt(0) : score.objectAt(index).objectAt(0);
 
 	let instance = score.reduce(function(a,b){
@@ -22,13 +40,18 @@ if(this.get('song.isPart')){
 	
 	if(outdex !== undefined){
 		console.error(output,instance,'part')
-		score.replace(index,1,[[output,instance]])
+		let oldIndex = score.objectAt(index).objectAt(0);
+
+		reseat.call(this,score, index, oldIndex) 
+		this.get('song.selected.composition').replace(index,1,[[output,score.objectAt(outdex).objectAt(1)]])
 		this.set('song.selected.compIndex',index)
 	
 	}else{
+		let newIndex = index+1;
 		//insert
-		score.insertAt(index+1,[output,instance+1]);
+		score.insertAt(newIndex,[output,instance+1]);
 		this.get('song.selected.content').objectAt(output).lyrics.pushObject([])
+		this.set('song.selected.compIndex',newIndex)
 		console.error(this.get('song.selected.content'),score,output,instance,'part')
 	}
 

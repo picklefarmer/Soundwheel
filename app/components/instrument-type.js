@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import DrawOsc from './functions/drawSpec'
 import BackView from './functions/backView'
 export default Ember.Component.extend({
  	name:null,

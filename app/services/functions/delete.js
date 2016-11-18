@@ -1,18 +1,18 @@
 import Ember from 'ember';
+import reseat from './reseatComposition';
+
 export default function(index){
 
   if(this.get('song.isPart')){
 
 
-    let compIndex= Number(this.get('song.selected.compIndex')),
+    let compIndex= this.get('song.selected.compIndex'),
         composition = this.get('song.selected.composition'),
 				index		= composition.objectAt(compIndex).objectAt(0);
 
-    if(!composition.any( ([a,b]) => a===index )){
-			this.get('song.selected.content').removeAt(index)
-		}
+		reseat.call(this, composition, compIndex, index)
+		this.get('song.selected.composition').removeAt(compIndex,1);
 
-		composition.removeAt(compIndex,1);
 		this.set('song.selected.compIndex',compIndex-1)
 
   }else if( !this.get('song.isBeat')){

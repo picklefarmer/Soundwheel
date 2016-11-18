@@ -18,6 +18,9 @@ export default function(val){
 	}
 	if(val === 2){
 		this.set('song.isPart',true)
+    if(!this.get('song.pause')){
+        this.set('song.selected.index',0)
+    }
 	}else{
 		this.set('song.isPart',false)
 	}
