@@ -12,6 +12,9 @@ module.exports = function(defaults) {
 					'node_modules/compass-mixins/lib/'
 
 				]
+		},
+		fingerprint:{
+			enabled:false
 		}
 
   });

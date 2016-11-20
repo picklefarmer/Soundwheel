@@ -6,8 +6,8 @@ var offset =  10,
 		scale		= 36,
 		x				= 67,
 		y				= 50,
-		yFactor = offset+(scale/2),
-		xFactor	=	offset/2 + (scale/2);
+		yFactor = 26,//offset+(scale/2),
+		xFactor	=	36;//offset/2 + (scale/2);
 
 export default Ember.Mixin.create({
 	
@@ -59,7 +59,7 @@ export default Ember.Mixin.create({
 					return	this.get('part').lyrics.objectAt(compInstance)
 	}),
 
-	lyrics:Ember.computed('lyricInstance','index',{
+	lyrics:Ember.computed('lyricInstance',{
 		get(){
 			//return this.get('part').
 			return	this.get('lyricInstance')
@@ -93,30 +93,13 @@ export default Ember.Mixin.create({
 
 	fretboard:Ember.computed('measure.notes.[]',function(){
 		console.error( 'fretbard refresh',this.get('index'))	
-		 let fretboard=  this.get('part.fretboard')
-							.getEach('notes');
-					console.log('fretboard', fretboard)
-		return fretboard.map( measure => {
-								if(!measure.length){
-									let argArr = [];
-									Object.keys(measure).forEach( key => argArr[key] = measure[key])
-									measure = argArr
-								}
-								return measure.map( (string,indx) => string.length?string.map( fret =>{
+		 	return this.get('part.fretboard')
+							.getEach('notes')
+							.map( measure => measure.map( (string,indx) => string.length?string.map( fret =>{
 								if(fret){
 									return [fret*x + xFactor, indx*y + yFactor,fret,indx]
 								}
-								}):false)
-							})
-/*
-							.map( (string,idx) => string
-								.map(beat=>[beat,idx])
-								.filter( group => group[0])
-								.map( ([note,id]) => [note*x + xFactor, id*y + yFactor,note,id])
-							)
-							*/
-
-		
+								}):false))
 	}),
 
 	fretMeasure:Ember.computed('index','fretboard',function(){

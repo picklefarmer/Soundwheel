@@ -1,5 +1,4 @@
 [
-  {"route":"song","isOnline":true,"name":"song","x":"edit","y":"new"},
   {"route":"about","name":"about"},
   {"route":"user","name":"personal"},
   {"route":"config","name":"config"}

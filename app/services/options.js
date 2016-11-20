@@ -7,6 +7,13 @@ export default Ember.Service.extend({
   verticalTab:false,
 	song:Ember.inject.service(),
   router:Ember.inject.service('-routing'),
+	couple:Ember.computed('pairingParam','song.auth.displayName',function(){
+		let pairingParam = this.get('pairingParam');
+		if(pairingParam && pairingParam !== this.get('song.auth.displayName')){
+			return true		
+		}
+		
+	}),
   songConfig(params){
 		let {tempo:bpm,voice:instrument} = params;
 

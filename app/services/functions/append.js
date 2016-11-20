@@ -1,4 +1,5 @@
 import blank from './generateBlank';
+//insert isLive check to return proxy object
 import blankPart from './blankPart';
 
 export default function(index){

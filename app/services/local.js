@@ -108,6 +108,7 @@ export default Ember.Service.extend({
       	res(om)
 			}
 			Ember.run(this.get('options'),this.get('options.updateUrl'),selection)
+		//}else if(this.get('options.couple')){
     }else{
 				console.log('local_om',om)
       Ember.$.getJSON("./scores/"+selection+".json")

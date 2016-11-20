@@ -7,16 +7,21 @@ export default Ember.Route.extend({
 		
 			console.log( 'init , from isOnline route model ',params)
     
-			//Ember.run(this,'checkOnline',params.isOnline,params.y)
+		Ember.run(this,'checkOnline',params.isOnline,params.y)
 
 			return params
 		},
 			//			params.y = [params.y.split("")][params.x] || params.y
 		checkOnline(isOnline,name){
-			if(isOnline === "online"){
-				this.set('song.isOnline',true)	
+			if(isOnline !== 'offline'){
+				this.set('song.isOnline',true)
+				this.set('song.options.pairingParam',isOnline)
+
+
 			}else{
-				this.router.replaceWith('song',{isOnline:"offline",y:name})
+				this.set('song.isOnline',false)
+				this.set('song.options.pairingParam',null)
+			//	this.router.replaceWith('song',{isOnline:"offline",y:name})
 					//this.set('song.isOnline',false)
 			}
 		},

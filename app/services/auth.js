@@ -29,6 +29,7 @@ export default Ember.Service.extend({
       instruments:Ember.$.getJSON('./json/instrumentsAuth.json'),
       songs:Hash({
       	destiny:Ember.$.getJSON('./scores/destiny.json'),
+      	mighty:Ember.$.getJSON('./scores/mighty.json'),
       })
     })
 		.then((hash)=>{
@@ -48,7 +49,7 @@ export default Ember.Service.extend({
 
     loginDebug:false,
 
-    login(auth){
+    login(auth,router){
 
 				console.log('login checkpoint', auth.currentUser)
 

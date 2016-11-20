@@ -27,7 +27,7 @@
 		}
 		display:block;
 		top:0px;
-	//	width:10%;
+		//width:20%;
 		height:100%;
 	}
   &.autohide {
@@ -36,7 +36,7 @@
 		}
 		ul {
 	  	display: none;
-	  	background: red;
+	  	
 		}
     
 		//background: green;
@@ -64,6 +64,7 @@
 		background:black;
 	}
 }
+
 .toolbar{
 	//overflow-y:hidden;
 	//height:100%;

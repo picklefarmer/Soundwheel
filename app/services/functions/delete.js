@@ -21,7 +21,7 @@ export default function(index){
 		this.get('song.selected.part.fretboard').removeAt(index,1);
 
 
-		if( index === this.get('song.selected.length')){
+		if( index === this.get('song.selected.length')-1){
 
 			this.decrementProperty('song.selected.index')
 

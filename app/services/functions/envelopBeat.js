@@ -54,6 +54,7 @@ export default function(update,isRest){
 			let score = measure.map(
 				function(string,n){
 
+					/*TODO [ 0 , 0 , 1 , 3 , 4 , 4 ] mastermind(game)/chordSelection */
 					if(string.length){//if string isArray
 						let test_input = update[n];
 						console.log(test_input, "test_input",update,string)

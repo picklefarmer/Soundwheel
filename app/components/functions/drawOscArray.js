@@ -60,7 +60,8 @@ const draw = function(ctx,chord){
         	x -= sliceWidth;
       	}
 				ctx.lineTo(x,height+ampl)	
-				ctx.lineTo(x-2,height+ampl)	
+				ctx.lineTo(x-2,height+ampl)
+				ctx.lineTo(offset,height+ampl)	
 	      ctx.stroke();
 
 			})

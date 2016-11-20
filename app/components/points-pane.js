@@ -1,17 +1,19 @@
 
 import Ember from 'ember';
 export default Ember.Component.extend({
+		classNames:['is-inline'],
     tagName:'span',
 		song:Ember.inject.service(),
-		graphics:{
-			verticalTab:"\uD83D\uDCA2",
-			isMoji:"M",
-//			areStrings:"S",
-			isSpritz:'S',
-      isToneToHue:'F',
-      isFullScreen:'O',
-			onLine:'\uD83C\uDF75',
-      isExplain:'\u2754'
+		graphics:[
+			{"name":"verticalTab",	label:"\uD83D\uDCA2" 						},
+			{"name":"isMoji",				label:"M"												},
+			{"name":"isSpritz",			label:'S'												},
+			{"name":"isToneToHue",	label:'\u0beb',	class:'reverse'	},
+			{"name":"isFullScreen",	label:'O'												},
+			{"name":"onLine",				label:'\uD83C\uDF75'						},
+			{"name":"isExplain",		label:'\u2754'									}
+		]
 //      areFrets:"F"
-		}
+//			areStrings:"S",
+		
 })

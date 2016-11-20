@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import onChange from './functions/onChange';
 
 export default Ember.Service.extend({
 		init(){
@@ -144,21 +145,54 @@ export default Ember.Service.extend({
     },
 
     selected(res,rej,selection){
-    	this.get('user').child('songs').child(selection)    
+			var juncture;
+			if(this.get('options.couple')){
+					juncture = this.get('base').ref(this.get('options.pairingParam'));
+			}else{
+	    		juncture	= this.get('user');
+			}
+				
+		 juncture = juncture.child('songs').child(selection)
+			 juncture
          .on("value",(song) => {
+					 console.log('value of selected',song,song.exportVal(),selection)
 					 let om = song.val();
 					 Ember.run(this,this.get('options.songConfig'),om.params)
 					 this.set('composition',om.composition)
-					 //om.parts.map( part => {
-						 /*
-						 part.fretboard.map( board =>{
-						 		if(board.notes.length){
-									board.notes = board.notes
+					 om.parts.forEach( (part,I) => {
+						 part.fretboard.forEach( (board,II) =>{
+						 		if(!board.notes.length){
+									let notes = [];
+									Object.keys(board.notes).map( key => notes[key] = board.notes[key])
+									om.parts[I].fretboard[II].notes = notes
 								}	
 						 })
-					 }*/
-					 res(om.parts)
+					 })
+					 juncture.off()
+					 //if(this.get('song.isLive'){}
+					 let proxy = onChange.call(this,juncture.child('parts'), song.val().parts);
+					 res(proxy)
+					 //res(om.parts)
 				 })
+
+
+/*
+		 	juncture.child('parts').on('child_changed')
+				.then(parts=> {
+						let partCount = parts.numChildren();
+						console.log('partCount',partCount)
+					if(partCount !== this.get('numChildren')){
+						this.set('numChildren',partCount)
+						parts.forEach(part=>{
+							let node = juncture.child('parts').child(part.key);
+							node.off()
+							node.on('child_changed',function(amount){
+								console.log(amount.val(),part.key,amount.key,amount.exportVal(),'amount')
+							})
+						})
+					}
+			})
+			*/
 			/*			 
          root.off('value')
          root.on('child_changed',((snapshot) => {
@@ -175,26 +209,42 @@ export default Ember.Service.extend({
     update(value){
           console.log("socket update",value)
      
-     var base = this.get('auth.user'),
-         song = this.get('selected.selection'),
-         index = this.get('selected.index');
+     var 	base	= this.get('user'),
+					beat	=	this.get('beat'),
+         	index = this.get('selected.index'),
+					part	= this.get('selected.partInstance'),
+        	song	= this.get('selected.selection');
+
+					//				string
+					// [ 0, 4, 3, 2, 0, 0][beat]
           
-      console.log( base, song, index ) 
+      console.log( base, song, index ,part, beat ,'update ') 
 
      var ref = base
-             .child('songs')
-              .child(song)
-              .child(index)
+        .child('songs').child(song)
+				.child('parts').child(part)
+				.child('fretboard').child(index)
+				.child('notes');
+
 
       if(value.length === 6) { 
-    
-         ref.update({notes:value})
-    
+			/*
+			[[v],[],[],[],[],[]]
+			[{0:{beat:v},1:{beat,v
+			*/
+				let update = {}
+				value.forEach((e,f)=> {
+					update[f+"/"+beat+"/"] = e
+				})
+
+				ref.update( update ) 
+//      ref.set(update)
+
       }else{
         let [fret,string] = value;
-        ref.child('notes')
-			.update({[string]:fret})  
-       } 
+				ref.update({[string+'/'+beat+"/"]:fret})  
+      } 
+    	this.get('playMatrix.beat').call(this,beat)
     },
 
  chords(res,rej){

@@ -50,6 +50,10 @@ export default Ember.Mixin.create(PromiseProxy,{
 
       set(_,selection){
 
+//				if(this.get('isOnline')){
+	//				Ember.run(this.get('firebase'),this.get('firebase.selected'))	
+		//		}
+
 	    	console.log(selection, 'from song service' )
 
     		let proxy 			= 	this.promiseWithSelection(_,selection);

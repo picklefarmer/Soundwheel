@@ -1,0 +1,8 @@
+
+song:inOnline => grab :: song || new measure
+	`route:isOnline => 
+	'service:song	=>	grab ( selected ) 
+	'firebase.user =  null  (* add coupling )
+
+push note
+\	 \ 	- 

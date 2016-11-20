@@ -7,9 +7,9 @@ var hot = new chroma.scale(['black', 'red', 'yellow', 'white']).domain([0,rate])
 var spectral = new chroma.scale('Spectral').domain([0,8]);
 // implement measureLength to domain top
 
-const scaleUp = function(x,y,print,m){
+const scaleUp = function(x,y,print,m,beat,color){
 			this.beginPath()
-			this.fillStyle = hot(m)
+				this.fillStyle = spectral(beat)
 			this.arc(	x , y, (rate-m)+1,	0,	2*Math.PI)
  			this.closePath();
 		 	this.fill()
@@ -26,21 +26,22 @@ const scaleUp = function(x,y,print,m){
 			  this.fillStyle = spectral(beat)
 			  this.arc(	x , y,(rate- m),	0,	2*Math.PI)
  			  this.closePath();
+				this.stroke()
 		 	  this.fill()
       },
 
-			noteMoji=function(x,y,print,m){
+			noteMoji=function(x,y,print,m,beat,color){
 				m = rate - m
-				this.fillStyle = hot(m)
-				this.font = (m*0.25)+"rem Georgia"
+				this.fillStyle = color
+				this.font = 1+(m*0.12075)+"rem Georgia"
 				this.fillText(print,x-m,y+m)
 
 			},
 
-      animationFrame= function(ctx,func,x,y,print,m,beat){
+      animationFrame= function(ctx,func,x,y,print,m,beat,color){
      		requestAnimationFrame(()=>{
 						ctx.clearRect(x-20,y-20,40,40)
-            func.forEach(func=>func.call(ctx,x,y,print,m,beat))
+            func.forEach(func=>func.call(ctx,x,y,print,m,beat,color))
 				})
       },
 			tonesToHue		= function(ctx,x,y,print,stanza){
@@ -59,10 +60,12 @@ const scaleUp = function(x,y,print,m){
 				}
 			},
   		upImp		= function(ctx,x,y,print,stanza){
-				let m = rate;
+				let m = rate,
+			  		color = "#"+this.get('main.fretboard.options.notes'),	
+            beat = this.get('beat');
 
 				while(m-- > -1){
-					setTimeout(animationFrame,m*stanza,ctx,[scaleUp,noteMoji],x,y,print,m)
+					setTimeout(animationFrame,m*stanza,ctx,[scaleUp,noteMoji],x,y,print,m,beat,color)
 				}
 			};
 
@@ -77,6 +80,7 @@ export default function(ctx,boardX,boardY,print,stanza,isMoji){
 		}else{
 			console.error(this.get('main.fretboard.options.notes'))
       if(this.get('isToneToHue')){
+				ctx.lineWidth = 22
 			  tonesToHue.call(this,ctx,boardX,boardY,print,stanza)
       }else{
 			  ctx.fillStyle = "#"+this.get('main.fretboard.options.notes')	

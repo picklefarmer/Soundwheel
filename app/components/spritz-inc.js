@@ -27,7 +27,7 @@ export default Ember.Component.extend({
   toneToHue:Ember.computed('song.beat',function(){
     return "border-color:"+spectral(this.get('song.beat'))+";"
   }),
-  words:Ember.computed('song.selected.lyrics','song.selected.index',{
+  words:Ember.computed('song.selected.lyrics.[]','song.selected.index',{
     get(){
 			let words = this.get('song.selected.lyrics').objectAt(this.get('song.selected.index')),column = [];
       if(words){
@@ -82,7 +82,7 @@ export default Ember.Component.extend({
     return spritz(this.get('max_length'))
   }),
 
-  word:Ember.computed('words','beat',function(){
+  word:Ember.computed('words','song.beat',function(){
     let beat = this.get('song.beat'),
         word = this.get('words')[beat],
         word_length = word.length,

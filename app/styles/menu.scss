@@ -6,6 +6,12 @@
 @import "compass/css3/text-shadow";
 @import "compass/css3/background-clip";
 @import "compass/css3/appearance";
+
+.reverse{
+  label{
+    transform: scaleX(-1)
+  }
+}
 .icon{
   float:left;
   display:block !important;
@@ -14,11 +20,15 @@
   height:40px;
 }
 .option-stack{
+	div{
+		display:block !important;
+	}
 	background:black;
 	//position:absolute;
-	margin:0 -12rem 0 0;
+	//margin:0 -12rem 0 0;
 	overflow-y:hidden;
 	height:100%;
+	width:22rem;
 }
 .is-inline{
   button{

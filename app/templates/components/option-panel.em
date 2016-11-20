@@ -16,8 +16,8 @@
       else
         select-me something
   li
-    span are we live?
-    div: =song.isOnline
+    if song.isOnline
+      div class="hit" live
 
       
   li
