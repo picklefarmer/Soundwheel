@@ -24,7 +24,7 @@ export default Ember.Mixin.create({
 				c			= composition.objectAt(compIndex);
 
 		console.error( c, 'partInstance')
-				return c[0]!==undefined? c[0]:c
+				return c[0]!== undefined? c[0]:c
 	}),
 
 	part:Ember.computed('compIndex','partInstance',function(_){
@@ -38,7 +38,7 @@ export default Ember.Mixin.create({
 			console.log(  'measure ' ) 
 			if(this.get('compIndex') !== undefined){
 				console.error(this.getProperties('index','part','compIndex','composition'),fretboard,'fretboard')
-				let fretboard = this.get('part').fretboard.objectAt(this.get('index'));
+				let fretboard = this.get('part').fretboard.content.objectAt(this.get('index'));
 				return fretboard
 			}else{
 				return this.objectAt(this.get('index'))
@@ -92,8 +92,9 @@ export default Ember.Mixin.create({
 
 
 	fretboard:Ember.computed('measure.notes.[]',function(){
+		console.error('liveobjectpush',this.get('part.fretboard'))
 		console.error( 'fretbard refresh',this.get('index'))	
-		 	return this.get('part.fretboard')
+		 	return this.get('part.fretboard.content')
 							.getEach('notes')
 							.map( measure => measure.map( (string,indx) => string.length?string.map( fret =>{
 								if(fret){

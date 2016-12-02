@@ -135,14 +135,14 @@ export default Ember.Mixin.create(PromiseProxy,{
 
 	chords:Ember.computed('onLine',{
 		get(_){
-			var promise = this.promise(_),
+			var promise = this.promiseWithContext(_),
 				_this = this;
 				  
 				promise.then(()=>{
 					promise.reopen({
 						update(hash){
 							console.log( ' got chords observe ',_this,_this.get('content'))
-							Ember.run ( _this,_this.get('content.updateChords'), hash)
+							Ember.run ( this,_this.get('content.updateChords'), hash)
 
 					  	}
 					})

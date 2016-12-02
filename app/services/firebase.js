@@ -10,6 +10,10 @@ export default Ember.Service.extend({
 
 		base:firebase.database(),
 
+		userAtSelection:Ember.computed('user','selected.selection',function(){
+			return this.get('user').child('songs/'+this.get('selected.selection'))
+		}),
+
 		user:Ember.computed('auth.uid','base',function(){
 			if(this.get('auth.uid')){
 				console.log('this.get.base',this.get('base').ref(this.get('auth.uid')))
@@ -87,7 +91,7 @@ export default Ember.Service.extend({
  {name:02_Saw,enabled:true}
  update({[update.name]:update.enabled})
  */
-          update = {[update.name]:update.enabled}
+      update = {[update.name]:update.enabled}
 
         this.get('auth.user')
             .child('instruments')
@@ -154,11 +158,16 @@ export default Ember.Service.extend({
 				
 		 juncture = juncture.child('songs').child(selection)
 			 juncture
-         .on("value",(song) => {
+         .once("value",(song) => {
 					 console.log('value of selected',song,song.exportVal(),selection)
 					 let om = song.val();
+
+					 //params
 					 Ember.run(this,this.get('options.songConfig'),om.params)
+					 //composition
 					 this.set('composition',om.composition)
+					 //parts
+					 //
 					 om.parts.forEach( (part,I) => {
 						 part.fretboard.forEach( (board,II) =>{
 						 		if(!board.notes.length){
@@ -168,45 +177,14 @@ export default Ember.Service.extend({
 								}	
 						 })
 					 })
-					 juncture.off()
 					 //if(this.get('song.isLive'){}
-					 let proxy = onChange.call(this,juncture.child('parts'), song.val().parts);
+					 let proxy = onChange.call(this,juncture.child('parts'), om.parts);
 					 res(proxy)
 					 //res(om.parts)
 				 })
-
-
-/*
-		 	juncture.child('parts').on('child_changed')
-				.then(parts=> {
-						let partCount = parts.numChildren();
-						console.log('partCount',partCount)
-					if(partCount !== this.get('numChildren')){
-						this.set('numChildren',partCount)
-						parts.forEach(part=>{
-							let node = juncture.child('parts').child(part.key);
-							node.off()
-							node.on('child_changed',function(amount){
-								console.log(amount.val(),part.key,amount.key,amount.exportVal(),'amount')
-							})
-						})
-					}
-			})
-			*/
-			/*			 
-         root.off('value')
-         root.on('child_changed',((snapshot) => {
-
-          console.log('returned') 
-          this.get('selected.content')
-            .objectAt(snapshot.key()).notes
-            .replace(0,6,snapshot.val().notes)
-
-         }))
-*/
     },
  
-    update(value){
+    update(value,isRest){
           console.log("socket update",value)
      
      var 	base	= this.get('user'),
@@ -223,11 +201,18 @@ export default Ember.Service.extend({
      var ref = base
         .child('songs').child(song)
 				.child('parts').child(part)
-				.child('fretboard').child(index)
-				.child('notes');
+				.child('fretboard').child(index);
+
+//				.child('notes');
 
 
-      if(value.length === 6) { 
+      if(isRest){
+      
+        value.forEach ( (e,f)=>{
+          ref.child('notes/'+f+'/'+beat).remove()
+        } ) 
+        ref.child('map').update({[beat]:0})
+      }else if(value.length === 6) { 
 			/*
 			[[v],[],[],[],[],[]]
 			[{0:{beat:v},1:{beat,v
@@ -237,7 +222,9 @@ export default Ember.Service.extend({
 					update[f+"/"+beat+"/"] = e
 				})
 
-				ref.update( update ) 
+				ref.child('notes').update( update )
+        //TODO make sustainBeat ;  
+        ref.child('map').update ( {[beat]:1})
 //      ref.set(update)
 
       }else{
@@ -253,11 +240,8 @@ export default Ember.Service.extend({
  },
 
 	names(res,rej){
+		console.log(this.getProperties('user','userAtSelection'))
   	this.get('user').child('songs')
-    	.on("value",(songs) => res(Object.keys(songs.val())))
+    	.once("value",(songs) => res(Object.keys(songs.val())))
   },
-
-
-     auth:Ember.inject.service(),
-
 });

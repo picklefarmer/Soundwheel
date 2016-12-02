@@ -1,36 +1,17 @@
-import blank from './generateBlank';
 //insert isLive check to return proxy object
-import blankPart from './blankPart';
+import Part from './append/appendPart';
+//import Beat from '/append/appendBeat;
+import Measure from './append/appendMeasure';
 
 export default function(index){
-	if(this.get('song.isPart')){
-
 	let compIndex = this.get('song.selected.compIndex'),
 			composition=this.get('song.selected.composition'),
 			parts			=	this.get('song.selected.content');
-	console.error(parts,'parts')
-		parts.pushObject(blankPart.call(this))
-		
-		composition.insertAt(compIndex+1,
-					//index
-				[	parts.length-1,
-					//instance
-					0
-				])
 
-		this.get('song').set('isEdit',true)
-		this.set('song.selected.compIndex',compIndex+1)	
+if(this.get('song.isPart')){
+	Part.call(this,index,compIndex,composition,parts)
 	}else{
-  	let {map,notes} = blank.call(this);
-
-
-		this.get('song.selected.part.fretboard')
-					.insertAt(	index+1	,{
-						notes,
-						map
-					});
-
-		this.set('song.selected.index',index+1);
+	Measure.call(this,index,compIndex)
 	}
 }
 

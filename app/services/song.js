@@ -107,9 +107,12 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
     clock(args){
 
 			if(this.pause){
-					if(!args){
+				if(!args){
 						Ember.run(this,'pulse',0)
-					}}
+				}else{
+					Ember.run(this,'pulse',args)
+				}
+			}
 
     },
 

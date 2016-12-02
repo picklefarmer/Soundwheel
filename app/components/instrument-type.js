@@ -75,7 +75,8 @@ export default Ember.Component.extend({
 	    },  
     	set(a,ctx){
 				ctx.font="bolder 22px serif";
-     			ctx.fillStyle = "#"+this.get('color.notes')//"white";//"rgba(155,155,155,.79)"
+
+   			ctx.fillStyle = "#"+this.get('color.notes')//"white";//"rgba(155,155,155,.79)"
 				ctx.strokeStyle = "white";
 				return ctx
 	    }
@@ -86,6 +87,9 @@ export default Ember.Component.extend({
         	this.get('ctx')
         },
       	set(a,ctx){
+			//ctx.fillStyle = 
+			ctx.lineWidth = 3
+			ctx.strokeStyle = "black"
 			ctx.font="bolder 22px serif"
 			return ctx
       	}

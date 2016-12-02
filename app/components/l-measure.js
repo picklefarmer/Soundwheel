@@ -6,6 +6,7 @@ export default Ember.Component.extend({
 	tagName:"li",
 	measure:Ember.computed('index',{
 		get(){
+      return this.get('beatMask').objectAt(this.get('index'))
 			var measure = this.get('index').toString()
 
 			if(	measure[1] ){

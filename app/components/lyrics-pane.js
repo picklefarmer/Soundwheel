@@ -16,10 +16,20 @@ export default Ember.Component.extend({
       })
     }),
     actions:{
-				update(data){
-						console.log(data,`action of the
+				update(partInstance,instance,index,value){
+					if(!value.length){return}
+					if(this.get('song.onLine')){
+							console.log(index,instance,partInstance,value,`action of the
 											 	lyrics' pane`)
-				this.set('song.selected.lyrics',data)
+
+							this.get('song.user')
+								.child('songs/'+this.get('song.selected.selection')+'/parts/')
+								.child(partInstance)
+								.child('lyrics')
+								.child(instance)
+								.update({[index]:value})
+					}
+				//this.set('song.selected.lyrics',data)
 				}
     }
 

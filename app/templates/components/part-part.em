@@ -4,7 +4,7 @@ if isEdit
     didInsertElement=toFocus
     value=(mut song.selected.part.name)
     class="bar-input"
-    aether=(action 'isEdit' target=song bubbles=false)
+    aether=(action 'isEdit' song.selected.partInstance target=song bubbles=false)
   ]
 else
   div: =partName

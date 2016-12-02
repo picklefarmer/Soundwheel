@@ -15,7 +15,8 @@ export default Ember.Route.extend({
 		checkOnline(isOnline,name){
 			if(isOnline !== 'offline'){
 				this.set('song.isOnline',true)
-				this.set('song.options.pairingParam',isOnline)
+		
+				Ember.run(this.get('song.options'),this.get('song.options.setUser'),isOnline)
 
 
 			}else{

@@ -23,7 +23,11 @@ export default Ember.Component.extend(Clock,{
 		console.error( this.get('y'), 'y')
 	},
 	isOnline:Ember.computed(function(){
-				return this.get('song.isOnline')?"online":"offline"
+		if(this.get('song.onLine')){
+			return this.get('song.options.pairingParam')
+		}else{
+			return 'offline'
+		}
 	}),
 	songOptions:['edit','lyrics','stave','chord'],
 	actions:{

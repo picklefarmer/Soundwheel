@@ -1,7 +1,5 @@
 if song.selected.isFulfilled
-
   each song.selected.composition as |color measure|
-
     part-part [
       song=song
       current=("is-classy" measure song.selected.compIndex)

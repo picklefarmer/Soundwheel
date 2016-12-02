@@ -17,11 +17,15 @@ export default Ember.Mixin.create({
   globalKeydown:Ember.inject.service(),
 
 actions:{
-  isEdit(event){
+  isEdit(partInstance,event){
     console.log(event,' this is of isEdit')
     event.stopPropagation()
     event.target.blur()
-    this.set('isEdit',false)    
+    this.set('isEdit',false)   
+   if(this.get('onLine')){
+    this.get('user').child('songs/'+this.get('selected.selection')).child('parts').child(partInstance).update({'name':event.target.value})
+
+   } 
   },
 	saveToStorage(){
 		localStorage[this.get('storageName')] = JSON.stringify(this.get('storage'));

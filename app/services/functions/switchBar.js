@@ -1,3 +1,4 @@
+import Ember from 'ember';
 const barTypes = ['meter','measure','part'];
 export default function(val){
 
@@ -9,7 +10,14 @@ export default function(val){
 	if(val > 2 || val < 0){
     if(val > 2){
       this.set('song.isEdit',true)
-    }
+    }else{
+			if(this.get('song.pause')){
+				this.toggleProperty('song.pause')
+			}else{
+				this.toggleProperty('song.pause')
+				Ember.run(this.get('song'),'clock',this.get('song.beat'))
+			}
+		}
 		return 	
 	}else if(val === 0){
 		this.set('song.isBeat',true)

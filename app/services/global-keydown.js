@@ -66,10 +66,10 @@ export default Ember.Service.extend({
 
 			switch(e.keyCode){
 
-/*left*/	case 37:Step.call(this,'decrementProperty',ctrl);break;
+/*left*/	case 37:Step.call(this,'decrementProperty',ctrl);e.preventDefault();break;
 					case 32:PlayPause.call(this);break;
 					case 38:SwitchBar.call(this,-1);break;
-/*right*/	case 39:Step.call(this,'incrementProperty',ctrl);break;
+/*right*/	case 39:Step.call(this,'incrementProperty',ctrl);e.preventDefault();break;
 
 					//show_meter_bar
 					case 40:SwitchBar.call(this,1);break;

@@ -7,7 +7,7 @@ export default function(_,b){
 				console.error('part_index',this.getProperties('compIndex','part'),b)
 				
 				if(this.get('compIndex') !== undefined	){
-					let	length	=		this.get('part.fretboard.length');
+					let	length	=		this.get('part.fretboard.content.length');
 
 					if(b < 0){
 						b = length-1

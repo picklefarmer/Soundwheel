@@ -1,7 +1,8 @@
 import Ember from 'ember';
 //import play from '../mixins/play';
-import chordHover from './functions/chordHover';
-import dotChord from './functions/dotChord';
+import chordHover  from './functions/chordHover';
+import dotChord 	 from './functions/dotChord';
+import fadeIn			 from './functions/fadeInChord';
 import mouseFormat from './functions/mouseFormat';
 import pushChord from './functions/pushChord';
 import pushNote from './functions/pushNote';
@@ -80,8 +81,13 @@ export default Ember.Component.extend({
 	},
 	
 	mouseLeave(){
+		//TODO contemplate the use of promises here;
+
 		if(this.get('song.chordSelection')){
 			Ember.run.once(this.get('options'),'clear')
+			if(!this.get('song.pause')){
+//				Ember.run.once(this,fadeIn)
+			}
 		}
 	}
 

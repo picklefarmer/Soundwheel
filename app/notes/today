@@ -1,8 +1,15 @@
 
-song:inOnline => grab :: song || new measure
-	`route:isOnline => 
-	'service:song	=>	grab ( selected ) 
-	'firebase.user =  null  (* add coupling )
+update append,copy,delete functions to online integration
 
-push note
-\	 \ 	- 
+add composition &  kit and lyrics online syncing
+
+add scaleUp noteGraphics type
+
+reintegrate settings to fretboard
+
+-	-
+toneToHue / isEdge- toggle | noteGraphics
+
+investigate noteGraphics property matrix component 
+
+optimize toneToHue beat-bar /|: borders 

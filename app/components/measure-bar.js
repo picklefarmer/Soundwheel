@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     song:Ember.inject.service(),
-    classNames:["scroll","sidebar"],
+    classNames:["scroll","sidebar",'measure-bar'],
     tagName:"ul",
 
     time:Ember.computed.oneWay('controller.editScore.length'),

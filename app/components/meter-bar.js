@@ -17,6 +17,18 @@ export default Ember.Component.extend({
       return style
     }
   }),
+  actions:{
+    valueUp(index){
+      console.log('fire at will') 
+     if(this.cacheFor('song.beat') !== index ){
+      this.set('song.beat',index)
+     }else{ 
+		  Ember.run(this.get('song'),
+        this.get('song.playMatrix.beat'),
+        index )
+     }
+    }
+  },
 	classNames:["sidebar","scroll"],
   timeSignature:Ember.computed('song.division',{get(){
 
