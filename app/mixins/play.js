@@ -1,3 +1,4 @@
+import {task,timeout} from 'ember-concurrency';
 import Ember from 'ember';
 //import * as Simple from '../mixins/functions/simple';
 //import * as Method from '../mixins/functions/playmethod';
@@ -15,6 +16,15 @@ const scale = 36;
 
 export default Ember.Mixin.create({
   globalKeydown:Ember.inject.service(),
+	count:0,
+  step:task(function * (inc){
+    let speed = 400;
+    while (true) {
+      this.incrementProperty('count', inc);
+      yield timeout(speed);
+      speed = Math.max(50, speed * 0.8);
+    }
+  }),
 
 actions:{
   isEdit(partInstance,event){

@@ -1,1 +1,2 @@
-button{'action' action}: =desc
+/button{'action' action}: =desc
+=desc

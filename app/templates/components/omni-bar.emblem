@@ -1,12 +1,23 @@
-play-bar playbar=true inline=true buttons=left
+/play-bar playbar=true inline=true buttons=left
+=perform-property [
+  press=(perform song.step -1)
+  release=(cancel-all song.step)
+  count=left.stepLeft.name
+  ]
+
 component [
   (concat song.barType "-bar")
   class='big-me'
   beatMask=beatMask
   ]
 
-
-play-bar playbar=true inline=true buttons=right
+h1: =song.count
+/play-bar playbar=true inline=true buttons=right
+=perform-property [
+  press=(perform song.step 1)
+  release=(cancel-all song.step)
+  count=right.stepRight.name
+  ]
 
 .beat-blanket
   each song.measureKit as |kitBin index|

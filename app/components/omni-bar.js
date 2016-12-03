@@ -1,6 +1,18 @@
 import Ember from 'ember';
+import {task,timeout} from 'ember-concurrency';
+
 
 export default Ember.Component.extend({
+  count:0,
+  test:task(function * (inc){
+    inc=1
+    let speed = 400;
+    while (true) {
+      this.incrementProperty('count', inc);
+      yield timeout(speed);
+      speed = Math.max(50, speed * 0.8);
+    }
+  }),
   song:Ember.inject.service(),
   beatMask:[
     '\u2160',  
