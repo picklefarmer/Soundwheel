@@ -20,7 +20,7 @@ export default Ember.Mixin.create({
   step:task(function * (inc){
     let speed = 400;
     while (true) {
-      this.incrementProperty('count', inc);
+      this.incrementProperty('beat', inc);
       yield timeout(speed);
       speed = Math.max(50, speed * 0.8);
     }
