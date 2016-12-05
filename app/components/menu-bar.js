@@ -36,10 +36,4 @@ export default Ember.Component.extend(Clock,{
     },
 	},
 	menuArray:[],
-  menuBar:function(){
-   // this.get('logger.menuBar')
-   //   .then(data => this.set('menuArray',data))
-  }.on('init'),
-
-
 });

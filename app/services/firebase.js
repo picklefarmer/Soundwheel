@@ -165,7 +165,7 @@ export default Ember.Service.extend({
 					 //params
 					 Ember.run(this,this.get('options.songConfig'),om.params)
 					 //composition
-					 this.set('composition',om.composition)
+					 this.set('composition',Ember.A(om.composition))
 					 //parts
 					 //
 					 om.parts.forEach( (part,I) => {
@@ -179,7 +179,7 @@ export default Ember.Service.extend({
 					 })
 					 //if(this.get('song.isLive'){}
 					 let proxy = onChange.call(this,juncture.child('parts'), om.parts);
-					 res(proxy)
+					 res(Ember.A(proxy))
 					 //res(om.parts)
 				 })
     },

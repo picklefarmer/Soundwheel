@@ -29,7 +29,7 @@ export default Ember.Mixin.create({
 
 	part:Ember.computed('compIndex','partInstance',function(_){
 		_ =this.objectAt(this.get('partInstance'));
-			console.error(_,this.get('partInstance'),'part')
+			console.error(_,this.get('content'),this,this.get('partInstance'),'part')
 			return _
 	}),
 
@@ -39,7 +39,7 @@ export default Ember.Mixin.create({
 			if(this.get('compIndex') !== undefined){
 				console.error(this.getProperties('index','part','compIndex','composition'),fretboard,'fretboard')
 				let fretboard = this.get('part').fretboard.content.objectAt(this.get('index'));
-				return fretboard
+				return Ember.A(fretboard)
 			}else{
 				return this.objectAt(this.get('index'))
 			}
@@ -49,14 +49,14 @@ export default Ember.Mixin.create({
 	measureLength:0,
 
 	instance:Ember.computed('compIndex','composition.[]',function(){
-		return this.get('composition').objectAt(this.get('compIndex')).objectAt(1)
+		return this.get('composition').objectAt(this.get('compIndex'))[1]
 	}),
 
 	lyricInstance:Ember.computed('instance','parts',function(_){
 		
 			let compInstance = this.get('instance');
 
-					return	this.get('part').lyrics.objectAt(compInstance)
+					return	this.get('part').lyrics[compInstance]
 	}),
 
 	lyrics:Ember.computed('lyricInstance',{
@@ -94,17 +94,17 @@ export default Ember.Mixin.create({
 	fretboard:Ember.computed('measure.notes.[]',function(){
 		console.error('liveobjectpush',this.get('part.fretboard'))
 		console.error( 'fretbard refresh',this.get('index'))	
-		 	return this.get('part.fretboard.content')
+		 	return Ember.A(this.get('part.fretboard.content')
 							.getEach('notes')
 							.map( measure => measure.map( (string,indx) => string.length?string.map( fret =>{
 								if(fret){
 									return [fret*x + xFactor, indx*y + yFactor,fret,indx]
 								}
-								}):false))
+								}):false)))
 	}),
 
 	fretMeasure:Ember.computed('index','fretboard',function(){
-		 return this.get('fretboard').objectAt(this.get('index'))
+		 return Ember.A(this.get('fretboard').objectAt(this.get('index')))
 	}),
 
 

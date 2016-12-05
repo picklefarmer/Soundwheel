@@ -134,7 +134,7 @@ export default Ember.ArrayProxy.reopenClass({
 			}
 
 				this.get('content').forEach( (e,f) => {
-					e.set('freqs',arrays[f])
+					e.set('freqs',Ember.A(arrays[f]))
 				})
 				return arrays
 			}

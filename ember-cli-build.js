@@ -32,7 +32,7 @@ module.exports = function(defaults) {
 	app.import(firebase+'database.js')
 	app.import(firebase+'auth.js')
 
-	app.import(bower_dir + 'firebase2/firebase-debug.js')
+//	app.import(bower_dir + 'firebase2/firebase-debug.js')
 
   return app.toTree();
 };

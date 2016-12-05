@@ -12,7 +12,7 @@ export default Ember.Service.extend({
     if(selection === "default"){
       return res()
     }
-     Ember.$.getJSON("./instruments/"+selection+".json")
+     Ember.$.getJSON("/instruments/"+selection+".json")
       .then(om => {
 
          var c = om.real.length;
@@ -36,7 +36,7 @@ export default Ember.Service.extend({
 
   instrumentNames(res,rej){
     console.log( ' instrument Names ' )
-      Ember.$.getJSON("./json/instrumentsDefault.json")
+      Ember.$.getJSON("/json/instrumentsDefault.json")
        .then(e => {
          var om = Object.keys(e)
               .map(instrument => {
@@ -54,7 +54,7 @@ export default Ember.Service.extend({
 
   main(res,rej){
     console.log( ' main options get ' )
-      Ember.$.getJSON("./json/mainDefault.json")
+      Ember.$.getJSON("/json/mainDefault.json")
         .then( e => {
           res(e)
         })
@@ -63,7 +63,7 @@ export default Ember.Service.extend({
 
 	actionNames(res,rej){
 		console.log( ' actionNames get ')
-			Ember.$.getJSON("./json/actionNamesDefault.json")
+			Ember.$.getJSON("/json/actionNamesDefault.json")
 				.then( e => {
 						res(e)
 				})
@@ -71,7 +71,7 @@ export default Ember.Service.extend({
 
   panels(res,rej){
     console.log(  ' panels get  ' )
-      Ember.$.getJSON("./json/panelsDefault.json")
+      Ember.$.getJSON("/json/panelsDefault.json")
         .then(  e => {
           var om = Object.keys(e)
               .map(hash => {
@@ -88,7 +88,7 @@ export default Ember.Service.extend({
 
   routes(res,rej){
     console.log(  ' routes get ' )
-      Ember.$.getJSON("./json/routesDefault.json")
+      Ember.$.getJSON("/json/routesDefault.json")
         .then(om => { console.log(om, "local options: routes");res(om) })
   },
 
@@ -111,7 +111,7 @@ export default Ember.Service.extend({
 		//}else if(this.get('options.couple')){
     }else{
 				console.log('local_om',om)
-      Ember.$.getJSON("./scores/"+selection+".json")
+      Ember.$.getJSON("/scores/"+selection+".json")
       	.then(om => {
 					console.log('local_om',om)
 					if(!om.length){
@@ -135,7 +135,7 @@ export default Ember.Service.extend({
     	console.log(names)
     	res( Ember.A(names) )
     }else{
-      let om = Ember.$.getJSON('./json/songsDefault.json')
+      let om = Ember.$.getJSON('/json/songsDefault.json')
             .then(e =>{
               var songs = Object.keys(e)
                                 .filter(key => e[key] ? key : false);
@@ -156,7 +156,7 @@ export default Ember.Service.extend({
           res(om)
       }else{
       console.log("chords",false)
-          om = Ember.$.getJSON('./json/chordsDefault.json')
+          om = Ember.$.getJSON('/json/chordsDefault.json')
                 .then(e => {
                   var chords = Object.keys(e)
                                      .map((key) => e[key])

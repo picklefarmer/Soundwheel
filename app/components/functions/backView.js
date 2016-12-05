@@ -25,7 +25,7 @@ export default function(a,ctx ) {
 							size = Math.ceil(1600/24),
 	            fret = new Image();
 
-				fret.src = "images/fret.jpg";
+				fret.src = "/images/fret.jpg";
 		//		console.log(width) 
 				//	fret.src = "lightning.svg";
 

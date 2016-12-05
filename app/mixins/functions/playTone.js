@@ -7,7 +7,7 @@ export default function(tone,stanza){
 			var ctx   = this.get('ctx'),
 					instrument = this.get('instrument'),
 
-					freq  = this.get('freqs').objectAt(tone),
+					freq  = this.get('freqs')[tone],
 					currentTime = ctx.context.currentTime;
 
 				ctx.gain.cancelScheduledValues(currentTime);

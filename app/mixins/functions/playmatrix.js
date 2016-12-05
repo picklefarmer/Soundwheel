@@ -48,7 +48,7 @@ obj.beat = function(beat){
 			isMoji	=	this.get('isMoji');
 
 		console.error(this.get('selected').getProperties('composition','part','measure'))
-			var time	= this.get('selected.measure.map').objectAt(beat);
+			var time	= this.get('selected.measure.map')[beat];
 
 	if(holdNote){
 		lastNotes.forEach(function(coords){
