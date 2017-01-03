@@ -112,7 +112,10 @@ export default Ember.Mixin.create(PromiseProxy,{
           _this = this;
 
         if(this.get('auth.uid')){
-            promise.then(()=>{;
+					console.log('auth.uid')
+            promise.then((e)=>{
+							console.log(e, ' panels object on auth')
+							
                 promise.reopen({
                   menuBars:["right",
                             "left",

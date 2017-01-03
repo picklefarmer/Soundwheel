@@ -64,8 +64,12 @@
 	height:312px;
 	overflow-x:	scroll;
 	overflow-y:	hidden;
+	cursor:crosshair;
 	//width:1400px;
+}
 
+.chord{
+	cursor:none;
 }
 
 .tablature{

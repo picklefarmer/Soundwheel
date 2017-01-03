@@ -13,7 +13,7 @@ console.log(this.get('song.isBeat'), 'isBeat')
 			this.set('song.partInputIndex',this.get('song.selected.compIndex'))
 		}
 		this[direction]('song.selected.compIndex')
-		console.log(this.getProperties('song.selected.part','song.selected.content','song.selected.composition'))
+		console.log(this.getProperties('song.selected.compIndex','song.selected.part','song.selected.content','song.selected.composition'))
 	}else{
 		if(ctrl && this.get('song.inputIndex')===undefined){
 			this.set('song.inputIndex',this.get('song.selected.index'))

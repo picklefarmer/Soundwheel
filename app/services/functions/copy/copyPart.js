@@ -1,8 +1,10 @@
-export default function(index,outdex,swap){
+import recompose from './../recompose';
+import reseat from './../reseatComposition';
 
-	index = this.get('song.selected.compIndex')
+export default function(compIndex,outdex,swap){
+console.log({compIndex,outdex,swap})
 	var score = this.get('song.selected.composition'),
-			output 	=	outdex!==undefined ? score.objectAt(outdex).objectAt(0) : score.objectAt(index).objectAt(0);
+			output 	=	outdex!==undefined ? score.objectAt(outdex).objectAt(0) : score.objectAt(compIndex).objectAt(0);
 
 	let instance = score.reduce(function(a,b){
 			if(b[0] === output){
@@ -18,19 +20,20 @@ export default function(index,outdex,swap){
 	
 	if(outdex !== undefined){
 		console.error(output,instance,'part')
-		let oldIndex = score.objectAt(index).objectAt(0);
+		let oldIndex = score.objectAt(compIndex).objectAt(0);
 
-		reseat.call(this,score, index, oldIndex) 
-		this.get('song.selected.composition').replace(index,1,[[output,score.objectAt(outdex).objectAt(1)]])
-		this.set('song.selected.compIndex',index)
+		reseat.call(this,score, compIndex, oldIndex) 
+		this.get('song.selected.composition').replace(compIndex,1,[[output,score.objectAt(outdex).objectAt(1)]])
+		this.set('song.selected.compIndex',compIndex)
 	
 	}else{
-		let newIndex = index+1;
+		let newIndex = compIndex+1;
 		//insert
 		score.insertAt(newIndex,[output,instance+1]);
 		if(this.get('song.onLine')){
 			let	ref	= this.get('song.user').child('songs/'+this.get('song.selected.selection'));
-			recompose.call(this,composition,ref.child('composition'),compIndex,partIndex,1)
+			ref.update({composition:this.get('song.selected.composition')})
+//			recompose.call(this,score,ref.child('composition'),compIndex,outdex,1)
 
 		}
 		this.get('song.selected.content').objectAt(output).lyrics.pushObject([])

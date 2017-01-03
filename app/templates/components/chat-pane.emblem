@@ -1,0 +1,16 @@
+ul.row
+  .column.large-4
+    .panel.panel-default
+      each song.dataArray as |messObject|
+        .panel-heading
+          img.badge.icon src=messObject.photoURL
+          h4.chatLeft: =messObject.displayName
+          /h5.chatLeft: ('roman-me' messObject.varm)
+          h3: =messObject.message
+        .panel-body
+        
+=span-me[
+  value=myValue
+  upload=(action 'messageIn' (action 'clear') target=song)
+]
+

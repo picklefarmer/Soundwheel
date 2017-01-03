@@ -7,7 +7,7 @@ import Osc 		from '../components/functions/drawOsc';
 import Chord 	from '../components/functions/drawOscArray';
 import Spec 	from '../components/functions/drawSpec';
 import Bar		from '../components/functions/drawBarGraph';
-
+import ChatPass from './functions/chatPass';
 const x = 67;
 const y = 50;
 const offset = 18;
@@ -17,6 +17,18 @@ export default Ember.Mixin.create({
   globalKeydown:Ember.inject.service(),
 
 actions:{
+  messageIn(action,message){
+    let varm = [
+      this.get('selected.compIndex'),
+      this.get('selected.index'),
+      this.get('beat')
+    ],
+    {displayName,photoURL} =  ChatPass.call(this);
+    this.get('userAtSelection').child('chat').push({displayName,photoURL,message,varm})
+      action()
+
+    console.log(message,this.get('userAtSelection'),'messageIn on actions')
+  },
   isEdit(partInstance,event){
     console.log(event,' this is of isEdit')
     event.stopPropagation()

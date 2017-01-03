@@ -16,6 +16,15 @@ const Return = function(index){
 	}
 };
 
+const evel = function(e,code,name,a,func, ...args){
+	let stat = this.get('song.'+name);
+	if(e.keyCode === code && stat !== undefined){
+		let app = [this,a,stat].concat(args);
+		func.apply(app)
+		this.set('song.'+name,undefined)
+	}
+};
+
 export default Ember.Service.extend({
 	end(e){
 		if(e){
@@ -30,24 +39,29 @@ export default Ember.Service.extend({
 				console.error('end',inputIndex,outdex,e.keyCode)	
 
 			if(this.get('song.isBeat')){
+				//evel.call(this,e,16,'beatInputIndex',beat,DupBeat,true)
 				if(e.keyCode === 16 && (beatInputIndex !== undefined)){
 					DupBeat.call(this,beat,beatInputIndex,true)
 					this.set('song.beatInputIndex',undefined)
 				}
+				//evel.call(this,e,17,'beatInputIndex',beat,DupBeat)
 				if(e.keyCode === 17 && (beatInputIndex !== undefined)){
 					DupBeat.call(this,beat,beatInputIndex)
 					this.set('song.beatInputIndex',undefined)
 				}	
 			}else if(this.get('song.isPart')){
+				//evel.call(this,e,17,'partInputIndex',partOut,Copy,false,true)
 				if(e.keyCode === 17 && (partInputIndex !== undefined)){
 					Copy.call(this,partOut,partInputIndex,false,true)
 					this.set('song.partInputIndex',undefined)
 				}	
 			}else{
+				//evel.call(this,e,16,'inputIndex',outdex,Copy,true)
 				if(e.keyCode === 16 && (inputIndex !== undefined)){
 					Copy.call(this,outdex,inputIndex,true)
 					this.set('song.inputIndex',undefined)
 				}
+				//evel.call(this,e,17,'inputIndex',outdex,Copy)
 				if(e.keyCode === 17 && (inputIndex !== undefined)){
 					Copy.call(this,outdex,inputIndex)
 					this.set('song.inputIndex',undefined)

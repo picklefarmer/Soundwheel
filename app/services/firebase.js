@@ -10,9 +10,11 @@ export default Ember.Service.extend({
 
 		base:firebase.database(),
 
-		userAtSelection:Ember.computed('user','selected.selection',function(){
+/*		userAtSelection:Ember.computed('user','selected.selection',function(){
+		console.log('user at selection', this.get('selected.selection'))	
 			return this.get('user').child('songs/'+this.get('selected.selection'))
 		}),
+		*/
 
 		user:Ember.computed('auth.uid','base',function(){
 			if(this.get('auth.uid')){
@@ -63,7 +65,16 @@ export default Ember.Service.extend({
 		routes(res,rej){
 			console.log(this.get('user'),'routes ref')
 			this.get('user').child('settings/routes')
-				.on('value',(routes)=>res(routes.val()))
+				.on('value',(routes)=>{
+					let value = routes.val();
+						console.log( ' options on firebase content.song',value)
+						if (!value ) {
+							console.log( ' options on firebase ',value ) 
+							Ember.run (this.get('auth'),this.get('auth.userNew'),'settings.routes',res ) 
+						} else{
+            	res(value)
+						}
+				})
 		},
 
     options(res,rej){
@@ -71,7 +82,14 @@ export default Ember.Service.extend({
                   .child('settings/options');
 
           root.on("value",(snapshot) => {
-            res(snapshot.val())
+						let value = snapshot.val();
+						console.log( ' options on firebase content.song',value)
+						if (!value ) {
+							console.log( ' options on firebase ',value ) 
+							Ember.run (this.get('auth'),this.get('auth.userNew'),'settings.options',res ) 
+						} else{
+            	res(snapshot.val())
+						}
          })
     },
 

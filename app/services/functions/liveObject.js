@@ -8,6 +8,8 @@ const fromObject = function(obj,length){
 
 const liveObj = Ember.Object.extend({
 		start(ref){
+			console.log( 'starting object',ref.path.o[6])
+
 			this.setProperties({
 				_map	:ref.child('/map'),
 				_notes:ref.child('/notes')
@@ -18,7 +20,7 @@ const liveObj = Ember.Object.extend({
 			return this
 		},
 		stop(){
-			console.log( this.scope, 'removing object')
+			console.log( this._map.path.o[6], 'removing object')
 			this._map.off()
 			this._notes.off()
 			return this

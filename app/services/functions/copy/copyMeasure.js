@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import reseatIndexes from './../reseatIndexes';
 
 export default function(index,outdex,swap){

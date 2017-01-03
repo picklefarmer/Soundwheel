@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+	classNames: ['menubar'],
   song:Ember.inject.service(),
   beatMask:[
     '\u2160',  

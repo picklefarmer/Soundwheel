@@ -1,11 +1,11 @@
 import Ember from 'ember';
 import Part from './copy/copyPart';
 import Measure from './copy/copyMeasure';
-
 export default function(index,outdex,swap){
-
 	if(this.get('song.isPart')){
-		Part.call(this,imdex,outdex,swap)
+		console.log({index,outdex,swap},'copy')
+		index = outdex !== undefined ? this.get('song.selected.compIndex'):index
+		Part.call(this,index,outdex,swap)
 	}else{
 		Measure.call(this,index,outdex,swap)
 	}

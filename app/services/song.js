@@ -10,6 +10,10 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 }).extend(UpdateMethods,Play,GalleryMap,Storage,{
 
   onLine:false,
+	dataArray:Ember.A([]),
+	userAtSelection:Ember.computed('onLine','user','selected.selection',function(){
+		return		this.get('user').child('songs/'+this.get('selected.selection'))
+	}),
   content:Ember.computed('onLine',{
 		get(){
 			var online = this.get('onLine')?"firebase":"local";

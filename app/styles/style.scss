@@ -34,6 +34,9 @@
 		@if ($pos == top){
 			position:absolute;
 		}
+		@if ($pos == bottom){
+			position:absolute;
+		}
 		ul {
 	  	display: none;
 	  	

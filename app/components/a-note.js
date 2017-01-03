@@ -34,10 +34,21 @@ export default Ember.Component.extend({
 		}
 	}),
   
-  type:Ember.computed('noteClass',function(){
+  type:Ember.computed('noteClass','expression',function(){
     //return this.get('noteClass')?'&#x2600;':'&#127761;';
-    return this.get('noteClass')?'\u2600':'\uD83C\uDF11';
+
+    let a = '\u2600',
+        b = '\uD83C\uDF11',
+        expression  = this.get('expression');
+    
+    if(expression){
+      a = expression.a
+      b = expression.b
+    }
+    
+    return this.get('noteClass')?a:b;
   }),
+
 	noteClass:Ember.computed('index','fret','low',{
 		get(){
       console.log('note class')

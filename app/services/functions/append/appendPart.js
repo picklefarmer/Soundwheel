@@ -1,4 +1,7 @@
+import blank from '../generateBlank';
 import blankPart from '../blankPart';
+import recompose from '../recompose';
+
 export default function(index,compIndex,composition,parts){
 
 	let ref,partIndex;
@@ -26,7 +29,8 @@ export default function(index,compIndex,composition,parts){
 				])
 
 		if(this.get('song.onLine')){
-			recompose.call(this,composition,ref.child('composition'),compIndex,partIndex,1)
+			ref.update({'composition':this.get('song.selected.composition')})
+//			recompose.call(this,composition,ref.child('composition'),compIndex,partIndex,1)
 		}
 
 

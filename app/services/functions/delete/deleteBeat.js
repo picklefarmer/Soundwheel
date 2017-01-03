@@ -1,16 +1,27 @@
-import reseatIndexes from '../reseatIndexes';
+import Ember from 'ember';
 
-export default function(index){
+export default function(beatIndex){
 
-		let part =	this.get('song.selected.part.fretboard');
-		if(this.get('song.onLine')){
-			reseatIndexes.call(this,index)
-		}else{
-			part.removeAt(index);
+		let strings		=	this.get('song.main.strings.options')+1,
+				map 			= this.get('song.selected.measure.map'),
+				theArr		=	[];
 
-			if( index !== 0){
-				this.decrementProperty('song.selected.index')
-			}
+//		map.replace(beatIndex,1,'r')
+//
+		console.error(map,'pre - map')	
+
+		for(var l = 0;l <= strings;l++){
+			theArr.push(null)	
 		}
+
+		console.error('theArr', theArr ) 
+
+    Ember.run( this.get('song') ,this.get('song.content.update'),  theArr , true )
+
+		console.error(map,'post - map')	
+
+		//.removeAt(this.get('beatIndex'),1)	
+    
+
 		
 }

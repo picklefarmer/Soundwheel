@@ -14,8 +14,12 @@ export default Ember.Service.extend({
     }),
 
 
-	userNew(base){
+	userNew(base,object,res){
 		base = this.get('song.firebase.user')
+
+		// add user photoUrl is pool ;
+		this.get('song.firebase.base').ref('leaders')
+			.update({[this.get('uid')]:this.get('photoURL')})
 
 		let Hash = Ember.RSVP.hash;
 
@@ -34,6 +38,12 @@ export default Ember.Service.extend({
     })
 		.then((hash)=>{
 			base.set(hash)
+			if(res){
+				console.log( ' hash is born ',hash.get(object) ) 
+
+				res(hash)
+
+			}	
   	})
 
 	},

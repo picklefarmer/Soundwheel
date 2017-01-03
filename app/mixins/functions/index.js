@@ -12,6 +12,7 @@ export default function(_,b){
 					if(b < 0){
 						b = length-1
 						this.decrementProperty('compIndex')
+						return this.get('part.fretboard.content.length')-1;
 					}else if(b >= length){
 						b	=	0
 						this.incrementProperty('compIndex')

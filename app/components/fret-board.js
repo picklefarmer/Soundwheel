@@ -24,7 +24,7 @@ export default Ember.Component.extend({
 	},
 
 	classNames:['tablet'],
-	classNameBindings:['verticalTab','isTutorial'],
+	classNameBindings:['verticalTab','isTutorial','song.chordSelection:chord'],
   isTutorial:Ember.computed.alias('song.isExplain'),
   
   verticalTab:Ember.computed.alias('song.verticalTab'),

@@ -2,6 +2,12 @@ $borderWidth:.15rem;
 $midnight-sea:rgba(0,0,0,0.31);
 @import "compass/css3/box-shadow";
 @import "compass/functions/lists";
+.isEditing{
+	cursor:crosshair;
+	button{
+		cursor:cell;
+	}
+}
 .inventory{
 	display:inline-block;
 	height:100%;
@@ -14,6 +20,7 @@ $midnight-sea:rgba(0,0,0,0.31);
 
 }
 .chord-stack{
+	cursor:cell;
 	outline:solid $midnight-sea 1.2rem;
 	border:groove 2rem grey;
 	position:absolute;

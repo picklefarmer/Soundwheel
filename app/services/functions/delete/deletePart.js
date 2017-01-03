@@ -12,7 +12,8 @@ export default function(index){
 		
 		if(this.get('song.onLine')){
 				let ref = this.get('song.user').child('songs/'+this.get('song.selected.selection'));
-				recompose.call(this,composition,ref.child('composition'),compIndex,index, -1)
+				ref.update({composition:this.get('song.selected.composition')})
+//				recompose.call(this,composition,ref.child('composition'),compIndex,index, -1)
 		}
 
 		this.set('song.selected.compIndex',compIndex-1)
