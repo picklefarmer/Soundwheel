@@ -9,6 +9,9 @@ module.exports = function(defaults) {
 			optional:['es6.spec.symbols'],
 			includePolyfill:true
 		},
+		SRI: {
+      enabled: false,
+    },
 			sassOptions: {
 		  	includePaths: [
 					'bower_components/bootstrap-theme-bootswatch-flatly/scss/',

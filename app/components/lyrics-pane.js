@@ -22,7 +22,7 @@ export default Ember.Component.extend({
 							console.log(index,instance,partInstance,value,`action of the
 											 	lyrics' pane`)
 
-							this.get('song.user')
+							this.get('song.group')
 								.child('songs/'+this.get('song.selected.selection')+'/parts/')
 								.child(partInstance)
 								.child('lyrics')
