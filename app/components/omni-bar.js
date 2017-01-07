@@ -1,22 +1,9 @@
 import Ember from 'ember';
-
+import Numeric from './../mixins/instances/numeric';
 export default Ember.Component.extend({
 	classNames: ['menubar'],
   song:Ember.inject.service(),
-  beatMask:[
-    '\u2160',  
-    '\u2161',  
-    '\u2162',  
-    '\u2163',  
-    '\u2164',  
-    '\u2165',  
-    '\u2166',  
-    '\u2167',  
-    '\u2168',  
-    '\u2169',  
-    '\u216a',  
-    '\u216b'
-  ],
+  beatMask:Numeric,
   left:{
 		stepLeft:			{name:"\u25c0",	type:"action"},
   },

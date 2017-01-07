@@ -10,6 +10,7 @@ export function initialize(App) {
 
  firebase.initializeApp(config);
 
+//	console.log(localStorage['firebase:authUser:AIzaSyCxvW0b58v6Nmn0FhdM-ZMWKequ4P2-tDo:[DEFAULT]'])
 
   App.inject('component:pa-nels',     'song',   'service:song')
   App.inject('component:selection-panel', 'song',   'service:song')

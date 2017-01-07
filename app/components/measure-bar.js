@@ -5,6 +5,13 @@ export default Ember.Component.extend({
     classNames:["scroll","sidebar",'measure-bar'],
     tagName:"ul",
 
+    actions:{
+      valueUp(value){
+        console.log('fire at will', value)
+        this.set('song.selected.index',value)
+        Ember.run(this.get('song'),this.get('song.playMatrix.beat'),0)
+      }
+    },
     time:Ember.computed.oneWay('controller.editScore.length'),
 
 //    attributeBindings:["dims:style"],

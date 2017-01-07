@@ -1,7 +1,9 @@
 import Ember from 'ember';
+import Numeric from './../mixins/instances/numeric';
 
 export function romanMe(params/*, hash*/) {
-  return params[0].map( num => '\\'+'u216'+num).join(':')
+  console.log(params, 'glyph')
+  return params[0].map( u => Numeric[u]).join(' ')
   //return params[0] === params[1];
 }
 

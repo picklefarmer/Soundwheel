@@ -4,14 +4,16 @@ import dataLink from '../mixins/data-link';
 const LENGTH = 4,
   displayMessage = function(val){
   let dataArray = this.get('song.dataArray');
+  let messObj = val.val();
   if(dataArray.length > LENGTH){
     dataArray.shift()
   }
-  dataArray.pushObject(val.val())
-    console.log(val.val(),this.get('dataArray'),'val from message function')
+
+  dataArray.pushObject(messObj)
+    console.log(messObj,this.get('dataArray'),'val from message function')
 };
 export default Ember.Component.extend(dataLink,{
-  classNames:['menubar'],
+  classNames:['menubar','chat-pane'],
   song:Ember.inject.service(),
 
   init(){
@@ -20,12 +22,18 @@ export default Ember.Component.extend(dataLink,{
   },
   dataArray:Ember.A([]),
   actions:{
+    goToIndex(points){
+      let [x,y,z] = points;
+      this.set('song.selected.compIndex',x)
+      this.set('song.selected.index',y)
+      this.set('song.beat',z)
+    },
     clear(){
       this.set('myValue','')
       console.log('clear the field')
     }
   },
-  myValue:'nineteen',
+  myValue:'',
   willRender(){
   let ref = this.get('ref');
     console.log('chat-pants',ref)

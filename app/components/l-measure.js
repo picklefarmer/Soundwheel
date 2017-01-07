@@ -23,11 +23,5 @@ export default Ember.Component.extend({
 		}
 	}),
 
-	click(e,f){
-		let ii = this.get('index')
-
-        //this.set('parentView.song.selected.index',ii)
-        this.set('boundValue',ii)
-	},
 
 });

@@ -26,7 +26,7 @@ export default Ember.Mixin.create({
 		
 		},get(){
 			let storage = this.get('content.fretboard');
-			storage.options.notes = "ff0"
+//			storage.options.notes = "ff0"
 //			let userSet = localStorage.songs.
 			return storage //this.get('storageName')
 		}}),
@@ -81,7 +81,10 @@ export default Ember.Mixin.create({
 					selected  = this.get('tuning.options'),
 					intervals = [],
 					indexes   = [];
-		  
+
+					console.log({'intervalsOnTuning':this,'context':this.get('content')})
+
+
 				indexes   = selected.map( e => notes.indexOf(e))
 
 				intervals = indexes.map(  (e,f)=>{

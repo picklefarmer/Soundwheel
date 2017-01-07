@@ -19,5 +19,6 @@ console.log(this.get('song.isBeat'), 'isBeat')
 			this.set('song.inputIndex',this.get('song.selected.index'))
 		}
 		this[direction]('song.selected.index')
+		Ember.run(this.get('song'),this.get('song.playMatrix.beat'),0 ) 
 	}
 }

@@ -63,7 +63,7 @@
 			border-radius:15px;
 			border:7px inset #383838;
 			@include box-shadow(inset 0px 0px 4px 4px $blend);
-			background:black;
+			background:$colorTwo;
 			@include box-shadow(rgba(0, 0, 0, 0.898438) 0px 0px 20px inset);
 			@include text-shadow(0px 1px 2px #282828);
 		    @include background-clip(text);

@@ -29,6 +29,21 @@ export default Ember.Mixin.create(PromiseProxy,{
 
 		}),
 
+		amount:Ember.computed(function(_){
+			return this.promiseFire(_)
+		}),
+    leaders:Ember.computed('user','onLine',function(_){
+      let proxy = this.promiseAsObject(_);
+			let firebaseRef = this.get('firebase.base').ref(_).on('value', up => proxy.set('content',up.val()));
+			proxy.then(()=>{
+				proxy.reopen({
+					ref:firebaseRef
+				})
+			})
+			
+      return proxy;
+    }),
+
 		main:Ember.computed('auth.uid',{
 			get(_){
 				console.log(this, this.get('promiseWithContextAsObject'),_,'main error')
@@ -107,7 +122,7 @@ export default Ember.Mixin.create(PromiseProxy,{
 
     panels:Ember.computed('auth.uid',{
       get(_){
-        console.log ( 'getting the panels object' ) 
+        console.log ( 'getting the panels object',{online:this.get('onLine')} ) 
         var promise = this.promiseWithContext(_),
           _this = this;
 
@@ -156,9 +171,10 @@ export default Ember.Mixin.create(PromiseProxy,{
   
   names:Ember.computed('onLine',{
 		get(_){
-			if(this.get('onLine')&&this.get('auth.id')){
+			if(this.get('onLine')&&this.get('auth.uid')){
 				return this.promiseWithContext(_)
 			}else{
+				console.log('get names on update-methods',{thus:this,online:this.get('onLine')})
      		return this.promise(_)
 			}
 		}

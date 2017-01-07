@@ -1,30 +1,18 @@
 import Ember from 'ember';
-
+var	checkOnline = function(group,name){
+	if(group !== 'offline'){
+//		this.set('song.isOnline',1)
+		Ember.run(this.get('song.options'),this.get('song.options.setGroup'),group)
+	}else{
+		this.set('song.isOnline',0)
+		//		this.set('song.options.pairingParam',null)
+	}
+};
 export default Ember.Route.extend({
 	song:Ember.inject.service(),
-	
 	model:function(params){
-		
-			console.log( 'init , from isOnline route model ',params)
-    
-		Ember.run(this,'checkOnline',params.isOnline,params.y)
-
-			return params
-		},
-			//			params.y = [params.y.split("")][params.x] || params.y
-		checkOnline(isOnline,name){
-			if(isOnline !== 'offline'){
-				this.set('song.isOnline',true)
-		
-				Ember.run(this.get('song.options'),this.get('song.options.setUser'),isOnline)
-
-
-			}else{
-				this.set('song.isOnline',false)
-				this.set('song.options.pairingParam',null)
-			//	this.router.replaceWith('song',{isOnline:"offline",y:name})
-					//this.set('song.isOnline',false)
-			}
-		},
-
+		console.log( 'init , from isOnline route model ',params)
+		checkOnline.call(this,params.isOnline,params.y)
+		return params
+	},
 });

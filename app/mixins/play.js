@@ -8,6 +8,7 @@ import Chord 	from '../components/functions/drawOscArray';
 import Spec 	from '../components/functions/drawSpec';
 import Bar		from '../components/functions/drawBarGraph';
 import ChatPass from './functions/chatPass';
+import Numeric  from './instances/numeric';
 const x = 67;
 const y = 50;
 const offset = 18;
@@ -23,8 +24,8 @@ actions:{
       this.get('selected.index'),
       this.get('beat')
     ],
-    {displayName,photoURL} =  ChatPass.call(this);
-    this.get('userAtSelection').child('chat').push({displayName,photoURL,message,varm})
+    {displayName,uid} =  ChatPass.call(this);
+    this.get('userAtSelection').child('chat').push({displayName,uid,message,varm})
       action()
 
     console.log(message,this.get('userAtSelection'),'messageIn on actions')

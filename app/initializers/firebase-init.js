@@ -2,24 +2,6 @@ import Ember from 'ember';
 
 export function initialize(App) {
 
-/*
- *
-"https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"
-"https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"
-"https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"
-//		"https://www.gstatic.com/firebasejs/3.6.1/firebase.js"
-
-	   var config = {
-	       apiKey: "AIzaSyCxvW0b58v6Nmn0FhdM-ZMWKequ4P2-tDo",
-         authDomain: "overlap-4468c.firebaseapp.com",
-         databaseURL: "https://overlap-4468c.firebaseio.com",
-         storageBucket: "overlap-4468c.appspot.com",
-         messagingSenderId: "359400789124"
-     };
-
-		 firebase.initializeApp(config);
-*/
-
   App.register('settings:side',Ember.Object.extend({
   	song:Ember.inject.service(),
     menuBars:["left","right","bottom","top","center","middle"],

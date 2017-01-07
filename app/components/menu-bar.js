@@ -22,7 +22,7 @@ export default Ember.Component.extend(Clock,{
 	willRender(){
 		console.error( this.get('y'), 'y')
 	},
-	isOnline:Ember.computed(function(){
+	isOnline:Ember.computed('song.onLine',function(){
 		if(this.get('song.onLine')){
 			return this.get('song.options.pairingParam')
 		}else{

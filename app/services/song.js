@@ -9,10 +9,11 @@ import UpdateMethods  from '../mixins/update-methods';
 export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 }).extend(UpdateMethods,Play,GalleryMap,Storage,{
 
-  onLine:false,
+  onLine:0,
 	dataArray:Ember.A([]),
-	userAtSelection:Ember.computed('onLine','user','selected.selection',function(){
-		return		this.get('user').child('songs/'+this.get('selected.selection'))
+	userAtSelection:Ember.computed('onLine','group','selected.selection',function(){
+		if(this.get('user'))
+		return		this.get('group').child('songs/'+this.get('selected.selection'))
 	}),
   content:Ember.computed('onLine',{
 		get(){

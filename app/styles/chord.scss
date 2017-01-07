@@ -17,7 +17,6 @@ $midnight-sea:rgba(0,0,0,0.31);
 	float:left;
 	margin:1.5rem;
 	border:6px grey groove;
-
 }
 .chord-stack{
 	cursor:cell;
@@ -25,6 +24,7 @@ $midnight-sea:rgba(0,0,0,0.31);
 	border:groove 2rem grey;
 	position:absolute;
 	height:95%;
+	padding-right:1rem;
 	overflow-y:scroll;
 }
 

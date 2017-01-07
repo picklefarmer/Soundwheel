@@ -23,6 +23,9 @@ export default Ember.Service.extend({
 			}
 		}),
 
+		leaders(res,ref){
+			this.get('base').ref('leaders').once('value', snap => res(snap.val()))
+		},
     instrumentNames(res,rej){
       console.log ( 'instrument Names Auth ' ) 
 			let objArray = [];
@@ -168,11 +171,7 @@ export default Ember.Service.extend({
 
     selected(res,rej,selection){
 			var juncture;
-			if(this.get('options.couple')){
-					juncture = this.get('base').ref(this.get('options.pairingParam'));
-			}else{
-	    		juncture	= this.get('user');
-			}
+	    		juncture	= this.get('group');
 				
 		 juncture = juncture.child('songs').child(selection)
 			 juncture
@@ -205,7 +204,7 @@ export default Ember.Service.extend({
     update(value,isRest){
           console.log("socket update",value)
      
-     var 	base	= this.get('user'),
+     var 	base	= this.get('group'),
 					beat	=	this.get('beat'),
          	index = this.get('selected.index'),
 					part	= this.get('selected.partInstance'),
@@ -247,7 +246,7 @@ export default Ember.Service.extend({
 
       }else{
         let [fret,string] = value;
-				ref.update({[string+'/'+beat+"/"]:fret})  
+				ref.update({[string+'/'+beat+"/"]:fret.toString()})  
       } 
     	this.get('playMatrix.beat').call(this,beat)
     },

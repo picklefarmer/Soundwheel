@@ -27,6 +27,7 @@
 		}
 		display:block;
 		top:0px;
+		z-index:2;
 		//width:20%;
 		height:100%;
 	}
@@ -35,7 +36,8 @@
 			position:absolute;
 		}
 		@if ($pos == bottom){
-			position:absolute;
+			position:fixed;
+			z-index:2;
 		}
 		ul {
 	  	display: none;
@@ -88,7 +90,7 @@
 
 .active{
 	background:#444 !important;
-	color:#aaa !important;
+	color:#FFA !important;
 }
 .hi {
 	color:red;
@@ -97,8 +99,8 @@
 	color:blue;
 }
 .ember-application {
-    margin:0px auto;
-	background:rgba(0,0,0,.45);
+  margin:0px auto;
+	background:$almond;
 	@include user-select(none);
 	overflow-x:hidden;	
 }

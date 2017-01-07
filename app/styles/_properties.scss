@@ -1,6 +1,15 @@
-$blend:#282828;
 
 
+
+
+
+$activeColor:#c73a27;
+$darkenColor:#9f085c;
+$blend:#afafaf;
+$colorOne:#377d5e;
+$colorTwo:#7c7d7c;
+$colorThree:#7a7a7a;
+$almond:#666;
 .right{
 	float:right;
 }
@@ -19,5 +28,3 @@ $blend:#282828;
  	 );
 	@return map-get($pos-map, $pos);
 }
-
-

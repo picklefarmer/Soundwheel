@@ -2,9 +2,9 @@
   li
     div
       span Songs
-      if song.names.isFulfilled
+      /if song.names.isFulfilled
         select-me proxy=true selection=song.selected content=song.names
-      else
+      /else
         select-me
 
 

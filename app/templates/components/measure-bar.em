@@ -5,5 +5,5 @@ if song.selected.isFulfilled
       highlight=("is-classy" measure song.inputIndex)
       measure=(get beatMask (concat '' measure))
       index=measure
-      boundValue=song.selected.index
+      click=(action 'valueUp' measure)
     ]

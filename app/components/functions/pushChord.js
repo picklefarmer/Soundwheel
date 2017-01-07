@@ -23,10 +23,6 @@ export default function(e){
 
 	    console.log(theArr.toString(),measure)
 
-	    //theArr = theArr.map( ( e , f ) => e ? e : ( measure[f] || 0 )) 
-
-	    console.log(theArr.toString(),measure)
-
 	    console.log('is firing',arr)
 
 	    Ember.run( this.get('song') ,this.get('song.content.update'),  theArr  )
