@@ -12,8 +12,8 @@ if chordEdit
           /&#x2600;
 else
   h1: =clock
-  .chord-stack
-    if song.chords.isFulfilled
+  if song.chords.isFulfilled
+    =scale-vertical class='chord-stack' amount=song.chords.length
       each song.chords as |chord|
         li class="{{if verticalTab 'vertical-dash'}} {{if (arr-comp selection chord) 'match'}}"
           ar-peg chord=chord action="selector"

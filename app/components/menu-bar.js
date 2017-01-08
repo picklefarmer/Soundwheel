@@ -2,10 +2,14 @@ import Ember from 'ember';
 import Clock from '../mixins/clock';
 
 export default Ember.Component.extend(Clock,{
-//	classNameBindings:['col-lg-12'],
+	classNames:['menu-bar'],
 //    settings:Em.inject.service(),
   song:Ember.inject.service(),
   icon:'\uD83D\uDD61',
+	titleTask:Ember.computed('song.selected.selection','song.barOverlay',function(){
+		let barNow = this.get('song.barOverlay');
+		return barNow || this.get('song.selected.selection')
+	}),
 	menubar:"menubar",
 	barVisible:false,
 	sidebar:"sidebar",

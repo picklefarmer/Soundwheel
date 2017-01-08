@@ -4,5 +4,6 @@ each-in buttons as |name desc|
     desc=desc.name
     name=name
     song=song
+    toggle=(get song name)
     action=(action name target=song)
   ]

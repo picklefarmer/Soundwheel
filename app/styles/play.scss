@@ -38,11 +38,12 @@
 		border:none;
 	}
 	option{
-		background:black;
-		overflow:auto;
+    width:90%;
+		overflow:hidden;
 		color: white;
-
+    background:$darkenColor;
 	}
+
   button{
   //  margin:.25rem;
     font-family:monospace;

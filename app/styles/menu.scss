@@ -33,13 +33,17 @@
 .is-inline{
   button{
     background:none;
+		box-shadow:0 0 .7rem .1rem;
   }
+	margin:-.5rem 0 !important;
+	vertical-align:middle;
 	display:inline-block;
 	border:none !important;
 }
 
 .menubar{
 
+	//	outline: 6px solid $panelOverlay;
 	background: $blend;
 	display:block;
 	width:100%;

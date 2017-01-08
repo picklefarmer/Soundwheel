@@ -2,7 +2,6 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
 		classNames:['is-inline'],
-    tagName:'span',
 		song:Ember.inject.service(),
 		graphics:[
 			{"name":"verticalTab",	label:"\uD83D\uDCA2" 						},

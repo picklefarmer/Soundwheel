@@ -9,6 +9,17 @@ const depth = {
 		3:"groupAtSelection"
 };
 
+
+/*
+ 
+	 user chords, chat
+	 group chords, chat
+	 song chord, chat
+ 
+ 
+ 
+ */
+
 export default Ember.Service.extend({
 
   verticalTab:false,

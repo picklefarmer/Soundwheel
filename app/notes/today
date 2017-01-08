@@ -1,3 +1,7 @@
+do map on pushChord / 
+					pushNote
+\do delete 
+
 fizz, double load from /local->auth/
 prepare rhythm-bar for instantiating strum patterns
 

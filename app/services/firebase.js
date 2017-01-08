@@ -97,9 +97,9 @@ export default Ember.Service.extend({
     },
 
     updateChords(update){
-      console.log ( ' observation got _2' )
+      console.log (update,this,this.get('firebase'), ' observation got _2' )
 
-      this.get('auth.user')
+      this.get('group').child('chords')
           .update(update,()=>{
             console.log('chords saved online')
           })
@@ -252,7 +252,8 @@ export default Ember.Service.extend({
     },
 
  chords(res,rej){
-	 this.get('user').child('chords')
+	 console.log(' firebase_chords' , "")
+	 this.get('group').child('chords')
   	 .on('value',(chords) => res(chords.val()))
  },
 

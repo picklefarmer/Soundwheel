@@ -1,12 +1,15 @@
-$middlegrey:#ccccaa;
-$textcolor:#112212;
 @import "compass/css3/box-shadow";
 @import "compass/css3/text-shadow";
 @import "compass/css3/background-clip";
+@import "properties";
+
 
 .chat-pane{
 	z-index:2;
+	transform:scale(.8);
+	margin:-5rem 0;
 }
+
 .chatLeft{
   float:left;
 	margin-top: 1.5rem;

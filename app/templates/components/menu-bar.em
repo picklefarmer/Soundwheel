@@ -4,7 +4,7 @@ ul class=menubar
     // &#x2609;
   if song.selected.isFulfilled
     li: h1 &#x2637; 
-    li: h1: =song.selected.selection
+    li: h1: =titleTask 
     li: h1 &#x2637; 
   if barVisible
     if song.routes.isFulfilled
@@ -20,10 +20,10 @@ ul class=menubar
         li class="{{if (e-q isActive.option path) hit}}":  link-to path (concat "isOnline.song." path ) isOnline song.selected.selection tagName="div"
       li: h1 &#x2637;
       li: =points-pane 
-      li: =play-bar playbar=true
       /each songToggles as | bool |
         =toggle-button name=bool bool=(get song bool)
           =bool
-      li: =clock
   
+unless barVisible
+  ul.menubar: =play-bar playbar=true tagName="li"
 

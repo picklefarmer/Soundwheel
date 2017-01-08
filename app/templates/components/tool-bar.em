@@ -1,9 +1,20 @@
 if song.panels.isFulfilled
   each song.panels as |panel|
     if (e-q panel.options 'middle')
-      |<div class='{{panel.options}}Full {{if song.options.verticalTab "verticalTab" }} {{if panel.enabled "autohide"}}'>{{component panel.name}}</div>
+      =hover-label [
+        class=(concat panel.options 'Full')
+        autohide=panel.enabled 
+        vertcalTab=song.options.verticalTab
+        mouseEnter=(action 'overLabel' panel.name target=song)
+        mouseLeave=(action 'outLabel' target=song)
+        ]
+        component panel.name
     else
-      |<div class='{{panel.options}}Full {{if panel.enabled "autohide"}}'>{{component panel.name}}</div>
-      /if panel.enabled
-        |<div class='{{panel.options}}Full'>{{component panel.name}}</div>
-
+      =hover-label [
+        class=(concat panel.options 'Full')
+        autohide=panel.enabled
+        bound=song.barNow
+        mouseEnter=(action 'overLabel' panel.name target=song)
+        mouseLeave=(action 'outLabel' target=song)
+        ]
+        component panel.name

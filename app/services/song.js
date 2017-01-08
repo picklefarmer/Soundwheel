@@ -97,7 +97,8 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 		measure	
 	    index
   	
-  */ 
+  */
+    play:true, 
     pause:false,
 		division:8,
     cacheNotes:[[]],

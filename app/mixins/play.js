@@ -18,6 +18,12 @@ export default Ember.Mixin.create({
   globalKeydown:Ember.inject.service(),
 
 actions:{
+  overLabel(name){
+    this.set('barOverlay',name)
+  },
+  outLabel(){
+    this.set('barOverlay',null)
+  },
   messageIn(action,message){
     let varm = [
       this.get('selected.compIndex'),
@@ -127,8 +133,7 @@ console.log('isKit',this.get('isKit'))
 		}
 	},	
 	play(){
-//			console.log( 'play ' ,this.get('song.pause')) 
-	    
+    this.toggleProperty('play')
 			if(this.toggleProperty('pause')){
 				Ember.run.next(this,'clock')
 			}
