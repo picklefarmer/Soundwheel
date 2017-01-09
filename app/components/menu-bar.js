@@ -6,9 +6,8 @@ export default Ember.Component.extend(Clock,{
 //    settings:Em.inject.service(),
   song:Ember.inject.service(),
   icon:'\uD83D\uDD61',
-	titleTask:Ember.computed('song.selected.selection','song.barOverlay',function(){
-		let barNow = this.get('song.barOverlay');
-		return barNow || this.get('song.selected.selection')
+	titleTask:Ember.computed('song.selected.selection',function(){
+		return this.get('song.selected.selection')
 	}),
 	menubar:"menubar",
 	barVisible:false,

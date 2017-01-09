@@ -12,6 +12,10 @@ export default Ember.Mixin.create(PromiseProxy,{
     auth:Ember.inject.service(),
 		storageName:'songs',
 
+		tipJar:Ember.computed(function(_){
+			return this.promiseLocal(_)
+		}),
+
 		instrument:Ember.computed({
 
 			get(){

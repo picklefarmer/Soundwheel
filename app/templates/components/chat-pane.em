@@ -9,7 +9,8 @@ ul.row
             .chatLeft.numeric{action 'goToIndex' messObject.varm}: span {{roman-me messObject.varm}}
             h3.messageChat: =messObject.message
           .panel-body
-        
+=tool-tip name=song.barOverlay
+  =song.barOverlay
 =span-me[
   value=myValue
   upload=(action 'messageIn' (action 'clear') target=song)

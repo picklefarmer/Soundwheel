@@ -5,4 +5,6 @@ each graphics as |graphic|
     name=graphic.name
     desc=graphic.label
     song=song
+    mouseEnter=(action 'overLabel' graphic.name target=song)
+    mouseLeave=(action 'outLabel' target=song)
   ]

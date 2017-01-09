@@ -5,6 +5,7 @@
     background:$darkenColor;
     border-radius:1rem;
     margin:  .5rem 1rem;
+		justify-content:center;
   }
   li{
     background:$middlegrey;
@@ -14,8 +15,11 @@
     border-color: transparent;
     outline:.5rem solid $panelOverlay;
     outline-offset: -0.3rem;
-
+		&:last-child{
+			justify-content:right;
+		}
   }
+	
 }
 
 

@@ -3,6 +3,11 @@ import EnvelopBeat from './functions/envelopBeat';
 import SustainBeat from './functions/sustainBeat';
 
 export default Ember.Service.extend({
+	tipJar(res,rej,date){
+		console.log( 'getting tipJar', date)
+		Ember.$.getJSON('./tipJar/main.json')
+			.then( om => res(om))
+	},
 	init(){
 		console.log('init local')
 	},

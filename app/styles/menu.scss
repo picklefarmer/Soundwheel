@@ -7,6 +7,12 @@
 @import "compass/css3/background-clip";
 @import "compass/css3/appearance";
 
+.tool-tip{
+	font-size: 90px;
+	background: $middlegrey;
+	@include box-shadow(inset 0px 0px 4px 4px $blend);
+}
+
 .reverse{
   label{
     transform: scaleX(-1)
@@ -56,7 +62,7 @@
 	h1{
 		background:#333;
 		color: #444;
-		margin:0px;	
+		margin:0px;
 	}
 	li{
 		padding:none;
@@ -75,7 +81,7 @@
 			font-size:20px;
 			padding:6px;
 		   	text-align:center;
-			vertical-align:middle;	
+			vertical-align:middle;
 		    color: transparent;
 		}
 	}
@@ -92,4 +98,3 @@
 		border:black 2px solid;
 }
 */
-

@@ -1,0 +1,13 @@
+{
+  "sustain":{
+    "name":"Sustain",
+    "desc":"Notes carry until next note or rest"
+  },
+  "isConvolver":{
+    "name":"Reverb",
+    "desc":"Applies reverb to instrument(s)"
+  }
+
+
+
+}

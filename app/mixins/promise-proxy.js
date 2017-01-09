@@ -5,6 +5,13 @@ const RsvpO = Ember.ObjectProxy.extend(Ember.PromiseProxyMixin);
 
 export default Ember.Mixin.create({
 
+		promiseLocal(method){
+			console.log('local',method)
+			var promise = new Ember.RSVP.Promise((res,rej) =>{
+				Ember.run(this,this.get('local.'+method),res,rej,new Date())
+			});
+			return RsvpO.create({promise})
+		},
 		promiseFire(method){
 			var ref =	this.get('firebase.base').ref(method),
 					promise = new Ember.RSVP.Promise((res,rej) =>{
