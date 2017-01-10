@@ -47,10 +47,15 @@
 	border:none !important;
 }
 
+@font-face {
+  font-family: 'led_sas';
+  src: url('../typography/VT323-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
 .menubar{
 
 	//	outline: 6px solid $panelOverlay;
 	background: $blend;
+  font-family:'led_sas';
 	display:block;
 	width:100%;
 	margin:0px;
@@ -58,6 +63,7 @@
 	position:relative;
 	top:0px;
 	width:100%;
+  @include lineHeight(); 
 	border-bottom:2px solid grey;
 	h1{
 		background:#333;

@@ -40,6 +40,14 @@ export default Ember.Component.extend({
 
 	didInsertElement(){
 		this.set('options.fretboard',this.get('element'))
+		Ember.$(window).on('resize', e => Ember.run.debounce(this.get('song'),
+			function(e){
+				this.set('docHeight',Ember.$(document.body).height())
+					//console.log('e',e,document.body.scrollHeight)
+					
+				//this.set('docHeight' , 
+				},e,150))
+
    	Ember.$(document).off('keydown')
    	Ember.$(document).off('keyup')
 		Ember.$(document).keyup(e => Ember.run(this,this.get('globalKeydown.end'),e))

@@ -59,7 +59,7 @@
 	$opposite:opposite($pos);
 	.#{$pos}Full {
     	@include fullBar($pos);
-		border-#{$opposite}:6px solid #ddd;
+		border-#{$opposite}:6px solid $algebra;
 		//background-image: url('/images/#{$animal}.png');
   	}
 }
@@ -69,7 +69,12 @@
 		background:black;
 	}
 }
-
+.wait{
+  cursor:wait;
+}
+.dino{
+  cursor:url('./../images/dino.cur');
+}
 .toolbar{
 	//overflow-y:hidden;
 	//height:100%;
@@ -85,7 +90,7 @@
 	width:30px;
 	height:30px;
 	margin:5px;
-	border: 1px solid white;
+	border: 1px solid $algebra;
 }
 
 .active{

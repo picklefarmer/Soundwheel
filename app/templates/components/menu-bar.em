@@ -1,6 +1,6 @@
 ul class=menubar
   li{action 'click'}
-    h1: =clock
+    h1.dino: =clock
     // &#x2609;
   if song.selected.isFulfilled
     li: h1 &#x2637; 
