@@ -4,6 +4,7 @@ export default Ember.Component.extend({
  	name:null,
 	tagName:'canvas',
 	classNames:['tablature'],
+	classNameBindings:['song.chordSelection:chord'],
 	attributeBindings:['id',"height","width"], //STYLE
 	song:Ember.inject.service(),
 	options:Ember.inject.service(),

@@ -5,6 +5,10 @@
 
 
 .chat-pane{
+	ul{
+		overflow-y:scroll;
+		height:26rem;
+	}
 	z-index:2;
 	transform:scale(.8);
 	margin:-5rem 0;

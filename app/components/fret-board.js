@@ -24,7 +24,7 @@ export default Ember.Component.extend({
 	},
 
 	classNames:['tablet'],
-	classNameBindings:['verticalTab','isTutorial','song.chordSelection:chord'],
+	classNameBindings:['verticalTab','isTutorial'],
   isTutorial:Ember.computed.alias('song.isExplain'),
   
   verticalTab:Ember.computed.alias('song.verticalTab'),
@@ -39,14 +39,8 @@ export default Ember.Component.extend({
 	volume:	0.25,
 
 	didInsertElement(){
-		this.set('options.fretboard',this.get('element'))
-		Ember.$(window).on('resize', e => Ember.run.debounce(this.get('song'),
-			function(e){
-				this.set('docHeight',Ember.$(document.body).height())
-					//console.log('e',e,document.body.scrollHeight)
-					
-				//this.set('docHeight' , 
-				},e,150))
+		//this.set('options.fretboard',this.get('element'))
+///		Ember.$(window).on('resize', e => Ember.run.debounce(this.get('song'),function(e){this.set('docHeight',Ember.$(document.body).height())//console.log('e',e,document.body.scrollHeight)//this.set('docHeight' , },e,150))
 
    	Ember.$(document).off('keydown')
    	Ember.$(document).off('keyup')
@@ -77,7 +71,7 @@ export default Ember.Component.extend({
 	}),
 	
   chordOverlay(e){
-		Ember.run.throttle(this,'chordHover',e,2)
+		Ember.run(this,'chordHover',e)
 	},
 	
 	click(e){

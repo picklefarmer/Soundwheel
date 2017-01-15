@@ -3,7 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
 	tagName:"table",
-	classNameBindings:["isEditing"],
+  classNames:['vertical-align'],
+	classNameBindings:["isEditing","verticalTab:vertical-dash"],
 	isEditing:false,
 	chordNotes:Ember.computed.filter('chord',function(e){if(e){return true}}),
 	low:Ember.computed.min('chordNotes'),

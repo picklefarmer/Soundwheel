@@ -10,7 +10,8 @@ export default Ember.Component.extend({
 			{"name":"isToneToHue",	label:'\u0beb',	class:'reverse'	},
 			{"name":"isFullScreen",	label:'O'												},
 			{"name":"onLine",				label:'\uD83C\uDF75'						},
-			{"name":"isExplain",		label:'\u2754'									}
+			{"name":"isExplain",		label:'\u2754'									},
+			{"name":"isToolTip",		label:'\uD83D\uDECE'						}
 		]
 //      areFrets:"F"
 //			areStrings:"S",

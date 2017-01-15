@@ -1,3 +1,6 @@
-menu-bar currentPath=this.currentPath y=this
+menu-bar [
+  currentPath=this.currentPath
+  y=this
+]
 
 outlet

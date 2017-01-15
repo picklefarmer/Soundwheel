@@ -1,2 +1,3 @@
 fret-board
-tool-bar updateUrl="updateUrl"
+if song.panels.isFulfilled
+  tool-bar source=song.panels updateUrl="updateUrl"

@@ -12,21 +12,26 @@
 	#{$pos}:0px;
 	position:fixed;
 	text-align:center;
-	background:#aaa;
+	background:middleyellow;//#aaa;
 	@if ($pos == top) or ($pos == bottom) {
 		left:0px;
 		@if ($pos == top){
 			position:relative;
 		}
 		display:inline-block;
-		width:100%;		
+		width:100%;
 	//	height:10%;
 	}@else{
+		@if ($pos == left){
+			direction:rtl;
+		}
 		li{
 			display:block;
 		}
 		display:block;
 		top:0px;
+		overflow-y: scroll;
+		overflow-x: hidden;
 		z-index:2;
 		//width:20%;
 		height:100%;
@@ -38,18 +43,19 @@
 		@if ($pos == bottom){
 			position:fixed;
 			z-index:2;
+			transition:all 1s;
 		}
-		ul {
+
+		ul,.chat-pane {
 	  	display: none;
-	  	
 		}
-    
 		//background: green;
-    
+
 		&:hover {
-	  	ul {
+	  	.chat-pane,ul {
 	  		display: inherit;
 	  	}
+
 			background: $panelOverlay;
     }
   }
@@ -66,7 +72,7 @@
 .middleFull {
 	text-align:center;
 	&.verticalTab{
-		background:black;
+		background:#3498db;
 	}
 }
 .wait{
@@ -79,7 +85,9 @@
 	//overflow-y:hidden;
 	//height:100%;
 }
-
+textarea:focus, input:focus{
+    outline: none;
+}
 .backGround{
 	position:absolute;
 	bottom:0px;
@@ -99,7 +107,7 @@
 }
 .hi {
 	color:red;
-} 
+}
 .lo {
 	color:blue;
 }
@@ -107,7 +115,7 @@
   margin:0px auto;
 	background:$almond;
 	@include user-select(none);
-	overflow-x:hidden;	
+	overflow-x:hidden;
 }
 .noteClass *{
 	background:green;
@@ -126,10 +134,9 @@
 }
 .outer {
 	border:4px double #666666;
-    padding:3%;	
+    padding:3%;
 	padding-top:12px;
 	border-radius:64px;
 	@include box-shadow(0px 0px 4px 4px #282828);
-	background-image:url("pat.png");	
+	background-image:url("pat.png");
 }
-

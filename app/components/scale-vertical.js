@@ -4,15 +4,15 @@ import Ember from 'ember';
 
 const gearic 			= function(){
 		let amount 		= this.get('amount'),
-				f					=	.005288,
-				vertical	=	this.get('song.docHeight')-128,
-				portion		=	1-f * (vertical/amount) ,
+				vertical	=	this.get('song.docHeight'),
+				f					=	(1080 -vertical)/1000,
+				portion		=	f ,
 				heel			=	-portion;
 
 			console.log( 'style_attribute', amount, portion)
 		if(vertical){
 
-			return `transform:scale(${portion}) translateY(${heel}) translateX(${heel}rem)`;
+			return `-webkit-transform-origin: top left;transform:scale(${portion})`;
 		}
 };
 
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
 	song:Ember.inject.service(),
   willRender(){
   },
-	style:Ember.computed('amount','song.docHeight',gearic)
+	//	style:Ember.computed('amount','song.docHeight',gearic)
 		
 		
 		

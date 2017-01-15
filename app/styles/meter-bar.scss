@@ -35,16 +35,29 @@
 .measure-bar{
 	li div{
  		width:8rem;
-		
+
 	}
 
 }
 .big-me{
-//  vertical-align:super;
- li div{
+  vertical-align:super;
 
-   font-size:4rem;
-   vertical-align:super;
+	li button{
+
+		line-height: 192rem;
+	}
+	li div{
+		//background:$coldFeet;
+
+		background-color: black;
+  	color: transparent;
+		text-shadow: .2rem .2rem 0px rgba(255,255,255,0.5);
+  	-webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+   	font-size:4rem;
+   	vertical-align:super;
+
  }
 }
 
@@ -53,7 +66,7 @@
 		height: 160px;
 		padding:none;
 		position:relative;
-		background:#444;
+		background:$coldFeet;
 }
 
 .note{
@@ -74,12 +87,17 @@
 	button{
 		background:inherit;
 		color:inherit;
+
 		hover:{
 			background:blue;
 		}
 	}
-	color:orange;
-	background-color:white !important;
+	div{
+		background:red;
+		box-shadow:none !important;
+	}
+	color:$coldFeet;
+	background:white;
 	display:inline-block;
-	border-radius:16px;	
+	border-radius:16px;
 }

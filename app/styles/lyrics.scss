@@ -1,4 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Crimson+Text);
+
+.vertical-text{
+	transform:rotate(90deg);
+	display:table-cell;
+	vertical-align: middle;
+	h1{
+		margin:4rem 0;
+	}
+	//transform-origin:left top 0;
+}
 .spritz{
 	position:relative;
 	margin:0px;
@@ -20,14 +30,17 @@
 input.span-me:focus{
 	background:cyan;
 }
+.lyrics{
+	background:$secondColor;
+}
 .span-me{
 	font-family:"Crimson Text", serif;
 	font-size: 25px;
 	text-align:center;
-	background:white;
+	background:$coldFeet;//white;
 	border:none;
 	padding:12px;
-	width:50%;
+	//width:50%;
 }
 
 .field{
@@ -35,5 +48,3 @@ input.span-me:focus{
 	font-size: 25px;
 	text-align:center;
 }
-
-

@@ -9,12 +9,7 @@
 	border-radius:30px 30px 0px 0px;
 	@include box-shadow(inset 0px 0px 20px rgba(0,0,0,0.9));
 }
-.inline-block{
-	display:inline-block;
-}
-.float-right{
-	float:right;
-}
+
 
 select{
 	text-align:center;
@@ -56,8 +51,8 @@ table{
 input{
 	//text-align:center;
 	//display:inline-block;
-	width:46px;
-	height:44px;
+	width:$chordScale*2;
+	height:$chordScale*2;
 	//border:7px solid #383838;
 	//border-radius:15px;
 	//@include box-shadow(0px 0px 5px 5px #222222);

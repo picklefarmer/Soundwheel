@@ -19,10 +19,14 @@ export default Ember.Mixin.create({
 
 actions:{
   overLabel(name){
-    this.set('barOverlay',name)
+    if(this.get('isToolTip')){
+      this.set('barOverlay',name)
+    }
   },
   outLabel(){
-    this.set('barOverlay',null)
+    if(this.get('isToolTip')){
+      this.set('barOverlay',null)
+    }
   },
   messageIn(action,message){
     let varm = [

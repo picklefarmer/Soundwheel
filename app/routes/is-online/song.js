@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const isAutoplay = true;
 var DEBUG;
 
 export default Ember.Route.extend({
@@ -14,7 +15,7 @@ export default Ember.Route.extend({
 			return params
 		},
 		//			params.y = [params.y.split("")][params.x] || params.y
-    isAutoplay:true,
+    isAutoplay,
 
 		autoplay(songName){
 

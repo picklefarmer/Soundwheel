@@ -16,7 +16,8 @@ module.exports = function(defaults) {
 		  	includePaths: [
 					'bower_components/bootstrap-theme-bootswatch-flatly/scss/',
 		      'bower_components/foundation/scss',
-					'node_modules/compass-mixins/lib/'
+					'node_modules/compass-mixins/lib/',
+					'public/typography/'
 
 				]
 		},

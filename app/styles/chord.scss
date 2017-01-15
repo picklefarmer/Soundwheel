@@ -4,11 +4,19 @@ $midnight-sea:rgba(0,0,0,0.31);
 @import "compass/functions/lists";
 @import 'properties';
 
-.isEditing{
+@mixin calc($property,$expression){
+	#{$property}: #{$expression};
+
+}
+.is-editing{
 	cursor:crosshair;
 	button{
 		cursor:cell;
 	}
+	background:$darkenColor;//rgba(121, 136, 145, 0.66)
+}
+.chord-edit{
+	background: $secondColor !important;
 }
 .inventory{
 	display:inline-block;
@@ -24,29 +32,45 @@ $midnight-sea:rgba(0,0,0,0.31);
 	cursor:cell;
 	outline:solid $midnight-sea 1.2rem;
 	border:groove 2rem grey;
-	position:absolute;
-	margin:0rem -2rem;
+	//position:absolute;
+	margin:0rem -1rem;
 	//height:95%;
-	padding-right:1rem;
+	//padding-right:1rem;
 	//overflow-y:scroll;
 }
 
 .chordBank{
+	overflow:hidden;
   li{
     margin:$borderWidth;
     outline:none;
   }
 	position:relative;
-	background:#aaa;
+	background:$panelOverlay;
 	margin:0px;
+
 	table{
+
 		border-collapse:separate;
+		border-radius: $chordScale/2;
+
 		.hit{
-			color:$goldArrow;	
+			color:$goldArrow;
+			border:inset $chordScale/2 #949494 ;//$goldArrow;
+			background: $goldArrow ;
+		}
+		td{
+			line-height: $chordScale;
+			font-size: $chordScale;
+			//box-shadow:1px 1px 4px 5px yellow;
+			color:$coldFeet;
+			border: inset $chordScale/3 $coldFeet;
+			background:cornsilk;
 		}
 		background: $coldFeet;
-		border:14px groove grey;
-		margin:2px;
+		//border:1rem solid transparent;
+		outline:1rem solid $midnight-sea;
+		margin:1.5rem;
 		line-height:1rem;
 	}
 }
@@ -54,15 +78,15 @@ $midnight-sea:rgba(0,0,0,0.31);
 .chordbtn button{
 	color:inherit;
 	background:rgba(0,0,0,.4);
-	font-size:22px;	
+	font-size:22px;
   margin:0px;
 	//  padding:0px 6px;
-} 
+}
 
 .chordbtn div{
 	background:blue;
 	color:white;
-	font-size:46px;	
+	font-size:46px;
 }
 
 .chordedit{
@@ -75,8 +99,10 @@ $midnight-sea:rgba(0,0,0,0.31);
 }
 .match{
   @include box-shadow( rgba(0,0,0,0.75) 0px 0px 6px 4px);
+
   margin:0 !important;
-	border:$borderWidth solid cyan;
+  border-radius:$chordScale;
+  border:$borderWidth solid cyan;
 }
 
 /*
@@ -90,5 +116,3 @@ $midnight-sea:rgba(0,0,0,0.31);
 
 }
 */
-
-

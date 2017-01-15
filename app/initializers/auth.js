@@ -8,10 +8,16 @@ export function initialize(App) {
       type = isLogged ? "auth" : "side";
 
   console.log( 'post init auth' , isLogged)
-
+  App.register('panels:chord',Ember.Object.extend({
+    list:[
+      { "name":"chat-pane","options":"bottom","enabled":true}
+    ]
+  }))
   App.inject('route:song'   ,'settings', `settings:${type}`)
 	console.log( 'pre init song to route service')
-	App.inject('route:song', 'song', `service:song`)
+	App.inject('controller:is-online.song.chord', 'panels','panels:chord') 
+	App.inject('controller:is-online.song.lyrics', 'panels','panels:chord') 
+	App.inject('controller:is-online.song.edit', 'song', `service:song`)
 }
 
 export default {

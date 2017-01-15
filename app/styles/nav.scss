@@ -1,6 +1,8 @@
 @import 'properties';
 
 .menu-bar{
+	margin:1rem 0;
+
   ul{
     background:$darkenColor;
     border-radius:1rem;
@@ -9,17 +11,17 @@
   }
   li{
     background:$middlegrey;
-    border: solid;
+    border: groove;
     margin:0 .3rem;
     border-width: 1rem 0;
-    border-color: transparent;
+    border-color: rgba(32, 127, 138, 0.27);
     outline:.5rem solid $panelOverlay;
     outline-offset: -0.3rem;
 		&:last-child{
 			justify-content:right;
 		}
   }
-	
+
 }
 
 
@@ -37,7 +39,7 @@
 	padding-left:12px;
 }
 .nav label{
-	
+
 }
 .nav div{
 	//width:60%;
@@ -55,4 +57,3 @@
 	//padding:3px;
 	position:relative;
 }
-

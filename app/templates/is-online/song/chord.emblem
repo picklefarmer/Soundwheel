@@ -1,4 +1,4 @@
-.row style="background:white"
-  .column.large-12.large-centered
-    chord-dash chordEdit=true
-    chord-dash
+chord-dash chordEdit=true
+chord-dash
+
+tool-bar source=panels.list

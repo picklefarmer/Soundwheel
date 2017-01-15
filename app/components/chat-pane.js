@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import dataLink from '../mixins/data-link';
 
-const LENGTH = 4,
+const LENGTH = 6,
   displayMessage = function(val){
   let dataArray = this.get('song.dataArray');
   let messObj = val.val();
@@ -38,7 +38,13 @@ export default Ember.Component.extend(dataLink,{
   let ref = this.get('ref');
     console.log('chat-pants',ref)
    if( !ref ){
-     ref = this.get('song.userAtSelection').child('chat');
+     ref = this.get('song.userAtSelection');
+     
+     if(ref){
+       ref = ref.child('chat');
+     }else{
+      return
+     }
  
      this.set('ref',ref)
        .limitToLast(LENGTH)

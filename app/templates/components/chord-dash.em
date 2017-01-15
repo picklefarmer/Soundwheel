@@ -1,15 +1,19 @@
 if chordEdit
   if isEditing
-    li
-      ul.chord-panel.list-group.panel-body
-        each-in acts as |act name|
+    
+      ul.menu-bar.playbar.vertical-align.foreground.float-left
+        /chord-panel.list-group.panel-body
+        each-in acts as |act bit|
           li.list-group-item
-            button{action act}: =name
+            button{action act} 
+              =bit.emoji
+              div: =bit.name
 
       if selected
-        ar-peg ableBody=true class=(if verticalTab 'vertical-dash') isEditing="isEditing" higher=this click=null chord=selected as |string fret type|
-          button{action "toggleSelected" string fret}: =type
-          /&#x2600;
+        .horizontal-align
+          ar-peg ableBody=true verticalTab=verticalTab isEditing=true higher=this click=null chord=selected as |string fret type|
+            button{action "toggleSelected" string fret}: h1: =type
+            /&#x2600;
 else
   h1: =clock
   if song.chords.isFulfilled
