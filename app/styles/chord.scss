@@ -16,7 +16,7 @@ $midnight-sea:rgba(0,0,0,0.31);
 	background:$darkenColor;//rgba(121, 136, 145, 0.66)
 }
 .chord-edit{
-	background: $secondColor !important;
+	background: $secondColor;// !important;
 }
 .inventory{
 	display:inline-block;
@@ -29,6 +29,9 @@ $midnight-sea:rgba(0,0,0,0.31);
 	border:6px grey groove;
 }
 .chord-stack{
+	div li{
+		display:inline-block;
+	}
 	cursor:cell;
 	outline:solid $midnight-sea 1.2rem;
 	border:groove 2rem grey;

@@ -2,8 +2,10 @@
 html, body{
 	width: 100%;
   height: 100%;
+	margin-top: -2rem;
+	transform: scale(50%);
+	image-rendering:pixelated;
 	//overflow-y:hidden;
-
 }
 .ember-text-field{
 	width:100%;
@@ -37,10 +39,11 @@ body{
 }
 .displayTable{
 	display:table;
-	background:$middleyellow;
+	background:$darkenColor;//$middleyellow;
 	border-bottom:$middleblue 4px solid;
 	div{
 		display:table-cell;
+		vertical-align: middle;
 	}
 }
 .float-right{
@@ -58,5 +61,7 @@ body{
 }
 button:focus{
 	outline:none;
-
+}
+.scroll{
+	overflow-y: scroll;
 }

@@ -1,13 +1,17 @@
 @import url(http://fonts.googleapis.com/css?family=Crimson+Text);
 
 .vertical-text{
-	transform:rotate(90deg);
+	//transform:rotate(90deg);
 	display:table-cell;
-	vertical-align: middle;
+	//vertical-align: middle;
 	h1{
 		margin:4rem 0;
+		writing-mode: tb-rl;
 	}
 	//transform-origin:left top 0;
+}
+.lyrics-pane{
+	background: $middleblue;
 }
 .spritz{
 	position:relative;

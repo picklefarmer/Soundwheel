@@ -19,6 +19,8 @@
 .playbar {
 	margin-top:1rem;
 	border-width:1rem .5rem !important;
+	border: 2rem inset #8e8b83 !important;
+	outline: .5rem groove #c4ab7b;
 	div{
 		display:inline-block;
 		vertical-align:middle;

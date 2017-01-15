@@ -23,7 +23,7 @@ if song.selected.isFulfilled
                 /div.float-right
                 /div: h1: =line.name
                 .vertical-text: h1: =line.name
-              .vertical-align
+              .lyrics-pane
                 each-in (get part.lyrics (concat "" line.instance)) as |indx|
                   |{{span-me upload=(action 'update' line.index line.instance indx) value=(mut (get (get (get (get song.selected.content (concat "" line.index)) 'lyrics') (concat '' line.instance)) indx))}}
                   br

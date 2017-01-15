@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     partsOrder:Ember.computed('song.selected.composition',function(){
 			let names= this.get('song.selected.partNames');
       return this.get('song.selected.composition').map( function(e){
-        return {name:names[0],index:e[0],instance:e[1]}
+        return {name:names[e[0]],index:e[0],instance:e[1]}
       })
     }),
 		isStats:true,

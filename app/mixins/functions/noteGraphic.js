@@ -40,11 +40,11 @@ const scaleUp = function(x,y,print,m,beat,color){
 
       animationFrame= function(ctx,func,x,y,print,m,beat,color){
      		requestAnimationFrame(()=>{
-						ctx.clearRect(x-20,y-20,40,40)
+						ctx.clearRect(x-24,y-24,48,48)
             func.forEach(func=>func.call(ctx,x,y,print,m,beat,color))
 				})
       },
-			tonesToHue		= function(ctx,x,y,print,stanza){
+			tonesToHue		= function(ctx,x,y,print,stanza,rate){
 				let m = rate,
             beat = this.get('beat');
 				while(m-- > -1){
@@ -80,8 +80,8 @@ export default function(ctx,boardX,boardY,print,stanza,isMoji){
 		}else{
 			console.error(this.get('main.fretboard.options.notes'))
       if(this.get('isToneToHue')){
-				ctx.lineWidth = 22
-			  tonesToHue.call(this,ctx,boardX,boardY,print,stanza)
+				ctx.lineWidth = 6
+			  tonesToHue.call(this,ctx,boardX,boardY,print,stanza,rate-3)
       }else{
 			  ctx.fillStyle = "#"+this.get('main.fretboard.options.notes')	
 			  downImp.call(this,ctx,boardX,boardY,print,stanza)
