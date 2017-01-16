@@ -11,6 +11,11 @@ html, body{
 	width:100%;
 
 }
+
+[data-ember-action]:not(:disabled) {
+  cursor: pointer;
+}
+
 body{
   background-attachment: fixed;
 }
@@ -41,10 +46,13 @@ body{
 	display:table;
 	background:$darkenColor;//$middleyellow;
 	border-bottom:$middleblue 4px solid;
-	div{
+	div, ul{
 		display:table-cell;
 		vertical-align: middle;
 	}
+}
+.tableColumn{
+	display:table-column;
 }
 .float-right{
 	float:right;
@@ -61,7 +69,9 @@ body{
 }
 button:focus{
 	outline:none;
+	color:antiqueWhite;
+	background:$pinkNoise !important;
 }
 .scroll{
-	overflow-y: scroll;
+	//overflow-y: scroll;
 }

@@ -9,6 +9,10 @@ export function initialize(App) {
 
   console.log( 'post init auth' , isLogged)
   App.register('panels:chord',Ember.Object.extend({
+    size:{
+      width:800,
+      height:200,
+    },
     list:[
       { "name":"chat-pane","options":"bottom","enabled":true}
     ]
@@ -17,7 +21,7 @@ export function initialize(App) {
 	console.log( 'pre init song to route service')
 	App.inject('controller:is-online.song.chord', 'panels','panels:chord') 
 	App.inject('controller:is-online.song.lyrics', 'panels','panels:chord') 
-	App.inject('controller:is-online.song.edit', 'song', `service:song`)
+	App.inject('controller:is-online.song.edit', 'song', 'service:song')
 }
 
 export default {

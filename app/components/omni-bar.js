@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   beatMask:Numeric,
   left:{
 		stepLeft:			{name:"\u25c0",	type:"action"},
+		outlet:true
   },
   right:{
     stepRight:		{name:"\u25b6", type:"action"},

@@ -18,6 +18,13 @@ $midnight-sea:rgba(0,0,0,0.31);
 .chord-edit{
 	background: $secondColor;// !important;
 }
+.chord-column, .chord-row{
+	//cursor:w-resize;
+	button{
+		line-height: $chordScale;
+		border-width:	$chordScale;
+	}
+}
 .inventory{
 	display:inline-block;
 	height:100%;
@@ -63,6 +70,7 @@ $midnight-sea:rgba(0,0,0,0.31);
 			background: $goldArrow ;
 		}
 		td{
+			transition:color 2s;
 			line-height: $chordScale;
 			font-size: $chordScale;
 			//box-shadow:1px 1px 4px 5px yellow;
@@ -82,7 +90,10 @@ $midnight-sea:rgba(0,0,0,0.31);
 	color:inherit;
 	background:rgba(0,0,0,.4);
 	font-size:22px;
-  margin:0px;
+  h1{
+
+		margin:0px;
+	}
 	//  padding:0px 6px;
 }
 

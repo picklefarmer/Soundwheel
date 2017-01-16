@@ -31,7 +31,7 @@
 	div{
 		display:block !important;
 	}
-	background:black;
+	background:$secondColor;//black;
 	//position:absolute;
 	//margin:0 -12rem 0 0;
 	overflow-y:hidden;
@@ -55,6 +55,9 @@
 }
 .menubar{
 
+	color:transparent;
+	text-align:center;
+	text-align:-webkit-center;
 	//	outline: 6px solid $panelOverlay;
 	background: $blend;
   font-family:'led_sas';
@@ -63,7 +66,7 @@
 	margin:1rem;
 
 	padding:1rem;
-	
+
 	position:relative;
 	top:0px;
 	width:100%;
@@ -81,10 +84,15 @@
 		padding:none;
 		vertical-align:middle;
 		div,.is-inline label{
+			&:hover{
+				border-color:$middlered;
+				//background:$deepRed;
+			}
+			
 			top:0px;
 			cursor:pointer;
 			border-radius:15px;
-			border:7px inset #383838;
+			border:7px inset $deepBlue;//#383838;
 			@include box-shadow(inset 0px 0px 4px 4px $blend);
 			background:$colorTwo;
 			@include box-shadow(rgba(0, 0, 0, 0.898438) 0px 0px 20px inset);
@@ -93,9 +101,9 @@
 
 			font-size:20px;
 			padding:6px;
-		   	text-align:center;
+		  text-align:center;
 			vertical-align:middle;
-		    color: transparent;
+		  //  color: transparent;
 		}
 	}
 }

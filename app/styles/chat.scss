@@ -5,6 +5,9 @@
 
 
 .chat-pane{
+	.panel{
+		background:$middlegrey;
+	}
 	ul{
 		overflow-y:scroll;
 		height:26rem;

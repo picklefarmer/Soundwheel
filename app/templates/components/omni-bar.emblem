@@ -1,14 +1,12 @@
-play-bar playbar=true inline=true buttons=left
-component [
-  (concat song.barType "-bar")
-  class='big-me'
-  beatMask=beatMask
-  ]
 
+play-bar playbar=true inline=true buttons=(combine-obj left right)
+  component [
+    (concat song.barType "-bar")
+    class='big-me'
+    beatMask=beatMask
+    ]
 
-play-bar playbar=true inline=true buttons=right
-
-.beat-blanket
+.beat-blanket.displayTable
   each song.measureKit as |kitBin index|
     =beat-bar  [
       index=index

@@ -2,14 +2,18 @@
 
 .menu-bar{
 	margin:1rem 0;
+	text-align: center;
+
 
   ul{
+		display: inline-block;
     background:$darkenColor;
     border-radius:1rem;
     margin:  .5rem 1rem;
 		justify-content:center;
   }
   li{
+  	
     background:$middlegrey;
     border: groove;
     margin:0 .3rem;

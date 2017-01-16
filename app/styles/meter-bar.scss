@@ -15,8 +15,11 @@
 	line-height:26px;
 }
 .beat-blanket{
+	width:60%;//inherit;
+	margin:$chordScale*2;
 	.selected{
 		div{
+			color:transparent;
 			background:rgba(255,255,255,0.42) !important;
 		}
 	}
@@ -40,7 +43,8 @@
 
 }
 .big-me{
-  vertical-align:super;
+  vertical-align:middle;
+	overflow: hidden;
 
 	li button{
 
@@ -82,14 +86,27 @@
 }
 .selected {
 	background-color:cyan;
+	color:inherit;
 }
 .hit {
 	button{
 		background:inherit;
 		color:inherit;
 
-		hover:{
-			background:blue;
+		&:hover{
+			/*&:before{
+				content: attr(sound);
+				position: absolute;
+				background: $coldFeet;
+				width: $chordScale;
+				height:$chordScale;
+				color:$deepBlue;
+				font-size: $chordScale*4;
+			}*/
+			background:$deepBlue;
+		}
+		&:active{
+			color:$deepRed;
 		}
 	}
 	div{

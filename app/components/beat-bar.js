@@ -5,7 +5,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
 	song:Ember.inject.service(),
-	classNames:["scroll","sidebar","bar-beat"],
+	classNames:["scroll","bar-beat","tableColumn"],
 	classNameBindings:['active:bar-hit'],
 	willRender(){
     this.set('active',Ember.computed.equal('boundValue',this.get('index')))

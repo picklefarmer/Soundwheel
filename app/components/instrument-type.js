@@ -51,10 +51,14 @@ export default Ember.Component.extend({
 	didInsertElement(){
     	//console.log('did Insert Element',this.get('name'))
 
-      	var name = this.get('name'),
-        	canvas = this.get('element'),
+      	var name	= this.get('name'),
+        	canvas	= this.get('element'),
+					size		=	this.get('size'),
 					ctx  = canvas.getContext('2d');
 
+				if(size){
+					ctx.setProperties(size)
+				}
         this.set('ctx',ctx)
 
         this.set(name,ctx);
