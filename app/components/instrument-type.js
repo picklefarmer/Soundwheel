@@ -55,9 +55,10 @@ export default Ember.Component.extend({
         	canvas	= this.get('element'),
 					size		=	this.get('size'),
 					ctx  = canvas.getContext('2d');
-
 				if(size){
-					ctx.setProperties(size)
+				console.log( ' initializing size',size)
+					canvas.width = size.width
+					canvas.height =size.height
 				}
         this.set('ctx',ctx)
 

@@ -75,7 +75,7 @@ button{
 		position:relative;
 		top:-1px;
 		left:-2px;
-		border:7px solid #383838;
+		border:7px solid $middlepurple;//#383838;
 		border-radius:15px;
 		@include box-shadow(0px 0px 1px 1px #282828);
 	}
@@ -92,7 +92,7 @@ th {
 	th{
 		@include matteShadow();
 		background:#626262;
-		color:white;	
+		color:white;
 	}
 	table {
 		@include matteShadow();
@@ -103,9 +103,9 @@ th {
 				td{
 					background:#626262;
 					@include matteShadow();
-					color:white;	
+					color:white;
 				}
-			}		
+			}
 		}
 	}
 	&:last-child{
@@ -136,5 +136,5 @@ th {
 				@include box-shadow(none);
 			}
 		}
-	}	
+	}
 }

@@ -3,9 +3,16 @@
 	line-height:1rem;
 };
 $chordScale:2rem;
+$mahogany:rgb(185, 12, 12);
+$borderRadius:100%;
+$deepSecond:#3a3835;
 $middleyellow:rgb(102, 102, 28);
 $middleblue:rgb(157, 163, 168);
 $middlered:#e8b4b4;
+$middlepurple:#41041e;
+$middleorange:#8e8b83;
+$deepOrange:#c4ab7b;
+$deepPurple:#1c1026;
 $deepRed:#290303;
 $deepBlue:rgb(6, 64, 83);
 //rgba(37, 66, 90,0.58);
@@ -15,7 +22,7 @@ $coldFeet:white;//rgba(244,213,209,.97);
 $algebra:rgba(0 , 0 , 0 , .84);
 
 $panelOverlay:linear-gradient(to bottom, $secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
-$middlegrey:#ccc;///#666;
+$middlegrey:$deepPurple;//#ccc;///#666;
 $textcolor:#112212;
 $activeColor:#c73a27;
 
@@ -27,7 +34,7 @@ $colorTwo:#797874;//#7c7d7c;
 $pinkNoise:#ff509a;
 $colorThree:#7a7a7a;
 
-$almond:$middleblue;
+$almond:burlywood;//$middleblue;
 
 .right{
 	float:right;

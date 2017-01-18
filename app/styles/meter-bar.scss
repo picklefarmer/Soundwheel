@@ -36,9 +36,12 @@
 	border:none;
 }
 .measure-bar{
+	li{
+		writing-mode:initial;
+	}
 	li div{
  		width:8rem;
-
+		//writing-mode:initial;
 	}
 
 }
@@ -80,8 +83,16 @@
 }
 
 .rest{
+	&.hit{
+		div{
+			background: $deepSecond !important;
+			border-color:$middleorange !important;
+
+		}
+	}
 	div{
-		border-color:#fff !important;
+		border-color:$secondColor !important;
+		background:$deepRed !important;//#fff !important;
 	}
 }
 .selected {
@@ -107,6 +118,7 @@
 		}
 		&:active{
 			color:$deepRed;
+			border-color:$middlepurple;
 		}
 	}
 	div{

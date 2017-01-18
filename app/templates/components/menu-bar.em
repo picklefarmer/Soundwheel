@@ -34,4 +34,6 @@ ul class=menubar
           =bool
 
 unless barVisible
-  ul.menubar: =play-bar playbar=true tagName="li"
+  /ul.menubar: =play-bar playbar=true tagName="li"
+  =display-table
+    =play-bar playbar=true tagName="div" 

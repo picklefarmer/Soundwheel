@@ -59,7 +59,7 @@
 	text-align:center;
 	text-align:-webkit-center;
 	//	outline: 6px solid $panelOverlay;
-	background: $blend;
+	background: $mahogany;//$blend;
   font-family:'led_sas';
 	display:block;
 	width:100%;
@@ -80,15 +80,27 @@
 	span{
 		margin:.25rem;
 	}
+
+@keyframes mymove {
+  from {background: transparent;}
+  to {background:blue}
+}
 	li{
 		padding:none;
 		vertical-align:middle;
+		background: $secondColor;
+		border-radius: $chordScale;
 		div,.is-inline label{
 			&:hover{
+				box-shadow: none;
 				border-color:$middlered;
-				//background:$deepRed;
+				background:$secondColor;
+				label{
+					animation: mymove 4s infinite;
+					border:none;
+				}
 			}
-			
+
 			top:0px;
 			cursor:pointer;
 			border-radius:15px;

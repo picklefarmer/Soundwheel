@@ -1,7 +1,3 @@
-h1: =peep
-each-in peep as |pat hold|
-  h1: =pat
-  h2: =hold
 each-in buttons as |name desc|
   if (e-q name "outlet")
     yield

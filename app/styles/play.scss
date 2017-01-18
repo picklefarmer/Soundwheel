@@ -18,16 +18,17 @@
 
 .playbar {
 	margin-top:1rem;
+	background:$deepPurple;
 	border-width:1rem .5rem !important;
-	border: 2rem inset #8e8b83 !important;
-	outline: .5rem groove #c4ab7b;
+	border: 2rem inset $middleorange  !important;
+	outline: .5rem groove $deepOrange;
 	div{
 		display:inline-block;
 		vertical-align:middle;
 	}
 	button{
 		//		color:$colorOne;
-		background:$colorThree;
+		background:$secondColor;
 		line-height: 4rem;
 		//vertical-align: middle;
 		label{
@@ -44,12 +45,16 @@
 		height:8rem;
 		width:7rem;
 		border-radius:$chordScale;
-		color:black;
+		background:$deepSecond;
+		color:$middleorange;
+		border:$chordScale/2 $deepRed inset;
+
+
 		text-align-last:center;
 		line-height: $chordScale*3;
 		font-size:5rem;
 		text-align:center;
-		border:none;
+
 	}
 	option{
     width:90%;

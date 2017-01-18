@@ -8,11 +8,13 @@ export function initialize(App) {
       type = isLogged ? "auth" : "side";
 
   console.log( 'post init auth' , isLogged)
+
+  App.register('settings:size',Ember.Object.extend({
+      width:1400,
+      height:300
+  }))
+
   App.register('panels:chord',Ember.Object.extend({
-    size:{
-      width:800,
-      height:200,
-    },
     list:[
       { "name":"chat-pane","options":"bottom","enabled":true}
     ]
@@ -21,6 +23,7 @@ export function initialize(App) {
 	console.log( 'pre init song to route service')
 	App.inject('controller:is-online.song.chord', 'panels','panels:chord') 
 	App.inject('controller:is-online.song.lyrics', 'panels','panels:chord') 
+//	App.inject('controller:is-online.song.edit', 'size', 'settings:size')
 	App.inject('controller:is-online.song.edit', 'song', 'service:song')
 }
 
