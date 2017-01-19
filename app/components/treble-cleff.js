@@ -1,8 +1,14 @@
 import Ember from 'ember';
 import three from './instances/3';
+import KeyDown from './../mixins/keydown';
+import Parallax from './instances/motionCapture';
+
 
 export default Ember.Component.extend({
   tagName:'canvas',
+	mouseIn(){
+		console.log('effort waisted')
+	},
   didInsertElement(){
     let content = this.get('element'),
         ctx     = content.getContext('2d'),
@@ -39,7 +45,7 @@ export default Ember.Component.extend({
     ];
 
     let length = trebleArr.length;
-/*
+
     ctx.beginPath()
     let k = 100;
     ctx.moveTo(k+-1,k+20)
@@ -52,6 +58,8 @@ export default Ember.Component.extend({
 
     ctx.stroke()
     ctx.fill()
-	*/
+
+		Parallax.call(this)
+
   }
 });

@@ -1,7 +1,7 @@
 if song.selected.isFulfilled
   unless full
     unless song.isSpritz
-      display-table 
+      display-table lyricPane=true
         if song.isPart
           .withRadius
             each-in song.selected.lyrics as |key|

@@ -3,7 +3,8 @@ import Ember from 'ember';
 export default function(a,ctx ) {
 
 	var areFrets = this.get('song.areFrets'),
-			areStrings	=	this.get('song.areStrings');
+			areStrings	=	this.get('song.areStrings'),
+			party				=	this.get('song.isParty');
 
         	//frets number
         	//heighti
@@ -25,12 +26,11 @@ export default function(a,ctx ) {
 							size = Math.ceil(1600/24),
 	            fret = new Image();
 
-				fret.src = "images/fret.jpg";
+				fret.src = "images/string.svg";
 		//		console.log(width) 
 				//	fret.src = "lightning.svg";
 
-//				fret.onload =
-				begin()
+				fret.onload =	begin
 
 
 				function begin(){
@@ -107,17 +107,34 @@ export default function(a,ctx ) {
 						}
 					}
 		
-					if(areStrings){	
-					frets =6;
+					if(areStrings){
 
-					while(frets--){
-							b.fillStyle = "hsl(0,0%,5%)"
-							b.fillRect(0,22+50*frets,width,6)
-							b.fillStyle = "hsl(0,0%,40%)"
-							b.fillRect(0,24+50*frets,width,3)
-					}
-       				}
-					}
+						frets =6;
+						let im = 35,
+								img	=	im,
+								imgW	=	140,
+								other	= imgW/3;
+						while(frets--){
+							if(party){
+
+									//b.translate(width, 0);
+									//b.scale(-1, 1);
+								while(img--){
+									b.drawImage(fret,img*other,22+50*frets,-imgW,imgW/4)
+								}
+								img=im;
+							}else{
+								b.fillStyle = "hsl(0,0%,5%)"
+								b.fillRect(0,22+50*frets,width,6)
+								b.fillStyle = "hsl(0,0%,40%)"
+								b.fillRect(0,24+50*frets,width,3)
+							}
+						}
+
+						
+       		}
+				}
+				
 				return ctx
 			}
 

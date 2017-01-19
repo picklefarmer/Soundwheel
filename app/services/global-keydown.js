@@ -5,6 +5,8 @@ import Copy 				from './functions/copy';
 import DupBeat			from './functions/DupBeat';
 import SwitchBar		from './functions/switchBar';
 import Step 				from './functions/step';
+import Numbers			from './instances/playNumber';
+import PlayNumber		from './functions/playNumber';
 import PlayPause		from './functions/playPause';
 import PlayPreview 	from './functions/playPreview';
 
@@ -93,9 +95,16 @@ export default Ember.Service.extend({
 					case 13:Return.call(this,index);break;
 					case 46:Delete.call(this,index);break;
 					case 45:Copy.call(this,index);	break;
-
-					default:break;	
-
+					case 48:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 49:PlayNumber.call(this,Numbers[e.keyCode]);break;
+ 					case 50:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 51:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 52:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 53:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 54:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 55:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 56:PlayNumber.call(this,Numbers[e.keyCode]);break;
+					case 57:PlayNumber.call(this,Numbers[e.keyCode]);break;
 			}
 
 		}

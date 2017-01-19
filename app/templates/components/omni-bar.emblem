@@ -1,6 +1,6 @@
 
-  /display-table
-  play-bar playbar=true inline=true buttons=(combine-obj left right)
+display-table
+  play-bar class="displayEighty" playbar=true inline=true buttons=(combine-obj left right)
     component [
       (concat song.barType "-bar")
       class='big-me'

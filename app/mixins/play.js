@@ -15,6 +15,9 @@ const offset = 18;
 const scale = 36;
 
 export default Ember.Mixin.create({
+	/* temp */
+	isParty:true,
+
   globalKeydown:Ember.inject.service(),
 
 actions:{

@@ -3,7 +3,7 @@ import Acts from './instances/lyricsActions';
 
 export default Ember.Component.extend({
 		acts:Acts,
-		classNames:["lyrics","horizontal-align"],
+		classNames:["lyrics","lyricsPane","horizontal-align"],
 //		classNameBindings:["full:horizontal-align"]
     song:Ember.inject.service(),
     full:false,

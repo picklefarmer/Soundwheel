@@ -8,12 +8,13 @@ ul class=menubar
     li: h1 &#x2637;
   if barVisible
     if song.routes.isFulfilled
-      li: link-to [
-        'song'
-        'isOnline.song.edit'
-        isOnline
-        song.selected.selection
-        tagName="div"
+      li
+        link-to [
+          "song"
+          'isOnline.song.edit'
+          isOnline
+          song.selected.selection
+          tagName="div"
         ]
       each song.routes as |page|
         li

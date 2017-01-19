@@ -9,6 +9,7 @@ export default Ember.Component.extend({
 			{"name":"isSpritz",			label:'S'												},
 			{"name":"isToneToHue",	label:'\u0beb',	class:'reverse'	},
 			{"name":"isFullScreen",	label:'O'												},
+			{"name":"isParty",			label:"\uD83D\uDD76"						},
 			{"name":"onLine",				label:'\uD83C\uDF75'						},
 			{"name":"isExplain",		label:'\u2754'									},
 			{"name":"isToolTip",		label:'\uD83D\uDECE'						}

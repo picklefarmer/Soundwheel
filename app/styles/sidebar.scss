@@ -17,8 +17,19 @@
 	border-left:7px inset #383838;
 }
 .sidebar li div{
+
+	&:hover{
+		border-color: $deepPurple;
+		border-style: solid;
+		border-width: 3rem 0rem 3rem 0rem;
+		writing-mode:initial;
+		color:$middleblue;
+		padding-bottom: 1rem;
+	}
+
+
 	display:inline-block;
-	cursor:pointer;
+	cursor:none;
 	border-radius:15px;
 	border:7px inset #383838;
 	-webkit-box-shadow:inset 0px 0px 4px 4px #282828;

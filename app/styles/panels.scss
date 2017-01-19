@@ -86,8 +86,16 @@ button:focus{
 }
 
 $outScale:1.5rem;
-
+.displayEighty{
+	width:70% !important;
+}
 .displayTable{
+
+	&.lyric-pane{
+		.exp,.expanding{
+			line-height:200%;
+		}
+	}
 	width:100%;
 	display:table;
 	overflow:hidden;
@@ -113,6 +121,8 @@ $outScale:1.5rem;
 	}
 }
 $slim:$chordScale/2*4;
+$u1:$secondColor;
+$u2:$middleorange;
 .withRadius{
 	vertical-align:middle;
 	border-radius:3rem;
@@ -123,20 +133,22 @@ $slim:$chordScale/2*4;
 	outline-offset: -2rem;
 	background:white;
 	border:solid $secondColor;
+	background:linear-gradient(90deg,$u1 12%,$u2 24%,$u1 35%,$u1 65%,$u2 78%,$u1 88%)
 }
 .expanding{
 	vertical-align: top;
-	line-height: 200%;
 	color:$middleorange;
 	//color:$deepSecond;//	$middleblue;
     display:table-cell;//width: 39%;
 		&:before,&:after{
+			padding: 1rem;
 			margin-right: $chordScale;
 			content:"⡇";
 			display: block;
 		  background: $middleorange;//$secondColor;//deepOrange;
 		  width: inherit;
 			height:inherit;
+			height:100%;
 		  border-radius: 0 0 $borderRadius 0 ;
 		  border: solid #e0e0e0 1rem;
 			border-top-color: $secondColor;

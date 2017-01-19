@@ -47,6 +47,7 @@
 }
 .big-me{
   vertical-align:middle;
+	display:inline-block !important;
 	overflow: hidden;
 
 	li button{
@@ -57,14 +58,15 @@
 		//background:$coldFeet;
 
 		background-color: black;
-  	color: transparent;
-		text-shadow: .2rem .2rem 0px rgba(255,255,255,0.5);
-  	-webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-   	font-size:4rem;
+  	color: $deepRed;
+		text-shadow:#d0bb27  .2rem .2rem 0;//rgba(255,255,255,0.5);
+  	//-webkit-background-clip: text;
+    //-moz-background-clip: text;
+    //background-clip: text;
+   	font-size:3rem;
    	vertical-align:super;
 
+		background:url('../images/fret.jpg');
  }
 }
 
