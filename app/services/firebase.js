@@ -100,7 +100,7 @@ export default Ember.Service.extend({
       console.log (update,this,this.get('firebase'), ' observation got _2' )
 
       this.get('group').child('chords')
-          .update(update,()=>{
+          .set(update,()=>{
             console.log('chords saved online')
           })
     },

@@ -1,23 +1,9 @@
 import Ember from 'ember';
+import Base from './instances/omni-base';
 import Numeric from './../mixins/instances/numeric';
-export default Ember.Component.extend({
+export default Ember.Component.extend(Base,{
 	classNames: ['menubar'],
   song:Ember.inject.service(),
   beatMask:Numeric,
-  left:{
-		stepLeft:			{name:"\u25c0",	type:"action"},
-		outlet:true
-  },
-  right:{
-    stepRight:		{name:"\u25b6", type:"action"},
-		barType:{type:"select", name:{
-						'meter'   :"\uD83D\uDCCF",
-						'measure' :"\uD83D\uDCD0",
-						'part'    :"\u2604",		
-      }
-		},
-
-  }
-
 
 });

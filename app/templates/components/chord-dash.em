@@ -1,7 +1,7 @@
 if chordEdit
   if isEditing
     
-      ul.menu-bar.playbar.vertical-align.foreground.float-left
+      /ul.menu-bar.playbar.vertical-align.foreground.float-left
         /chord-panel.list-group.panel-body
         each-in acts as |act bit|
           li.list-group-item

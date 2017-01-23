@@ -1,3 +1,4 @@
+yield
 each source as |panel|
   if (e-q panel.options 'middle')
     =hover-label [

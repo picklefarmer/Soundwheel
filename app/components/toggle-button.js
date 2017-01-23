@@ -7,7 +7,9 @@ export default Ember.Component.extend({
 	classNameBindings:['bool:hit'],
   actions:{
     actionUp(){
-      this.action()
+      if(this.action){
+        this.action()
+      }
     }
   }
 });

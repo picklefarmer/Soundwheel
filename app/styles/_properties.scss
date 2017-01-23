@@ -2,6 +2,7 @@
 @mixin lineHeight(){
 	line-height:1rem;
 };
+$fret:url('./../images/fret.jpg');
 $chordScale:2rem;
 $mahogany:rgb(185, 12, 12);
 $borderRadius:100%;
@@ -10,6 +11,7 @@ $middleyellow:rgb(102, 102, 28);
 $middleblue:rgb(157, 163, 168);
 $middlered:#e8b4b4;
 $middlepurple:#41041e;
+
 $middleorange:#8e8b83;
 $deepOrange:#c4ab7b;
 $deepPurple:#1c1026;

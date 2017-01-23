@@ -4,11 +4,15 @@ import Ember from 'ember';
 import playMatrix from '../mixins/functions/playmatrix';
 //import isOsc      from '../services/functions/drawOsc';
 import Osc 		from '../components/functions/drawOsc';
-import Chord 	from '../components/functions/drawOscArray';
+//import Chord  from '../services/actions/chord';
+import OscArr 	from '../components/functions/drawOscArray';
 import Spec 	from '../components/functions/drawSpec';
 import Bar		from '../components/functions/drawBarGraph';
 import ChatPass from './functions/chatPass';
 import Numeric  from './instances/numeric';
+const actions = {
+  
+};
 const x = 67;
 const y = 50;
 const offset = 18;
@@ -21,6 +25,59 @@ export default Ember.Mixin.create({
   globalKeydown:Ember.inject.service(),
 
 actions:{
+  saveSelection(){
+		Ember.run(this.get('chords'),"update",this.get('chords.content')) 
+  },
+
+	updateSelection(){
+		var model = this.get('chords'),
+				selected		=	this.get('chordSelected'),
+        selection   = this.get('chordSelection'),
+        index = model.indexOf(selection);
+
+		this.set('chordSelection',selected)
+
+		model.replace(index,1,[selected])
+//  this.get('chord').replace(index,1,[selected])
+	},
+
+	chordCapture(){
+		  var chord = this.get('song.selected.measure.notes').filter(e => e ? e : false),
+              low   = Math.min.apply(this,chord),
+              high  = Math.max.apply(this,chord),
+              difference = Math.abs(low - high) + 1
+
+          this.send('newSelection',{chord,high,difference,low})
+
+	},
+
+  newSelection({chord:notes,high,difference,low}={}){
+
+    console.log("pre-model",this.get('chord'))
+    notes = notes || Ember.A([1,1,1,1]);
+    this.set('chordSelected',notes)
+    this.get('chords').addObject(notes)
+    this.set('chordSelection',notes)
+    console.log("chordSelection",this.get('model')||"undefined",notes||"undefined",high,difference,low) 
+  },
+
+	deleteSelection(){
+		var selection = this.get('chordSelection');
+		this.get('chords').removeObject(selection)
+		this.setProperties({chordSelected:null,chordSelection:null})
+	},
+
+	editSelected(){
+		this.toggleProperty('isEditing')
+        console.log(' is edit chord', this.get('selected'),this.get('selection'))
+ 		this.send('sendSelection')
+	},
+
+	sendSelection(){
+     this.set('chordSelected',Ember.copy(this.get('chordSelection')))
+         console.log('selected from edit dash',this.get('selected'))
+	},
+
   overLabel(name){
     if(this.get('isToolTip')){
       this.set('barOverlay',name)
@@ -108,7 +165,7 @@ actions:{
 					case "Spec":Spec.call(this,null,ctx);break;
 					case "Osc":Osc.call(this,null,ctx);break;
 					case "Bars":Bar.call(this,null,ctx);break;
-					case "Chord":Chord.call(this,null,ctx);break;
+					case "Chord":OscArr.call(this,null,ctx);break;
 				}				
 				this[val].call(this,null,ctx)
 	},

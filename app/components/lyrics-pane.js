@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import Acts from './instances/lyricsActions';
+//import Acts from './instances/lyricsActions';
 
 export default Ember.Component.extend({
-		acts:Acts,
+	//	acts:Acts,
 		classNames:["lyrics","lyricsPane","horizontal-align"],
 //		classNameBindings:["full:horizontal-align"]
     song:Ember.inject.service(),

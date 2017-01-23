@@ -14,6 +14,7 @@ export default Ember.Component.extend(Clock,{
 	sidebar:"sidebar",
 	active:"song",
 	isActive:Ember.computed('currentPath',function(){
+    return false
 		let active = this.get('currentPath').split('.');
 		console.log(active, 'computed active')
 		return {
@@ -23,7 +24,7 @@ export default Ember.Component.extend(Clock,{
 
 	}),
 	willRender(){
-		console.error( this.get('y'), 'y')
+//		console.error( this.get('y'), 'y')
 	},
 	isOnline:Ember.computed('song.onLine',function(){
 		if(this.get('song.onLine')){

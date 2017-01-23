@@ -1,19 +1,19 @@
 
-display-table
-  play-bar class="displayEighty" playbar=true inline=true buttons=(combine-obj left right)
-    component [
-      (concat song.barType "-bar")
-      class='big-me'
-      beatMask=beatMask
-      ]
+/display-table
+    /play-bar class="displayEighty" playbar=true inline=true buttons=(combine-obj center)
+component [
+  (concat song.barType "-bar")
+  class='big-me'
+  beatMask=beatMask
+  ]
 
-  if song.isKit
-    .beat-blanket.displayTable
-      each song.measureKit as |kitBin index|
-        =beat-bar  [
-          index=index
-          boundValue=song.beat
-          kitBin=(mut kitBin)
-        ]
+if song.isKit
+  .beat-blanket.displayTable
+    each song.measureKit as |kitBin index|
+      =beat-bar  [
+        index=index
+        boundValue=song.beat
+        kitBin=(mut kitBin)
+      ]
 
 

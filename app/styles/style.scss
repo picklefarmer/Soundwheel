@@ -8,15 +8,21 @@
 
 @import "properties";
 
+
 @mixin fullBar($pos){
 	#{$pos}:0px;
+
+	transition:backGround 1s;
 	position:fixed;
 	text-align:center;
-	background:middleyellow;//#aaa;
+	//background:$middleyellow;//#aaa;
+	background:linear-gradient(to $pos,$secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
 	@if ($pos == top) or ($pos == bottom) {
 		left:0px;
 		@if ($pos == top){
-			position:relative;
+			position:fixed;
+			top:-1rem;
+			z-index: 2;
 		}
 		display:inline-block;
 		width:100%;
@@ -38,12 +44,12 @@
 	}
   &.autohide {
 		@if ($pos == top){
-			position:absolute;
+			position:fixed;
 		}
 		@if ($pos == bottom){
 			position:fixed;
 			z-index:2;
-			transition:all 1s;
+
 		}
 
 		ul,.chat-pane {
@@ -55,11 +61,11 @@
 	  	.chat-pane,ul {
 	  		display: inherit;
 	  	}
-
-			background: $panelOverlay;
+		//	background: $panelOverlayUp;
     }
   }
 }
+
 
 @each $pos in top, left, right, bottom {
 	$opposite:opposite($pos);

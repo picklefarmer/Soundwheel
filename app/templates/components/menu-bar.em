@@ -34,7 +34,7 @@ ul class=menubar
         =toggle-button name=bool bool=(get song bool)
           =bool
 
-unless barVisible
+/`unless barVisible
   /ul.menubar: =play-bar playbar=true tagName="li"
-  =display-table
+  /=display-table
     =play-bar playbar=true tagName="div" 

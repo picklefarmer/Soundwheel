@@ -38,6 +38,9 @@ input.span-me:focus{
 	background:$secondColor;
 }
 .span-me{
+	&nth-child(even){
+		
+	}
 	font-family:"Crimson Text", serif;
 	font-size: 25px;
 	text-align:center;

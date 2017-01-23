@@ -21,6 +21,7 @@ export function initialize(App) {
   }))
   App.inject('route:song'   ,'settings', `settings:${type}`)
 	console.log( 'pre init song to route service')
+	App.inject('controller:is-online.song','song','service:song')
 	App.inject('controller:is-online.song.chord', 'panels','panels:chord') 
 	App.inject('controller:is-online.song.lyrics', 'panels','panels:chord') 
 //	App.inject('controller:is-online.song.edit', 'size', 'settings:size')
