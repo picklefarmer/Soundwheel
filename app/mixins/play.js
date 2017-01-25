@@ -49,7 +49,7 @@ const actions = {
 		console.log('saveToStorage')
 	},
   sustain(){
-				this.toggleProperty('sustain')
+		this.toggleProperty('sustain')
   },
   barType(barType){
     if(barType === 'meter'){
