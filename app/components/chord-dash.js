@@ -26,7 +26,7 @@ export default Ember.Component.extend({
 //	acts:Acts,
 
   	actions:{
-
+/*
 		saveSelection(){
 
           Ember.run(this.get('song.chords'),"update",this.get('song.chords.content')) 
@@ -72,11 +72,11 @@ export default Ember.Component.extend({
         		this.send('sendSelection')
 		},
 
+*/
 		sendSelection(){
        this.set('selected',Ember.copy(this.get('selection')))
          console.log('selected from edit dash',this.get('selected'))
 		},
-
 		selector({chord:selection,difference,low}){
 			console.log ("action selector",selection)
           var isEditing = this.get('isEditing')

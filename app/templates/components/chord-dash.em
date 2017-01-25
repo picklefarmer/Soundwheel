@@ -15,9 +15,14 @@ if chordEdit
             button{action "toggleSelected" string fret}: h1: =type
             /&#x2600;
 else
-  h1: =clock
+  //  h1: =clock
   if song.chords.isFulfilled
-    =scale-vertical class='chord-stack' amount=song.chords.content.length
+    if chordEdit
+      .bank-pane
+        each song.chords as |chord|
+          div: li class="{{if (arr-comp selection chord)'match'}}": ar-peg chord=chord action="selector": =song.main.bankmoji.options
+    else
+      /=scale-vertical class='chord-stack' amount=song.chords.content.length
       each song.chords as |chord|
         div: li class="{{if verticalTab 'vertical-dash'}} {{if (arr-comp selection chord) 'match'}}"
           ar-peg chord=chord action="selector"

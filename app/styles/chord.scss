@@ -8,6 +8,16 @@ $midnight-sea:rgba(0,0,0,0.31);
 	#{$property}: #{$expression};
 
 }
+.bank-pane{
+	text-align:center;
+	div{
+
+		li{
+			vertical-align:middle;
+		}
+		display:inline-block;
+	}
+}
 .is-editing{
 	cursor:crosshair;
 	button{

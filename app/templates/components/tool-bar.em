@@ -1,5 +1,6 @@
 yield
-each source as |panel|
+// from source
+each group as |panel|
   if (e-q panel.options 'middle')
     =hover-label [
       class=(concat panel.options 'Full')
