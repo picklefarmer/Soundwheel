@@ -1,7 +1,7 @@
 with (concat elementId "-name") as |idName|
 
   label for=idName
-    =desc
+    =displayText
 
   =yield idName
 
