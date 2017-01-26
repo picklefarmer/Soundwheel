@@ -61,23 +61,37 @@ $midnight-sea:rgba(0,0,0,0.31);
 
 .chordBank{
 	overflow:hidden;
-  li{
+	transform-origin: center 29%;
+	transform: scale(0.5);
+	div{
+		margin:$chordScale/2;
+	}
+	li{
     margin:$borderWidth;
     outline:none;
   }
 	position:relative;
+	padding:1rem;
 	background:$panelOverlay;
 	margin:0px;
 
-	table{
+	div,td,li,table{
+		background: $crisp;
 
+		padding:0;//$chordScale/14;
+		line-height: 21rem;
+		border-color:$secondColor;//$midnight-sea;
+		border-radius: $chordScale;
+	}
+	table{
+		padding: $chordScale 0;
 		border-collapse:separate;
-		border-radius: $chordScale/2;
+
 
 		.hit{
-			color:$goldArrow;
-			border:inset $chordScale/2 #949494 ;//$goldArrow;
-			background: $goldArrow ;
+			color:$deepBlue;
+			border:inset $chordScale/2 $midnight-sea;
+			background: $midnight-sea ;
 		}
 		td{
 			transition:color 2s;
@@ -85,12 +99,12 @@ $midnight-sea:rgba(0,0,0,0.31);
 			font-size: $chordScale;
 			//box-shadow:1px 1px 4px 5px yellow;
 			color:$coldFeet;
-			border: inset $chordScale/3 $coldFeet;
+			border: inset $chordScale/3;
 			background:cornsilk;
 		}
 		background: $coldFeet;
 		//border:1rem solid transparent;
-		outline:1rem solid $midnight-sea;
+		//outline:1rem solid $midnight-sea;
 		margin:1.5rem;
 		line-height:1rem;
 	}
@@ -123,10 +137,13 @@ $midnight-sea:rgba(0,0,0,0.31);
 }
 .match{
   @include box-shadow( rgba(0,0,0,0.75) 0px 0px 6px 4px);
+	div,td,li,table{
+		background:$midnight-sea !important;
 
+	}
   margin:0 !important;
   border-radius:$chordScale;
-  border:$borderWidth solid cyan;
+  border:$borderWidth solid cyan !important;
 }
 
 /*
