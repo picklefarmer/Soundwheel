@@ -22,6 +22,9 @@
 	border-width:1rem .5rem !important;
 	border: 2rem inset $middleorange  !important;
 	outline: .5rem groove $deepOrange;
+	button,select{
+		margin: 0 $chordScale/5;
+	},
 	div{
 		display:inline-block;
 		vertical-align:middle;
@@ -29,7 +32,7 @@
 	button{
 		//		color:$colorOne;
 		background:$secondColor;
-		line-height: 4rem;
+		line-height: $chordScale*3.25;
 		//vertical-align: middle;
 		label{
 			//vertical-align: middle;
@@ -43,11 +46,12 @@
 		vertical-align:middle;
 		//padding-left:1rem;
 		height:8rem;
-		width:7rem;
+		width:inherit;
 		border-radius:$chordScale;
 		background:$deepSecond;
 		color:$middleorange;
 		border:$chordScale/2 $deepRed inset;
+		padding:0 $chordScale*.15;
 
 
 		text-align-last:center;
