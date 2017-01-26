@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import MoonMarkers from './moonMarker';
+import FretMarkers from './fretMarker';
 
 export default function(a,ctx ) {
 
@@ -20,7 +22,9 @@ export default function(a,ctx ) {
 	var frets   = this.get('song.main.frets.options') || 24,
 	            height  = this.get('height'),
     	        width = this.get('width'),
-    	        color = ("#" + this.get('color.background')),
+							isMoon=	this.get('song.isMoon'),
+    	        front = this.get('color.background'),
+    	        color = (this.get('color')['fret marker']),
     	        dots = 2,
     	        L = 775,
 							size = Math.ceil(1600/24),
@@ -35,10 +39,10 @@ export default function(a,ctx ) {
 
 				function begin(){
 
-					b.fillStyle = "rgba(19,34,16,.58)"
+					b.fillStyle = front// "rgba(19,34,16,.58)"
 					b.fillRect(0,0,size,height);
 
-					b.fillStyle = "rgba(33,33,0,.5)";//color; //"#012";
+					b.fillStyle = color //"rgba(33,33,0,.5)";//color; //"#012";
 					//b.fillStyle = this.get('song.main.fretboard.color.options') || "rgba(33,33,0,.5)";//color; //"#012";
 		    	//b.fillRect(0,0,1600,300);
 	    		b.fillRect(0,0,width,height);
@@ -58,30 +62,10 @@ export default function(a,ctx ) {
 					//
 					b.restore()
 
-					b.fillStyle = color["fret marker"] // "hsl(180,11%,32%)"
-
-					dots = 4
-
-					while(dots--){
-						b.beginPath()
-						b.arc(size*3.5+3+(dots*size*2),height/2,16,0,2*Math.PI)
-						b.fill()
-					}
-
-					dots = 4;
-
-					while(dots--){
-						b.beginPath()
-						b.arc(size*15.5+3+(dots*size*2),height/2,16,0,2*Math.PI)
-						b.fill()
-					}
-
-					dots = 2;
-		
-					while(dots--){
-						b.beginPath()
-						b.arc(size*12.5+3,75+(height/2)*dots,16,0,2*Math.PI)
-						b.fill()
+					if(isMoon){						
+						MoonMarkers(b,dots,size,height,color,front)
+					}else{
+						FretMarkers(b,dots,size,height,color)
 					}
 
 					b.fillStyle = "rgba(44,77,150,.122)"
