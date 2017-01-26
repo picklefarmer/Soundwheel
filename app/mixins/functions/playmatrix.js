@@ -45,18 +45,13 @@ obj.beat = function(beat){
 			kit		= this.get('measureKit'),
 			isKit = this.get('isKit'),
 			holdNote=this.get('holdNote'),
+			lastNotes	=	this.get('lastNotes'),
+			backLast	=	lastNotes ? lastNotes.concat([]):[],
 			isMoji	=	this.get('isMoji');
 
 		console.error(this.get('selected').getProperties('composition','part','measure'))
 			var time	= this.get('selected.measure.map').objectAt(beat);
 
-	if(holdNote){
-		lastNotes.forEach(function(coords){
-			window.requestAnimationFrame(()=>{
-				view.fillRect(coords[0]-24,coords[1]-24,48,48)
-			})
-		})
-	}
 
 	/*(	lastNotes = this.get('selected.measure').notes
 						.map( (string,idx) => [string[beat],idx]	)
@@ -65,19 +60,21 @@ obj.beat = function(beat){
 						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx]);
 	) */
 
-	lastNotes = this.get('selected.fretMeasure')
+	this.set('lastNotes', this.get('selected.fretMeasure')
 							.getEach(""+beat)
-							.filter( a =>a?true:false)
+							.filter( a =>a?true:false))
 
 	if(isKit && kit){
 		toKitBin.call(this,kit.objectAt(beat))
 	}
 
+
+//	clearLast(backLast,view)
 	lastNotes.forEach ( obj => {
 
 		if( !obj[2].length){
 			Ember.run(audio.objectAt(obj[3]),'play',obj[2],stanza/(9-time))
-			boardWalk.call(this,view,obj[0],obj[1],print,stanza,isMoji)						
+			NoteGraphic.call(this,view,obj[0],obj[1],print,stanza,isMoji,clearLast,backLast)						
 		}else{
 
 			Ember.run(audio.objectAt(obj[3]),'glide',obj[2],stanza/(9-time))
@@ -86,8 +83,18 @@ obj.beat = function(beat){
 		}
 	},this)
 }
+const	boardWalk = function(ctx,boardX,boardY,print,stanza,isMoji){
+				NoteGraphic.call(this,ctx,boardX,boardY,print,stanza,isMoji)	
+},
+	clearLast = function(lastNotes,view){
+		requestAnimationFrame(()=>{
+		lastNotes.forEach(function(coords){
+				view.clearRect(coords[0]-24,coords[1]-24,48,48)
+		})})
+	},
 
-const toKitBin = function(a){
+
+	toKitBin = function(a){
 		let val = a.toString(2);
 		let kit = this.get('kit');
 		while(val.length < 3){
@@ -98,16 +105,9 @@ const toKitBin = function(a){
 				kit.objectAt(f).play()
 			}
 		})
-};
-const slideWalk		= function(ctx,boardX,boardY,print,stanza,isMoji){
-
 },
+	slideWalk		= function(ctx,boardX,boardY,print,stanza,isMoji){
 
-			boardWalk = function(ctx,boardX,boardY,print,stanza,isMoji){
-		window.requestAnimationFrame(()=>{
-//       	this.clearRect(0,boardY-y/2,900,y)
-				NoteGraphic.call(this,ctx,boardX,boardY,print,stanza,isMoji)	
-	})
 };
 
 

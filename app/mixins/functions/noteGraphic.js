@@ -1,21 +1,23 @@
 
 
-const scale = 36;
-const rate = 19;//original rate 16
-const playRATE=6;//original playRate 10
+const scale = 36,
+			rate = 22,//original rate 16,19
+			playRATE=6,//original playRate 10
+			fulcrom	=	0.2234;
 var hot = new chroma.scale(['black', 'red', 'yellow', 'white']).domain([0,rate]);
 var spectral = new chroma.scale('Spectral').domain([0,8]);
 // implement measureLength to domain top
 
 const scaleUp = function(x,y,print,m,beat,color){
 			this.beginPath()
-				this.fillStyle = spectral(beat)
-			this.arc(	x , y, (rate-m)+1,	0,	2*Math.PI)
+			this.fillStyle = 'white'//	this.fillStyle = spectral(beat)
+			this.arc(	x , y, (m)+1,	0,	2*Math.PI)
  			this.closePath();
 		 	this.fill()
 },
 			scaleDown = function(x,y,print,m,beat){
 			this.beginPath()
+				this.fillStyle='black';
 			this.arc(	x , y,(rate- m),	0,	2*Math.PI)
  			this.closePath();
 		 	this.fill()
@@ -31,15 +33,20 @@ const scaleUp = function(x,y,print,m,beat,color){
       },
 
 			noteMoji=function(x,y,print,m,beat,color){
-				m = rate - m
-				this.fillStyle = color
-				this.font = 1+(m*0.12075)+"rem Georgia"
-				this.fillText(print,x-m,y+m)
-
+				this.font = m*fulcrom+"rem Georgia"
+				//				this.fillStyle = '#997565'
+				this.fillText(print,x-m*1.1 +4,y + m*.63 +4)
+				//				this.strokeStyle = '#554545'
+				this.strokeText(print,x-m*1.1 +4,y + m*.63 +4)
 			},
 
-      animationFrame= function(ctx,func,x,y,print,m,beat,color){
+      animationFrame= function(ctx,func,x,y,print,m,beat,color,backLast){
      		requestAnimationFrame(()=>{
+						if(m===6){
+						backLast.forEach( function(coords){
+							ctx.clearRect(coords[0]-24,coords[1]-24,48,48)
+							})
+						}
 						ctx.clearRect(x-24,y-24,48,48)
             func.forEach(func=>func.call(ctx,x,y,print,m,beat,color))
 				})
@@ -59,13 +66,13 @@ const scaleUp = function(x,y,print,m,beat,color){
 					setTimeout(animationFrame,m*stanza,ctx,[scaleDown],x,y,null,m)
 				}
 			},
-  		upImp		= function(ctx,x,y,print,stanza){
-				let m = rate,
+  		upImp		= function(ctx,x,y,print,stanza,func,backLast){
+				let m = 1,
 			  		color = "#"+this.get('main.fretboard.options.notes'),	
             beat = this.get('beat');
 
-				while(m-- > -1){
-					setTimeout(animationFrame,m*stanza,ctx,[scaleUp,noteMoji],x,y,print,m,beat,color)
+				while(m++ < rate){
+					setTimeout(animationFrame,m*stanza,ctx,[noteMoji],x,y,print,m,beat,color,backLast)
 				}
 			};
 
@@ -74,9 +81,11 @@ const scaleUp = function(x,y,print,m,beat,color){
 				},rate*playRATE)
 */
 
-export default function(ctx,boardX,boardY,print,stanza,isMoji){
+export default function(ctx,boardX,boardY,print,stanza,isMoji,func,args){
 		if(isMoji){
-			upImp.call(this,ctx,boardX,boardY,print,stanza)
+			ctx.fillStyle = 'cornsilk';
+			ctx.strokeStyle		=	'cornflowerBlue'
+			upImp.call(this,ctx,boardX,boardY,print,stanza,func,args)
 		}else{
 			console.error(this.get('main.fretboard.options.notes'))
       if(this.get('isToneToHue')){
