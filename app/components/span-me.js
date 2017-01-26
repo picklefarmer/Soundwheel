@@ -4,7 +4,15 @@ import KeyDown from '../mixins/keydown';
 export default Ember.TextField.extend(KeyDown,{
   classNames:"span-me",
   keyDownBinding:'statis',
-  attributeBindings:['onblur','onfocus'],
+  attributeBindings:['onblur','onfocus','size'],
+	classNameBindings:['dynamicWidth::dynamicWidth'],
+//	size:300,
+	size:Ember.computed('dynamicWidth','value.length',function(){
+		if(this.get('dynamicWidth')){
+			return this.get('value.length')
+		}
+	}),
+	valueLength:Ember.computed('value.length',function(){return this.get('value').length}),
   statis:Ember.computed('aether',function(){
     if(this.get('aether')){
       return this.get('keyFunction')

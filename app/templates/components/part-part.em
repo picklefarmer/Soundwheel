@@ -1,6 +1,6 @@
 if isEdit
   div: =span-me [
-    size="5"
+    dynamicWidth=true
     didInsertElement=toFocus
     value=(mut song.selected.part.name)
     class="bar-input"

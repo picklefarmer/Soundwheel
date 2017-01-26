@@ -8,7 +8,7 @@ html, body{
 	//overflow-y:hidden;
 }
 .ember-text-field{
-	width:100%;
+	width:inherit;//92.8%;
 
 }
 input[type="range"] {
@@ -171,8 +171,8 @@ $book:$deepPurple;//linear-gradient(90deg,$u1 1%,$u2 18%,$u1 35%,$deepSecond 50%
 			height:inherit;
 			height:100%;
 		  border-radius: 0 0 $borderRadius 0 ;
-		  border: solid #e0e0e0 1rem;
-			border-top-color: $secondColor;
+		  border: solid $crisp 1rem;
+			//border-top-color: blue;//$secondColor;
 		  border-width: 0 0 3rem  0;
 			border-right-width: $slim;
 		}

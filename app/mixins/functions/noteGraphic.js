@@ -17,7 +17,6 @@ const scaleUp = function(x,y,print,m,beat,color){
 },
 			scaleDown = function(x,y,print,m,beat){
 			this.beginPath()
-				this.fillStyle='black';
 			this.arc(	x , y,(rate- m),	0,	2*Math.PI)
  			this.closePath();
 		 	this.fill()
@@ -40,13 +39,8 @@ const scaleUp = function(x,y,print,m,beat,color){
 				this.strokeText(print,x-m*1.1 +4,y + m*.63 +4)
 			},
 
-      animationFrame= function(ctx,func,x,y,print,m,beat,color,backLast){
+      animationFrame= function(ctx,func,x,y,print,m,beat,color){
      		requestAnimationFrame(()=>{
-						if(m===6){
-						backLast.forEach( function(coords){
-							ctx.clearRect(coords[0]-24,coords[1]-24,48,48)
-							})
-						}
 						ctx.clearRect(x-24,y-24,48,48)
             func.forEach(func=>func.call(ctx,x,y,print,m,beat,color))
 				})
@@ -66,13 +60,13 @@ const scaleUp = function(x,y,print,m,beat,color){
 					setTimeout(animationFrame,m*stanza,ctx,[scaleDown],x,y,null,m)
 				}
 			},
-  		upImp		= function(ctx,x,y,print,stanza,func,backLast){
+  		upImp		= function(ctx,x,y,print,stanza){
 				let m = 1,
 			  		color = "#"+this.get('main.fretboard.options.notes'),	
             beat = this.get('beat');
 
 				while(m++ < rate){
-					setTimeout(animationFrame,m*stanza,ctx,[noteMoji],x,y,print,m,beat,color,backLast)
+					setTimeout(animationFrame,m*stanza,ctx,[noteMoji],x,y,print,m,beat,color)
 				}
 			};
 
@@ -81,7 +75,7 @@ const scaleUp = function(x,y,print,m,beat,color){
 				},rate*playRATE)
 */
 
-export default function(ctx,boardX,boardY,print,stanza,isMoji,func,args){
+export default function(ctx,boardX,boardY,print,stanza,isMoji){
 		if(isMoji){
 			ctx.fillStyle = 'cornsilk';
 			ctx.strokeStyle		=	'cornflowerBlue'
