@@ -1,48 +1,36 @@
-export default function(b,dots,size,height,color,front){
+import Moon from './../instances/moon';
+export default function(b,dots,size,height,color){
 
-					var gibbos = 'white'; // "hsl(180,11%,32%)"
-					front = "rgba(33,33,0,.5)"
+					b.fillStyle = 'pink';//color["fret marker"] // "hsl(180,11%,32%)"
+					b.font = "4rem Ariel"
+					let phase = 1;
 					dots = 4
-					height = height/2
+					height = height/2 + 12
 					while(dots--){
-						let length = size*3.5+3+(dots*size*2);
-						b.fillStyle = gibbos
-						b.beginPath()
-						b.arc(length,height,16,0,2*Math.PI)
-						b.fill()
-						//b.beginPath()
-						b.beginPath()
-						b.fillStyle = front
-						b.arc(length,height,16,0,Math.PI)
+						let length = size*3.5-15+(dots*size*2);
+						b.fillText(Moon(phase-=0.125),length,height)
 						b.fill()
 					}
-	
-					b.fillStyle = gibbos
+
 					dots = 4;
 
+					phase+=0.125
 					while(dots--){
-						let length = size*15.5+3+(dots*size*2);
+						let length = size*15.5-15+(dots*size*2);
 						b.beginPath()
-						b.fillStyle = gibbos
-						b.arc(length,height,16,0,2*Math.PI)
-						b.fill()
-						b.beginPath()
-						b.fillStyle = front
-						b.arc(length,height,16,0,Math.PI)
+						b.fillText(Moon(phase-=0.125),length,height)
+						//b.arc(size*15.5+3+(dots*size*2),height,16,0,2*Math.PI)
 						b.fill()
 					}
+
 					dots = 2;
-		
+					phase = 0.5
 					while(dots--){
-						let length = size*12.5+3,
-								depth		=	75+height*dots;
-						b.fillStyle = gibbos
+						let length = size*12.5-15,
+							depth = (150*dots)+87;
 						b.beginPath()
-						b.arc(length,depth,16,0,2*Math.PI)
-						b.fill()
-						b.beginPath()
-						b.fillStyle = front
-						b.arc(length,depth,16,0,Math.PI)
+						b.fillText(Moon(length),length,depth)
+						//b.arc(size*12.5+3,75+(height)*dots,16,0,2*Math.PI)
 						b.fill()
 					}
 }

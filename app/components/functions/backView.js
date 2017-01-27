@@ -62,11 +62,12 @@ export default function(a,ctx ) {
 					//
 					b.restore()
 
+					FretMarkers(b,dots,size,height,color)
+
 					if(isMoon){						
 						MoonMarkers(b,dots,size,height,color,front)
-					}else{
-						FretMarkers(b,dots,size,height,color)
 					}
+					
 
 					b.fillStyle = "rgba(44,77,150,.122)"
 					b.lineWidth = "5"
