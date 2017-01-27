@@ -52,6 +52,34 @@
 	background-position: 26px 0px, 29px 0px;
 	background-color:transparent;
 }
+
+.lips{
+
+  width:100%;
+  position:relative;
+  &:after,
+  &:before{
+    content:"";
+    display:inline-block;
+    position: absolute;
+    z-index:-1;
+    background-repeat: no-repeat;
+    height:98%;
+    top:0;
+    width:50%;
+    pointer-events: none;
+
+    background-size:contain;
+    background-image:url('./../images/lips.svg');
+
+    //content:attr(lips),
+
+  }
+  &:after{
+    right:0rem;
+    transform:rotateY(180deg);
+  }
+}
 .tablet{
   div:first-child{
       display:inline-block;
@@ -70,27 +98,7 @@
 	overflow-y:	hidden;
 	cursor:crosshair;
 	//width:1400px;
-  &:after,
-  &:before{
-    content:"";
-    display:inline-block;
-    position: relative;
-    z-index:1;
-    background-repeat: no-repeat;
-    height:100%;
-    width:50%;
 
-    background-size:contain;
-    background-image:url('./../images/lips.svg');
-
-    //content:attr(lips),
-
-  }
-  &:after{
-    transform:rotateY(180deg);
-    background-image-position:center;
-
-  }
 
 }
 
@@ -100,11 +108,11 @@
 
 .tablature{
 	border-radius:8px;
-	margin-left:10px;
+	//margin-left:10px;
 	display:inline-block;
 	height:300px;
 	position:absolute;
 	top:0px;
-	left:-$chordScale;
+	//left:-$chordScale;
 
 }

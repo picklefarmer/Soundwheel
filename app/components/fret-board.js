@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     'frontView':C,
 	},
 
-	classNames:['tablet'],
+	classNames:['tablet','orangino'],
 	classNameBindings:['verticalTab','isTutorial'],
   isTutorial:Ember.computed.alias('song.isExplain'),
   

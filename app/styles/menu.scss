@@ -55,6 +55,7 @@
 }
 .menubar{
 
+
 	color:transparent;
 	text-align:center;
 	text-align:-webkit-center;
@@ -63,6 +64,7 @@
   font-family:'led_sas';
 	display:block;
 	width:100%;
+
 	margin:1rem;
 
 	padding:1rem;
@@ -85,6 +87,22 @@
   from {background: transparent;}
   to {background:blue}
 }
+	ul{
+		white-space: nowrap;
+		max-width: 62%;
+		overflow-x: scroll;
+		&::-webkit-scrollbar-track{
+			background:transparent;//$deepPurple;
+		}
+		&::-webkit-scrollbar{
+			width:12rem;
+			background-color:$deepPurple;
+		}
+		&::-webkit-scrollbar-thumb{
+			background:blue;
+		}
+
+	}
 	li{
 		padding:none;
 		vertical-align:middle;
@@ -95,6 +113,7 @@
 				box-shadow: none;
 				border-color:$middlered;
 				background:$secondColor;
+
 				label{
 					animation: mymove 4s infinite;
 					border:none;
@@ -109,7 +128,7 @@
 			background:$colorTwo;
 			@include box-shadow(rgba(0, 0, 0, 0.898438) 0px 0px 20px inset);
 			@include text-shadow(0px 1px 2px #282828);
-		    @include background-clip(text);
+	    @include background-clip(text);
 
 			font-size:20px;
 			padding:6px;

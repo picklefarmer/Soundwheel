@@ -9,5 +9,5 @@ if song.panels.isFulfilled
       playbar=true
       base=target.currentPath
       ]
-    outlet
+    .lips: =outlet
 /back-ground
