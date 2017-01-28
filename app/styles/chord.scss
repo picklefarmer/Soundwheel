@@ -1,5 +1,5 @@
-$borderWidth:.15rem;
-$midnight-sea:rgba(0,0,0,0.31);
+
+
 @import "compass/css3/box-shadow";
 @import "compass/functions/lists";
 @import 'properties';
@@ -62,11 +62,12 @@ $midnight-sea:rgba(0,0,0,0.31);
 .chordBank{
 	overflow:hidden;
 	transform-origin: center 29%;
-	transform: scale(0.5);
+	transform: scale(0.8);
 	div{
 		margin:$chordScale/2;
 	}
 	li{
+		direction:initial;
     margin:$borderWidth;
     outline:none;
   }
@@ -89,12 +90,12 @@ $midnight-sea:rgba(0,0,0,0.31);
 
 
 		.hit{
-			color:$deepBlue;
-			border:inset $chordScale/2 $midnight-sea;
+			color:$deepSecond;
+			border:inset $chordScale/2 $secondColor;
 			background: $midnight-sea ;
 		}
 		td{
-			transition:color 2s;
+			//transition:color 2s;
 			line-height: $chordScale;
 			font-size: $chordScale;
 			//box-shadow:1px 1px 4px 5px yellow;
@@ -136,14 +137,31 @@ $midnight-sea:rgba(0,0,0,0.31);
 	}
 }
 .match{
+	//background:$pink !important;
+	.hit{
+		color:$pink !important;
+		border-color:$deepRed $pink $mahogany $deepRed !important;
+		border-style:solid !important;
+
+		box-shadow:$deepRed 0rem 0rem 2rem !important;
+		background:$mahogany !important;
+	}
+	td{
+		color:transparent !important;
+		box-shadow:none !important;
+		border-color:transparent !important;
+	}
   @include box-shadow( rgba(0,0,0,0.75) 0px 0px 6px 4px);
-	div,td,li,table{
-		background:$midnight-sea !important;
+	div,li,table{
+		border-radius: $borderWidth !important;
+		background:transparent !important;
 
 	}
   margin:0 !important;
   border-radius:$chordScale;
-  border:$borderWidth solid cyan !important;
+	color:$orange;
+	background: transparent;
+  border:$borderWidth solid $deepOrange !important;
 }
 
 /*

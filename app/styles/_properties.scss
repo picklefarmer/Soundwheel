@@ -2,11 +2,19 @@
 @mixin lineHeight(){
 	line-height:1rem;
 };
+$orange:#f90;
+$secondColor:rgb(224, 228, 200);
+$midnight-sea:rgba(0,0,0,0.31);
+$panelOverlay:linear-gradient(to bottom, $secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+
 $fret:url('./../images/fret.jpg');
 $chordScale:2rem;
+$borderWidth:$chordScale;
 $mahogany:rgb(185, 12, 12);
 $borderRadius:100%;
 $deepSecond:#3a3835;
+$pink:lighten($mahogany,40%);
+
 $middleyellow:rgb(102, 102, 28);
 $middleblue:rgb(157, 163, 168);
 $middlered:#e8b4b4;
@@ -19,12 +27,28 @@ $deepPurple:#1c1026;
 $deepRed:#290303;
 $deepBlue:rgb(6, 64, 83);
 //rgba(37, 66, 90,0.58);
-$secondColor:rgb(224, 228, 200);
+
 $goldArrow:black;//rgba(3, 25, 43, 1);
 $coldFeet:white;//rgba(244,213,209,.97);
 $algebra:rgba(0 , 0 , 0 , .84);
 
-$panelOverlay:linear-gradient(to bottom, $secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+$orangeV: -webkit-linear-gradient(90deg,
+		rgba(255, 255, 255, .2) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, .2) 50%,
+		rgba(255, 255, 255, .2) 75%,
+		transparent 75%,
+		transparent);
+$orangeH: -webkit-linear-gradient(0deg,
+				$deepOrange 25%,
+				transparent 25%,
+				transparent 50%,
+				$deepOrange 50%,
+				$middleorange 75%,
+				transparent 75%,
+				transparent);
+
 $middlegrey:$deepPurple;//#ccc;///#666;
 $textcolor:#112212;
 $activeColor:#c73a27;

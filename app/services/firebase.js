@@ -202,8 +202,6 @@ export default Ember.Service.extend({
     },
  
     update(value,isRest){
-          console.log("socket update",value)
-     
      var 	base	= this.get('group'),
 					beat	=	this.get('beat'),
          	index = this.get('selected.index'),
@@ -212,8 +210,11 @@ export default Ember.Service.extend({
 
 					//				string
 					// [ 0, 4, 3, 2, 0, 0][beat]
-          
-      console.log( base, song, index ,part, beat ,'update ') 
+         /* 
+      console.log(`socket update :`,value,`
+					`,{ base, song, index,part, beat },`
+					update`) 
+					*/
 
      var ref = base
         .child('songs').child(song)

@@ -80,10 +80,13 @@
     transform:rotateY(180deg);
   }
 }
+
 .tablet{
   div:first-child{
       display:inline-block;
   }
+  margin:0 $chordScale;
+
 	border-radius:15px;
 	//margin:9rem 6rem 0;
 	//border:7px inset #383838;

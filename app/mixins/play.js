@@ -149,7 +149,7 @@ const scale = 36;
 export default Ember.Mixin.create({
 	/* temp */
 	isParty:true,
-	isMoon:true,
+	//	isMoon:true,
 	//	isMoji:true,
 	actions,
   globalKeydown:Ember.inject.service(),

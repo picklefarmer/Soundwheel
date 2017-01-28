@@ -12,7 +12,7 @@
 @mixin fullBar($pos){
 	#{$pos}:0px;
 	//@extend .orangino;
-	transition:backGround 1s;
+	//transition:background 1s;
 	position:fixed;
 	text-align:center;
 	//background:$middleyellow;//#aaa;

@@ -7,19 +7,40 @@
 		background-color: transparent;
 	}
 	&::-webkit-scrollbar{
-		width: 10px;
+		width: $chordScale;
+		height: $chordScale;
+
 		background-color: transparent;//#F5F5F5;
 	}
 	&::-webkit-scrollbar-thumb{
-	background-color: #F90;
-	background-image: -webkit-linear-gradient(90deg,
-      rgba(255, 255, 255, .2) 25%,
-		  transparent 25%,
-		  transparent 50%,
-		  rgba(255, 255, 255, .2) 50%,
-		  rgba(255, 255, 255, .2) 75%,
-		  transparent 75%,
-		  transparent)
+
+		border-radius:$chordScale/3;
+		background-color: $orange;
+		background-image: $fret;
+	}
+}
+
+.inline-tab{
+	width:50%;
+
+	//position:relative;
+	display:table;
+
+}
+
+.oranginoH{
+	@extend .orangino;
+	&:hover{
+		//background-color: green;
+	}
+	&::-webkit-scrollbar-thumb{
+		&:hover{
+			background-color:$orange;
+		}
+		background-color:$midnight-sea;
+		background-image:$fret;
+		background-size: $chordScale*12;
+		background-repeat: repeat;
 	}
 }
 

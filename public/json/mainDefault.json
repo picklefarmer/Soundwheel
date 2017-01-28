@@ -2,7 +2,7 @@
 	"isLeft"	:{"enabled":false, 	"options":false	},
 	"frets"		:{"enabled":true, 	"options":24	},
 	"strings"	:{"enabled":true,	"options":6		},
-	"fretboard"	:{"enabled":true,	"options":{	"background":"012","fret marker":"012","notes":"fff"}},
+	"fretboard"	:{"enabled":true,	"options":{	"background":"rgba(19,34,16,.58)","fret marker":"rgba(33,33,.5)","notes":"fff"}},
 	"notemoji":{"enabled":true,"options":["\u2600"]},
 	"bankmoji":{"enabled":true,"options":["\uD83D\uDD18"]},
 	"tuning"	:{"enabled":true,	"options":["e","a","d","g","b","e"]}

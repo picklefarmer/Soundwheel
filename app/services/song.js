@@ -104,8 +104,9 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
     cacheNotes:[[]],
 
     beat:Ember.computed({
-      get(){ console.log( 'get beat'); return 0},
-      set:beatIndex
+      get(){ console.log( 'init get beat'); return 0},
+    
+			set:beatIndex
     }),
 
     pulse,

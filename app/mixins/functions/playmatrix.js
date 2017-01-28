@@ -45,8 +45,6 @@ obj.beat = function(beat){
 			kit		= this.get('measureKit'),
 			isKit = this.get('isKit'),
 			holdNote=this.get('holdNote'),
-			lastNotes	=	this.get('lastNotes'),
-			backLast	=	lastNotes ? lastNotes.concat([]):[],
 			isMoji	=	this.get('isMoji');
 
 		console.error(this.get('selected').getProperties('composition','part','measure'))
@@ -60,9 +58,9 @@ obj.beat = function(beat){
 						.map( ([note,idx]) => [note*x + xFactor, idx*y + yFactor,note,idx]);
 	) */
 
-	this.set('lastNotes', this.get('selected.fretMeasure')
+	lastNotes =  this.get('selected.fretMeasure')
 							.getEach(""+beat)
-							.filter( a =>a?true:false))
+							.filter( a =>a?true:false)
 
 	if(isKit && kit){
 		toKitBin.call(this,kit.objectAt(beat))
@@ -74,7 +72,7 @@ obj.beat = function(beat){
 
 		if( !obj[2].length){
 			Ember.run(audio.objectAt(obj[3]),'play',obj[2],stanza/(9-time))
-			NoteGraphic.call(this,view,obj[0],obj[1],print,stanza,isMoji,clearLast,backLast)						
+			NoteGraphic.call(this,view,obj[0],obj[1],print,stanza,isMoji,clearLast)						
 		}else{
 
 			Ember.run(audio.objectAt(obj[3]),'glide',obj[2],stanza/(9-time))

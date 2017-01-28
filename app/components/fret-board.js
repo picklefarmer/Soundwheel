@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     'frontView':C,
 	},
 
-	classNames:['tablet','orangino'],
+	classNames:['tablet','oranginoH'],
 	classNameBindings:['verticalTab','isTutorial'],
   isTutorial:Ember.computed.alias('song.isExplain'),
   
@@ -39,8 +39,6 @@ export default Ember.Component.extend({
 	volume:	0.25,
 
 	didInsertElement(){
-		//this.set('options.fretboard',this.get('element'))
-///		Ember.$(window).on('resize', e => Ember.run.debounce(this.get('song'),function(e){this.set('docHeight',Ember.$(document.body).height())//console.log('e',e,document.body.scrollHeight)//this.set('docHeight' , },e,150))
 
    	Ember.$(document).off('keydown')
    	Ember.$(document).off('keyup')
@@ -92,8 +90,5 @@ export default Ember.Component.extend({
 			}
 		}
 	}
-
-	//playSwitch:Ember.observer('song.selected.isFulfilled',playSwitch)
-
 })
 

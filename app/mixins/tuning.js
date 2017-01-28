@@ -18,6 +18,7 @@ export default Ember.Mixin.create({
 				return objArray
 			}
 		}),            
+		overlay:'#f89999',//rgb(155,90,0)',
 		bankmojiArr:notemojiArr,
 		notemojiArr,
 		fretboard:Ember.computed('content.fretboard.[]',{

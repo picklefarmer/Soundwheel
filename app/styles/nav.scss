@@ -3,7 +3,10 @@
 .menu-bar{
 	margin:1rem 0;
 	text-align: center;
-
+	.playbar{
+		margin: auto;
+		display:table;
+	}
 
   ul{
 		display: inline-block;
@@ -13,7 +16,7 @@
 		justify-content:center;
   }
   li{
-  	
+
     background:$middlegrey;
     border: groove;
     margin:0 .3rem;

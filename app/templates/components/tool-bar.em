@@ -4,8 +4,7 @@ each group as |panel|
   if (e-q panel.options 'middle')
     =hover-label [
       class=(concat panel.options 'Full')
-      autohide=panel.enabled 
-      vertcalTab=song.options.verticalTab
+      verticalTab=song.verticalTab
       mouseEnter=(action 'overLabel' panel.name target=song)
       mouseLeave=(action 'outLabel' target=song)
       ]

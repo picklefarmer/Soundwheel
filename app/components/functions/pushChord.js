@@ -23,7 +23,7 @@ export default function(e){
 
 	    console.log(theArr.toString(),measure)
 
-	    console.log('is firing',arr)
+	    console.log('is firing',theArr)
 
 	    Ember.run( this.get('song') ,this.get('song.content.update'),  theArr  )
 
