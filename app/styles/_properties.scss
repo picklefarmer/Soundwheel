@@ -16,10 +16,19 @@ $deepSecond:#3a3835;
 $pink:lighten($mahogany,40%);
 $panelOverlay:linear-gradient(to bottom, $secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
 $pinkOverlay:linear-gradient(to bottom, $pink 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+$panelOverlay:linear-gradient(to bottom, $secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+$pinkOverlay:linear-gradient(to bottom, $pink 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
 $middleyellow:rgb(102, 102, 28);
 $middleblue:rgb(157, 163, 168);
 $middlered:#e8b4b4;
 $middlepurple:#41041e;
+
+$castleWhite:	#d8faff;
+$deepCastle:	#382486;
+$secondShip: #34d8d7;
+$deepShip:		#12182A;
+
+
 
 $crisp:#e0e0e0;
 $middleorange:#8e8b83;

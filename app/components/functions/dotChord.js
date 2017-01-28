@@ -47,6 +47,7 @@ export default function(chord,pulse,fadeIn){
   chordTemp.map(([fret,string]) => ctx.clearRect(( fret+scale/2 ) -4  , string - 4  ,scale+ 8 ,8+ scale+offset))
 
 		ctx.strokeStyle = this.get('song.main.overlay')
+    ctx.lineWidth = '3.25'
 		ctx.fillStyle 	= 'red'
 		ctx.font = '4rem Ariel';
 		console.log('dotChord' , this.get('song.main.hover'))	
