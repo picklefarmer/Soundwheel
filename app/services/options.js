@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Save from './functions/saveAction';
 import New from './functions/newAction';
+//import ButtonGraphic from './instances/buttonGraphic';
 
 const depth = {
 		0:"offline",
@@ -25,8 +26,6 @@ export default Ember.Service.extend({
   verticalTab:false,
 	song:Ember.inject.service(),
   router:Ember.inject.service('-routing'),
-
-
 	chat:Ember.computed('depth',function(){
 		var level =  depth[this.get('depth')] || 0;
 		return this.get('song.firebase').get(level).child('chat')

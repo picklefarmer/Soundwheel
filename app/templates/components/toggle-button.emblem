@@ -1,7 +1,7 @@
 with (concat elementId "-name") as |idName|
 
   label for=idName
-    =displayText
+    =pic-me graphic=displayText
 
   =yield idName
 
