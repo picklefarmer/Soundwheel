@@ -5,7 +5,7 @@
 $orange:#f90;
 $secondColor:rgb(224, 228, 200);
 $midnight-sea:rgba(0,0,0,0.31);
-$panelOverlay:linear-gradient(to bottom, $secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+
 
 $fret:url('./../images/fret.jpg');
 $chordScale:2rem;
@@ -14,7 +14,8 @@ $mahogany:rgb(185, 12, 12);
 $borderRadius:100%;
 $deepSecond:#3a3835;
 $pink:lighten($mahogany,40%);
-
+$panelOverlay:linear-gradient(to bottom, $secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+$pinkOverlay:linear-gradient(to bottom, $pink 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
 $middleyellow:rgb(102, 102, 28);
 $middleblue:rgb(157, 163, 168);
 $middlered:#e8b4b4;
@@ -52,7 +53,7 @@ $orangeH: -webkit-linear-gradient(0deg,
 $middlegrey:$deepPurple;//#ccc;///#666;
 $textcolor:#112212;
 $activeColor:#c73a27;
-
+$factor:2;
 
 $darkenColor:rgb(114, 124, 130);//rgba(121, 136, 145, 0.66);//#323232;
 $blend:#afafaf;
@@ -60,8 +61,8 @@ $colorOne:#377d5e;
 $colorTwo:#797874;//#7c7d7c;
 $pinkNoise:#ff509a;
 $colorThree:#7a7a7a;
-
-$almond:burlywood;//$middleblue;
+$applicationBackground:rgb(241, 144, 163);//burlywood;
+$almond:$applicationBackground;//$middleblue;
 
 .right{
 	float:right;

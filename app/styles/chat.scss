@@ -3,10 +3,20 @@
 @import "compass/css3/background-clip";
 @import "properties";
 
+$clearness:.9;
 
 .chat-pane{
+	border-radius: $chordScale*$factor;
+	color:$deepPurple;
+	.span-me{
+		background-color: $almond;
+	}
+	.span-me:focus{
+		background-color: $coldFeet;
+
+	}
 	.panel{
-		background:#aa43ff
+		background:transparentize(#aa43ff,$clearness);
 		//background:$middlegrey;
 	}
 	ul{

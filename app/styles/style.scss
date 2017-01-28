@@ -16,7 +16,7 @@
 	position:fixed;
 	text-align:center;
 	//background:$middleyellow;//#aaa;
-	background:linear-gradient(to $pos,$secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+	background:$panelOverlay;//linear-gradient(to $pos,$secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
 	@if ($pos == top) or ($pos == bottom) {
 		left:0px;
 		@if ($pos == top){
@@ -43,6 +43,7 @@
 		height:100%;
 	}
   &.autohide {
+
 		@if ($pos == top){
 			position:fixed;
 		}
@@ -61,7 +62,8 @@
 	  	.chat-pane,ul {
 	  		display: inherit;
 	  	}
-		//	background: $panelOverlayUp;
+			background:$pinkOverlay;
+			
     }
   }
 }
@@ -70,13 +72,14 @@
 @each $pos in top, left, right, bottom {
 	$opposite:opposite($pos);
 	.#{$pos}Full {
-    	@include fullBar($pos);
+  	@include fullBar($pos);
 		border-#{$opposite}:6px solid $algebra;
 		//background-image: url('/images/#{$animal}.png');
   	}
 }
 .middleFull {
 	text-align:center;
+	margin:0 $chordScale 0 0;
 	&.verticalTab{
 		background:#3498db;
 	}

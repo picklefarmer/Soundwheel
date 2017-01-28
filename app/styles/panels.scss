@@ -7,8 +7,8 @@
 		background-color: transparent;
 	}
 	&::-webkit-scrollbar{
-		width: $chordScale;
-		height: $chordScale;
+		width: $chordScale*$factor;
+		height: $chordScale*$factor;
 
 		background-color: transparent;//#F5F5F5;
 	}
@@ -160,7 +160,7 @@ $outScale:1.5rem;
 		//background:$secondColor;
 		outline-offset: -1rem;
 		min-width:60rem;
-		width:40%;
+		//width:40%;
 		position: relative;
 		border-bottom-color: $secondColor !important;
 		border-left-color:#d7b293 !important;
