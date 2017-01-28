@@ -3,7 +3,8 @@ import {sun} from './../../mixins/instances/notemoji';
 const A = '#d8faff',
       C = '#382496',
       D = '#12182A',
-      B = chroma.scale([C,'green',A]).colors(8);
+      E = '#34d8d7',
+      B = chroma.scale([C,E,A]).colors(8);
 const offset = 18,
 			scale = 36,
       rotation  = 4,
