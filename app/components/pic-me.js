@@ -21,6 +21,8 @@ export default Ember.Component.extend({
     //    _.fill()
     _.font  =   '6rem monotype'
     _.textAlign = 'center'
+    _.lineWidth = ''+1;
+    _.strokeStyle = 'rgb(192,144,4)'
     requestAnimationFrame(()=>{
       _.fillStyle = 'rgb(241, 144, 163)'
       _.fillText(graphic,30,40)

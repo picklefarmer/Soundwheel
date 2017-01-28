@@ -1,17 +1,35 @@
 import {sun} from './../../mixins/instances/notemoji';
 
+const A = '#d8faff',
+      C = '#382496',
+      D = '#12182A',
+      B = chroma.scale([C,'green',A]).colors(8);
 const offset = 18,
 			scale = 36,
+      rotation  = 4,
 			l		=	8,
+      factor  = (Math.PI*2)/8,
+      sliceWidth  = factor,
 			graphic = function(x,y,ctx,back){
 				let X = offset+x+scale/2,
 						Y	=	offset/2+y+scale/2;
+
+        for(var v = 9; v > 0; v--){
+          let pi = v*factor;
+          ctx.fillStyle = B[(v+rotation)%7]
+            ctx.beginPath()
+          ctx.arc(X,Y,18,pi,pi+sliceWidth,false)
+          ctx.lineTo(X,Y)
+          ctx.fill()
+        }
 				ctx.beginPath()
-				ctx.strokeStyle = 'coral'
+//				ctx.strokeStyle = 'coral'
+        ctx.fillStyle = A
 				ctx.fillText('\u2600',X-18,Y+14)
 				ctx.stroke()
 
-				ctx.strokeStyle = back
+        
+				ctx.strokeStyle =D //back
 				ctx.arc(X,Y,
 					((scale/2)/8)*l,
 					0,2*Math.PI

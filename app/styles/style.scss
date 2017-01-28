@@ -7,7 +7,7 @@
 @import "compass/css3/appearance";
 
 @import "properties";
-
+$algebra:$almond;
 
 @mixin fullBar($pos){
 	#{$pos}:0px;
@@ -16,7 +16,7 @@
 	position:fixed;
 	text-align:center;
 	//background:$middleyellow;//#aaa;
-	background:$panelOverlay;//linear-gradient(to $pos,$secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+	background:linear-gradient(to #{opposite($pos)},$pink 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
 	@if ($pos == top) or ($pos == bottom) {
 		left:0px;
 		@if ($pos == top){
@@ -62,8 +62,9 @@
 	  	.chat-pane,ul {
 	  		display: inherit;
 	  	}
-			background:$pinkOverlay;
-			
+			background:linear-gradient(to $pos,$secondColor 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+			//background:$panelOverlay;
+
     }
   }
 }
@@ -73,7 +74,7 @@
 	$opposite:opposite($pos);
 	.#{$pos}Full {
   	@include fullBar($pos);
-		border-#{$opposite}:6px solid $algebra;
+		border-#{$opposite}:$chordScale/$factor solid $algebra;
 		//background-image: url('/images/#{$animal}.png');
   	}
 }
