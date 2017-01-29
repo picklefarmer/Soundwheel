@@ -194,7 +194,7 @@ $book:$deepPurple;//linear-gradient(90deg,$u1 1%,$u2 18%,$u1 35%,$deepSecond 50%
 	vertical-align:middle;
 	border-radius:3rem;
 	padding:0;
-	color:$middlepurple;
+	color:$deepGold;//$middlepurple;
 	overflow:hidden;
 	outline: $secondColor .3rem solid;
 	outline-offset: -2rem;
@@ -202,13 +202,24 @@ $book:$deepPurple;//linear-gradient(90deg,$u1 1%,$u2 18%,$u1 35%,$deepSecond 50%
 	border:solid $secondColor;
 	//background:$book;//white;
 }
+.canon{
+	.exp{
+		padding:$chordScale*$factor 0;
+	}
+	.expanding{
+		&:before,&:after{
+			padding:$chordScale*$factor 0;
+		}
+	}
+}
 .expanding{
 	vertical-align: top;
 	color:$middleorange;
+	padding:1rem;
 	//color:$deepSecond;//	$middleblue;
     display:table-cell;//width: 39%;
 		&:before,&:after{
-			padding: 1rem;
+			padding: inherit;
 			margin-right: $chordScale;
 			content:"⡇";
 			display: block;

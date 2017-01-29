@@ -7,11 +7,12 @@ const A = '#d8faff',
       B = chroma.scale([C,E,A]).colors(8);
 const offset = 18,
 			scale = 36,
+      fontHeight= 1.68,
       rotation  = 4,
 			l		=	8,
       factor  = (Math.PI*2)/8,
       sliceWidth  = factor,
-			graphic = function(x,y,ctx,back){
+			graphic = function(x,y,ctx,back,overMoji){
 				let X = offset+x+scale/2,
 						Y	=	offset/2+y+scale/2;
 
@@ -26,7 +27,7 @@ const offset = 18,
 				ctx.beginPath()
 //				ctx.strokeStyle = 'coral'
         ctx.fillStyle = A
-				ctx.fillText('\u2600',X-18,Y+14)
+				ctx.fillText(overMoji,X-8,Y+5)
 				ctx.stroke()
 
         
@@ -41,7 +42,7 @@ export default function(chord,pulse,fadeIn){
 			var chordTemp = this.get('chordTemp'),
 					isLow			=	this.get('isLow'),
 					back			=	this.get('song.main.overlay'),
-					overMoji	=	this.get('song.main.overMoji') || '\u2600',
+					overMoji	=	this.get('song.main.bankmoji.options') || '\u2600',
 					ctx = this.get('options.centerView');
 			
   chordTemp.map(([fret,string]) => ctx.clearRect(( fret+scale/2 ) -4  , string - 4  ,scale+ 8 ,8+ scale+offset))
@@ -49,14 +50,15 @@ export default function(chord,pulse,fadeIn){
 		ctx.strokeStyle = this.get('song.main.overlay')
     ctx.lineWidth = '3.25'
 		ctx.fillStyle 	= 'red'
-		ctx.font = '4rem Ariel';
+		ctx.font = fontHeight+'rem Ariel';
+    ctx['text-align'] = 'center'
 		console.log('dotChord' , this.get('song.main.hover'))	
 //	ctx.globalCompositeOperation = "source-over"
 //	ctx.globalAlpha=	pulse || 0.5
 		
 	for(var [x,y] of chord){
 		if(x){
-			graphic(x,y,ctx,back)
+			graphic(x,y,ctx,back,overMoji)
 		
 			if(isLow){
 				ctx.fill();

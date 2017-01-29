@@ -10,4 +10,6 @@ if song.panels.isFulfilled
       base=target.currentPath
       ]
     .lips: =outlet
+    =tool-tip glyph=song.barOverlay.glyph name=song.barOverlay.name
+      =song.barOverlay
 /back-ground

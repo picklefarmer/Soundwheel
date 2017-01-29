@@ -12,9 +12,9 @@ import ChatPass from './functions/chatPass';
 import Numeric  from './instances/numeric';
 
 const actions = {
-  overLabel(name){
+  overLabel(name,glyph){
     if(this.get('isToolTip')){
-      this.set('barOverlay',name)
+      this.set('barOverlay',{name,glyph})
     }
   },
   outLabel(){
@@ -151,6 +151,7 @@ export default Ember.Mixin.create({
 	isParty:true,
 	//	isMoon:true,
 	//	isMoji:true,
+  isToolTip:true,
 	actions,
   globalKeydown:Ember.inject.service(),
 	playMatrix

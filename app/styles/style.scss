@@ -16,7 +16,10 @@ $algebra:$almond;
 	position:fixed;
 	text-align:center;
 	//background:$middleyellow;//#aaa;
-	background:linear-gradient(to #{opposite($pos)},$pink 0%, rgba(76,76,76,0.15) 85%, rgba(76,76,76,0) 100%);
+	background:linear-gradient(to #{opposite($pos)},
+		$secondShip 0%,
+		transparentize($deepMaple, .85),
+		transparentize($deepMaple,.15) 85%, transparentize($deepMaple,0) 100%);
 	@if ($pos == top) or ($pos == bottom) {
 		left:0px;
 		@if ($pos == top){
@@ -74,7 +77,13 @@ $algebra:$almond;
 	$opposite:opposite($pos);
 	.#{$pos}Full {
   	@include fullBar($pos);
-		border-#{$opposite}:$chordScale/$factor solid $algebra;
+		ul:first-child,div:first-child{
+			border:$chordScale solid transparent;
+			border-top-#{$pos}-radius:$chordScale*$factor;
+			border-bottom-#{$pos}-radius: $chordScale*$factor;
+
+		}
+		border-#{$opposite}:$chordScale/$factor solid $deepGold;
 		//background-image: url('/images/#{$animal}.png');
   	}
 }

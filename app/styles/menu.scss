@@ -8,8 +8,30 @@
 @import "compass/css3/appearance";
 
 .tool-tip{
+	text-align: center;
 	font-size: 90px;
+	h1{
+		padding: 0 $chordScale*$factor;
+		display: inline-block;
+		&:before{
+			//padding-left: $chordScale;
+			content:attr(canon);
+			float:left;
+			margin-right: $chordScale;
+			height:20px;
+			display: inline-block;
+			width: 8rem;
+			font-size: 6rem;
+		}
+	}
+	margin-left: $chordScale*2.5;
+	bottom:$chordScale;
+	position: absolute;
 	background: $middlegrey;
+	h4{
+		padding:$chordScale*$factor;
+		background:magenta;
+	}
 	@include box-shadow(inset 0px 0px 4px 4px $blend);
 }
 .vertical-align{
@@ -30,6 +52,15 @@
 .option-stack{
 	div{
 		display:block !important;
+	}
+	li{
+		&:after{
+			display: block;
+			content:attr(canon);
+			width:$chordScale*$factor;
+			height:90%;
+			background-color: $deepCastle;
+		}
 	}
 	background:$secondColor;//black;
 	//position:absolute;

@@ -1,5 +1,3 @@
-=tool-tip name=song.barOverlay
-  =song.barOverlay
 ul.panel.panel-default.orangino
   if song.leaders.isFulfilled
     each song.dataArray as |messObject|
