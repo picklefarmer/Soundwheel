@@ -18,7 +18,7 @@ export default Ember.ArrayProxy.reopenClass({
 			.map( piece => {
 				return Ember.Object.create({
 					ac:wa.get('ac'),
-					mv:wa.get('masterVolume'),
+					mv:wa.get('kitVolume'),
           cp:wa.get('compressor'),
 					play(){
 						piece.call(this.get('ac'),this.get('mv'),this.get('cp'))

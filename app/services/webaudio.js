@@ -1,28 +1,35 @@
 import Ember from 'ember';
 import Tone from '../mixins/tone-object';
+import Gain 		from './functions/generateGain';
+import AudioTree from './instances/audioTree';
 import ImpulseResponse from './functions/impulseResponse';
 
 export default Ember.Service.extend(Tone,{
-  	instruments:Ember.inject.service(),
-  	song:Ember.inject.service(),
+	init(){
+		this._super()
 
-  	tone(freqs){
+		AudioTree.call(this)
+	},
+  instruments:Ember.inject.service(),
+  song:Ember.inject.service(),
+
+  tone(freqs){
   
       return this.get('toneObject')
                   .create({
                     song:this.get('song'),
                     instruments:this.get('instruments'),
                     freqs:freqs,
-                    masterVolume:this.get('masterVolume'),
+                    boardVolume:this.get('boardVolume'),
                     ac:this.get('ac')
                    })
-  	},
+  },
 
-  	tempo:Ember.computed('song.tempo',{
+  tempo:Ember.computed('song.tempo',{
 		get(){
     		return this.get('song.tempo')
 		}
-  	}),
+  }),
   analyser:Ember.computed('ac','masterVolume',function(){
     const analyser = this.get('ac').createAnalyser();
 		analyser.fftSize = 512;
@@ -41,36 +48,50 @@ export default Ember.Service.extend(Tone,{
 	}),
 	compressor:Ember.computed('ac',function(){
 		let ac 					=	this.get('ac'),
-				analyser		=	this.get('analyser'),
 				compressor 	= ac.createDynamicsCompressor();
-
-				compressor.connect(ac.destination)
-		   	compressor.connect(this.get('analyser'));
-
 		return compressor
 	}),
-	masterVolume:Ember.computed({
-  		get(){
-		    var ac 			= this.get('ac'),
-        		gain		= ac.createGain(),
-	        	comp = this.get('compressor');
 
-					gain.connect(comp)
-        	return gain
-		},
+	kitVolume:Ember.computed({
 		set(_,volume){
+			var ac = this.get('kitVolume');
+				ac.gain.value = volume;
+				return ac
+		},
+		get(){
+		   var ac 			= this.get('ac'),
+        		gain		= ac.createGain();
+			 		return gain
+				}
+	}),
+	boardVolume:Ember.computed({
+		set(_,volume){
+			var ac = this.get('boardVolume');
+				ac.gain.value = volume;
+				return ac
+		},
+		get(){
+		   var ac 			= this.get('ac'),
+        		gain		= ac.createGain();
+						return gain;
+				}
+	}),
+	masterVolume:Ember.computed({
+ 		set(_,volume){
 			var ac = this.get('masterVolume');
 
 				ac.gain.value = volume;
 				return ac
 		},
-	}),
-
-  	ac:Ember.computed({
 		get(){
-				let ac = window.AudioContext || window.webkitAudioContext;
-		    return  new ac()
-		}
+		   var ac 			= this.get('ac'),
+        		gain		= ac.createGain();
+			 		return gain
+				}
+	}),
+ac:Ember.computed(function(){
+		let ac = window.AudioContext || window.webkitAudioContext;
+    return  new ac()
 	})
 })
 

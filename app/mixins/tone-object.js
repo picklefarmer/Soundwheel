@@ -10,18 +10,18 @@ export default Ember.Mixin.create({
 
 		init(){
 
-			var MV   = this.get('masterVolume'),
+			var boardVolume   = this.get('boardVolume'),
   				tone = this.get('tone'),
-	  			ctx  = this.get('ctx'),
-		  		ac   = this.get('ac');
+	  			toneGain  = this.get('toneGain');
 
 			console.log('tone init')
 		//  this.get('instruments.selected')
 		//  Ember.run(this,"instrumentObserver")
-			this.get('tone').start(0)
-			tone.connect(ctx)
-			ctx.gain.value = 0.166
-			ctx.connect(MV)
+			tone.start(0)
+			tone.connect(toneGain)
+			toneGain.connect(boardVolume)
+			//ctx.gain.value = 0.166
+			//ctx.connect(MV)
 		},
 
     instrument:Ember.computed('instruments.selected',{
@@ -36,7 +36,7 @@ export default Ember.Mixin.create({
 				if(instrument){
 
 					let tone = this.get('tone'),
-						ctx = this.get('ctx'),
+						ctx = this.get('toneGain'),
 						ac = this.get('ac'),
 						W,
 						I;  
@@ -82,7 +82,7 @@ export default Ember.Mixin.create({
       return this.get('freqs').objectAt(tone)
     }.property('freqs'),
   */  
-   	ctx:Ember.computed('ac',{
+   	toneGain:Ember.computed('ac',{
 			get(){
      			return this.get('ac').createGain()
 			}
@@ -92,7 +92,7 @@ export default Ember.Mixin.create({
         let analyser =  this.get('ac').createAnalyser();
         analyser.fftSize = 2048;
         analyser.smoothingTimeConstant = 1;
-         this.get('ctx').connect(analyser)
+         this.get('toneGain').connect(analyser)
          return analyser
     }), 
 
@@ -106,12 +106,12 @@ export default Ember.Mixin.create({
 		glide,
     pause(){
     	// console.log( 'pause' ) 
-      	this.get('ctx').gain.exponentialRampToValueAtTime(0.001,this.get('ctx').context.currentTime)
+      	this.get('toneGain').gain.exponentialRampToValueAtTime(0.001,this.get('tone').context.currentTime)
     	},
 
 	    volume:Ember.computed({
 			set(value){
-  				this.get('ctx').gain.value = value;
+  				this.get('toneGain').gain.value = value;
 			}
 		})   
 	})	

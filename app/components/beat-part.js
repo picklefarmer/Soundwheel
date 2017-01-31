@@ -15,12 +15,12 @@ export default Ember.Component.extend({
   	measure:Ember.computed('index',{
 		get(){
 			var measure = this.get('index').toString()
-
+/*
 			if(	measure[1] ){
 				return measure
 			}
-
-			return "0"+measure
+*/
+			return measure
 		}
 	}),
 

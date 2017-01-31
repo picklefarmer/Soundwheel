@@ -202,6 +202,9 @@ $book:$deepPurple;//linear-gradient(90deg,$u1 1%,$u2 18%,$u1 35%,$deepSecond 50%
 	border:solid $secondColor;
 	//background:$book;//white;
 }
+.hidden{
+	visibility: hidden;
+}
 .canon{
 	.exp{
 		padding:$chordScale*$factor 0;

@@ -4,7 +4,7 @@ export default function(tone,stanza){
 
 
 			this.set('toneIndex',tone)
-			var ctx   = this.get('ctx'),
+			var ctx   = this.get('toneGain'),
 					instrument = this.get('instrument'),
 
 					freq  = this.get('freqs').objectAt(tone),

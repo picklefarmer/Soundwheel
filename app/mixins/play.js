@@ -14,7 +14,9 @@ import Numeric  from './instances/numeric';
 const actions = {
   overLabel(name,glyph){
     if(this.get('isToolTip')){
-      this.set('barOverlay',{name,glyph})
+			if(typeof name === 'string'){
+	      this.set('barOverlay',{name,glyph})
+			}
     }
   },
   outLabel(){
@@ -65,15 +67,13 @@ const actions = {
     }else{
       this.set('isPart',false)
     }
-    
     this.set('barType',barType)
   },
 	isConvolver(){
 		let wa = this.get('webaudio'),
-				ac = wa.get('ac'),
-				co = wa.get('compressor'),
 				re = wa.get('reverb'),
-				ga = wa.get('masterVolume');
+				co = wa.get('masterVolume'),
+				ga = wa.get('boardVolume');
 
 		if(this.toggleProperty('isConvolver')){
 			ga.disconnect(co)
@@ -151,7 +151,7 @@ export default Ember.Mixin.create({
 	isParty:true,
 	//	isMoon:true,
 	//	isMoji:true,
-  isToolTip:true,
+  //isToolTip:true,
 	actions,
   globalKeydown:Ember.inject.service(),
 	playMatrix

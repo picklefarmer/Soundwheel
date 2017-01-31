@@ -16,7 +16,14 @@
 
 	border-left:7px inset #383838;
 }
+.sidebar li:hover{
+	.hidden{
+		visibility: visible;
+	}
+}
 .sidebar li div{
+	line-height: 3rem;
+	padding: 0 2rem 0 0 !important;
 
 	&:hover{
 		border-color: $deepPurple;

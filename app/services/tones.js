@@ -38,7 +38,7 @@ export default Ember.ArrayProxy.reopenClass({
 
        this.set('content', Ember.A(strings))
 
-			 this.setEach('ctx.gain.value',0.001)
+			 this.setEach('toneGain.gain.value',0.001)
 			 console.log(' after tones init' )
 
 	//		 Ember.run.next(this.get('song'),'clock', 'working from tones service')

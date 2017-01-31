@@ -10,6 +10,8 @@
 .tool-tip{
 	text-align: center;
 	font-size: 90px;
+	position:fixed;
+	z-index: 2;
 	h1{
 		padding: 0 $chordScale*$factor;
 		display: inline-block;
@@ -24,13 +26,16 @@
 			font-size: 6rem;
 		}
 	}
+	h4{
+		display:inline-block;
+	}
 	margin-left: $chordScale*2.5;
 	bottom:$chordScale;
-	position: absolute;
+
 	background: $middlegrey;
 	h4{
 		padding:$chordScale*$factor;
-		background:magenta;
+		background:$pinkNoise;
 	}
 	@include box-shadow(inset 0px 0px 4px 4px $blend);
 }
@@ -82,7 +87,7 @@
 
 @font-face {
   font-family: 'led_sas';
-  src: url('../typography/VT323-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+  src: url('../typography/advanced_pixel_lcd-7.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 .menubar{
 
@@ -91,8 +96,8 @@
 	text-align:center;
 	text-align:-webkit-center;
 	//	outline: 6px solid $panelOverlay;
-	background: $pink;//$mahogany;//$blend;
-  font-family:'led_sas';
+	background: $mahogany;//$blend;
+  //font-family:'led_sas';
 	display:block;
 	width:100%;
 
@@ -137,7 +142,7 @@
 	li{
 		padding:none;
 		vertical-align:middle;
-		background: $secondColor;
+		background: $deepPink;
 		border-radius: $chordScale;
 		div,.is-inline label{
 			&:hover{
@@ -146,7 +151,7 @@
 				background:$secondColor;
 
 				label{
-					animation: mymove 4s infinite;
+					//animation: mymove 4s infinite;
 					border:none;
 				}
 			}

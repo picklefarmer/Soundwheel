@@ -123,16 +123,37 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 
     },
 
-    volume:Ember.computed({
-		get(){
-			return .5
-		},
-		set(_,I){
+		volume:Ember.computed({
+			get(){
+				return .5
+			},
+			set(_,I){
 		    console.log(_,I)
-      		this.set('webaudio.masterVolume',I)
-      		return I 
-		}
-	}),
+     		this.set('webaudio.masterVolume',I)
+     		return I 
+			}
+		}),
+		kitVolume:Ember.computed({
+
+   get(){
+				return .5
+			},
+		set(_,I){
+		 	 console.log(_,I)
+     		this.set('webaudio.kitVolume',I)
+     	return I 
+			}
+		}),
+ boardVolume:Ember.computed({
+			get(){
+				return .5
+			},
+		set(_,I){
+		 	 console.log(_,I)
+     		this.set('webaudio.boardVolume',I)
+     	return I 
+			}
+		}),
 		//...bring in from options
     chordSelection:Ember.computed({
 		get(){

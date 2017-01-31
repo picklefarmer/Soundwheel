@@ -21,18 +21,31 @@
 
       
   li
-    div
-      =input type="range" min=".01"  max="6" step=".05" value=options.song.volume
-      =text-me value=(mut options.song.volume)
-      span Volume
+    .hidden
+      =input type="range" min=".01"  max="6" step=".05" value=song.volume
+      =text-me value=(mut song.volume)
+    span Master
+
+  if song.isKit
+    li
+      .hidden
+        =input type="range" min=".01"  max="6" step=".05" value=song.kitVolume
+        =text-me value=(mut song.kitVolume)
+      span Drum-Kit
+
+  li
+    .hidden
+      =input type="range" min=".01"  max="6" step=".05" value=song.boardVolume
+      =text-me value=(mut song.boardVolume)
+    span Fretboard
 
 
 
   li
-    div
+    .hidden
       =input type="range" min=song.minTempVal  max="4000" value=song.bpm
       =text-me value=(mut song.meter)
-      span Tempo
+    span Tempo
 
 
   li

@@ -27,8 +27,9 @@
 }
 
 .bar-beat{
-	div, li{
-		width:100%;
+	li{
+		writing-mode:initial;
+		display: block;//width:100%;
 	}
 	width:58px;
 	padding:0px;
@@ -58,7 +59,7 @@
 		//background:$coldFeet;
 
 		background-color: black;
-  	color: $deepRed;
+  	color: $middlepink;//deepRed;
 		text-shadow:#d0bb27  .2rem .2rem 0;//rgba(255,255,255,0.5);
   	//-webkit-background-clip: text;
     //-moz-background-clip: text;
@@ -66,10 +67,25 @@
    	font-size:3rem;
    	vertical-align:super;
 
-		background:url('../images/fret.jpg');
+		//background:url('../images/fret.jpg');
  }
 }
+.beat-bar{
 
+	li div{
+		line-height: 5rem;
+		padding: 0rem;
+		writing-mode:initial;
+	}
+	font-family:'led_sas';
+	.rest div{
+		background: blue !important;
+		& .hit{
+			background: red !important;
+		}
+
+	}
+}
 .meter-bar{
 		border:3px black solid;
 		height: 160px;
