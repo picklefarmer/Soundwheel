@@ -71,8 +71,27 @@
  }
 }
 .beat-bar{
-
 	li div{
+		position:relative;
+
+		z-index: 2;
+	}
+	// li div:after{
+	// 	font-family:serif;
+	// 	font-size: 3rem;
+	// 	content: attr(background);
+	// 	display:block;
+	// 	top:0;
+	// 	z-index: 0;
+	//
+	// 	position: absolute;
+	// 	height: 5rem;
+	// 	color:white;
+	// 	background:black;
+	// 	width: 5rem;
+	// }
+	li div{
+
 		line-height: 5rem;
 		padding: 0rem;
 		writing-mode:initial;

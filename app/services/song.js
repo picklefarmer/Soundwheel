@@ -31,7 +31,7 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	isConvolver:false,
   webaudio:Ember.inject.service(),
 	tones:Ember.inject.service(),
-	isKit:false,
+	isKit:true,
   isEdit:false,
 	kit:Ember.inject.service(),
 	measureKit:Ember.computed('isKit','selected.index',function(){

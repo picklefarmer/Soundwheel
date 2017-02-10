@@ -15,7 +15,7 @@
 		li{
 			vertical-align:middle;
 		}
-		display:inline-block;
+		//display:inline-block;
 	}
 }
 .is-editing{
@@ -60,6 +60,7 @@
 }
 
 .chordBank{
+	direction: ltr;
 	overflow:hidden;
 	transform-origin: center 29%;
 	transform: scale(0.8);

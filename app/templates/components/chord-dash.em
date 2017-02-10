@@ -22,7 +22,7 @@ else
         each song.chords as |chord|
           div
             li class="{{if (arr-comp selection chord)'match'}}": ar-peg chord=chord action="selector": =song.main.bankmoji.options
-            li What's up!?
+            /``:wli What's up!?
     else
       /=scale-vertical class='chord-stack' amount=song.chords.content.length
       each song.chords as |chord|
