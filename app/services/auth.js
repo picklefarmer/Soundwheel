@@ -52,7 +52,7 @@ export default Ember.Service.extend({
     login(auth,router){
 				//console.log('login checkpoint', auth.currentUser)
 				auth.onAuthStateChanged(user=>{
-					if(!user.uid)return
+					if(!user)return
 					let {uid,photoURL,displayName} = user;
 					this.setProperties({uid,photoURL,displayName})
 					Ember.run(this,'userNewCheck',uid)

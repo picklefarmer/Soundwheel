@@ -31,12 +31,12 @@ export default Ember.ObjectProxy.reopenClass({ isServiceFactory:true
 	isConvolver:false,
   webaudio:Ember.inject.service(),
 	tones:Ember.inject.service(),
-	isKit:true,
+	//isKit:true,
   isEdit:false,
 	kit:Ember.inject.service(),
 	measureKit:Ember.computed('isKit','selected.index',function(){
-		if(this.get('isKit')){
-
+		if(this.get('isKit') && this.get('selected.part.kit')){
+		
 		let kit = this.get('selected.part').kit.objectAt(this.get('selected.index'));
 		console.error(kit,'kit')
 			return kit
