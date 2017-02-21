@@ -11,7 +11,11 @@ export default Ember.Component.extend({
 	//strings number
 	color:Ember.computed('song.main.fretboard.options',{
 		get(){
-    		var color = this.get('song.main.fretboard.options')
+    		var color = this.get('song.main.fretboard.options') || {
+					['fret marker']:'rgb(0,0,0)',
+					background:'rgb(255,255,255)',
+					notes:'fff'
+				};
 			//console.log('color','changed',color)
 		    return color
 		}

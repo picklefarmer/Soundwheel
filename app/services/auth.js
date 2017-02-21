@@ -50,10 +50,22 @@ export default Ember.Service.extend({
     loginDebug:false,
 
     login(auth,router){
-				//console.log('login checkpoint', auth.currentUser)
+				console.log('login checkpoint', auth.currentUser)
 				auth.onAuthStateChanged(user=>{
-					if(!user)return
-					let {uid,photoURL,displayName} = user;
+					console.log('user onAuthChange' , user)
+						let uid, photoURL, displayName;
+					if(!user){
+						auth.signInAnonymously()
+					}else{
+						if( user.isAnonymous){
+							uid = 'wVyyPVSNVbTz6hZcu6xUDLoKDv73'
+							photoURL = './images/dino.ico'
+							displayName = 'Anonymous'
+						}else{
+
+						({uid,photoURL,displayName} = user);
+						}
+					}
 					this.setProperties({uid,photoURL,displayName})
 					Ember.run(this,'userNewCheck',uid)
 				})

@@ -48,7 +48,7 @@ export default Ember.Mixin.create(PromiseProxy,{
       return proxy;
     }),
 
-		main:Ember.computed('auth.uid',{
+		main:Ember.computed('onLine','auth.uid',{
 			get(_){
 				console.log(this, this.get('promiseWithContextAsObject'),_,'main error')
 				let proxy = this.promiseWithContextAsObject(_),

@@ -48,7 +48,8 @@ export default Ember.ArrayProxy.reopenClass({
 		get(_){
 			console.log('init from notes',
 					   	this.get('song.main'),
-						this.get('song.main.intervals') ) 
+						this.get('song.main.intervals')
+				 	) 
 			let notesMap = [ ],
 				octaves = [.5,1,2,4],
 				intervals = [5,5,5,4,5,5],//this.get('song.main.intervals') || [7,5,5,5,4,5],
