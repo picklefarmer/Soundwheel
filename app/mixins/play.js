@@ -54,6 +54,7 @@ const actions = {
 		this.toggleProperty('sustain')
   },
   barType(barType){
+    console.log('barType',barType,this.getProperties('isBeat','isPart'))
     if(barType === 'meter'){
       this.set('isBeat',true)
     }else{
@@ -95,13 +96,14 @@ const actions = {
 				console.log(val, 'val from isOsc')
 				let ctx =this.get('options.graphView'); 
 				this.toggleProperty('isOsc')
+					ctx.clearRect(0,0,1472,300)
 				switch(val){
 					case "Spec":Spec.call(this,null,ctx);break;
 					case "Osc":Osc.call(this,null,ctx);break;
 					case "Bars":Bar.call(this,null,ctx);break;
 					case "Chord":OscArr.call(this,null,ctx);break;
 				}				
-				this[val].call(this,null,ctx)
+				//this[val].call(this,null,ctx)
 	},
 	isBeat(){
 				this.toggleProperty('isBeat')

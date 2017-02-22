@@ -40,6 +40,7 @@ export default Ember.Component.extend({
 
 	didInsertElement(){
 
+		this.set('options.fretboard',this.get('element'))
    	Ember.$(document).off('keydown')
    	Ember.$(document).off('keyup')
 		Ember.$(document).keyup(e => Ember.run(this,this.get('globalKeydown.end'),e))

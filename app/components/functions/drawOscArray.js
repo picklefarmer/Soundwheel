@@ -6,6 +6,7 @@ export default function(a,ctx){
      	 	ctx.strokeStyle = 'aliceblue';
 		chord = chord.map( string => {
 						let analyser = string.get('analyser');
+						console.log(analyser,'analyser')
 						let toneIndex = string;
 				    var bufferLength = analyser.frequencyBinCount;
     				var dataArray = new Uint8Array(bufferLength);
@@ -32,6 +33,9 @@ const draw = function(ctx,chord){
       })  
 
   	  ctx.clearRect(0, 0, 1472, HEIGHT);
+
+			let offset	 = this.get('options.fretboard.scrollLeft');
+				console.log('analyser',ctx,offset,'offset')
 		
 			chord.forEach(({analyser,bufferLength,dataArray,string},f)=>{
 
@@ -41,13 +45,12 @@ const draw = function(ctx,chord){
      	 	ctx.beginPath();
 
      	 	var sliceWidth = WIDTH/ bufferLength,
-						offset		 = this.get('options.fretboard.scrollLeft'),
-						x = bufferLength + offset + 78;
+						x = bufferLength + offset + 178;
 
 
 				let height = sHeight*f -vHeight;
 
-				var stop = -(offset*0.73125) + (string.get('toneIndex') * 49)+270;
+				var stop = -(offset*0.73125) + (string.get('toneIndex') * 49)+170;
       	for(var i = bufferLength; i > stop; i--) {
    
         	var v = dataArray[i] / 128.0;

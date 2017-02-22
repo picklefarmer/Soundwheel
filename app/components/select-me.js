@@ -5,7 +5,7 @@ export default Ember.Component.extend(Keydown,{
   content:[],
   tagName:"select",
   change(val){
-    console.log('beginning',val.target.value)
+    console.log('beginning',this.action,val.target.value)
     if(this.action){
       this.action(val.target.value,val.target.prop)
     }else{

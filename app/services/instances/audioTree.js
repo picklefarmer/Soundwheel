@@ -25,6 +25,6 @@ export default function(){
 	//	this.get('ac').connect()
 
 	compressor.connect(ac.destination)
-	//compressor.connect(this.get('analyser'));
+	boardVolume.connect(this.get('analyser'));
 
 }

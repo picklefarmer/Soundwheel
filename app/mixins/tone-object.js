@@ -84,14 +84,17 @@ export default Ember.Mixin.create({
   */  
    	toneGain:Ember.computed('ac',{
 			get(){
-     			return this.get('ac').createGain()
+				let gain = this.get('ac').createGain();
+				gain.gain.value = 4
+     			return gain
+					//this.get('ac').createGain()
 			}
 		}),
 	
     analyser:Ember.computed('ac',function(){
         let analyser =  this.get('ac').createAnalyser();
         analyser.fftSize = 2048;
-        analyser.smoothingTimeConstant = 1;
+        analyser.smoothingTimeConstant = 0;
          this.get('toneGain').connect(analyser)
          return analyser
     }), 

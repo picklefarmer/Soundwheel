@@ -22,7 +22,7 @@ export default function(index,outdex,swap){
 		score.replace(index,1,{notes,map});
 		this.set('song.selected.index',index)
 	}else{
-		console.error(output,outMap,notes,map)
+		console.error({output,outMap,notes,map})
 		if(this.get('song.onLine')){
 			reseatIndexes.call(this,index+1,index)
 		}else{

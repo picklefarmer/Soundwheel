@@ -34,7 +34,7 @@ var obj = {}, lastNotes = [];
 export default obj;
 
 obj.beat = function(beat){
-		if(!this.get('selected.isFulfilled')){
+		if(!this.get('main.isFulfilled')){//selected.isFulfilled')){
 			return
 		}
 				console.log(beat, 'playMatrix')

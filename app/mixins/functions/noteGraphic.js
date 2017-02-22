@@ -81,12 +81,12 @@ export default function(ctx,boardX,boardY,print,stanza,isMoji){
 			ctx.strokeStyle		=	'cornflowerBlue'
 			upImp.call(this,ctx,boardX,boardY,print,stanza,func,args)
 		}else{
-			console.error(this.get('main.fretboard.options.notes'))
+			console.error(this,this.get('main'),this.get('main.fretboard.options.notes'))
       if(this.get('isToneToHue')){
 				ctx.lineWidth = 6
 			  tonesToHue.call(this,ctx,boardX,boardY,print,stanza,rate-3)
       }else{
-			  ctx.fillStyle = "#"+this.get('main.fretboard.options.notes')	
+			  ctx.fillStyle = "#"+this.get('main.content.fretboard.options.notes')	
 			  downImp.call(this,ctx,boardX,boardY,print,stanza)
       }
 		}
