@@ -11,8 +11,8 @@
     "win": "electron --disable-gpu --enable-transparent-visuals electronMain.js",
     "build": "ember build",
     "start": "ember server",
-		"fire":	"~/nwjs/nw ~/firebase/",
-    "test": "ember test"
+		"fire":	"~/nwjs/nw ~/firebase/"
+    
   },
   "repository": "",
   "engines": {
